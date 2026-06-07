@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pandadata API"
+  short_description: "Pandadata data API reference and examples"
+  default_prompt: "Use $pandadata-api to choose and call the correct panda_data API for my market data request."
