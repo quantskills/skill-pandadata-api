@@ -1,0 +1,22 @@
+---
+description: Use the Pandadata API skill to select and call panda_data methods from the bundled Pandadata interface docs.
+alwaysApply: false
+---
+
+# Pandadata API Skill
+
+When the user asks about Pandadata, `panda_data`, Pandadata market/fundamental/macro data interfaces, API parameters, response fields, or Python examples, use the local skill package.
+
+Preferred local project path:
+
+```text
+.cursor/skills/pandadata-api
+```
+
+Workflow:
+
+1. Read `.cursor/skills/pandadata-api/SKILL.md`.
+2. Use `.cursor/skills/pandadata-api/references/method-index.md` or run `python .cursor/skills/pandadata-api/scripts/search_api_docs.py --list-methods`.
+3. Before writing code for a method, extract the exact section with `python .cursor/skills/pandadata-api/scripts/search_api_docs.py --method <method>`.
+4. For real API calls, prefer `python .cursor/skills/pandadata-api/scripts/call_api.py --method <method> --params '<json>'`; it checks credentials and runs setup when needed.
+5. Preserve documented parameter names, date formats, symbol formats, and examples. Do not invent authentication or installation steps.
