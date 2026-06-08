@@ -75,7 +75,7 @@ def write_env_file(path: Path, username: str, password: str, base_url: str) -> N
     print(f"[setup] Load it in a shell with: source {shlex.quote(str(path))}")
 
 
-def ask_yes_no(prompt: str, default: bool = False) -> bool:
+def ask_yes_no(prompt: str, default: bool = True) -> bool:
     suffix = " [Y/n]" if default else " [y/N]"
     raw = input(prompt + suffix + ": ").strip().lower()
     if not raw:

@@ -4,11 +4,11 @@
 from __future__ import annotations
 
 import os
+import platform
 import shlex
 import subprocess
 import sys
 from pathlib import Path
-from typing import Optional
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,6 +72,19 @@ def has_credentials() -> bool:
     return bool(username and password and base_url)
 
 
+def setup_command(
+    env_file: Path = DEFAULT_ENV_FILE,
+    install: bool = False,
+    probe_api: bool = False,
+) -> list[str]:
+    cmd = [sys.executable, str(ROOT / "scripts" / "setup_runtime.py"), "--env-file", str(env_file)]
+    if not install:
+        cmd.append("--no-install")
+    if probe_api:
+        cmd.append("--probe-api")
+    return cmd
+
+
 def run_setup(
     env_file: Path = DEFAULT_ENV_FILE,
     install: bool = False,
@@ -79,12 +92,51 @@ def run_setup(
 ) -> None:
     """Run the interactive setup script."""
 
-    cmd = [sys.executable, str(ROOT / "scripts" / "setup_runtime.py"), "--env-file", str(env_file)]
-    if not install:
-        cmd.append("--no-install")
-    if probe_api:
-        cmd.append("--probe-api")
-    subprocess.run(cmd, check=True)
+    subprocess.run(setup_command(env_file=env_file, install=install, probe_api=probe_api), check=True)
+
+
+def open_setup_terminal(
+    env_file: Path = DEFAULT_ENV_FILE,
+    install: bool = False,
+    probe_api: bool = False,
+    dry_run: bool = False,
+) -> str:
+    """Open a user-facing terminal window for interactive credential setup."""
+
+    cmd = setup_command(env_file=env_file, install=install, probe_api=probe_api)
+    shell_cmd = " ".join(shlex.quote(part) for part in cmd)
+    shell_cmd = (
+        f"cd {shlex.quote(str(ROOT))} && {shell_cmd}; "
+        "printf '\\nPandadata setup finished. You can close this terminal.\\n'; "
+        "read -r -p 'Press Enter to close...'"
+    )
+
+    if dry_run:
+        return shell_cmd
+
+    if platform.system() == "Darwin":
+        escaped = shell_cmd.replace("\\", "\\\\").replace('"', '\\"')
+        apple_script = (
+            'tell application "Terminal"\n'
+            "  activate\n"
+            f'  do script "{escaped}"\n'
+            "end tell"
+        )
+        subprocess.run(["osascript", "-e", apple_script], check=True)
+        return shell_cmd
+
+    raise PandadataRuntimeError(
+        "Opening a setup terminal is currently implemented for macOS Terminal only. "
+        f"Run this command manually instead: {shell_cmd}"
+    )
+
+
+def setup_terminal_message(command: str) -> str:
+    return (
+        "Pandadata credentials are missing or invalid. Opened an interactive setup "
+        "terminal for the user. After setup finishes, rerun the API call. "
+        f"Setup command: {command}"
+    )
 
 
 def init_pandadata(
