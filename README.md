@@ -3,7 +3,7 @@
 > 把自然语言数据需求，精准路由到正确的 `panda_data` API，并生成可直接运行的 Python 调用。
 
 <p align="center">
-  <img alt="methods" src="https://img.shields.io/badge/API_methods-187-brightgreen">
+  <img alt="methods" src="https://img.shields.io/badge/API_methods-185-brightgreen">
   <img alt="domains" src="https://img.shields.io/badge/data_domains-7-blue">
   <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.9-orange">
   <img alt="python" src="https://img.shields.io/badge/python-3.x-3776AB?logo=python&logoColor=white">
@@ -14,7 +14,7 @@
 
 ## 📖 这是什么
 
-`pandadata-api` 是一个 **Agent Skill**（技能包）——它把 Pandadata / `panda_data` Python SDK 的中文接口文档（187 个数据接口）打包成 AI Agent 可以查询、引用、校验的本地知识库。
+`pandadata-api` 是一个 **Agent Skill**（技能包）——它把 Pandadata / `panda_data` Python SDK 的中文接口文档（185 个数据接口）打包成 AI Agent 可以查询、引用、校验的本地知识库。
 
 当你向 Agent（Claude Code、Codex、Cursor 等）提出诸如 *"帮我查 000001.SZ 的 A 股日线"* 这类需求时，这个技能会：
 
@@ -31,7 +31,7 @@
 
 ```mermaid
 mindmap
-  root((panda_data<br/>187 methods))
+  root((panda_data<br/>185 methods))
     交易工具
       交易日历
       交易日推算
@@ -72,7 +72,7 @@ mindmap
 | 🌏 **港美股** | `get_hk_daily` · `get_us_daily` | 行情、公司事件、一致预期、财务因子 |
 | 🏛️ **宏观数据** | `get_macro_na` · `get_macro_cal` | 中国/国际宏观、行业、特色数据、经济日历 |
 
-完整 187 个接口映射见 [`references/method-index.md`](references/method-index.md)。
+完整 185 个接口映射见 [`references/method-index.md`](references/method-index.md)。
 
 ---
 
@@ -104,7 +104,8 @@ pandadata-api/
 ├── SKILL.md                          # 技能入口：工作流、调用约定、规则
 ├── requirements.txt                  # panda_data==0.0.9, requests
 ├── references/
-│   ├── method-index.md               # 📇 187 接口速查表（按域分组 + 文档行号）
+│   ├── method-index.md               # 📇 185 接口速查表（按域分组 + 文档行号）
+│   ├── api_catalog.json              # 🧭 方法到后端服务 endpoint 的映射
 │   ├── api-docs.md                   # 📚 完整中文接口文档
 │   └── agent-integration.md          # 🔌 各 Agent 安装/加载/冒烟测试
 ├── scripts/
@@ -126,7 +127,7 @@ pandadata-api/
 ### 1️⃣ 检索接口（无需凭证，纯文档查询）
 
 ```bash
-# 列出全部方法（应为 187）
+# 列出全部方法（应为 185）
 python scripts/search_api_docs.py --list-methods
 
 # 查看某个方法的完整参数 / 字段 / 示例
@@ -203,7 +204,7 @@ python scripts/search_api_docs.py --method get_stock_daily | head -60
 python scripts/search_api_docs.py --list-methods | wc -l
 ```
 
-**预期结果**：`get_stock_daily` 打印其参数表，且方法计数为 **187**。
+**预期结果**：`get_stock_daily` 打印其参数表，且方法计数为 **185**。
 
 ---
 

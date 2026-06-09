@@ -139,6 +139,7 @@ Known PyPI runtime dependencies from `panda_data==0.0.9`: `pandas>=2.0.0`, `nump
 ## Reference Files
 
 - `references/method-index.md`: compact method map grouped by domain, with line numbers into `api-docs.md`.
+- `references/api_catalog.json`: method-to-service endpoint mapping for API routing checks.
 - `references/api-docs.md`: full Pandadata interface document copied from `接口文档.md`.
 - `references/agent-integration.md`: installation, loading, and smoke-test patterns for Claude Code, Codex, Hermes, OpenClaw, Cursor, and WorkBuddy.
 

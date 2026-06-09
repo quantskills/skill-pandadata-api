@@ -23,7 +23,7 @@ PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 "$PYTHON_BIN" scripts/search_api_docs.py --list-methods | wc -l
 ```
 
-Expected result: `get_stock_daily` prints its parameter table and the method count is `187`.
+Expected result: `get_stock_daily` prints its parameter table and the method count is `185`.
 
 Runtime API calls require SDK login:
 
