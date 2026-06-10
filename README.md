@@ -8,6 +8,7 @@
   <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.9-orange">
   <img alt="python" src="https://img.shields.io/badge/python-3.x-3776AB?logo=python&logoColor=white">
   <img alt="agents" src="https://img.shields.io/badge/agents-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%2B4-7c3aed">
+  <img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue">
 </p>
 
 ---
@@ -253,3 +254,9 @@ python scripts/search_api_docs.py --list-methods | wc -l   # 复核方法计数
 - `panda_data==0.0.9` 运行时依赖：`pandas>=2.0.0`、`numpy>=1.22,<2.0`、`python-snappy>=0.7.3`、`python-dotenv>=1.0.0`、`PyYAML>=6.0`、`zstandard>=0.22.0`、`duckdb`、`pyarrow`。
 
 > 凭证文件（`*.env`、`user.json`、`.pandadata/`）已在 `.gitignore` 中忽略，不会提交。
+
+---
+
+## 📜 License
+
+This project is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE).
