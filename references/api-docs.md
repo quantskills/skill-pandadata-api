@@ -17600,7 +17600,7 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 | end_quarter | string | 结束季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 非必填 |
 | date | string | 公告日期,返回该日期及之前的数据 | 非必填 |
 | is_latest | Optional[bool] | True：返回最新披露数据，False：返回全部。默认为True | 非必填 |
-| interim_type | Optional[string] | 报表类型，对应接口参数 interimType；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
+| interimType | Optional[string] | 报表类型；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
 | fields | Optional[Union[string, list]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
@@ -17623,7 +17623,7 @@ result = panda_data.get_fina_statement(
         end_quarter="2026q4",
         date="20241014",
         is_latest=True,
-        interim_type="cumulative",
+        interimType="cumulative",
         fields=["symbol", "bs_asset_accruals"],
         )
 print(result)
@@ -18287,7 +18287,7 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 | end_quarter | string | 结束季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 非必填 |
 | date | string | 公告日期,返回该日期及之前的数据 | 非必填 |
 | is_latest | Optional[bool] | True：返回最新披露数据，False：返回全部。默认为True | 非必填 |
-| interim_type | Optional[string] | 报表类型，对应接口参数 interimType；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
+| interimType | Optional[string] | 报表类型；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
 | fields | Optional[Union[string, list]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
@@ -18310,7 +18310,7 @@ result = panda_data.get_fina_ex(
         end_quarter="2026q4",
         date="20241014",
         is_latest=True,
-        interim_type="cumulative",
+        interimType="cumulative",
         fields=["symbol", "bs_asset_accruals"],
         )
 print(result)
