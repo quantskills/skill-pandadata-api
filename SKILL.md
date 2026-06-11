@@ -2,6 +2,13 @@
 name: pandadata-api
 description: Pandadata/panda_data Python SDK API reference skill for selecting, calling, and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档. Use when the user asks to query Pandadata data, choose the right panda_data.get_* method, write or validate panda_data Python examples, inspect request/response fields, or install/load/use this skill in Claude Code, Codex, Hermes, OpenClaw, Cursor, or WorkBuddy agents.
 license: GPL-3.0-only
+metadata:
+  organization: QuantSkills
+  organization_url: https://github.com/quantskills
+  repository: skill-pandadata-api
+  repository_url: https://github.com/quantskills/skill-pandadata-api
+  project_type: skill
+  collection: pandadata-api
 ---
 
 # Pandadata API
