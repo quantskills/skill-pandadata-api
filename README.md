@@ -1,5 +1,7 @@
 # 🐼 Pandadata API Skill
 
+**简体中文** | [English](README.en.md)
+
 > 把自然语言数据需求，精准路由到正确的 `panda_data` API，并生成可直接运行的 Python 调用。
 
 <p align="center">
