@@ -5,8 +5,8 @@
 > 把自然语言数据需求，精准路由到正确的 `panda_data` API，并生成可直接运行的 Python 调用。
 
 <p align="center">
-  <img alt="methods" src="https://img.shields.io/badge/API_methods-185-brightgreen">
-  <img alt="domains" src="https://img.shields.io/badge/data_domains-7-blue">
+  <img alt="methods" src="https://img.shields.io/badge/API_methods-218-brightgreen">
+  <img alt="domains" src="https://img.shields.io/badge/data_domains-9-blue">
   <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.9-orange">
   <img alt="python" src="https://img.shields.io/badge/python-3.x-3776AB?logo=python&logoColor=white">
   <img alt="agents" src="https://img.shields.io/badge/agents-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%2B4-7c3aed">
@@ -17,11 +17,11 @@
 
 ## 📖 这是什么
 
-`pandadata-api` 是一个 **Agent Skill**（技能包）——它把 Pandadata / `panda_data` Python SDK 的中文接口文档（185 个数据接口）打包成 AI Agent 可以查询、引用、校验的本地知识库。
+`pandadata-api` 是一个 **Agent Skill**（技能包）——它把 Pandadata / `panda_data` Python SDK 的中文接口文档（218 个数据接口）打包成 AI Agent 可以查询、引用、校验的本地知识库。
 
 当你向 Agent（Claude Code、Codex、Cursor 等）提出诸如 *"帮我查 000001.SZ 的 A 股日线"* 这类需求时，这个技能会：
 
-1. 🧭 **路由** —— 在 7 大数据域中定位到正确的接口
+1. 🧭 **路由** —— 在 9 大数据域中定位到正确的接口
 2. 📑 **加载契约** —— 从接口文档中读取**精确的**参数名 / 字段名 / 示例，而不是凭记忆瞎编
 3. ✍️ **生成代码** —— 写出符合文档约定的、可运行的 `panda_data` 调用
 4. 🚀 **真实调用**（可选）—— 自动加载凭证、初始化 SDK、执行接口并返回结果
@@ -34,7 +34,7 @@
 
 ```mermaid
 mindmap
-  root((panda_data<br/>185 methods))
+  root((panda_data<br/>218 methods))
     交易工具
       交易日历
       交易日推算
@@ -63,6 +63,12 @@ mindmap
       中国/国际宏观
       行业/特色数据
       经济日历
+    基金数据
+      基础/行情
+      ETF申赎
+    优先股数据
+      基础/分红/评级
+      发行/配售/交易
 ```
 
 | 数据域 | 代表接口 | 说明 |
@@ -74,8 +80,10 @@ mindmap
 | 🧮 **量化因子** | `get_factor` · `get_adj_factor` | 回测因子、复权因子 |
 | 🌏 **港美股** | `get_hk_daily` · `get_us_daily` | 行情、公司事件、一致预期、财务因子 |
 | 🏛️ **宏观数据** | `get_macro_na` · `get_macro_cal` | 中国/国际宏观、行业、特色数据、经济日历 |
+| 🧾 **基金数据** | `get_fund_detail` · `get_fund_daily` | 基金基础信息、行情、ETF 申赎清单 |
+| 💠 **优先股数据** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | 优先股基础信息、分红、评级、发行配售 |
 
-完整 185 个接口映射见 [`references/method-index.md`](references/method-index.md)。
+完整 218 个接口映射见 [`references/method-index.md`](references/method-index.md)。
 
 ---
 
@@ -107,8 +115,8 @@ pandadata-api/
 ├── SKILL.md                          # 技能入口：工作流、调用约定、规则
 ├── requirements.txt                  # panda_data==0.0.9, requests
 ├── references/
-│   ├── method-index.md               # 📇 185 接口速查表（按域分组 + 文档行号）
-│   ├── api_catalog.json              # 🧭 方法到后端服务 endpoint 的映射
+│   ├── method-index.md               # 📇 218 接口速查表（按域分组 + 文档行号）
+│   ├── api_catalog.json              # 🧭 方法到 MCP 网关 /pandaData endpoint 的映射
 │   ├── api-docs.md                   # 📚 完整中文接口文档
 │   └── agent-integration.md          # 🔌 各 Agent 安装/加载/冒烟测试
 ├── scripts/
@@ -130,7 +138,7 @@ pandadata-api/
 ### 1️⃣ 检索接口（无需凭证，纯文档查询）
 
 ```bash
-# 列出全部方法（应为 185）
+# 列出全部方法（应为 218）
 python scripts/search_api_docs.py --list-methods
 
 # 查看某个方法的完整参数 / 字段 / 示例
@@ -207,7 +215,7 @@ python scripts/search_api_docs.py --method get_stock_daily | head -60
 python scripts/search_api_docs.py --list-methods | wc -l
 ```
 
-**预期结果**：`get_stock_daily` 打印其参数表，且方法计数为 **185**。
+**预期结果**：`get_stock_daily` 打印其参数表，且方法计数为 **218**。
 
 ---
 
@@ -252,7 +260,7 @@ python scripts/search_api_docs.py --list-methods | wc -l   # 复核方法计数
 ## 🔐 凭证与依赖
 
 - SDK 在 `init_token()` 成功前会抛出 `ClientNotInitializedError`。
-- 可通过环境变量提供凭证：`DEFAULT_USERNAME` / `DEFAULT_PASSWORD` / `JAVA_SERVICE_BASE_URL`。传入**明文密码**，SDK 内部自行哈希。
+- 可通过环境变量或 `~/.pandadata/pandadata.env` 提供凭证：`DEFAULT_USERNAME` / `DEFAULT_PASSWORD` / `JAVA_SERVICE_BASE_URL`（兼容 `PANDADATA_BASE_URL`）。传入**明文密码**，SDK 内部自行哈希。
 - `panda_data==0.0.9` 运行时依赖：`pandas>=2.0.0`、`numpy>=1.22,<2.0`、`python-snappy>=0.7.3`、`python-dotenv>=1.0.0`、`PyYAML>=6.0`、`zstandard>=0.22.0`、`duckdb`、`pyarrow`。
 
 > 凭证文件（`*.env`、`user.json`、`.pandadata/`）已在 `.gitignore` 中忽略，不会提交。

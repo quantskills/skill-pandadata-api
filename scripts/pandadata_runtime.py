@@ -12,7 +12,6 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_BASE_URL = "http://pandadata.pandaaiquant.com"
 DEFAULT_ENV_FILE = Path.home() / ".pandadata" / "pandadata.env"
 
 
@@ -63,7 +62,7 @@ def load_env_file(path: Path = DEFAULT_ENV_FILE, override: bool = False) -> bool
 def credentials_from_env() -> tuple[str, str, str]:
     username = os.getenv("DEFAULT_USERNAME", "")
     password = os.getenv("DEFAULT_PASSWORD", "")
-    base_url = os.getenv("JAVA_SERVICE_BASE_URL", DEFAULT_BASE_URL)
+    base_url = os.getenv("JAVA_SERVICE_BASE_URL") or os.getenv("PANDADATA_BASE_URL", "")
     return username, password, base_url
 
 

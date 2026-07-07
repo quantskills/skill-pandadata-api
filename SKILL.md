@@ -43,7 +43,7 @@ Use this skill to route natural-language data requests to the correct `panda_dat
 
 ## Workflow
 
-1. Identify the data domain: trading calendar, A-share, futures, options, factors, Hong Kong/US equities, or macro.
+1. Identify the data domain: trading calendar, A-share, futures, options, factors, Hong Kong/US equities, macro, funds, or preferred stocks.
 2. Open `references/method-index.md` first, or run `./.venv/bin/python scripts/search_api_docs.py --list-methods` when `.venv` exists.
 3. Load the exact method section before coding:
 
@@ -82,15 +82,16 @@ Initialize the SDK before any `get_*` call. The installed SDK raises `ClientNotI
 
 ```python
 import panda_data
+import os
 
 panda_data.init_token(
     username="YOUR_USERNAME",
     password="YOUR_PASSWORD",
-    base_url="http://pandadata.pandaaiquant.com",
+    base_url=os.environ["JAVA_SERVICE_BASE_URL"],
 )
 ```
 
-The SDK can also read `DEFAULT_USERNAME`, `DEFAULT_PASSWORD`, and `JAVA_SERVICE_BASE_URL` from environment variables. Pass the plain password; the SDK hashes it internally.
+The SDK can also read `DEFAULT_USERNAME`, `DEFAULT_PASSWORD`, and `JAVA_SERVICE_BASE_URL` from environment variables. Pass the plain password; the SDK hashes it internally. Do not assume a fixed service URL; use the configured environment or the saved env file.
 
 If credentials were saved by `scripts/setup_runtime.py`, load them before running data scripts:
 
@@ -173,8 +174,8 @@ Known PyPI runtime dependencies from `panda_data==0.0.9`: `pandas>=2.0.0`, `nump
 ## Reference Files
 
 - `references/method-index.md`: compact method map grouped by domain, with line numbers into `api-docs.md`.
-- `references/api_catalog.json`: method-to-service endpoint mapping for API routing checks.
-- `references/api-docs.md`: full Pandadata interface document copied from `接口文档.md`.
+- `references/api_catalog.json`: method-to-gateway endpoint mapping for API routing checks, preserving the MCP gateway's `/pandaData/...` dispatch paths.
+- `references/api-docs.md`: full Pandadata interface document copied from `接口文档2.md`.
 - `references/agent-integration.md`: installation, loading, and smoke-test patterns for Claude Code, Codex, Hermes, OpenClaw, Cursor, and WorkBuddy.
 
 ## Agent Usage Rules

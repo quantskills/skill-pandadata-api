@@ -23,7 +23,7 @@ PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 "$PYTHON_BIN" scripts/search_api_docs.py --list-methods | wc -l
 ```
 
-Expected result: `get_stock_daily` prints its parameter table and the method count is `185`.
+Expected result: `get_stock_daily` prints its parameter table and the method count is `218`.
 
 Runtime API calls require SDK login:
 
@@ -45,7 +45,7 @@ Manual equivalent:
 ```bash
 export DEFAULT_USERNAME="..."
 export DEFAULT_PASSWORD="..."
-export JAVA_SERVICE_BASE_URL="http://pandadata.pandaaiquant.com"
+export JAVA_SERVICE_BASE_URL="https://YOUR_PANDADATA_SERVICE"
 ```
 
 ```python
@@ -59,7 +59,7 @@ Or pass credentials explicitly:
 panda_data.init_token(
     username="...",
     password="...",
-    base_url="http://pandadata.pandaaiquant.com",
+    base_url="https://YOUR_PANDADATA_SERVICE",
 )
 ```
 

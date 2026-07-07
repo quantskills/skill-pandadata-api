@@ -5,8 +5,8 @@
 > Routes natural-language data requests to the right `panda_data` API and generates Python calls that run as-is.
 
 <p align="center">
-  <img alt="methods" src="https://img.shields.io/badge/API_methods-185-brightgreen">
-  <img alt="domains" src="https://img.shields.io/badge/data_domains-7-blue">
+  <img alt="methods" src="https://img.shields.io/badge/API_methods-218-brightgreen">
+  <img alt="domains" src="https://img.shields.io/badge/data_domains-9-blue">
   <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.9-orange">
   <img alt="python" src="https://img.shields.io/badge/python-3.x-3776AB?logo=python&logoColor=white">
   <img alt="agents" src="https://img.shields.io/badge/agents-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%2B4-7c3aed">
@@ -17,11 +17,11 @@
 
 ## 📖 What is this
 
-`pandadata-api` is an **Agent Skill** — it packages the Chinese API documentation of the Pandadata / `panda_data` Python SDK (185 data interfaces) into a local knowledge base that AI Agents can query, cite, and validate against.
+`pandadata-api` is an **Agent Skill** — it packages the Chinese API documentation of the Pandadata / `panda_data` Python SDK (218 data interfaces) into a local knowledge base that AI Agents can query, cite, and validate against.
 
 When you ask an Agent (Claude Code, Codex, Cursor, …) something like *"fetch A-share daily bars for 000001.SZ"*, this skill will:
 
-1. 🧭 **Route** — locate the right interface among 7 data domains
+1. 🧭 **Route** — locate the right interface among 9 data domains
 2. 📑 **Load the contract** — read the **exact** parameter names / fields / examples from the docs instead of inventing them from memory
 3. ✍️ **Generate code** — write a runnable `panda_data` call that follows the documented conventions
 4. 🚀 **Real call** (optional) — auto-load credentials, initialize the SDK, execute the interface, and return results
@@ -34,7 +34,7 @@ When you ask an Agent (Claude Code, Codex, Cursor, …) something like *"fetch A
 
 ```mermaid
 mindmap
-  root((panda_data<br/>185 methods))
+  root((panda_data<br/>218 methods))
     Trading utilities
       Trading calendar
       Trade-date math
@@ -63,6 +63,12 @@ mindmap
       China / international macro
       Industry / special data
       Economic calendar
+    Fund data
+      Basic info / quotes
+      ETF creation-redemption
+    Preferred stock data
+      Basic info / dividends / ratings
+      Issuance / placement / trading
 ```
 
 | Data domain | Representative interfaces | Description |
@@ -74,8 +80,10 @@ mindmap
 | 🧮 **Quant factors** | `get_factor` · `get_adj_factor` | Backtest factors, adjustment factors |
 | 🌏 **HK & US stocks** | `get_hk_daily` · `get_us_daily` | Quotes, corporate events, consensus, financial factors |
 | 🏛️ **Macro data** | `get_macro_na` · `get_macro_cal` | China/international macro, industries, special data, economic calendar |
+| 🧾 **Fund data** | `get_fund_detail` · `get_fund_daily` | Fund basics, quotes, ETF creation-redemption lists |
+| 💠 **Preferred stock data** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | Preferred stock basics, dividends, ratings, issuance and placement |
 
-The full mapping of all 185 interfaces lives in [`references/method-index.md`](references/method-index.md).
+The full mapping of all 218 interfaces lives in [`references/method-index.md`](references/method-index.md).
 
 ---
 
@@ -107,8 +115,8 @@ pandadata-api/
 ├── SKILL.md                          # Skill entry: workflow, calling conventions, rules
 ├── requirements.txt                  # panda_data==0.0.9, requests
 ├── references/
-│   ├── method-index.md               # 📇 185-interface quick index (grouped by domain + doc line numbers)
-│   ├── api_catalog.json              # 🧭 Method-to-backend-endpoint mapping
+│   ├── method-index.md               # 📇 218-interface quick index (grouped by domain + doc line numbers)
+│   ├── api_catalog.json              # 🧭 Method-to-MCP-gateway /pandaData endpoint mapping
 │   ├── api-docs.md                   # 📚 Full Chinese API documentation
 │   └── agent-integration.md          # 🔌 Install/load/smoke-test per Agent
 ├── scripts/
@@ -130,7 +138,7 @@ pandadata-api/
 ### 1️⃣ Search the docs (no credentials needed)
 
 ```bash
-# List all methods (should be 185)
+# List all methods (should be 218)
 python scripts/search_api_docs.py --list-methods
 
 # Show a method's full parameters / fields / examples
@@ -207,7 +215,7 @@ python scripts/search_api_docs.py --method get_stock_daily | head -60
 python scripts/search_api_docs.py --list-methods | wc -l
 ```
 
-**Expected**: `get_stock_daily` prints its parameter table, and the method count is **185**.
+**Expected**: `get_stock_daily` prints its parameter table, and the method count is **218**.
 
 ---
 
@@ -252,7 +260,7 @@ Then rerun the universal smoke test.
 ## 🔐 Credentials & Dependencies
 
 - The SDK raises `ClientNotInitializedError` until `init_token()` succeeds.
-- Credentials can come from environment variables: `DEFAULT_USERNAME` / `DEFAULT_PASSWORD` / `JAVA_SERVICE_BASE_URL`. Pass the **plaintext password**; the SDK hashes it internally.
+- Credentials can come from environment variables or `~/.pandadata/pandadata.env`: `DEFAULT_USERNAME` / `DEFAULT_PASSWORD` / `JAVA_SERVICE_BASE_URL` (`PANDADATA_BASE_URL` is also accepted). Pass the **plaintext password**; the SDK hashes it internally.
 - `panda_data==0.0.9` runtime dependencies: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`.
 
 > Credential files (`*.env`, `user.json`, `.pandadata/`) are git-ignored and never committed.

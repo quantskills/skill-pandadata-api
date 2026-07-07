@@ -12,11 +12,11 @@
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期，格式为 YYYYMMDD | 非必填 |
-| end_date | string | 结束日期，格式为 YYYYMMDD | 非必填 |
-| exchange | string | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
-| is_trading_day | integer | 是否为交易日，1=交易日，0=非交易日，None=全部 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
+| start_date | Optional[string] | 开始日期，格式为 YYYYMMDD | 非必填 |
+| end_date | Optional[string] | 结束日期，格式为 YYYYMMDD | 非必填 |
+| exchange | Optional[string] | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
+| is_trading_day | Optional[integer] | 是否为交易日，1=交易日，0=非交易日，None=全部 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -75,9 +75,9 @@ exchange  is_trade  nature_date  pretrade_date  next_trade_date
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| date | string | 基准日期，格式为 "YYYYMMDD" | 非必填 |
-| exchange | string | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
-| n | integer | 前第n个交易日，默认为1 | 非必填 |
+| date | string | 基准日期，格式为 "YYYYMMDD" | 必填 |
+| exchange | Optional[string] | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
+| n | Optional[integer] | 前第n个交易日，默认为1 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -116,7 +116,7 @@ date
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| exchange | string | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
+| exchange | Optional[string] | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
 
 **1.3. 响应参数**
 
@@ -153,10 +153,10 @@ date
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | Optional[string] | 开始日期,eg:"20250702" | 非必填 |
+| end_date | Optional[string] | 结束日期,eg:"20250702" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -168,7 +168,6 @@ date
 | description | string | 特别处理（或撤销）事项描述 |
 | name | string | 股票名称 |
 | type | string | 特别处理（或撤销）类别 |
-| info_date | string | 公告日期 |
 
 **1.4. 使用示例**
 
@@ -202,8 +201,8 @@ symbol  date  change_date  description  name  type
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| date | string | 日期,eg:"20250702" | 非必填 |
-| exchange | string | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
+| date | Union[string, List[string]] | 日期,eg:"20250702" | 必填 |
+| exchange | Optional[string] | 交易所代码，默认为 "SH"，目前支持"SH"，"HK"和"US" | 非必填 |
 
 **1.3. 响应参数**
 
@@ -442,11 +441,11 @@ symbol  date
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| indicator | string | 股票池，参考本文档简介部分中的股票池说明，默认为空表示查询所有 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| indicator | Optional[string] | 股票池，参考本文档数据概述部分中的股票池说明，默认为空表示查询所有 | 非必填 |
 | st | Optional[bool] | 是否包含ST股，默认True表示包含。仅在type为stock时有效 | 非必填 |
 
 **1.3. 响应参数**
@@ -508,7 +507,7 @@ symbol  date  close  high  limit_down  limit_up  low  name  open  pre_close  tra
 17  000001.SZ  20250127  11.47  11.55  10.21  12.47  11.38  平安银行  11.38  11.34  0  115193471.0  1.324271e+09
 ```
 
-**2. get_stock_rt_daily - 获取A股实时日线数据**
+**2. get_stock_rt_daily - 获取A股当日日线**
 
 **2.1. 方法名：get_stock_rt_daily**
 
@@ -760,11 +759,11 @@ symbol  date  open  high  low  close  volume  amount  num_trades
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 股票 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| indicator | string | 股票池，参考本文档简介部分中的股票池说明，默认为空表示查询所有 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| indicator | Optional[string] | 股票池，参考本文档数据概述部分中的股票池说明，默认为空表示查询所有 | 非必填 |
 | st | Optional[bool] | 是否包含ST股，默认True表示包含。仅在type为stock时有效 | 非必填 |
 
 **3.3. 响应参数**
@@ -833,11 +832,11 @@ symbol  date  open  high  low  close  volume  pre_close  limit_up  limit_down  n
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 股票 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| indicator | string | 股票池，参考本文档简介部分中的股票池说明，默认为空表示查询所有 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| indicator | Optional[string] | 股票池，参考本文档数据概述部分中的股票池说明，默认为空表示查询所有 | 非必填 |
 | st | Optional[bool] | 是否包含ST股，默认True表示包含。仅在type为stock时有效 | 非必填 |
 
 **4.3. 响应参数**
@@ -906,12 +905,12 @@ symbol  date  open  high  low  close  volume  pre_close  limit_up  limit_down  n
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | time_zone | Optional[tuple] | 时间段过滤,格式为("HH:MM", "HH:MM")，例如("10:00", "23:00") | 非必填 |
-| frequency | string | 频率, 支持 "1m", "5m", "15m", "60m",默认为"1m"（指数仅支持1m） | 非必填 |
+| frequency | Optional[string] | 频率, 支持 "1m", "5m", "15m", "60m",默认为"1m" | 非必填 |
 
 **5.3. 响应参数**
 
@@ -920,7 +919,6 @@ symbol  date  open  high  low  close  volume  pre_close  limit_up  limit_down  n
 | date | string | 日期 |
 | minute | string | 时间（精确至分钟） |
 | symbol | string | 股票代码 |
-| name | string | 股票名称 |
 | open | float | 当日开盘价 |
 | close | float | 当日收盘价 |
 | high | float | 当日最高价 |
@@ -1153,7 +1151,7 @@ symbol  date  datetime  minute  num_trades  amount  volume
 199  000001.SZ  20250107  2025-01-07 10:16:00  101600  226.0  3127968.0  272500.0
 ```
 
-**6. get_stock_rt_min - 获取当日A股分钟线数据**
+**6. get_stock_rt_min - 获取A股当日分钟线**
 
 **6.1. 方法名：get_stock_rt_min**
 
@@ -1161,10 +1159,10 @@ symbol  date  datetime  minute  num_trades  amount  volume
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | time_zone | Optional[tuple] | 时间段过滤,格式为("HH:MM", "HH:MM")，例如("10:00", "23:00") | 非必填 |
-| frequency | string | 频率, 支持 "1m", 默认为"1m" | 非必填 |
+| frequency | Optional[string] | 频率, 支持 "1m", 默认为"1m" | 非必填 |
 
 **6.3. 响应参数**
 
@@ -1271,9 +1269,9 @@ symbol  date  amount  num_trades  volume
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| concept | string | 概念名称 | 非必填 |
-| start_date | string | 开始时间 | 非必填 |
-| end_date | string | 结束时间 | 非必填 |
+| concept | Optional[Union[string, List[string]]] | 概念名称 | 非必填 |
+| start_date | Optional[string] | 开始时间 | 非必填 |
+| end_date | Optional[string] | 结束时间 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -1311,10 +1309,10 @@ name  date
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| concept | string | 概念名称 | 非必填 |
-| concept_stock | string | 股票代码 | 非必填 |
-| date | string | 日期，返回该日期前被纳入对应概念的股票 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| concept | Optional[Union[string, List[string]]] | 概念名称 | 非必填 |
+| concept_stock | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| date | Optional[string] | 日期，返回该日期前被纳入对应概念的股票 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -1326,7 +1324,7 @@ name  date
 
 **2.4. 使用示例**
 
-**2.4.1. 获取一定日期内某个**概念成分股****
+**2.4.1. 获取一定日期内某个概念成分股**
 
 ```python
 import panda_data
@@ -1422,9 +1420,9 @@ concept_stock  date  concept
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| status | integer | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| status | Optional[integer] | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -1480,9 +1478,9 @@ market_tplus  name  special_type  status  de_listed_date  listed_date  sector_co
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指数代码 | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| status | string | 指数状态(1：正常交易，0：已退市，-1：暂无信息) | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指数代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| status | Optional[string] | 指数状态(1：正常交易，0：已退市，-1：暂无信息) | 非必填 |
 
 **2.3. 响应参数**
 
@@ -1728,10 +1726,10 @@ symbol  abbrev_symbol  de_listed_date  listed_date  market_tplus  min_order_amou
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| industry_code | string | 行业代码，如"801010" | 非必填 |
-| stock_symbol | string | 股票代码，如"000001.SZ" | 非必填 |
-| level | string | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| industry_code | Optional[Union[string, List[string]]] | 行业代码，如"801010" | 非必填 |
+| stock_symbol | Optional[Union[string, List[string]]] | 股票代码，如"000001.SZ" | 非必填 |
+| level | Optional[string] | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -1778,18 +1776,21 @@ stock_symbol  l1_code  in_date  l1_name  l2_code  l2_name  l3_code  l3_name  out
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| fields | string | 返回字段列表 | 非必填 |
-| level | string | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| level | Optional[Union[string, List[string]]] | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
 
 **2.3. 响应参数**
 
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
-| symbol | string | 指数代码 |
 | industry_code | string | 行业代码 |
 | industry_name | string | 行业名称 |
-| level | string | 行业级别 |
-| parent_code | string | 上级行业代码 |
+| parent_name | string | 上级行业名称（仅L2支持） |
+| parent_code | string | 上级行业代码（仅L2支持） |
+| parent_l1_code | string | 上级一级行业代码（仅L3支持） |
+| parent_l1_name | string | 上级一级行业名称（仅L3支持） |
+| parent_l2_code | string | 上级二级行业代码（仅L3支持） |
+| parent_l2_name | string | 上级二级行业名称（仅L3支持） |
 
 **2.4. 使用示例**
 
@@ -1807,38 +1808,38 @@ print(result)
 **响应示例**
 
 ```text
-symbol  industry_code  industry_name  level  parent_code
-0  801010  110000  农林牧渔  L1  0
-1  801030  220000  基础化工  L1  0
-2  801040  230000  钢铁  L1  0
-3  801050  240000  有色金属  L1  0
-4  801080  270000  电子  L1  0
-5  801880  280000  汽车  L1  0
-6  801110  330000  家用电器  L1  0
-7  801120  340000  食品饮料  L1  0
-8  801130  350000  纺织服饰  L1  0
-9  801140  360000  轻工制造  L1  0
-10  801150  370000  医药生物  L1  0
-11  801160  410000  公用事业  L1  0
-12  801170  420000  交通运输  L1  0
-13  801180  430000  房地产  L1  0
-14  801200  450000  商贸零售  L1  0
-15  801210  460000  社会服务  L1  0
-16  801780  480000  银行  L1  0
-17  801790  490000  非银金融  L1  0
-18  801230  510000  综合  L1  0
-19  801710  610000  建筑材料  L1  0
-20  801720  620000  建筑装饰  L1  0
-21  801730  630000  电力设备  L1  0
-22  801890  640000  机械设备  L1  0
-23  801740  650000  国防军工  L1  0
-24  801750  710000  计算机  L1  0
-25  801760  720000  传媒  L1  0
-26  801770  730000  通信  L1  0
-27  801950  740000  煤炭  L1  0
-28  801960  750000  石油石化  L1  0
-29  801970  760000  环保  L1  0
-30  801980  770000  美容护理  L1  0
+industry_code  industry_name
+0  801010  农林牧渔
+1  801030  基础化工
+2  801040  钢铁
+3  801050  有色金属
+4  801080  电子
+5  801110  家用电器
+6  801120  食品饮料
+7  801130  纺织服饰
+8  801140  轻工制造
+9  801150  医药生物
+10  801160  公用事业
+11  801170  交通运输
+12  801180  房地产
+13  801200  商贸零售
+14  801210  社会服务
+15  801230  综合
+16  801710  建筑材料
+17  801720  建筑装饰
+18  801730  电力设备
+19  801740  国防军工
+20  801750  计算机
+21  801760  传媒
+22  801770  通信
+23  801780  银行
+24  801790  非银金融
+25  801880  汽车
+26  801890  机械设备
+27  801950  煤炭
+28  801960  石油石化
+29  801970  环保
+30  801980  美容护理
 ```
 
 **3. get_stock_industry - 获取指定股票所属的行业信息**
@@ -1849,8 +1850,8 @@ symbol  industry_code  industry_name  level  parent_code
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| stock_symbol | string | 股票代码，如"000001.SZ" | 非必填 |
-| level | string | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
+| stock_symbol | string | 股票代码，如"000001.SZ" | 必填 |
+| level | Optional[string] | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
 
 **3.3. 响应参数**
 
@@ -1896,8 +1897,8 @@ stock_symbol  industry_code  industry_name
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
 | symbol | string | 指数代码 | 非必填 |
 | fields | string | 返回字段 | 非必填 |
 
@@ -1962,12 +1963,12 @@ symbol  date  amount  close  high  low  open  pre_close  volume
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 指数代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 指数代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | time_zone | Optional[tuple] | 时间段过滤,格式为("HH:MM", "HH:MM")，例如("10:00", "23:00") | 非必填 |
-| frequency | string | 频率, 支持 "1m", 默认为"1m"（指数仅支持1m） | 非必填 |
+| frequency | Optional[string] | 频率, 支持 "1m", 默认为"1m" | 非必填 |
 
 **2.3. 响应参数**
 
@@ -2218,11 +2219,11 @@ symbol  date  datetime  minute  amount  volume
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| index_symbol | string | 指数代码 | 非必填 |
-| stock_symbol | string | 成分股代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| index_symbol | Optional[Union[string, List[string]]] | 指数代码 | 非必填 |
+| stock_symbol | Optional[Union[string, List[string]]] | 成分股代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -2463,10 +2464,10 @@ index_symbol  date  stock_symbol
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指数代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指数代码 | 非必填 |
+| start_date | Optional[string] | 开始日期,eg:"20250702" | 非必填 |
+| end_date | Optional[string] | 结束日期,eg:"20250702" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -2711,11 +2712,11 @@ symbol  date  pb_lf  pb_lyr  pb_ttm  pe_lyr  pe_ttm
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，如 "000001.SZ" | 非必填 |
-| type | string | 龙虎榜类型 | 非必填 |
-| start_date | string | 开始日期，格式 "YYYYMMDD" | 非必填 |
-| end_date | string | 结束日期，格式 "YYYYMMDD" | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，如 "000001.SZ" | 非必填 |
+| type | Optional[Union[string, List[string]]] | 龙虎榜类型 | 非必填 |
+| start_date | Optional[string] | 开始日期，格式 "YYYYMMDD" | 非必填 |
+| end_date | Optional[string] | 结束日期，格式 "YYYYMMDD" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -2939,12 +2940,12 @@ symbol  date  type  amount  amplitude  change_rate  deviation  end_date  reason 
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string = None | 股票代码，如 "000001.SZ" | 非必填 |
-| type | string | 龙虎榜类型 | 非必填 |
-| start_date | string | 开始日期，格式 "YYYYMMDD" | 非必填 |
-| end_date | string | 结束日期，格式 "YYYYMMDD" | 非必填 |
-| side | string | 买卖方向，可选值为 "buy" 或 "sell" 或 "cum"，其中"cum"类型记录发生严重异常时的累计数据，与具体买卖方向无关 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] = None | 股票代码，如 "000001.SZ" | 非必填 |
+| type | Optional[Union[string, List[string]]] | 龙虎榜类型 | 非必填 |
+| start_date | string | 开始日期，格式 "YYYYMMDD" | 必填 |
+| end_date | string | 结束日期，格式 "YYYYMMDD" | 必填 |
+| side | Optional[string] | 买卖方向，可选值为 "buy" 或 "sell" 或 "cum"，其中"cum"类型记录发生严重异常时的累计数据，与具体买卖方向无关 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -3006,11 +3007,11 @@ symbol  date  side  rank  agency  b_value  reason  s_value  type
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| margin_type | string | 买卖方向，'stock' 代表融券卖出，'cash' 代表融资买入 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| margin_type | Optional[string] | 买卖方向，"stock" 代表融券卖出，"cash" 代表融资买入 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -3025,7 +3026,7 @@ symbol  date  side  rank  agency  b_value  reason  s_value  type
 | symbol | string | 股票代码 |
 | short_balance_quantity | float | 融券余量 |
 | short_repayment_quantity | float | 融券偿还量 |
-| margin_type | string | 买卖方向，'stock' 代表融券卖出，'cash' 代表融资买入 |
+| margin_type | string | 买卖方向，"stock" 代表融券卖出，"cash" 代表融资买入 |
 | total_balance | float | 总余额 |
 
 **3.4. 使用示例**
@@ -3076,10 +3077,10 @@ symbol  date  short_balance  margin_balance  short_repayment_quantity  short_sel
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -3123,10 +3124,10 @@ adjusted_holding_ratio  symbol  date  holding_ratio  shares_num
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -3168,11 +3169,11 @@ participant  institute  investor_or_analyst_detail  symbol  date
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
 | start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| market | string | 市场,默认'cn'为中国内地市场 | 非必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| market | Optional[string] | 市场,默认"cn"为中国内地市场 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -3222,10 +3223,10 @@ symbol  date  relieve_date  shareholder  relieve_reason  relieve_shares  actual_
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 日期，格式 "YYYYMMDD" | 非必填 |
-| end_date | string | 日期，格式 "YYYYMMDD" | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | Optional[string] | 日期，格式 "YYYYMMDD" | 非必填 |
+| end_date | Optional[string] | 日期，格式 "YYYYMMDD" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -3274,9 +3275,9 @@ print(result)
 
 ```text
 symbol  date  maturity_desc  buy_back_percent  buy_back_value  currency  purpose  share_type  price_floor  buy_back_end_date  buy_back_price  buy_back_volume  buy_back_mode  volume_floor  procedure  price_ceiling  buy_back_start_date  announcement_dt  seller  write_off_date  value_floor  volume_ceiling  value_ceiling
-0  002011.SZ  20250730  None  0.0008  5630000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》(以下简称“《第一期限制性股票与股票期权激励计划(草案)》”、“本激励计划”)及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》(以下简称“《第一期股权激励授予协议书》”)的相关约定,本激励计划首次授予限制性股票的23名激励对象已离职,公司应回购注销该23名激励对象已获授但尚未解除限售的40.80万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》《第一期股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的2名激励对象因退休不再具备激励对象资格,公司应回购注销该2名激励对象因个人年度考核系数未达到100%及退休后无法解除限售的2.93万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,除前述激励对象外,本激励计划首次授予限制性股票的178名激励对象的个人年度考核系数未达到100%或存在降职,公司应回购注销该178名激励对象无法解除限售的37.67万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,本激励计划首次授予限制性股票的1名激励对象因担任监事不能持有限制性股票,不再具备激励对象资格,公司应回购注销该1名激励对象无法解除限售的2万股限制性股票。  流通A股  6.61  None  None  834000.0  协议回购  834000.0  预案  None  None  2025-07-29 19:41:19  激励对象  None  5630000.0  834000.0  5630000.0
-1  002011.SZ  20250730  None  0.0008  5630000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》(以下简称“《第一期限制性股票与股票期权激励计划(草案)》”、“本激励计划”)及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》(以下简称“《第一期股权激励授予协议书》”)的相关约定,本激励计划首次授予限制性股票的23名激励对象已离职,公司应回购注销该23名激励对象已获授但尚未解除限售的40.80万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》《第一期股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的2名激励对象因退休不再具备激励对象资格,公司应回购注销该2名激励对象因个人年度考核系数未达到100%及退休后无法解除限售的2.93万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,除前述激励对象外,本激励计划首次授予限制性股票的178名激励对象的个人年度考核系数未达到100%或存在降职,公司应回购注销该178名激励对象无法解除限售的37.67万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,本激励计划首次授予限制性股票的1名激励对象因担任监事不能持有限制性股票,不再具备激励对象资格,公司应回购注销该1名激励对象无法解除限售的2万股限制性股票。  流通A股  6.61  None  None  834000.0  协议回购  834000.0  预案  None  None  2025-07-29 19:41:19  激励对象  None  5630000.0  834000.0  5630000.0
-2  002011.SZ  20250730  None  0.0008  5630000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的23名激励对象已离职,公司应回购注销该23名激励对象已获授但尚未解除限售的40.80万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》《第一期股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的2名激励对象因退休不再具备激励对象资格,公司应回购注销该2名激励对象因个人年度考核系数未达到100%及退休后无法解除限售的2.93万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,除前述激励对象外,本激励计划首次授予限制性股票的178名激励对象的个人年度考核系数未达到100%或存在降职,公司应回购注销该178名激励对象无法解除限售的37.67万股限制性股票。\r\n  根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,本激励计划首次授予限制性股票的1名激励对象因担任监事不能持有限制性股票,不再具备激励对象资格,公司应回购注销该1名激励对象无法解除限售的2万股限制性股票。  流通A股  6.61  None  None  834043.0  协议回购  834043.0  决案  None  None  2025-07-29 19:41:19  激励对象  None  5630000.0  834043.0  5630000.0
+0  002011.SZ  20250730  None  0.0008  5630000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》(以下简称“《第一期限制性股票与股票期权激励计划(草案)》”、“本激励计划”)及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》(以下简称“《第一期股权激励授予协议书》”)的相关约定,本激励计划首次授予限制性股票的23名激励对象已离职,公司应回购注销该23名激励对象已获授但尚未解除限售的40.80万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》《第一期股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的2名激励对象因退休不再具备激励对象资格,公司应回购注销该2名激励对象因个人年度考核系数未达到100%及退休后无法解除限售的2.93万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,除前述激励对象外,本激励计划首次授予限制性股票的178名激励对象的个人年度考核系数未达到100%或存在降职,公司应回购注销该178名激励对象无法解除限售的37.67万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,本激励计划首次授予限制性股票的1名激励对象因担任监事不能持有限制性股票,不再具备激励对象资格,公司应回购注销该1名激励对象无法解除限售的2万股限制性股票。  流通A股  6.61  None  None  834000.0  协议回购  834000.0  预案  None  None  2025-07-29 19:41:19  激励对象  None  5630000.0  834000.0  5630000.0
+1  002011.SZ  20250730  None  0.0008  5630000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》(以下简称“《第一期限制性股票与股票期权激励计划(草案)》”、“本激励计划”)及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》(以下简称“《第一期股权激励授予协议书》”)的相关约定,本激励计划首次授予限制性股票的23名激励对象已离职,公司应回购注销该23名激励对象已获授但尚未解除限售的40.80万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》《第一期股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的2名激励对象因退休不再具备激励对象资格,公司应回购注销该2名激励对象因个人年度考核系数未达到100%及退休后无法解除限售的2.93万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,除前述激励对象外,本激励计划首次授予限制性股票的178名激励对象的个人年度考核系数未达到100%或存在降职,公司应回购注销该178名激励对象无法解除限售的37.67万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,本激励计划首次授予限制性股票的1名激励对象因担任监事不能持有限制性股票,不再具备激励对象资格,公司应回购注销该1名激励对象无法解除限售的2万股限制性股票。  流通A股  6.61  None  None  834000.0  协议回购  834000.0  预案  None  None  2025-07-29 19:41:19  激励对象  None  5630000.0  834000.0  5630000.0
+2  002011.SZ  20250730  None  0.0008  5630000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的23名激励对象已离职,公司应回购注销该23名激励对象已获授但尚未解除限售的40.80万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》《第一期股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的2名激励对象因退休不再具备激励对象资格,公司应回购注销该2名激励对象因个人年度考核系数未达到100%及退休后无法解除限售的2.93万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,除前述激励对象外,本激励计划首次授予限制性股票的178名激励对象的个人年度考核系数未达到100%或存在降职,公司应回购注销该178名激励对象无法解除限售的37.67万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,本激励计划首次授予限制性股票的1名激励对象因担任监事不能持有限制性股票,不再具备激励对象资格,公司应回购注销该1名激励对象无法解除限售的2万股限制性股票。  流通A股  6.61  None  None  834043.0  协议回购  834043.0  决案  None  None  2025-07-29 19:41:19  激励对象  None  5630000.0  834043.0  5630000.0
 3  002011.SZ  20251127  None  0.0002  1350000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》(以下简称“《第一期限制性股票与股票期权激励计划(草案)》”、“本激励计划”)及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》(以下简称“《第一期股权激励授予协议书》”)的相关约定,本激励计划首次授予限制性股票的8名激励对象已离职或工作调整,公司应回购注销该8名激励对象已获授但尚未解除限售的19.98万股限制性股票。  流通A股  6.61  None  None  199800.0  协议回购  199800.0  预案  None  None  2025-11-26 19:51:37  8名激励对象  None  1350000.0  199800.0  1350000.0
 ```
 
@@ -3288,10 +3289,10 @@ symbol  date  maturity_desc  buy_back_percent  buy_back_value  currency  purpose
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | Optional[string] | 开始日期,eg:"20250702" | 非必填 |
+| end_date | Optional[string] | 结束日期,eg:"20250702" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -3338,14 +3339,14 @@ symbol  date  end_date  a_holders  avg_a_holders  avg_circulation_holders  avg_h
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| market | string | 市场,默认'cn'为中国内地市场 | 非必填 |
-| start_rank | integer | 排名开始值 | 非必填 |
-| end_rank | integer | 排名结束值 | 非必填 |
-| stock_type | string | 股票种类, flow基于持有A股流通股;total基于所有发行出的A股 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| market | Optional[string] | 市场,默认"cn"为中国内地市场 | 非必填 |
+| start_rank | Optional[integer] | 排名开始值 | 非必填 |
+| end_rank | Optional[integer] | 排名结束值 | 非必填 |
+| stock_type | Optional[string] | 股票种类, flow基于持有A股流通股;total基于所有发行出的A股 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -3408,10 +3409,10 @@ symbol  date  rank  stock_type  end_date  freeze  hold_percent_float  hold_perce
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | Optional[string] | 开始日期,eg:"20250702" | 非必填 |
+| end_date | Optional[string] | 结束日期,eg:"20250702" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **6.3. 响应参数**
 
@@ -3457,10 +3458,10 @@ symbol  date  price  buyer  seller  volume  amount
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **7.3. 响应参数**
 
@@ -3665,10 +3666,10 @@ symbol  date  circulation_a  free_circulation  non_circulation_a  preferred_shar
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 
 **8.3. 响应参数**
 
@@ -3676,9 +3677,9 @@ symbol  date  circulation_a  free_circulation  non_circulation_a  preferred_shar
 |:---|:---|:---|
 | symbol | string | 股票代码 |
 | announcement_date | string | 公布日期 |
-| effective_date | string | 常规分红对应的有效财政季度；特殊分红则对应股权登记日 |
-| ex_date | string | 除权除息日，该天股票的价格会因为分红而进行调整 |
-| div_type | string | 是否分红及具体分红形式:transferred share 代表转增股份；bonus share 代表赠送股份；cash 为现金；cash and share 代表现金、转增股和送股都有涉及。 |
+| effective_date | string | 常规分红：对应财政季度；特殊分红：股权登记日 |
+| ex_date | string | 除权除息日 |
+| div_type | string | 是否分红及分红形式 |
 
 **8.4. 使用示例**
 
@@ -3712,10 +3713,10 @@ symbol  announcement_date  effective_date  ex_date  div_type
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 
 **9.3. 响应参数**
 
@@ -3758,10 +3759,10 @@ symbol  ex_date  record_date  payable_date  split_factor_pre  split_factor_post 
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 
 **10.3. 响应参数**
 
@@ -3809,10 +3810,10 @@ symbol  announcement_date  div_cash_gross  record_date  ex_date  payment_date  r
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 
 **11.3. 响应参数**
 
@@ -3857,10 +3858,10 @@ symbol  announcement_date  event_stage  total_div_amount  quarter
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 
 **12.3. 响应参数**
 
@@ -3907,10 +3908,10 @@ symbol  announcement_date  issue_type  issue_status  listed_date  issued_shares 
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 
 **13.3. 响应参数**
 
@@ -3949,6 +3950,1281 @@ symbol  announcement_date  planned_ratio  actual_ratio  actual_shares  allotment
 3  000001.SZ  19990717  0.3  0.25387  393975057.0  8.0  20001103  20001106
 ```
 
+**14. get_stock_disclosure_date - 获取上市A股定期报告预披露数据**
+
+**14.1. 方法名：get_stock_disclosure_date**
+
+**14.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**14.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 证券简称 |
+| expected_disclosure_date | string | 预计披露日 |
+| end_date | string | 报告期 |
+| actual_disclosure_date | string | 实际披露日 |
+| first_change_date | string | 第一次变更日期 |
+| second_change_date | string | 第二次变更日期 |
+| third_change_date | integer | 第三次变更日期 |
+| first_publish_date | integer | 首次发布日期 |
+| latest_predisclosure_date | integer | 最新预披露日期 |
+
+**14.4. 使用示例**
+
+**14.4.1. 获取一定日期范围内上市 A 股定期报告预披露数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_disclosure_date(
+    start_date='20250101',
+    end_date='20260430',
+
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+symbol  end_date  name  expected_disclosure_date  actual_disclosure_date  first_change_date  second_change_date  third_change_date  first_publish_date  latest_predisclosure_date
+0  000001.SZ  20241231  平安银行  20250315  20250315  None  None  None  20241231  20241231
+1  000001.SZ  20250331  平安银行  20250419  20250419  None  None  None  20250331  20250331
+```
+
+**15. get_stock_over_allotment - 获取超额配售权实施情况数据**
+
+**15.1. 方法名：get_stock_over_allotment**
+
+**15.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**15.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 证券简称 |
+| info_date | string | 公告日期 |
+| end_date | string | 最后行使日期 |
+| vwap | float | 行权中竞价交易购买股票均价 |
+| volume | float | 行权中竞价交易购买股票数量 |
+| over_allotment_shares | float | 超额发行股份数 |
+| over_allotment_rate | float | 超额配售率 |
+| full_subscription_flag | integer | 是否全额(0：否，1：是，2：未获知，3:不排除) |
+| additional_raised_funds | float | 增加的募集资金 |
+| additional_raised_fee | float | 增加的募集资金费用 |
+| total_proceeds_exercise | float | 行权后募集资金总额人民币 |
+| net_proceeds_exercise | float | 行权后募集资金净额人民币 |
+| foreign_total_proceeds_exercise | float | 行权后募集资金总额外币 |
+| foreign_net_proceeds_exercise | float | 行权后募集资金净额外币 |
+| currency_symbol | string | 外币币种( HKD：港元，USD：美元) |
+
+**15.4. 使用示例**
+
+**15.4.1. 获取一定日期范围超额配售权实施情况数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_over_allotment(
+    start_date='20250101',
+    end_date='20260430',
+
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+symbol  info_date  name  end_date  vwap  volume  over_allotment_shares  over_allotment_rate  full_subscription_flag  additional_raised_funds  additional_raised_fee  total_proceeds_exercise  net_proceeds_exercise  foreign_total_proceeds_exercise  foreign_net_proceeds_exercise  currency_symbol
+0  001391.SZ  20250207  国货航  None  None  None  198176500.0  15.0  1  455806000.0  4096000.0  3494514200  3437295600  None  None  None
+1  600930.SH  20250816  华电新能  None  None  None  745341500.0  15.0  1  2370186000  17657600  18171428600  17944401500  None  None  None
+```
+
+**16. get_stock_litigation_arbitration - 获取上市公司诉讼仲裁数据**
+
+**16.1. 方法名：get_stock_litigation_arbitration**
+
+**16.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| lawsuit_type | Optional[Union[integer, List[integer]]] | 诉讼类型 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**16.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 证券代码 |
+| name | string | 证券简称 |
+| info_date | string | 公告日期 |
+| lawsuit_type | integer | 诉讼类型(CI:民事诉讼,AD:行政诉讼,CR:刑事诉讼,AR:仲裁) |
+| filing_date | string | 起诉日期 |
+| case_summary | string | 案件摘要 |
+| case_intro | string | 案件简介 |
+| case_progress | string | 案件进展 |
+| involved_amount | float | 涉案金额(元) |
+| currency_code | string | 货币代码 |
+| plaintiff | string | 原告方 |
+| defendant | string | 被告方 |
+| first_court | string | 一审受理法院 |
+| first_judgment_date | string | 一审判决日期 |
+| is_appeal_flg | integer | 是否上诉(1:是，0:否，2:不排除) |
+| appellant_type | string | 上诉方(P:原告，D:被告，TP:其他) |
+| second_court | string | 二审受理法院 |
+| second_judgment_date | string | 二审判决日期 |
+| judgment_content | string | 判决/仲裁内容 |
+| remark | string | 备注 |
+
+**16.4. 使用示例**
+
+**16.4.1. 获取一定日期范围内上市公司诉讼仲裁数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_litigation_arbitration (
+    start_date='20250101',
+    end_date='20260430',
+
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+symbol  appellant_type  case_intro  case_progress  case_summary  currency_code  defendant  filing_date  first_court  first_judgment_date  info_date  involved_amount  is_appeal_flg  judgment_content  lawsuit_type  name  plaintiff  remark  second_court  second_judgment_date
+0  000776.SZ  None  案号：\n(2023)粤03民初5772号\n诉讼当事人：\n原告：陈卫福等合计12名自然人...  20241217：近日，公司收到了广东省深圳市中级人民法院于2024年12月13日出具的《民...  证券虚假陈述责任纠纷  CNY  王迎燕,徐晶,美尚生态景观股份有限公司,广发证券股份有限公司,东兴证券股份有限公司,天衡会计...  None  广东省深圳市中级人民法院  None  20250101  950202.89  None  None  CI  广发证券  陈卫福等合计12名自然人投资者  None  None  None
+1  300266.SZ  None  合同纠纷  20250101：公司于近日收到了最高人民法院送达的《民事裁定书》<(2023)最高法民申3...  合同纠纷  CNY  吴劼,双兴棋,杭州立阳投资管理合伙企业(有限合伙),王森,盛国祥,吕勤,黄斌  None  最高人民法院  None  20250101  188891000.0  None  None  CI  兴源环境  兴源环境科技股份有限公司,杭州中艺生态环境工程有限公司  None  None  None
+```
+
+**17. get_stock_csrc_approval - 获取证监会批文数据**
+
+**17.1. 方法名：get_stock_csrc_approval**
+
+**17.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| announcement_level | Optional[Union[integer, List[integer]]] | 公告级别 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**17.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| publish_date | string | 发文日期 |
+| publish_institution | string | 发布机构 |
+| announcement_category | string | 公告类别（公告类别对应表） |
+| announcement_level | integer | 公告级别(分为01级、02级、03级) |
+| announcement_title | string | 公告名称 |
+| announcement_number | string | 公告文号 |
+| announcement_content | string | 公告正文 |
+| attachment_link | string | 附件链接 |
+| announcement_link | string | 公告链接 |
+
+**17.4. 使用示例**
+
+**17.4.1. 获取一定日期范围内证监会批文数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_csrc_approval (
+    start_date='20250101',
+    end_date='20260430',
+
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+publish_date  publish_institution  announcement_category  announcement_level  announcement_title  announcement_number  announcement_content  attachment_link  announcement_link
+0  20250102  证监会  15  01  关于同意上海期货交易所铅、镍、锡和氧化铝期权注册的批复  无  上海期货交易所：你所《关于申请铅、镍、锡和氧化铝期权注册的请示》（上期发〔2024〕279号）收悉。根据《中华人民共和国期货和衍生品法》的有关规定，按照《期货期权品种注册管理暂行规定》（证监发〔2022〕85号），现批复如下：一、同意你所铅、镍、锡和氧化铝期权注册。二、请你所做好各项准备工作，确保铅、镍、锡和氧化铝期权平稳运行和健康发展。三、本批复自作出之日起一年内有效。中国证监会2024年8月22日  http://www.csrc.gov.cn/csrc/c101903/c7530169/content.shtml
+1  20250102  证监会  15  01  关于同意大连商品交易所原木期货和期权注册的批复  无  大连商品交易所：你所《关于申请原木期货和期权注册的请示》（大商所发〔2023〕410号）收悉。根据《中华人民共和国期货和衍生品法》的有关规定，按照《期货期权品种注册管理暂行规定》（证监发〔2022〕85号），现批复如下：一、同意你所原木期货和期权注册。二、请你所做好各项准备工作，确保原木期货和期权平稳运行和健康发展。三、本批复自作出之日起一年内有效。中国证监会2024年10月24日  http://www.csrc.gov.cn/csrc/c101903/c7530171/content.shtml
+```
+
+**18. get_stock_competitor - 获取竞争企业信息数据**
+
+**18.1. 方法名：get_stock_competitor**
+
+**18.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**18.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 证券代码 |
+| info_date | string | 公告日期 |
+| name | string | 证券简称 |
+| competitor_name | string | 竞争公司名称 |
+| competitor_intro | string | 竞争公司机构介绍 |
+| competitor_stock_code | string | 竞争公司股票代码 |
+| competition_fields | string | 竞争领域（有多个时，以“,”分割） |
+
+**18.4. 使用示例**
+
+**18.4.1. 获取一定日期范围内股票竞争企业信息数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_competitor_information (
+    start_date='20250101',
+    end_date='20260430',
+    symbol=['001220.SZ']
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+symbol  info_date  name  competitor_name  competitor_intro  competitor_stock_code  competition_fields
+0  001220.SZ  20251121  世盟股份  上海畅联国际物流股份有限公司  上海畅联国际物流股份有限公司成立于 2001 年 5 月 22 日，公司专注于为国际跨国企业提供精益供应链管理服务，主要在企业供应链中的采购、生产、销售等环节提供供应链综合管理方案的设计与实施，并提供与之配套的口岸通关、仓储管理、货物配送等一体化综合物流服务。  603648  综合性物流服务
+1  001220.SZ  20251121  世盟股份  密尔克卫智能供应链服务集团股份有限公司  密尔克卫化工供应链服务股份有限公司成立于 1997 年 3 月 28 日，公司是一家专业化工供应链服务商，提供以货运代理、仓储和运输为核心的一站式综合物流服务，以及化工品交易服务。  603713  综合性物流服务
+```
+
+**19. get_stock_intermediary - 获取中介情况信息表数据**
+
+**19.1. 方法名：get_stock_intermediary**
+
+**19.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| event_type | Optional[Union[string, List[string]]] | 事件类型 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**19.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 证券简称 |
+| equity_event_code | string | 权益融资事件代码 |
+| event_type | string | 事件类型（PIPE:定向增发；FO:公开增发；IPO:首发；RI:配股；PREF:优先股；PRE:定期报告） |
+| issue_start_date | string | 发行起始日 |
+| intermediary_category | string | 中介机构类别（见中介机构类别对应表） |
+| intermediary_name | string | 中介机构名称 |
+| intermediary_handler | string | 中介机构经办人姓名 |
+
+**19.4. 使用示例**
+
+**19.4.1. 获取一定日期范围内股票中介情况信息表数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_intermediary (
+    start_date='20240101',
+    end_date='20260430',
+    symbol=['000002.SZ']
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+symbol  issue_start_date  name  equity_event_code  event_type  intermediary_category  intermediary_name  intermediary_handler
+0  000002.SZ  20241231  万科A  60202401  PRE  03  毕马威华振会计师事务所(特殊普通合伙)  周永明、李瑶
+1  000002.SZ  20251231  万科A  60202501  PRE  03  德勤华永会计师事务所(特殊普通合伙)  杨誉民、许湘照
+```
+
+**20. get_stock_related_party - 上市公司关联交易**
+
+**20.1. 方法名：get_stock_related_party**
+
+**20.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+
+**20.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 股票名 |
+| info_date | string | 公告日期 |
+| introduction | string | 首次公告日期 |
+| relation | string | 关联关系 |
+| party_name | string | 关联方名称 |
+| is_control | string | 是否存在控制关系 |
+| amount | float | 交易金额(万元) |
+| currency | string | 币种 |
+| pricing_basis | string | 定价依据 |
+| trading_method | string | 交易方式 |
+| pay_type | string | 支付方式 |
+| begin_date | string | 交易起始日 |
+| end_date | string | 交易截止日 |
+
+**20.4. 使用示例**
+
+**20.4.1. 获取一段时间内的某股票相关上市公司关联交易数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_related_party(
+    symbol="000001.SZ",
+    start_date="20250101",
+    end_date="20260101",
+    fields=[""]
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  info_date  name  introduction  relation  party_name  is_control  amount  currency  pricing_basis  trading_method  pay_type  begin_date  end_date
+0  000001.SZ  20250222  平安银行  平安银行股份有限公司(以下简称“平安银行”、“本行”)第十二届董事会第三十五次会议审议通过了《关于与陆金所控股有限公司关联交易的议案》,同意与陆金所控股有限公司(以下简称“陆金所”)进行离岸人民币定期存款业务和离岸协定存款业务合作,其中:离岸人民币定期存款业务本金金额合计不超过人民币45亿元,利息合计不超过人民币0.29亿元;离岸协定存款业务本金金额不超过等值人民币21.84亿元,利息不超过人民币0.18亿元。  同一关键人员,公司其它关联方  陆金所控股有限公司  否  None  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  金融服务,物业租赁  现金  None  None
+1  000001.SZ  20250222  平安银行  平安银行股份有限公司(以下简称“平安银行”、“本行”)第十二届董事会第三十五次会议审议通过了《关于与安科技术有限公司关联交易的议案》,同意与安科技术有限公司(以下简称“安科技术”)进行美元定期存款业务合作,本金金额不超过等值人民币36亿元,利息不超过等值人民币0.44亿元。  同一母公司  安科技术有限公司  否  None  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  美元定期存款  现金  None  None
+2  000001.SZ  20250222  平安银行  平安银行股份有限公司(以下简称“平安银行”、“本行”)第十二届董事会第三十五次会议审议通过了《关于与平安证券股份有限公司关联交易的议案》,同意给予平安证券股份有限公司(以下简称“平安证券”)原额续做同业综合授信额度人民币45亿元,额度期限至2025年10月24日。  同一控股公司  平安证券股份有限公司  否  450000.0  CNY  前述关联交易定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  同业授信  现金  None  None
+3  000001.SZ  20250222  平安银行  平安银行股份有限公司(以下简称“平安银行”、“本行”)第十二届董事会第三十五次会议审议通过了《关于与平安国际融资租赁有限公司关联交易的议案》,同意给予平安国际融资租赁有限公司(以下简称“平安租赁”)原额续作综合授信额度等值人民币65亿元,额度期限1年。  同一控股公司  平安国际融资租赁有限公司  否  650000.0  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  授信  现金  None  None
+4  000001.SZ  20250404  平安银行  平安银行股份有限公司(以下简称平安银行、本行)第十二届董事会第三十八次会议审议通过了《关于与方正证券股份有限公司关联交易的议案》,同意给予方正证券股份有限公司(以下简称方正证券)增额续做同业综合授信额度人民币20亿元,额度期限至2026年1月23日。  同一控股公司  方正证券股份有限公司  否  200000.0  CNY  前述关联交易定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  授信额度  现金  None  None
+5  000001.SZ  20250404  平安银行  平安银行股份有限公司(以下简称平安银行、本行)第十二届董事会第三十八次会议审议通过了《关于与中国平安保险(集团)股份有限公司关联交易的议案》,同意与中国平安保险(集团)股份有限公司(以下简称中国平安)进行协定存款(含人民币、港币、美元)业务合作,本金金额合计不超过等值人民币400亿元,存款利息合计不超过等值人民币2.73亿元。  公司股东  中国平安保险(集团)股份有限公司  否  None  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  协定存款业务  现金  None  None
+6  000001.SZ  20250404  平安银行  平安银行股份有限公司(以下简称平安银行、本行)第十二届董事会第三十八次会议审议通过了《关于与深圳市创帆企业管理有限公司关联交易的议案》,同意与深圳市创帆企业管理有限公司(以下简称创帆企管)进行人民币协定存款业务合作,本金金额不超过人民币148.00亿元,利息不超过人民币0.962亿元。  同一母公司  深圳市创帆企业管理有限公司  否  None  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  存款业务合作  现金  None  None
+7  000001.SZ  20250524  平安银行  2025年度，本行拟与中国平安保险(集团)股份有限公司,平安国际融资租赁有限公司,平安证券股份有限公司,方正证券股份有限公司等及其关联方开展同业拆借,债券回购,金融衍生品等关联交易，预计金额为6274000万元。\r\n20250524：股东大会通过  公司股东,同一控股公司,公司其它关联方  中国平安保险(集团)股份有限公司,平安国际融资租赁有限公司,平安证券股份有限公司,方正证券股份有限公司等  否  6274000.0  CNY  前述关联交易定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  同业拆借,债券回购,金融衍生品等  现金  None  None
+8  000001.SZ  20250704  平安银行  平安银行股份有限公司(以下简称平安银行、本行)第十二届董事会第四十一次会议审议通过了《关于与董事、监事、高级管理人员及其相关关联方关联交易的议案》,同意本行与董事、监事、高级管理人员及其相关关联方开展一般性存款、支付结算、信用卡、个人贷款、购买金融产品等授信类、资产转移类、服务类、存款和其他类型关联交易。  公司其它关联方  董事、监事、高级管理人员及其相关关联方  否  None  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  存款,支付结算,购买金融产品等  现金  None  None
+9  000001.SZ  20250927  平安银行  平安银行股份有限公司（以下简称平安银行或本行）第十二届董事会第四十三次会议审议通过《关于与陆金所控股有限公司关联交易的议案》，同意与陆金所控股有限公司（以下简称陆控）签订《服务及产品购买协议》及其补充协议、《金融服务合作协议》及其补充协议，预计2026年至2028年，在国家金融监督管理总局口径下，关联交易上限总额1,287.50亿元，其中：服务类关联交易上限总额0.40亿元，存款类关联交易按本金上限总额1,117.60亿元，衍生品服务协议金额120亿元，同业拆借按额度协议金额49.50亿元；在深圳证券交易所口径下，关联交易金额上限总额为183.68亿元。  公司其它关联方  陆金所控股有限公司  否  None  CNY  前述关联交易定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  金融服务  现金  None  None
+10  000001.SZ  20250927  平安银行  平安银行股份有限公司（以下简称平安银行或本行）第十二届董事会第四十三次会议审议通过了《关于与新方正控股发展有限责任公司关联交易的议案》，同意与新方正控股发展有限责任公司（以下简称新方正）进行结构性存款及七天通知存款业务合作，其中：结构性存款累计发生额合计不超过人民币121亿元，存款利息合计不超过人民币2.42亿元；七天通知存款累计发生额合计不超过人民币97亿元，存款利息合计不超过人民币0.73亿元。  同一母公司  新方正控股发展有限责任公司  否  None  CNY  前述关联交易定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  金融服务  现金  None  None
+11  000001.SZ  20250927  平安银行  平安银行股份有限公司（以下简称平安银行或本行）第十二届董事会第四十三次会议审议通过了《关于与平安国际融资租赁有限公司关联交易的议案》，同意与平安国际融资租赁有限公司（以下简称平安租赁）进行协定存款业务合作，本金金额合计不超过人民币18.71亿元，存款利息合计不超过人民币841.95万元。  同一母公司  平安国际融资租赁有限公司  否  None  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  金融服务  现金  None  None
+12  000001.SZ  20250927  平安银行  平安银行股份有限公司（以下简称平安银行或本行）第十二届董事会第四十三次会议审议通过《关于与远东宏信有限公司关联交易的议案》，同意给予远东宏信有限公司（以下简称远东宏信）新增综合授信额度人民币20亿元或等值外币，额度期限12个月。  公司其它关联方,同一关键人员  远东宏信有限公司  否  None  CNY  前述关联交易定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  金融服务  现金  None  None
+```
+
+**21. get_cumu_guarantee - 获取累计担保信息**
+
+**21.1. 方法名：get_cumu_guarantee**
+
+**21.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+
+**21.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 股票名 |
+| info_date | string | 公告日期 |
+| end_date | string | 截止日期 |
+| currency | string | 币种 |
+| amount | float | 担保额度（万元） |
+| ex_amount | float | 对外担保额度（万元） |
+| sub_amount | float | 对子公司担保额度（万元） |
+| occur_amount | float | 担保发生额（万元） |
+| ex_occur_amount | float | 对外担保发生额（万元） |
+| sub_occur_amount | float | 对子公司担保发生额（万元） |
+| total_amount | float | 担保总额（万元） |
+| ex_balance | float | 对外担保余额（万元） |
+| sub_balance | float | 对子公司担保余额（万元） |
+| total_amount_ratio | float | 担保总额占净资产比例（%） |
+| high_debt_ratio_amount | float | 直接或间接为资产负债率超过70%的被担保对象提供的债务担保金额（万元） |
+| related_amount | float | 为股东、实际控制人及其关联方提供担保的金额（万元） |
+| excess_amount | float | 担保总额超过净资产50%部分的金额（万元） |
+
+**21.4. 使用示例**
+
+**21.4.1. 获取一段时间内的所有上市公司担保累计数据**
+
+```python
+import panda_data
+result = panda_data.get_cumu_guarantee(
+    symbol="",
+    start_date="20250101",
+    end_date="20260101",
+    fields=[]
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  info_date  end_date  name  currency  amount  ex_amount  sub_amount  occur_amount  ex_occur_amount  sub_occur_amount  total_amount  ex_balance  sub_balance  total_amount_ratio  high_debt_ratio_amount  related_amount  excess_amount
+0  000002.SZ  20250401  20241231  万科A  CNY  9640958.26  243337.59  9397620.67  5015893.11  173180.42  4842712.69  7424999.26  184286.57  7240712.69  36.62  4989736.45  None  None
+1  000002.SZ  20250823  20250630  万科A  CNY  10430848.57  321350.98  10109497.59  2375233.77  85052.39  2290181.38  8632172.11  258510.43  8373661.68  42.59  5409448.13  None  None
+2  000006.SZ  20250426  20241231  深振业A  CNY  246700.0  0.0  246700.0  26415.46  0.0  26415.46  102958.33  0.0  102958.33  19.05  102958.33  0.0  0.0
+3  000006.SZ  20250829  20250630  深振业A  CNY  None  0.0  0.0  None  0.0  0.0  None  0.0  0.0  None  None  None  None
+4  000008.SZ  20250419  20241231  神州高铁  CNY  410665.0  0.0  410665.0  101000.0  0.0  101000.0  130450.16  0.0  130450.16  43.04  25000.0  0.0  78420.13
+5  000008.SZ  20250827  20250630  神州高铁  CNY  280000.0  0.0  280000.0  32300.0  0.0  32300.0  130700.0  0.0  130700.0  44.57  8000.0  0.0  133356.0
+6  000009.SZ  20250416  20241231  中国宝安  CNY  79000.0  None  79000.0  0.0  None  0.0  16065.99  None  16065.99  None  0.0  0.0  0.0
+7  000009.SZ  20250829  20250630  中国宝安  CNY  None  None  0.0  None  None  0.0  None  None  0.0  None  None  None  None
+8  000010.SZ  20250429  20241231  美丽生态  CNY  105000.0  105000.0  0.0  None  0.0  0.0  46070.0  46070.0  0.0  152.65  None  None  None
+9  000010.SZ  20250829  20250630  美丽生态  CNY  100000.0  None  100000.0  0.0  None  0.0  8140.0  None  8140.0  26.62  None  None  None
+10  000011.SZ  20250329  20241231  深物业A  CNY  567000.0  None  567000.0  47346.86  None  47346.86  369146.63  None  369146.63  109.81  369146.63  None  None
+11  000011.SZ  20250829  20250630  深物业A  CNY  None  None  0.0  None  None  0.0  None  None  0.0  None  None  None  None
+12  000012.SZ  20250428  20241231  南玻A  CNY  1809583.0  0.0  1809583.0  284521.0  0.0  284521.0  820718.0  0.0  820718.0  60.63  68460.0  0.0  0.0
+13  000012.SZ  20250819  20250630  南玻A  CNY  1790428.0  0.0  1790428.0  141558.0  0.0  141558.0  813954.0  0.0  813954.0  61.59  65173.0  0.0  0.0
+14  000016.SZ  20250415  20241231  深康佳A  CNY  2176225.0  1237370.0  938855.0  684825.0  594755.0  90070.0  1244164.0  851125.0  393039.0  525.04  1244164.0  800000.0  1125681.0
+15  000016.SZ  20250829  20250630  深康佳A  CNY  2001305.0  1076870.0  924435.0  29229.0  2249.0  26980.0  1202815.0  844256.0  358559.0  646.01  1202815.0  800000.0  1084332.0
+16  000021.SZ  20250425  20241231  深科技  CNY  1679627.0  28800.0  1650827.0  477419.59  19200.0  458219.59  420207.04  24000.0  396207.04  35.38  219867.0  0.0  0.0
+17  000021.SZ  20250828  20250630  深科技  CNY  1604627.0  28800.0  1575827.0  242601.58  17760.0  224841.58  449932.7  27360.0  422572.7  36.5  294481.8  0.0  0.0
+18  000022.SZ  20250403  20241231  深赤湾A  CNY  2992037.43  364244.65  2627792.78  8316.0  0.0  8316.0  1448370.16  34240.58  1414129.58  23.55  1310704.38  34240.58  None
+19  000022.SZ  20250830  20250630  深赤湾A  CNY  2602785.64  52387.32  2550398.32  None  0.0  0.0  1439243.13  34133.5  1405109.63  23.01  1305228.15  34133.5  0.0
+```
+
+**22. get_stock_material_contract - 获取上市公司重大合同数据**
+
+**22.1. 方法名：get_stock_material_contract**
+
+**22.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(公告日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(公告日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**22.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 证券简称 |
+| info_date | string | 公告日期 |
+| info_id | string | 公告id |
+| project_progress | string | 项目进度 |
+| contract_party_a | string | 甲方 |
+| contract_party_b | string | 乙方 |
+| party_b_relation | string | 上市公司与乙方关系 |
+| project_name | string | 项目名称 |
+| contract_title | string | 合同名称 |
+| max_contract_amount | float | 合同金额上限 |
+| min_contract_amount | float | 合同金额下限 |
+| currency | string | 币种 |
+| has_affiliation | string | 是否存在关联关系(0:否,1:是,2:未获知) |
+| is_related_party_transaction | string | 是否构成关联交易(0:否,1:是,2:未获知) |
+| contract_term | string | 合同期限 |
+| effective_date | string | 合同生效日期 |
+| expiration_date | string | 合同截止日期 |
+| operation_mode | string | 运作模式 |
+| bid_amount | float | 中标金额/上年度营业收入 |
+| consortium_members | string | 联合体成员 |
+
+**22.4. 使用示例**
+
+**22.4.1. 查询一段时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_material_contract(
+    start_date='20250430',
+    end_date='20260430',
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+info_date  symbol  bid_amount  consortium_members  contract_party_a  contract_party_b  contract_term  contract_title  currency  effective_date  expiration_date  has_affiliation  info_id  is_related_party_transaction  max_contract_amount  min_contract_amount  name  operation_mode  party_b_relation  project_name  project_progress
+0  20250430  002973.SZ  1.455  None  浦北县综合行政执法局  侨银城市管理股份有限公司  96  None  CNY  None  None  0  45458701  0  56955126.69  56955126.69  侨银股份  None  本公司  浦北县城区环卫保洁和绿化养护一体化服务项目  2
+1  20250430  300355.SZ  9.5212  阿拉善左旗蓝马园林生态建设有限责任公司,阿拉善盟城投建设工程有限责任公司  阿拉善左旗科学技术和林业草原局  蒙草生态环境(集团)股份有限公司  None  None  CNY  None  None  0  45462371  0  204281144.6  204281144.6  蒙草生态  None  本公司  内蒙古自治区阿拉善盟阿拉善左旗-三北六期蒙甘边境防沙治沙沙漠锁边项目(施工)  2
+2  20250430  300355.SZ  11.722  中铁四局集团有限公司,通辽市城镇建设发展有限责任公司  扎鲁特旗林业和草原局  蒙草生态环境(集团)股份有限公司  16.2  None  CNY  20250501  20260830  0  45471565  0  251500592.51  251500592.51  蒙草生态  None  本公司  "内蒙古自治区通辽市2024年度扎鲁特旗'三北'工程林草湿荒一体化保护修复项目(退化草原修复...  1
+3  20250430  601186.SH  0.1327  None  None  中铁十一局集团有限公司  73  None  CNY  None  None  0  45458495  0  1416000000.0  1416000000.0  中国铁建  施工总承包  下属  中吉乌铁路先期开工段三座隧道工程ZJWZQ-2标段施工总承包项目  2
+4  20250430  601186.SH  0.1097  None  None  中铁十二局集团有限公司  73  None  CNY  None  None  0  45458495  0  1171000000.0  1171000000.0  中国铁建  施工总承包  下属  中吉乌铁路先期开工段三座隧道工程ZJWZQ-3标段施工总承包项目  2
+5  20250430  601390.SH  0.131  None  None  中铁五局集团有限公司  73  None  CNY  None  None  0  45459372  0  1516000000.0  1516000000.0  中国中铁  施工总承包  下属  中吉乌铁路先期开工段三座隧道工程ZJWZQ-1标段施工总承包项目  2
+6  20250501  300190.SZ  22.9534  None  山鹰纸业(宿州)有限公司  维尔利(常州)生物能源有限公司  192  沼气提纯项目合作协议  CNY  None  None  0  45486278  0  470000000.0  470000000.0  维尔利  None  全资子公司  山鹰纸业(宿州)有限公司沼气提纯项目  4
+7  20250501  300265.SZ  4.4368  None  国家电网有限公司  江苏通光强能输电线科技有限公司  None  None  CNY  None  None  0  45484381  0  115040000.0  115040000.0  通光线缆  None  全资子公司  国家电网有限公司2025年第十三批采购(输变电项目第二次线路装置性材料招标采购)  1
+8  20250501  300265.SZ  0.3945  None  国家电网有限公司  江苏通光信息有限公司  None  None  CNY  None  None  0  45484381  0  10230000.0  10230000.0  通光线缆  None  全资子公司  国家电网有限公司2025年第十三批采购(输变电项目第二次线路装置性材料招标采购)  1
+9  20250501  300265.SZ  0.6584  None  国家电网有限公司  江苏通光强能输电线科技有限公司  None  None  CNY  None  None  0  45484381  0  17070000.0  17070000.0  通光线缆  None  全资子公司  国家电网有限公司2025年第十四批采购(输变电项目第一次35-330千伏材料协议库存招标采购)  1
+10  20250501  301235.SZ  9.7606  中元建设集团股份有限公司  嘉兴市第二医院  武汉华康世纪洁净科技股份有限公司  8.7  None  CNY  None  None  0  45496323  0  166693737.0  166693737.0  华康洁净  None  本公司  嘉兴市第二医院整体迁建(长三角国际医学中心总医院)项目(主体医疗楼、行政科教楼、2号地下室、...  1
+11  20250501  603887.SH  36.7314  中建三局第一建设工程有限责任公司,华信咨询设计研究院有限公司  四川盐腾数据科技有限责任公司  香江系统工程有限公司  9  珑腾凉山州AI数据中心项目(一期)合同协议书  CNY  None  None  0  45482316  0  595409563.55  595409563.55  城地香江  None  全资子公司  珑腾凉山州AI数据中心项目(一期)  4
+12  20250501  688378.SH  123.0068  None  成都京东方显示技术有限公司  上海升翕光电科技有限公司  None  京东方第8.6代AMOLED生产线项目采购合同  CNY  None  None  0  45486302  0  655400000.0  655400000.0  奥来德  None  全资子公司  京东方第8.6代AMOLED生产线项目  4
+13  20250506  002560.SZ  None  None  国家电网有限公司  河南通达电缆股份有限公司  None  None  None  None  None  0  45505377  0  None  None  通达股份  None  本公司  国家电网有限公司2025年第十三批采购(输变电项目第二次线路装置性材料招标采购)包9、包13...  1
+14  20250506  002560.SZ  None  None  国家电网有限公司  河南通达电缆股份有限公司  None  None  None  None  None  0  45505377  0  None  None  通达股份  None  本公司  国家电网有限公司2025年第十四批采购(输变电项目第一次35-330千伏材料协议库存招标采购)包5  1
+15  20250506  002606.SZ  4.4117  None  国家电网有限公司  大连电瓷集团输变电材料有限公司  None  None  CNY  None  None  0  45505042  0  66000000.0  66000000.0  大连电瓷  None  全资子公司  国家电网有限公司2025年第十三批采购(输变电项目第二次线路装置性材料招标采购)  1
+16  20250506  002606.SZ  0.3342  None  国家电网有限公司  大连电瓷集团输变电材料有限公司  None  None  CNY  None  None  0  45505042  0  5000000.0  5000000.0  大连电瓷  None  全资子公司  国家电网有限公司2025年第十四批采购(输变电项目第一次35-330千伏材料协议库存招标采购)  1
+17  20250506  300001.SZ  None  None  国家电网有限公司  青岛特锐德电气股份有限公司  None  None  None  None  None  0  45505420  0  None  None  特锐德  None  本公司  国家电网有限公司2025年第二十三批采购(输变电项目第二次变电设备(含电缆)招标采购)组合电...  1
+18  20250506  300001.SZ  None  None  国家电网有限公司  川开电气有限公司  None  None  None  None  None  0  45505420  0  None  None  特锐德  None  全资公司  国家电网有限公司2025年第二十三批采购(输变电项目第二次变电设备(含电缆)招标采购)开关柜包62  1
+```
+
+**23. get_investor_brief_detail - 获取投资者简报详情**
+
+**23.1. 方法名：get_investor_brief_detail**
+
+**23.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**23.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| date | string | 日期 |
+| begin_time | string | 会议开始时间（精确至秒） |
+| title | string | 会议名称 |
+| name | string | 股票名 |
+
+**23.4. 使用示例**
+
+**23.4.1. 获取一定日期范围内业绩说明会详情数据**
+
+```python
+import panda_data
+result = panda_data.get_investor_brief_detail(
+    symbol="",
+    start_date="20250101",
+    end_date="20260101",
+    fields=[""]
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  begin_time  title  name
+0  000011.SZ  20250421  2025-04-21 15:00:00  深物业A（000011）、深物业B（200011）2024年度业绩说明会  深物业A
+1  000017.SZ  20250515  2025-05-15 15:00:00  深中华A（000017）2024年度网上业绩说明会  深中华A
+2  000019.SZ  20250520  2025-05-20 15:30:00  深粮控股（000019）2024年度网上业绩说明会  深粮控股
+3  000021.SZ  20250516  2025-05-16 15:00:00  深科技（000021）2024年度网上业绩说明会  深科技
+4  000025.SZ  20250415  2025-04-15 15:00:00  特力A（000025）2024年度网上业绩说明会  特力A
+5  000026.SZ  20250327  2025-03-27 15:00:00  飞亚达精密科技股份有限公司2024年度网上业绩说明会  飞亚达
+6  000027.SZ  20250513  2025-05-13 15:00:00  深圳能源（000027）2024年度网上业绩说明会  深圳能源
+7  000030.SZ  20250514  2025-05-14 15:00:00  富奥股份2024年度暨2025年第一季度网上业绩说明会  富奥股份
+8  000030.SZ  20250918  2025-09-18 15:00:00  富奥股份2025年半年度报告业绩说明会  富奥股份
+9  000030.SZ  20251106  2025-11-06 15:00:00  富奥股份2025年第三季度业绩说明会  富奥股份
+10  000031.SZ  20250923  2025-09-23 15:00:00  大悦城（000031）/ 大悦城地产（0207.HK）2025年半年度业绩说明会  大悦城
+11  000035.SZ  20250522  2025-05-22 15:00:00  中国天楹2024年度网上业绩说明会  中国天楹
+12  000036.SZ  20250521  2025-05-21 15:00:00  华联控股（000036）2024年度业绩说明会  华联控股
+13  000037.SZ  20250515  2025-05-15 15:00:00  深南电（000037、200037）2024年度网上业绩说明会  深南电A
+14  000042.SZ  20250430  2025-04-30 15:30:00  中洲控股（000042）2024年度业绩说明会  中洲控股
+15  000045.SZ  20250415  2025-04-15 15:00:00  深纺织A（000045）2024年度网上业绩说明会  深纺织A
+16  000048.SZ  20250417  2025-04-17 15:00:00  京基智农2024年度业绩说明会  京基智农
+17  000049.SZ  20250428  2025-04-28 15:00:00  德赛电池（000049）2024年度网上业绩说明会  德赛电池
+18  000050.SZ  20250403  2025-04-03 15:00:00  深天马A 2024年度业绩网上说明会  深天马Ａ
+19  000050.SZ  20250905  2025-09-05 15:00:00  深天马A2025年半年度业绩网上说明会  深天马Ａ
+20  000055.SZ  20250429  2025-04-29 15:00:00  方大集团（000055）2024年度网上业绩说明会  方大集团
+21  000056.SZ  20250512  2025-05-12 15:00:00  皇庭国际2024年度暨2025年第一季度业绩说明会  皇庭国际
+22  000058.SZ  20250416  2025-04-16 15:00:00  深赛格（000058）2024年年度业绩说明会  深赛格
+23  000059.SZ  20250514  2025-05-14 16:00:00  华锦股份（000059）2024年度暨2025年一季度业绩说明会  华锦股份
+24  000059.SZ  20250825  2025-08-25 16:00:00  华锦股份（000059）2025年中报业绩说明会  华锦股份
+25  000059.SZ  20251107  2025-11-07 15:30:00  华锦股份（000059）2025年第三季度业绩说明会  华锦股份
+26  000060.SZ  20250425  2025-04-25 15:00:00  中金岭南2024年度业绩说明会  中金岭南
+27  000061.SZ  20250609  2025-06-09 15:00:00  农产品（000061）2024年度网上业绩说明会  农产品
+28  000065.SZ  20250422  2025-04-22 15:00:00  北方国际2024年度业绩说明会  北方国际
+29  000065.SZ  20250826  2025-08-26 15:00:00  北方国际2025年半年度业绩说明会  北方国际
+30  000065.SZ  20251106  2025-11-06 15:00:00  北方国际2025年第三季度业绩说明会  北方国际
+31  000066.SZ  20250520  2025-05-20 15:00:00  中国长城（000066）2024年度暨2025年一季度网上业绩说明会  中国长城
+32  000088.SZ  20250528  2025-05-28 15:00:00  盐田港（000088）2024年度网上业绩说明会  盐田港
+33  000088.SZ  20250929  2025-09-29 15:00:00  盐田港（000088）2025年半年度业绩说明会  盐田港
+34  000089.SZ  20250516  2025-05-16 15:00:00  深圳机场（000089）2024年度业绩说明会  深圳机场
+35  000096.SZ  20250515  2025-05-15 15:00:00  广聚能源（000096）2024年度业绩说明会  广聚能源
+36  000099.SZ  20250327  2025-03-27 15:00:00  中信海直（000099）2024年度网上业绩说明会  中信海直
+37  000153.SZ  20250424  2025-04-24 15:00:00  丰原药业2024年年度网上业绩说明会  丰原药业
+38  000155.SZ  20250520  2025-05-20 15:00:00  川能动力（000155）2024年度网上业绩说明会  川能动力
+39  000166.SZ  20250331  2025-03-31 15:00:00  申万宏源（000166）2024年度业绩说明会  申万宏源
+40  000166.SZ  20250901  2025-09-01 15:00:00  申万宏源（000166）2025年半年度业绩说明会  申万宏源
+41  000301.SZ  20250520  2025-05-20 15:00:00  东方盛虹（000301）2024年度网上业绩说明会  东方盛虹
+42  000333.SZ  20250411  2025-04-11 15:00:00  美的集团（000333）2024年度网上业绩说明会  美的集团
+43  000338.SZ  20250416  2025-04-16 15:00:00  潍柴动力（2338.HK；000338.SZ）2024年度业绩说明会  潍柴动力
+44  000402.SZ  20250514  2025-05-14 15:00:00  金融街（000402）2024年业绩说明会  金融街
+45  000404.SZ  20250428  2025-04-28 15:00:00  长虹华意（000404）2024年度网上业绩说明会  长虹华意
+46  000404.SZ  20250819  2025-08-19 15:00:00  长虹华意（000404）2025年半年度网上业绩说明会  长虹华意
+47  000407.SZ  20250414  2025-04-14 15:00:00  胜利股份2024年度网上业绩说明会  胜利股份
+48  000408.SZ  20250330  2025-03-30 15:00:00  藏格矿业2024年年度网上业绩说明会  藏格矿业
+49  000408.SZ  20250802  2025-08-02 15:00:00  藏格矿业2025年半年度网上业绩说明会  藏格矿业
+50  000408.SZ  20251020  2025-10-20 15:00:00  藏格矿业2025年三季报网上业绩说明会  藏格矿业
+51  000410.SZ  20250509  2025-05-09 15:00:00  沈阳机床2024年度业绩网上说明会  沈阳机床
+52  000410.SZ  20250919  2025-09-19 16:00:00  沈阳机床（000410）2025年半年度业绩网上说明会  沈阳机床
+53  000421.SZ  20250429  2025-04-29 15:00:00  南京公用（000421）2024年度业绩说明会  南京公用
+54  000425.SZ  20250506  2025-05-06 15:00:00  徐工机械（000425）2024年度暨2025年第一季度网上业绩说明会  徐工机械
+55  000426.SZ  20250522  2025-05-22 15:00:00  兴业银锡2024年度网上业绩说明会  兴业银锡
+56  000429.SZ  20250516  2025-05-16 15:00:00  粤高速Ａ2024年度及2025年一季度业绩说明会  粤高速Ａ
+57  000488.SZ  20250407  2025-04-07 15:00:00  晨鸣纸业2024年度业绩说明会  晨鸣纸业
+58  000507.SZ  20250428  2025-04-28 15:00:00  珠海港（000507）2024年度网上业绩说明会  珠海港
+59  000507.SZ  20250901  2025-09-01 15:00:00  珠海港（000507）2025年半年度网上业绩说明会  珠海港
+60  000510.SZ  20250521  2025-05-21 15:00:00  新金路（000510）2024年度暨2025年一季度网上业绩说明会  新金路
+61  000513.SZ  20250415  2025-04-15 15:00:00  丽珠集团2024年年度网上业绩说明会  丽珠集团
+62  000521.SZ  20250415  2025-04-15 15:00:00  长虹美菱2024年度业绩说明会  长虹美菱
+63  000523.SZ  20250418  2025-04-18 15:00:00  红棉股份（000523）2024年度业绩说明会  红棉股份
+64  000524.SZ  20250403  2025-04-03 15:00:00  岭南控股（000524）2024年度业绩说明会  岭南控股
+65  000529.SZ  20250519  2025-05-19 15:00:00  广弘控股（000529）2024年度网上业绩说明会  广弘控股
+66  000530.SZ  20250429  2025-04-29 15:00:00  冰山冷热2024年度网上业绩说明会  冰山冷热
+67  000531.SZ  20250416  2025-04-16 15:00:00  穗恒运Ａ2024年度网上业绩说明会  穗恒运Ａ
+68  000532.SZ  20250409  2025-04-09 15:30:00  华金资本（000532）2024年度业绩说明会  华金资本
+69  000533.SZ  20250418  2025-04-18 15:00:00  顺钠股份（000533）2024年度业绩说明会  顺钠股份
+70  000539.SZ  20250415  2025-04-15 15:00:00  粤电力Ａ2024年度业绩网上说明会  粤电力Ａ
+71  000541.SZ  20250523  2025-05-23 15:00:00  佛山照明2024年度暨2025年第一季度业绩说明会  佛山照明
+72  000544.SZ  20250414  2025-04-14 15:00:00  中原环保2024年年度业绩说明会  中原环保
+73  000544.SZ  20250908  2025-09-08 15:00:00  中原环保2025年半年度业绩说明会  中原环保
+74  000545.SZ  20250926  2025-09-26 15:00:00  金浦钛业投资者说明会  金浦钛业
+75  000546.SZ  20250516  2025-05-16 15:00:00  金圆股份（000546）2024年度业绩说明会  金圆股份
+76  000548.SZ  20250418  2025-04-18 15:00:00  湖南投资（000548）2024年度业绩说明会  湖南投资
+77  000550.SZ  20250417  2025-04-17 15:30:00  江铃汽车（000550）2024年度网上业绩说明会  江铃汽车
+78  000551.SZ  20250425  2025-04-25 15:00:00  创元科技（000551）2024年度业绩网上说明会  创元科技
+79  000551.SZ  20250904  2025-09-04 15:00:00  创元科技（000551）2025年半年度业绩网上说明会  创元科技
+80  000554.SZ  20250515  2025-05-15 15:00:00  泰山石油（000554）2024年度业绩说明会暨2025年山东辖区上市公司投资者网上集体接待日活动  泰山石油
+81  000554.SZ  20250918  2025-09-18 15:00:00  泰山石油（000554）2025年半年度网上业绩说明会  泰山石油
+82  000563.SZ  20250402  2025-04-02 15:00:00  陕国投Ａ2024年度业绩说明会  陕国投Ａ
+83  000570.SZ  20250429  2025-04-29 15:00:00  苏常柴Ａ2024年年度报告业绩说明会  苏常柴Ａ
+84  000581.SZ  20250507  2025-05-07 15:00:00  威孚高科（000581）2024年度暨2025年第一季度业绩说明会  威孚高科
+85  000582.SZ  20250523  2025-05-23 15:00:00  北部湾港（000582）2024年度暨2025年第一季度业绩说明会  北部湾港
+86  000593.SZ  20250606  2025-06-06 15:30:00  德龙汇能（000593）2024年年度报告暨2025年一季度报告业绩说明会  德龙汇能
+87  000595.SZ  20250417  2025-04-17 15:00:00  宝塔实业（000595）投资者说明会  *ST宝实
+88  000596.SZ  20250520  2025-05-20 15:00:00  古井贡酒2024年度网上业绩说明会  古井贡酒
+89  000598.SZ  20250507  2025-05-07 15:30:00  兴蓉环境2024年度暨2025年第一季度业绩说明会  兴蓉环境
+90  000600.SZ  20250515  2025-05-15 15:00:00  建投能源2024年度暨2025年一季度网上业绩说明会  建投能源
+91  000601.SZ  20250508  2025-05-08 15:00:00  韶能股份（000601）2024年度及 2025年第一季度网上业绩说明会  韶能股份
+92  000608.SZ  20250421  2025-04-21 15:00:00  阳光股份2024年度业绩说明会  阳光股份
+93  000617.SZ  20250424  2025-04-24 15:00:00  中油资本2024年度业绩说明会  中油资本
+94  000617.SZ  20250912  2025-09-12 15:30:00  中油资本2025年半年度业绩说明会  中油资本
+95  000617.SZ  20251114  2025-11-14 15:00:00  中油资本2025年三季度业绩说明会  中油资本
+96  000623.SZ  20250428  2025-04-28 15:00:00  吉林敖东2024年度业绩说明会  吉林敖东
+97  000625.SZ  20250411  2025-04-11 15:00:00  长安汽车2024年度业绩说明会  长安汽车
+98  000628.SZ  20250513  2025-05-13 15:00:00  高新发展（000628）2024年度网上业绩说明会  高新发展
+99  000629.SZ  20250411  2025-04-11 15:00:00  钒钛股份2024年度网上业绩说明会  钒钛股份
+100  000636.SZ  20250423  2025-04-23 15:00:00  风华高科2024年度业绩说明会  风华高科
+101  000650.SZ  20250509  2025-05-09 15:00:00  仁和药业（000650）2024年度网上业绩说明会  仁和药业
+102  000651.SZ  20250609  2025-06-09 15:00:00  格力电器2024年度网上业绩说明会  格力电器
+103  000655.SZ  20250416  2025-04-16 15:00:00  金岭矿业（000655）2024年度业绩说明会  金岭矿业
+104  000655.SZ  20250905  2025-09-05 15:00:00  金岭矿业（000655）2025年半年度业绩说明会  金岭矿业
+105  000661.SZ  20250514  2025-05-14 15:00:00  长春高新2024年度及2025年第一季度网上业绩说明会  长春高新
+106  000663.SZ  20250411  2025-04-11 15:30:00  永安林业（000663）2024年年度业绩说明会  永安林业
+107  000663.SZ  20250904  2025-09-04 15:30:00  永安林业（000663）2025年半年度业绩说明会  永安林业
+108  000670.SZ  20250425  2025-04-25 15:30:00  盈方微（000670）2024年度网上业绩说明会  盈方微
+109  000676.SZ  20250509  2025-05-09 15:00:00  智度股份2024年度暨2025年第一季度业绩说明会  智度股份
+110  000677.SZ  20250509  2025-05-09 15:00:00  恒天海龙（000677）2024年年度网上业绩说明会  恒天海龙
+111  000685.SZ  20250508  2025-05-08 15:00:00  中山公用（000685）2024年度业绩说明会  中山公用
+112  000686.SZ  20250428  2025-04-28 15:00:00  东北证券（000686）2024年度网上业绩说明会  东北证券
+113  000686.SZ  20250829  2025-08-29 15:00:00  东北证券（000686）2025年半年度网上业绩说明会  东北证券
+114  000688.SZ  20250403  2025-04-03 15:00:00  国城矿业2024年度网上业绩说明会  国城矿业
+115  000691.SZ  20250521  2025-05-21 15:30:00  *ST亚太（000691）2024年度网上业绩说明会  *ST亚太
+116  000698.SZ  20250512  2025-05-12 15:00:00  沈阳化工2024年度网上业绩说明会  沈阳化工
+117  000698.SZ  20250908  2025-09-08 15:00:00  沈阳化工2025年半年度网上业绩说明会  沈阳化工
+118  000698.SZ  20251031  2025-10-31 15:00:00  ST沈化2025年三季度网上业绩说明会  ST沈化
+119  000700.SZ  20250521  2025-05-21 15:00:00  模塑科技（000700）2024年度业绩说明会  模塑科技
+120  000703.SZ  20250514  2025-05-14 15:00:00  恒逸石化2024年年度网上业绩说明会  恒逸石化
+121  000709.SZ  20250428  2025-04-28 15:00:00  河钢股份2024年度业绩说明会  河钢股份
+122  000713.SZ  20250402  2025-04-02 15:00:00  丰乐种业（000713）2024年度网上业绩说明会  国投丰乐
+123  000715.SZ  20250606  2025-06-06 15:00:00  中兴商业2024年度暨2025年第一季度业绩说明会  中兴商业
+124  000716.SZ  20250521  2025-05-21 15:00:00  黑芝麻（000716）2024年度网上业绩说明会  黑芝麻
+125  000717.SZ  20250515  2025-05-15 15:30:00  中南股份（000717）2024年度暨2025年一季度业绩说明会  中南股份
+126  000717.SZ  20250904  2025-09-04 15:00:00  中南股份（000717）2025年半年度业绩说明会  中南股份
+127  000719.SZ  20250915  2025-09-15 15:00:00  中原传媒（000719）2025年半年度业绩说明会  中原传媒
+128  000720.SZ  20250508  2025-05-08 15:00:00  新能泰山2024年度及2025年第一季度业绩说明会  新能泰山
+129  000722.SZ  20250424  2025-04-24 15:00:00  湖南发展（000722）2024年度业绩说明会  湖南发展
+130  000723.SZ  20250414  2025-04-14 15:00:00  美锦能源（000723）投资者说明会  美锦能源
+131  000725.SZ  20250422  2025-04-22 15:00:00  京东方2024年度业绩网上说明会  京东方Ａ
+132  000725.SZ  20250911  2025-09-11 15:00:00  京东方2025年半年度业绩网上说明会  京东方Ａ
+133  000726.SZ  20250422  2025-04-22 15:00:00  鲁泰A（000726）2024年度业绩说明会  鲁泰A
+134  000727.SZ  20250519  2025-05-19 15:00:00  冠捷科技（000727）2024年度业绩说明会  冠捷科技
+135  000729.SZ  20250515  2025-05-15 15:00:00  燕京啤酒2024年度业绩说明会  燕京啤酒
+136  000731.SZ  20250514  2025-05-14 15:00:00  四川美丰（000731）2024年度及2025年一季度网上业绩说明会  四川美丰
+137  000731.SZ  20250905  2025-09-05 15:00:00  四川美丰（000731）2025年半年度网上业绩说明会  四川美丰
+138  000736.SZ  20250508  2025-05-08 15:00:00  *ST中地2024年度业绩网上说明会  中交地产
+139  000737.SZ  20250509  2025-05-09 15:00:00  北方铜业（000737）2024年度暨2025年第一季度业绩说明会  北方铜业
+140  000737.SZ  20250822  2025-08-22 15:00:00  北方铜业（000737）2025年半年度报告业绩说明会  北方铜业
+141  000739.SZ  20250327  2025-03-27 15:00:00  普洛药业（000739）2024年年度报告网上业绩说明会  普洛药业
+142  000750.SZ  20250421  2025-04-21 15:00:00  国海证券2024年度业绩说明会  国海证券
+143  000756.SZ  20250427  2025-04-27 09:00:00  新华制药（000756）2024年度网上业绩说明会  新华制药
+144  000757.SZ  20250514  2025-05-14 15:00:00  浩物股份（000757）2024年度网上业绩说明会  浩物股份
+145  000761.SZ  20250416  2025-04-16 15:00:00  本钢板材2024年度业绩说明会  本钢板材
+146  000761.SZ  20250905  2025-09-05 15:00:00  本钢板材2025年半年度业绩说明会  本钢板材
+147  000761.SZ  20251106  2025-11-06 15:00:00  本钢板材股份有限公司2025年第三季度业绩说明会  本钢板材
+148  000767.SZ  20250513  2025-05-13 15:00:00  晋控电力（000767）年报业绩说明会  晋控电力
+149  000767.SZ  20250916  2025-09-16 15:00:00  晋控电力（000767）2025年半年度报告业绩说明会  晋控电力
+150  000767.SZ  20251105  2025-11-05 15:00:00  晋控电力（000767）2025年第三季度报告业绩说明会  晋控电力
+151  000776.SZ  20250402  2025-04-02 15:00:00  广发证券2024年度业绩说明会  广发证券
+152  000777.SZ  20250710  2025-07-10 15:00:00  中核科技（000777）终止发行股份购买资产并募集配套资金暨关联交易事项投资者说明会  中核科技
+153  000777.SZ  20250905  2025-09-05 14:00:00  中核科技（000777）2025年半年度业绩说明会（线上）  中核科技
+154  000778.SZ  20250619  2025-06-19 15:00:00  新兴铸管2024年度暨2025年第一季度业绩说明会  新兴铸管
+155  000778.SZ  20251128  2025-11-28 15:00:00  新兴铸管2025年第三季度业绩说明会  新兴铸管
+156  000779.SZ  20250526  2025-05-26 15:30:00  甘咨询2024年度业绩网上说明会  甘咨询
+157  000782.SZ  20250416  2025-04-16 15:30:00  恒申新材（000782）2024年度业绩说明会  恒申新材
+158  000783.SZ  20250522  2025-05-22 15:00:00  长江证券2024年年度业绩说明会  长江证券
+159  000783.SZ  20250919  2025-09-19 15:00:00  长江证券2025年半年度业绩说明会  长江证券
+160  000785.SZ  20250521  2025-05-21 15:00:00  居然智家（000785）2024年度业绩说明会  居然智家
+161  000790.SZ  20250515  2025-05-15 15:00:00  华神科技（000790）2024年度网上业绩说明会  华神科技
+162  000799.SZ  20250527  2025-05-27 15:30:00  酒鬼酒（000799）2024年度报告网上业绩说明会  酒鬼酒
+163  000799.SZ  20250912  2025-09-12 15:30:00  酒鬼酒（000799）2025年半年度报告网上业绩说明会  酒鬼酒
+164  000800.SZ  20250414  2025-04-14 15:00:00  一汽解放2024年度业绩网上说明会  一汽解放
+165  000807.SZ  20250402  2025-04-02 16:45:00  云铝股份2024年度业绩说明会  云铝股份
+166  000809.SZ  20250414  2025-04-14 15:00:00  辽宁和展能源集团股份有限公司2024年度业绩说明会  和展能源
+167  000819.SZ  20250422  2025-04-22 15:30:00  岳阳兴长（000819）2024年年度报告及2025年一季度报告网上业绩说明会  岳阳兴长
+168  000819.SZ  20250828  2025-08-28 15:30:00  岳阳兴长（000819）2025年半年度报告网上业绩说明会  岳阳兴长
+169  000819.SZ  20251031  2025-10-31 15:30:00  岳阳兴长（000819）2025年第三季度网上业绩说明会  岳阳兴长
+170  000822.SZ  20250408  2025-04-08 15:00:00  山东海化（000822）2024年度业绩网上说明会  山东海化
+171  000822.SZ  20250911  2025-09-11 15:00:00  山东海化（000822）2025年半年度业绩网上说明会  山东海化
+172  000825.SZ  20250519  2025-05-19 15:00:00  太钢不锈2024年度业绩说明会  太钢不锈
+173  000826.SZ  20250901  2025-09-01 15:00:00  启迪环境2025年半年度报告业绩说明会  启迪环境
+174  000828.SZ  20250509  2025-05-09 15:00:00  东莞控股2024年度及2025年第一季度网上业绩说明会  东莞控股
+175  000828.SZ  20250909  2025-09-09 15:00:00  东莞控股2025年半年度网上业绩说明会  东莞控股
+176  000828.SZ  20251121  2025-11-21 15:00:00  东莞控股2025年第三季度网上业绩说明会  东莞控股
+177  000830.SZ  20250506  2025-05-06 15:30:00  鲁西化工（000830）2024年度暨2025年一季度业绩说明会  鲁西化工
+178  000830.SZ  20250911  2025-09-11 15:00:00  鲁西化工（000830）2025年半年度业绩说明会  鲁西化工
+179  000830.SZ  20251117  2025-11-17 15:00:00  鲁西化工（000830）2025年第三季度业绩说明会  鲁西化工
+180  000831.SZ  20250514  2025-05-14 15:00:00  中国稀土（000831）2024年度暨2025年第一季度业绩说明会  中国稀土
+181  000831.SZ  20250909  2025-09-09 15:00:00  中国稀土（000831）2025年半年度业绩说明会  中国稀土
+182  000833.SZ  20250418  2025-04-18 15:00:00  粤桂股份（000833）2024年度网上业绩说明会  粤桂股份
+183  000837.SZ  20250416  2025-04-16 15:00:00  秦川机床（000837）2024年度业绩说明会  秦川机床
+184  000852.SZ  20250513  2025-05-13 15:30:00  石化机械（000852）2024年度暨2025年第一季度网上业绩说明会  石化机械
+185  000852.SZ  20250826  2025-08-26 15:30:00  石化机械（000852）2025年半年度业绩说明会  石化机械
+186  000858.SZ  20250509  2025-05-09 15:30:00  五粮液2024年度及2025年第一季度业绩说明会  五 粮 液
+187  000859.SZ  20250403  2025-04-03 15:00:00  国风新材2024年度网上业绩说明会  国风新材
+188  000860.SZ  20250428  2025-04-28 15:30:00  顺鑫农业（000860）2024年度网上业绩说明会  顺鑫农业
+189  000862.SZ  20250402  2025-04-02 16:45:00  银星能源2024年年度业绩说明会  银星能源
+190  000862.SZ  20250912  2025-09-12 15:30:00  银星能源2025年半年度业绩说明会  银星能源
+191  000876.SZ  20250515  2025-05-15 15:00:00  新希望2024年度及2025年第一季度网上业绩说明会  新 希 望
+192  000878.SZ  20250402  2025-04-02 16:45:00  云南铜业2024年年度业绩说明会（线上）  云南铜业
+193  000878.SZ  20250522  2025-05-22 15:00:00  云南铜业2025年一季度网上业绩说明会  云南铜业
+194  000878.SZ  20250901  2025-09-01 15:00:00  云南铜业2025年半年度报告网上业绩说明会  云南铜业
+195  000878.SZ  20251031  2025-10-31 15:00:00  云南铜业2025年第三季度网上业绩说明会  云南铜业
+196  000880.SZ  20250418  2025-04-18 15:00:00  潍柴重机（000880）2024年度业绩说明会  潍柴重机
+197  000890.SZ  20250512  2025-05-12 15:30:00  法尔胜（000890）2024年度业绩说明会  法尔胜
+198  000895.SZ  20250416  2025-04-16 16:00:00  双汇发展2024年度业绩网上说明会  双汇发展
+199  000898.SZ  20250829  2025-08-29 15:00:00  鞍钢股份2025年中期业绩说明会  鞍钢股份
+```
+
+**24. get_investor_brief_qa - 获取投资者简报问答**
+
+**24.1. 方法名：get_investor_brief_qa**
+
+**24.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**24.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| ask_time | string | 提问时间（精确至秒） |
+| date | string | 提问日期（查询筛选依据） |
+| ask_user | string | 提问用户 |
+| ask_content | string | 提问内容 |
+| ans_time | string | 回答时间（精确至秒） |
+| ans_member | string | 回答人员 |
+| ans_content | string | 回答内容 |
+| ans_interval | integer | 问答间隔（秒） |
+| is_question | integer | 是否为问题（1为是，0为否） |
+
+**24.4. 使用示例**
+
+**24.4.1. 获取一定日期范围内业绩说明会提问数据**
+
+```python
+import panda_data
+result = panda_data.get_investor_brief_qa(
+    start_date="20250101",
+    end_date="20260101",
+    fields=["ask_time","date","ask_user","ask_content"]
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+ask_time  date  ask_user  ask_content
+0  2025-01-01 05:52:11  20250101  提问人698436  持续2年8个月的重组闹剧，给二级市场投资者造成了伤害，公司会采取哪些手段消除大家的反感？
+1  2025-01-03 09:15:33  20250103  提问人652871  宜昌市熊书记讲话对旅游业提振全市经济抱有很高的期待，请问在新的一年里作为宜昌国有文旅龙头企业有什么具体举措？一个月后新的项目会不会向市场融资？目前三峡旅游已经具备了水陆运营能力，何时进军国家倡导的低空飞行领域，完善水陆空的布局？三峡旅游股价连续低迷数年，希望在王董事长的带领下能让广大中长线投资者获得实实在在的收益。
+2  2025-01-03 09:52:49  20250103  提问人660274  您好！请问一下新闻报导说宜昌要建成世界性的旅游名城。贵公司是宜昌唯一的上市公司，有没有什么具体的参与和实施方案?公司未来的发展是以文化旅游为主还是风景旅游为主？
+3  2025-01-03 13:01:10  20250103  提问人689365  为什么22年4月宣布收购这两家公司，股价从7块掉到4块，上个星期宣布不收购又从5块掉的4块，你总得给个说法
+4  2025-01-03 15:01:10  20250103  133****7903  一个月后，公司在资产重组并购方面有什么计划
+5  2025-01-03 15:04:40  20250103  155****3791  对于这次交易，贵司的态度是什么。
+6  2025-01-03 15:06:14  20250103  186****3648  本次交易取消以后，公司将何去何从？
+7  2025-01-03 15:10:57  20250103  kuchiki  为什么会终止
+8  2025-01-03 15:12:41  20250103  131****4875  是否可以考虑把三峡机场注入上市公司以发展航空旅游？
+9  2025-01-03 15:16:00  20250103  131****4875  公司目前总经理是谁？
+10  2025-01-03 15:21:00  20250103  提问人648485  三峡基地有没有打算退出对三峡旅游股份的持有计划。
+11  2025-01-03 15:21:50  20250103  果子岭  王总，你好，公司近期受终止重组的影响，股价大副下跌，请问计划采取什么措施稳定股价，维护中小投资者权益
+12  2025-01-03 15:24:22  20250103  提问人630721  后期有什么资产注入吗 ？目前旅游项目有些薄弱啊
+13  2025-01-03 15:28:34  20250103  milligan  该股下一步，股走势，怎样 ！
+14  2025-01-03 15:30:10  20250103  提问人654703  本上市公司关注公司大股东哪些优质资产？
+15  2025-01-03 15:43:52  20250103  遥遥领先  有消息说：建造中的省际游轮停工了，请问是否属实？
+16  2025-01-03 15:48:55  20250103  遥遥领先  目前公司最新股东人数是多少？
+17  2025-01-03 15:53:02  20250103  提问人615316  您好！请问一下公司花三年时间的重组终止了会不会对公司的发展规划造成巨大影响?未来业绩增长会不会受此影响变差？谢谢!
+18  2025-01-03 15:56:04  20250103  提问人651061  听说长江夜游会关闭？
+19  2025-01-13 17:51:13  20250113  提问人609164  公司未来的发展是什么
+20  2025-01-14 11:42:24  20250114  139****7130  请问下终止资产重组会不会造成股价大跌？
+21  2025-01-14 11:42:50  20250114  139****7130  还有公司管理层打算如何维护股价？
+22  2025-01-14 15:01:32  20250114  156****4366  本次终止重组会对公司经营情况造成什么影响吗？
+23  2025-01-14 15:01:50  20250114  M-Jack  贵司近期股价下跌这么多，是否有稳定股价的措施？
+24  2025-01-14 15:03:17  20250114  156****4366  公司对稳定股价有没有举措，让支持公司的散户何去何从？
+25  2025-01-14 15:07:22  20250114  156****9368  请问董事长，公司后期还会不会继续重组？
+26  2025-01-14 15:13:00  20250114  M-Jack  特斯拉和贵司的合作目前是否存在可披露事项？
+27  2025-01-14 15:18:30  20250114  提问人634414  我们美利信上市之后就业绩亏损，还要收购德国和波兰的公司，是因为什么？利润不够买下这两家公司吗？
+28  2025-01-14 15:18:50  20250114  M-Jack  贵司目前是否存在财务审计的风险？是否进行自查？财务报表披露的内容是否合法合规？
+29  2025-01-14 15:19:01  20250114  136****7863  请问总经理本次终止资产重组，是否和上海重新建立的新公司有关，将资金留给发展新公司业务
+30  2025-01-14 15:19:10  20250114  199****9068  为什么美利信长期发行价破位?董事长将采取什么措施?
+31  2025-01-14 15:26:48  20250114  提问人651972  公司与特斯拉Fsd有什么合作吗
+32  2025-01-14 15:30:07  20250114  M-Jack  贵司是否会迁移至上海发展？
+33  2025-01-14 15:39:09  20250114  M-Jack  算力方面，贵司的产品是否可以用于算力领域？液冷服务器方面？
+34  2025-01-14 15:44:07  20250114  提问人660527  公司目前有没有减持或者增持回购的计划？
+35  2025-01-14 15:45:19  20250114  M-Jack  北美公司什么时候投产？特朗普上任后是否有影响？北美的工厂主要的供货商是哪些企业？
+36  2025-01-26 22:35:00  20250126  189****5688  请问此次重组终止的具体原因是什么？公司后续经营是否已陷入绝境？
+37  2025-01-26 23:10:00  20250126  183****3456  公司耗费了一年多的精力，人力，物力，还回购注销了股份，目前公司的股价到这个位置了，后续会有什么新的目标和发展方向？对于中小投资者，对于关心万通发展的小股东，能不能拿出来合理的解释？不辜负投资者，谢谢
+38  2025-01-27 01:45:00  20250127  138****7070  公司董秘之前一直回复大股东估算拍卖不会影响公司重组，后期又回复大股东股权拍卖会影响重组。有明显误导投资者的行为？
+39  2025-01-27 10:11:00  20250127  139****3953  本次重组终止后，公司和索尔思光电保持合作？公司在转型之路上，有什么更清晰的方向和目标吗？
+40  2025-01-27 11:16:00  20250127  132****1701  为什么停止重组 目前公司面临的困境是什么 如果资金充足 还有发起重组吗
+41  2025-01-27 11:59:00  20250127  186****6284  贵公司对当前重组失败股价怎么看。控股股东和万科的债务解决了吗，公司前期拿的5000万美元怎么处理有具体的方案吗。公司一直在尝试转行这次失败了以后还会尝试吗。控股股东能不能拿着自有资金回购股份。当前的散户损失也是重组失败造成的，控股股东回购也是对公司的认可
+42  2025-01-27 12:04:00  20250127  186****6284  重组失败了能不能想办法提振业绩。是在整合重组还是轻装减负前行。公司有重大破产 风险吗。目前1月27日公司账面现金有多少，可以回购股票吗。。股价已经是2024到2025全股市倒数第一了
+43  2025-01-27 13:00:00  20250127  136****2160  从最高点就持续下跌 是不是有人知道跑了？此前一直说正常推进重组，并且还有相关协议说2月15号才定，为什么突然就终止了？
+44  2025-01-27 14:59:00  20250127  136****2160  公司终止本次重组后，是否还会有并购相应的准备，因为目前房地产整体低迷，而且公司一直在谋求转型布局通讯行业？公司能否会有相应举措维护股价？
+45  2025-01-27 15:02:00  20250127  137****8895  请问公司如何稳住股价，3年亏损公司的策略是什么
+46  2025-01-27 15:03:00  20250127  136****2160  在目前这样的情况下，公司是否有相应的举措维护股价，如何保护中小投资者的权益？
+47  2025-01-27 15:06:00  20250127  137****8895  二次问询函迟迟无法回复，实控人被法拍是否是影响重组主要原因？为什么两次回复口径不一，开始说实控人法拍不影响重组，后说实控人法拍影响重组？
+48  2025-01-27 15:09:00  20250127  135****8026  请问贵公司本次重组失败后，如何提升投资者回报这块，因为公司主业长期亏损，公司是否还要加快向通信转型？另公司2022年底原本打算注册设立一家通信业务全资子公司，以“专项保障频率合作项目的顺利推进。”请问这个项目还在推进吗？
+49  2025-01-27 15:18:00  20250127  159****1012  作为老板请来的专业人员，下一步公司在股市上有何战略规划？有何作为？
+50  2025-01-27 15:20:00  20250127  139****9842  請問：具體是哪些条款与V-Capital未能達成一致？
+51  2025-01-27 15:24:00  20250127  131****5751  投资索尔思可转债的5000万美元的后续安排？
+52  2025-01-27 15:30:00  20250127  184****7726  您好！我长期关注贵公司发展。近些年房地产行业竞争激烈，市场多变，此前贵公司筹划收购索尔思光电，展现出转型决心。但近期终止收购，引发关注。想了解此次变动是否会对转型战略产生重大影响？未来还会继续推进转型吗？若推进，方向会有调整吗，是仍聚焦通信与数字科技，还是开拓新方向？
+53  2025-01-27 15:33:00  20250127  136****2160  想问下 之前公司支付的5000万美金后续会退回来吗？还是投资的形式进入了？
+54  2025-01-27 15:34:00  20250127  138****1726  1、重组失败是个巨大的利空消息，加之2024年度经营业绩下滑并持续亏损，下一步采取什么措施应对阻止股价暴跌？减少投资者的损失？ 2、就公司的经营状况有可能被ST吗？公司如何应对和举措避免被ST？
+55  2025-01-27 15:43:00  20250127  188****8388  公司对于这次终止重大资产重组，后续还有哪些战略转型上的动作？或者说有没有新的并购目标
+56  2025-01-27 16:00:00  20250127  173****2924  业绩连亏三年会不会有ST风险，一年的重组之路未能成功，是对方要价高还是不能承诺业绩，接下还有什么办法提升业绩
+57  2025-01-27 16:01:00  20250127  138****6418  导致这次重组失败究竟是什么原因？
+58  2025-01-27 16:05:00  20250127  189****5372  （二）优先股认股安排 1、公司应依据协议约定，将所持有的优先股认股权证转换为索尔思光电的优先股。公司有权以每股 2.6179 美元的价格用 5,000 万美元的总对价认购索尔思光电对应股份。 2、在可转债行权条件成就时，索尔思光电需配合向公司按协议约定发行股份并进行股份登记。 请问，公司下一步是否会按照协议转股?
+59  2025-01-27 16:10:00  20250127  133****6229  后面还会有资产重组吗
+60  2025-01-27 16:10:00  20250127  150****1800  请问万通发展的战略定位有变化吗？主营业务下一步有调整吗？
+61  2025-01-27 16:15:00  20250127  189****9151  面对当下房地产现状以及本次重组失败，万通是否有计划进行下一步准备工作
+62  2025-01-27 16:18:00  20250127  150****0731  大股东与万科的债务问题协商的怎么样了？本次终止重组是否与万科债务问题有关？
+63  2025-01-27 16:20:00  20250127  134****5957  请问此次重组终止后，公司有何安排？后续是否继续考虑收购光通信行业企业以实现数字科技方向转型？
+64  2025-01-27 16:26:00  20250127  138****0505  尊敬的董秘，您好。此次重大资产重组终止的具体原因是什么？公司提到与交易各方就某些商业条款未达成一致，能否具体说明是哪些条款未能达成一致？
+65  2025-01-27 16:37:00  20250127  135****9467  请问本次交易方通知的解除协议，万通是否还要赔偿违约金
+66  2025-02-10 20:13:00  20250210  133****3335  友商同花顺和东方财富都已经推出成熟的AI产品和股民交流社区，请问贵司是否有此方面的计划？
+67  2025-02-10 20:15:00  20250210  189****3231  公司引流模式单一，且广告投入范围狭窄，请问公司如何应对，相比东财的股吧，有话题有交流，可以引流获客，贵公司有无相应计划？
+68  2025-02-10 20:19:00  20250210  185****0140  公司是否考虑重点加强一下手机端App的实用性，例如：加入“论坛”“股吧”创造讨论氛围提高App日活，从而提高开户率
+69  2025-02-10 20:20:00  20250210  185****0140  公司有考虑接入deepseek大模型吗？
+70  2025-02-10 21:07:00  20250210  153****6999  30亿定增目前进展如何？有没计划接入DeepSeeK？
+71  2025-02-13 09:20:00  20250213  东方财富网友  恭喜指南针被明晟指数纳入，做大做强互联网证券业务！
+72  2025-02-13 14:42:00  20250213  192****7751  请问，贵公司是按照什么标准确认营收的？
+73  2025-02-13 14:42:00  20250213  156****9732  公司未来的发展战略有何变化，下一步工作重点是基金还是麦高证券
+74  2025-02-13 15:03:00  20250213  156****9732  现在指南针股东多少
+75  2025-02-13 15:03:00  20250213  150****1529  请问公司截至目前，股东人数是多少？
+76  2025-02-13 15:03:00  20250213  东方财富网友  股权激励内容具体是什么?
+77  2025-02-13 15:03:00  20250213  东方财富网友  请问董事长，公司有量化交易工具吗？公司增发股票的价格如何确定？进度如何？
+78  2025-02-13 15:05:00  20250213  东方财富网友  请问董事长，公司收购麦高证券和先锋基金后的运行情况如何？
+79  2025-02-13 15:07:00  20250213  东方财富网友  请问公司有自营盘吗？
+80  2025-02-13 15:08:00  20250213  189****5427  请问顿衡先生，指南针定向增发进展如何？
+81  2025-02-13 15:09:00  20250213  东方财富网友  10转4.5股什么时候
+82  2025-02-13 15:13:00  20250213  东方财富网友  什么时候转送4.5股
+83  2025-02-13 15:22:00  20250213  东方财富网友  10转4.5什么时候可以落实
+84  2025-02-13 15:22:00  20250213  156****9732  公司下一步关于先锋基金的重点工作方向？
+85  2025-02-13 15:23:00  20250213  东方财富网友  请问指南针10送4.5什么时候送
+86  2025-02-13 15:26:00  20250213  东方财富网友  作为一个集券商、基金、炒股软件为一体的公司，公司的市值与行业同样的公司有不少差距，公司有没有市值管理的计划
+87  2025-02-13 15:28:00  20250213  132****2460  2024年度股东大会 什么时候开始
+88  2025-02-13 15:32:00  20250213  133****3335  请问贵司是否会推出类似同花顺和东方财富那样的股民社区？
+89  2025-02-13 15:32:00  20250213  东方财富网友  10转4.5股的目的是什么？如果明天股东大会通过，股权登记日和除权日是哪天？
+90  2025-02-13 15:32:00  20250213  186****8166  请问麦高证券的长期规划是什么，计划多久可以超越东方财富成为互联网券商第一？
+91  2025-02-13 15:44:00  20250213  东方财富网友  今年一季度利润是否有大幅度增加
+92  2025-02-13 15:45:00  20250213  东方财富网友  公司的定增审核是不是有实质的问题？两三年了，深交所都没有审核通过
+93  2025-02-13 15:49:00  20250213  东方财富网友  麦高证券的主要业务构成包括哪些
+94  2025-02-13 15:52:00  20250213  东方财富网友  请问指南针公司,2024年9月份三季报亏损，2024年年底年报扭亏为盈,同样2023年9月份亏损，2023年第四季度年报扭亏,请问为什么这两年总是第三季度亏损，第四季度扭亏？是运用财务手段扭亏的吗？有什么猫腻吗？
+95  2025-02-13 15:53:00  20250213  东方财富网友  请问指南针公司2023年9月份三季报亏损，2023年年报扭亏为盈;同样2024年三季报亏损，2024年年底年报扭亏为盈,请问反复出现这种情况,是用财务手段才扭亏的吗？具体是否存在什么猫腻呢？
+96  2025-02-13 16:03:00  20250213  东方财富网友  公司的官网看起来有点落伍，是否考虑重新设计，官网是企业的面子，另外，公司的APP连最基本的社交功能都没有，是否考虑增加？
+97  2025-02-13 16:13:00  20250213  东方财富网友  请问麦高证券什么时候能开展融资融券业务？
+98  2025-02-13 16:14:00  20250213  133****3335  请问麦高证券有没有开展两融业务？
+99  2025-02-13 16:15:00  20250213  东方财富网友  贵公司有没计划接入deepseek？
+100  2025-02-13 16:36:00  20250213  东方财富网友  公司有无回购增持公司股份的计划
+101  2025-02-14 11:48:00  20250214  158****6843  公司称，此次收购事项终止原因为“标的公司少数股权存在法律纠纷，导致审核要件无法齐备。”想请问上述法律纠纷发生和存续的具体时间，是否为该收购事项开始前就一直存在，公司为何历时半年多才因该原因终止，是否存在重大影响事件披露不完整？
+102  2025-02-14 11:53:00  20250214  158****6843  此次收购事项终止，对公司后续发展的影响？后续在路产并购方面的规划如何？
+103  2025-02-14 15:24:00  20250214  150****3308  中止会否对公司基本面造成影响？24年业绩受影响吗？
+104  2025-02-14 15:29:00  20250214  136****7388  请问，新成渝高速通车后，会有什么影响
+105  2025-02-14 15:32:00  20250214  150****3308  公司现在股息率多少？终止是否会影响公司分红政策？
+106  2025-02-14 15:48:00  20250214  173****9679  此次收购终止，是因为标的公司股权遭到冻结吗？
+107  2025-02-14 16:11:00  20250214  150****3308  中止是因为股价比较低，所以你们集团不想做了吗？
+108  2025-02-18 09:21:52  20250218  提问人651107  为什么拿着六亿去理财，又要去融资三亿，这岂不是伤害股民？
+109  2025-02-18 09:30:12  20250218  提问人628674  請問一下2025年有無新增的科研產品量產？以及2025的業績展望？
+110  2025-02-18 14:23:40  20250218  tibbetts  请问咱公司最近一期的股东人数是多少呢？
+111  2025-02-18 15:12:47  20250218  提问人669376  目前公司盈利较上年度有较大的增长，面对新的基本面，公司是否有新的市值管理计划？
+112  2025-02-18 15:17:25  20250218  188****4431  请问25年业绩展望？
+113  2025-02-18 15:22:39  20250218  135****7620  潘总好，请问贵公司2024业绩大增，股价却一直没有表现，公司有没有考虑进行市值管理？比如回购股票计划？
+114  2025-02-18 15:34:14  20250218  提问人629245  请问董事长：近期国家对民营企业发展提出了新方向（双精），本企业该如何抓住机遇促进发展，为投资者提供良好回报？
+115  2025-02-18 15:37:34  20250218  提问人685947  业绩和股价不成比例，对企业的发展是否有阻碍
+116  2025-02-18 16:03:56  20250218  提问人632249  请问董事长：今年到目前为止，企业的产销能否维持企业2024年的增长发展势头？订单能维持企业满产满销吗？谢谢！
+117  2025-02-18 16:14:29  20250218  提问人642588  公司所处行业在未来3~5年的发展方向在哪里？
+118  2025-02-18 16:36:13  20250218  提问人676336  为何没有机构投资者进入十大股东之列？
+119  2025-02-28 20:29:00  20250228  东方财富网友  为什么心肌灌注的检测药没有起量。已经上市快半年了4季度一点销量都没增加？ 预期和现实差距有点大啊
+120  2025-03-03 19:09:00  20250303  139****2036  当前PET显像用放射性药物氟-18（18F）的出厂价是多少元，这几年有因为竞争而降价吗？
+121  2025-03-03 20:05:34  20250303  188****9206  感谢管理层百忙之中抽出时间回复中小投资者问题。想问下公司管理层如下两个问题： 1、零售渠道以及小B工程渠道营收中与房地产相关收入占比大约是多少呢？； 2、在公司未来与房地产相关营收中，麻烦展望下未来新房装修与旧房修缮相关营收占比趋势情况； 谢谢
+122  2025-03-04 12:58:16  20250304  提问人688149  能开会说明公司还是有潜力的
+123  2025-03-04 15:51:00  20250304  183****1700  请问贵司服务的卫星是否可以为各种机器人与无人驾驶的汽车、无人机提供导航、定位等服务？
+124  2025-03-04 15:53:00  20250304  183****1700  请问贵司领导，做为央企控股上市公司，有否制定持续性市值管理的工作安排？谢谢！
+125  2025-03-04 16:08:00  20250304  183****1700  请问牛总，贵司博士学位员工占总员工多少比例？有没有持续提高博士等员工占比的人才计划？可否考虑在上海、北京和广州一线城市设立研发中心或子公司以引进国际化高素质人才（利于子女教育和家人医疗等后顾之忧）进一步提高团队竞争力？
+126  2025-03-05 15:10:00  20250305  东方财富网友  18F-APN-1607上市了吗，上市之前进一步进行研究是什么意思？不是去年七月就研究完了吗？
+127  2025-03-05 15:26:00  20250305  东方财富网友  业绩为什么降了这么多？
+128  2025-03-05 15:28:00  20250305  东方财富网友  有没有市值管理计划？
+129  2025-03-05 15:32:00  20250305  东方财富网友  报告显示核素药物研发投入占比总研发费用86.62%，高研发投入能否转化为未来收入？目前在研的核药产品预计何时上市？
+130  2025-03-05 15:32:00  20250305  东方财富网友  关于APN-1607产品大概什么时候上市
+131  2025-03-05 15:36:00  20250305  东方财富网友  公司市值管理有什么新办法吗？
+132  2025-03-05 15:39:00  20250305  东方财富网友  罗总，看了公司的年度报告，核药的外部环境还是不错的，东诚的核药也有十年了，为什么公司的业绩这么多年了不见起色呢？
+133  2025-03-05 15:45:00  20250305  150****3691  东诚药业参股公司，去年十月，停止美国上市，其中公司发展方向是停止上市计划，还是转向其他地区上市，或者不在上市了?
+134  2025-03-05 15:46:00  20250305  东方财富网友  东诚从事核药己经十年了应该说不短了，可是业绩不见起色，公司是如何考虑的？
+135  2025-03-05 16:25:00  20250305  东方财富网友  原料药业务板块销售收入下降主要原因是肝素钠销售价格下降。请问公司对肝素钠等原料药价格走势有何判断？有什么应对价格波动的措施？
+136  2025-03-05 16:53:00  20250305  东方财富网友  硫酸软骨素销量创历史新高，未来是否可持续
+137  2025-03-06 07:57:18  20250306  158****3715  尊敬的领导您好，公司过去一年业绩再次取得突破，但是有几个隐忧，一是公司经历这么多年发展账上现金一直给人很穷的表观感受，没有随着公司规模扩大相应增加？而是应收帐款虽然公司表示基本都是一年内的收款正常，但从坏账来看似乎又不太理想？尤其同同行业公司对比这个帐额可以说巨大？是否公司在供应链的弱势？
+138  2025-03-06 12:13:11  20250306  mcmillin  公司在养老产业的发展上有没有什么计划？
+139  2025-03-06 15:03:34  20250306  提问人602461  请问公司准备增发股份，筹集的资金具体投资哪些项目？
+140  2025-03-06 15:04:33  20250306  131*****620  您好！目前国内AI人工智能产业势头正盛，请问贵司对于人工智能的结合应用有哪些展望呢？
+141  2025-03-06 15:05:05  20250306  188*****821  您好，贵司近几年销售毛利率波动明显，未来如何稳定盈利能力并应对成本压力？
+142  2025-03-06 15:05:20  20250306  提问人698723  公司对市值管理，有没有具体的打算？
+143  2025-03-06 15:06:45  20250306  提问人652777  公司有没有养老机器人方面的计划
+144  2025-03-06 15:07:00  20250306  提问人600303  公司ai 布局有哪些
+145  2025-03-06 15:07:35  20250306  提问人682104  公司养老方面是否有采用养老机器人的计划？何时实施？还有公司转型多年一直进展不大，未来一两年是否会加快转型脚步？
+146  2025-03-06 15:07:47  20250306  提问人670253  公司支出部分去哪了？利润下降
+147  2025-03-06 15:07:48  20250306  poulson  从哪里进去看直播？
+148  2025-03-06 15:07:55  20250306  提问人626353  公司上海地块转型多年一直没有明显进展，今年这方面的规划如何？
+149  2025-03-06 15:08:43  20250306  提问人603564  请问一下公司有养老机器人计划吗，另外为什么不去对接Deepseek呢
+150  2025-03-06 15:08:51  20250306  提问人672933  公司有无并购计划
+151  2025-03-06 15:09:17  20250306  提问人614517  公司目前康养收入占比较低，公司下一步准备如何提高康养业务的规模？谢谢
+152  2025-03-06 15:10:30  20250306  181****6585  贵公司年利润下降百分之三百以上主要是受那些因素影响？可有计划或者政策扭转负盈利？
+153  2025-03-06 15:10:45  20250306  提问人655555  随着房地产下行，公司主营业务最近几年一直处于亏损状态，今年如何扭转这个局面？展望2025年，是否还会继续亏损？
+154  2025-03-06 15:10:46  20250306  提问人619899  另外公司的几百亩土地有什么计划吗
+155  2025-03-06 15:11:17  20250306  提问人613142  股票明天能涨吗
+156  2025-03-06 15:12:20  20250306  jennison  你好董事长，公司去年亏损较大，请问今年有什么好的项目路径去实现扭亏为盈
+157  2025-03-06 15:13:28  20250306  提问人629057  这股票老在三元徘徊，不随大盘涨，请问公司是否有地雷？
+158  2025-03-06 15:15:40  20250306  提问人668519  公司项目都落地了吗，养老机器人项目进度怎么样了
+159  2025-03-06 15:15:47  20250306  Qiana  公司养老职业教育方面有什么规划。
+160  2025-03-06 15:16:26  20250306  提问人606700  公司今年一季度，是否盈利？？
+161  2025-03-06 15:17:07  20250306  Apollo  公司有没有打算跟进国家提倡方向 关注养老机器人市场动态 择机布局该板块
+162  2025-03-06 15:17:09  20250306  提问人664998  公司去年为什么亏损这么严重
+163  2025-03-06 15:17:21  20250306  sarker  谢谢家门，祝贵公司鸿图大展
+164  2025-03-06 15:18:35  20250306  提问人660465  您好，请问公司在辅助生殖领域有没有新的计划？
+165  2025-03-06 15:19:08  20250306  aneela  买你家股票4元多，2年了还在4元以上，你们家公司到底有没前景，没有的话，我们股民就全抛了
+166  2025-03-06 15:20:31  20250306  提问人673199  不是全景路演吗，怎么纯文字，图文视频呢
+167  2025-03-06 15:22:39  20250306  提问人616842  公司每月公布的股东人数中，机构股东一般都有2—3千家，这些是量化机构吗？
+168  2025-03-06 15:23:19  20250306  提问人687838  公司市值管理有哪些措施
+169  2025-03-06 15:23:42  20250306  提问人660091  董事长您好，请问公司在婴童及辅助生殖领域有什么计划或者重大项目
+170  2025-03-06 15:24:53  20250306  181****6585  公司有对科技 AI 领域有布局参与吗
+171  2025-03-06 15:25:51  20250306  提问人601102  公司500多亩存量用地进入实施阶段了呗
+172  2025-03-06 15:27:35  20250306  181****6585  公司最近有没有什么利好政策或者事件要公布？
+173  2025-03-06 15:27:46  20250306  提问人647186  养老产业是不是公司以后发展的重心
+174  2025-03-06 15:28:00  20250306  提问人678283  请问贵公司什么时候st
+175  2025-03-06 15:28:54  20250306  提问人638519  公司的ai板块与deepseek有无合作
+176  2025-03-06 15:29:18  20250306  131*****572  您好，请问公司净利润同比增长的核心驱动因素是什么？
+177  2025-03-06 15:38:47  20250306  提问人683093  昨天教育部，今天商务部都是提到医疗，教育领域的开放试点，希望公司积极拥抱AI医疗AI教育，为公司夯实潜力
+178  2025-03-06 15:42:34  20250306  提问人669603  公司股票回购价格上限能否提高？
+179  2025-03-06 15:42:49  20250306  zenia  建材行业下行，养老行业周期久，那公司未来的发展很让人担忧，毫无新的增长点，有新的业务发展或收购吗？
+180  2025-03-06 15:48:58  20250306  提问人624040  请问公司旗下等各公司，一共入住多少老年人，计划继续增加多少床位
+181  2025-03-06 15:53:54  20250306  提问人623291  今年在养老方面有什么计划
+182  2025-03-06 15:54:58  20250306  提问人640565  请问公司对最近比较火的机器人和康养的结合发展上，有规划么
+183  2025-03-06 15:55:35  20250306  提问人678789  您好，老板，今天大盘大涨，贵公司的股票怎么做到一动不动是的？
+184  2025-03-06 15:55:59  20250306  提问人640748  业绩画面有视频画面么，另外回购进展如何。
+185  2025-03-06 15:56:12  20250306  180****7379  李总，买了贵公司的股票，非常不能悦心且健康
+186  2025-03-06 15:57:14  20250306  提问人677517  请问是否有市值管理措施
+187  2025-03-06 15:57:37  20250306  Fedelma  贵公司股票明天会不会跌停？跌停我就买进，不跌停一直不敢进
+188  2025-03-06 15:58:42  20250306  提问人690352  贵公司股票明天会不会跌停？跌停我就没进，不跌停一直不敢进
+189  2025-03-06 16:03:41  20250306  138*****812  公司2025年以来蛋安酸产品市场如何？和2023年1一2月相比，是涨还是跌？
+190  2025-03-06 16:07:48  20250306  提问人663905  公司的康养床位有多少，计划增加多少
+191  2025-03-06 16:08:45  20250306  提问人623869  健康和教育产业做了那么久为什么营收少？
+192  2025-03-06 16:10:27  20250306  181****6585  公司近期还会实行更多的股票回购吗？价格会不会继续往上提高？
+193  2025-03-06 16:11:17  20250306  nishimura  今天大盘如此之好，贵公司为什么大股东为什么恶意砸盘？我们小股东容易吗
+194  2025-03-06 16:11:31  20250306  138*****812  郝董事长好，中美贸易战大背景下，美国对公司欧美区域的业务影响大吗？公司如何规避此类风险。 与2024年相比，有哪些新产能释放？
+195  2025-03-06 16:13:09  20250306  提问人611767  你好董事长有没有打算剥离瓷砖行业，专心打造养老业务
+196  2025-03-06 16:16:26  20250306  提问人659660  同花顺老说悦心健康估值类型危险，请说明一下？
+197  2025-03-06 16:20:53  20250306  提问人610547  请问公司参股鑫山保险公司的持股比例是多少？
+198  2025-03-06 16:22:21  20250306  提问人653001  有没有打算剥离瓷砖行业，专心打造养老业务
+199  2025-03-06 16:26:11  20250306  verwey  公司年报显示亏损，会不会有ST风险
+```
+
+**25. get_stock_equity_illegal - 获取股权违规信息**
+
+**25.1. 方法名：get_stock_equity_illegal**
+
+**25.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 查询起始日期（公告日期），格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 查询结束日期（公告日期），格式为 "YYYYMMDD" | 必填 |
+
+**25.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 股票简称 |
+| info_date | string | 公告日期 |
+| illegal_type | string | 违规类型 |
+| illegal_subject | string | 违规主体 |
+| punish_subject | string | 处罚对象 |
+| punish_relation | string | 处罚对象关系 |
+| illegal_event | string | 违规行为 |
+| punish_type | string | 处分类型 |
+| punish_action | string | 处分措施 |
+| executor | string | 处理单位 |
+| punish_amount | float | 处罚金额（万） |
+| related_laws | string | 相关法律 |
+
+**25.4. 使用示例**
+
+**25.4.1. 获取一定日期范围内全部上市公司违规情况的部分字段信息**
+
+```python
+import panda_data
+result = panda_data.get_stock_equity_illegal(
+    symbol="",
+    start_date="20240101",
+    end_date="20240131",
+    fields=["symbol","info_date","name","illegal_type",
+            "illegal_subject","punish_subject","punish_relation","punish_amount"]
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  info_date  name  illegal_type  illegal_subject  punish_subject  punish_relation  punish_amount
+0  000409.SZ  20240127  云鼎科技  未依法履行其他职责  公司  云鼎科技股份有限公司  公司本身  None
+1  000415.SZ  20240105  渤海租赁  未依法履行其他职责,未及时披露公司重大事项  公司  天津通万投资合伙企业(有限合伙)  公司股东  None
+2  000415.SZ  20240106  渤海租赁  未依法履行其他职责  公司  天津通万投资合伙企业(有限合伙)  公司股东  None
+3  000718.SZ  20240110  苏宁环球  未依法履行其他职责  个人  张桂平  公司高管  15.0
+4  000889.SZ  20240106  中嘉博创  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  公司  中嘉博创信息技术股份有限公司  公司本身  None
+5  000889.SZ  20240106  中嘉博创  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  吴鹰  公司高管  None
+6  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  丁毅  公司高管  None
+7  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  高晓娟  公司高管  None
+8  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  李兴哲  公司高管  None
+9  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  公司  数源科技股份有限公司  公司本身  None
+10  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  吴小刚  公司高管  None
+11  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  章国经  公司高管  None
+12  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  公司  数源科技股份有限公司  公司本身  None
+13  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  丁毅  公司高管  None
+14  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  高晓娟  公司高管  None
+15  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  李兴哲  公司高管  None
+16  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  吴小刚  公司高管  None
+17  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  章国经  公司高管  None
+18  001309.SZ  20240116  德明利  未及时披露公司重大事项  公司  深圳市德明利技术股份有限公司  公司本身  None
+19  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  个人  安胜杰  公司高管  None
+20  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  公司  保利联合化工控股集团股份有限公司  公司本身  None
+21  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  个人  刘士彬  公司高管  None
+22  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  个人  张毅  公司高管  None
+23  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  安胜杰  公司高管  120.0
+24  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  公司  保利联合化工控股集团股份有限公司  公司本身  300.0
+25  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  胡浩川  公司其它关联方  50.0
+26  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  刘士彬  公司高管  80.0
+27  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  王丽春  公司高管  65.0
+28  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  魏兴  公司其它关联方  50.0
+29  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  魏彦  公司高管  80.0
+30  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  文韬  公司其它关联方  50.0
+31  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  袁莉  公司高管  80.0
+32  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  张毅  公司高管  80.0
+33  002086.SZ  20240129  东方海洋  其他  公司  湖南神州行者资本管理有限公司  公司股东  None
+34  002086.SZ  20240129  东方海洋  其他  公司  湖南优禾神州股权投资合伙企业(有限合伙)  公司股东  None
+35  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  恒宝股份有限公司  公司本身  None
+36  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  陈妹妹  公司高管  None
+37  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  钱京  公司高管  None
+38  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  徐霄凌  公司高管  None
+39  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  艾路明  公司其它关联方  None
+40  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  公司  武汉三特索道集团股份有限公司  公司本身  None
+41  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  曹正  公司高管  None
+42  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  卢胜  公司高管  None
+43  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  王栎栎  公司高管  None
+44  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  张泉  公司高管  None
+45  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  张云韵  公司高管  None
+46  002178.SZ  20240105  延华智能  其他  公司  上海延华智能科技(集团)股份有限公司  公司本身  None
+47  002178.SZ  20240105  延华智能  其他  个人  曹磊  公司高管  None
+48  002178.SZ  20240105  延华智能  其他  个人  龚保国  公司高管  None
+49  002178.SZ  20240105  延华智能  其他  个人  黄慧玲  公司高管  None
+50  002178.SZ  20240105  延华智能  其他  个人  唐文妍  公司高管  None
+51  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  上海延华智能科技(集团)股份有限公司  公司本身  200.0
+52  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  曹磊  公司高管  50.0
+53  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  龚保国  公司高管  100.0
+54  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  黄慧玲  公司高管  75.0
+55  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  唐文妍  公司高管  50.0
+56  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  公司  山东如意毛纺服装集团股份有限公司  公司本身  200.0
+57  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  杜元姝  公司高管  80.0
+58  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  胡骏华  公司高管  50.0
+59  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  黄利群  公司高管  55.0
+60  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  李井新  公司高管  55.0
+61  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  李艳宝  公司高管  50.0
+62  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  卢浩然  公司高管  50.0
+63  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  邱亚夫  公司高管  350.0
+64  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  苏晓  公司高管  65.0
+65  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  王科林  公司高管  50.0
+66  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  徐长瑞  公司高管  60.0
+67  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  杨成  公司高管  50.0
+68  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  张义英  公司高管  90.0
+69  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  公司  日海智能科技股份有限公司  公司本身  400.0
+70  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  丁艺  公司高管  80.0
+71  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  刘平  公司高管  80.0
+72  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  马玉峰  公司高管  50.0
+73  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  宋德亮  公司高管  50.0
+74  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  杨涛  公司高管  100.0
+75  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  杨宇翔  公司高管  100.0
+76  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  余明  公司高管  50.0
+77  002343.SZ  20240110  慈文传媒  信息披露虚假或严重误导性陈述,业绩预测结果不准确或不及时  公司  慈文传媒股份有限公司  公司本身  None
+78  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  陈多佳  公司高管  None
+79  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  胡大富  公司高管  None
+80  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  胡丹  公司高管  None
+81  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项  公司  深圳市新力达电子集团有限公司  公司股东  None
+82  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  王伟华  公司高管  None
+83  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  伍娜  公司高管  None
+84  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  公司  新亚制程(浙江)股份有限公司  公司本身  None
+85  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项  个人  徐琦  公司高管  None
+86  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  许雷宇  公司高管  None
+87  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  个人  李国富  公司股东  None
+88  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  个人  刘必安  公司其它关联方  None
+89  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  个人  刘彦茗  公司股东  None
+90  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  公司  长沙金森新能源有限公司  公司股东  None
+91  002399.SZ  20240116  海普瑞  其他  公司  深圳市海普瑞药业集团股份有限公司  公司本身  None
+92  002473.SZ  20240105  圣莱退  其他  公司  宁波圣莱达电器股份有限公司  公司本身  None
+93  002483.SZ  20240104  润邦股份  未依法履行其他职责  个人  王春山  公司股东  15.0
+94  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  公司  鼎龙文化股份有限公司  公司本身  None
+95  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  方树坡  公司高管  None
+96  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  刘文康  公司高管  None
+97  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  龙学勤  公司高管  None
+98  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  王小平  公司高管  None
+99  002503.SZ  20240118  *ST搜特  其他  个人  何君  公司高管  50.0
+100  002503.SZ  20240118  *ST搜特  其他  个人  黎良望  公司高管  50.0
+101  002503.SZ  20240118  *ST搜特  其他  个人  周世权  公司高管  50.0
+102  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  公司  北京弘高创意建筑设计股份有限公司  公司本身  500.0
+103  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  何宁  公司高管  300.0
+104  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  贺利双  公司高管  20.0
+105  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  荆明  公司高管  100.0
+106  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  孙志新  公司高管  120.0
+107  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  杨立微  公司高管  100.0
+108  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  张艳宇  公司高管  70.0
+109  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  甄建涛  公司其它关联方  300.0
+110  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  公司  深圳丹邦科技股份有限公司  公司本身  400.0
+111  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  陈文彬  公司高管  50.0
+112  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  邓建峰  公司高管  200.0
+113  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  龚艳  公司高管  50.0
+114  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  刘萍  公司高管  800.0
+115  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  刘文魁  公司高管  100.0
+116  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  莫珊洁  公司高管  70.0
+117  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  任琥  公司高管  100.0
+118  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  谢凡  公司高管  200.0
+119  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  殷鹰  公司高管  60.0
+120  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  周鸾斌  公司高管  60.0
+121  002629.SZ  20240103  仁智股份  其他  个人  陈敏  公司高管  None
+122  002636.SZ  20240124  金安国纪  其他,未依法履行其他职责  公司  天原企业管理咨询服务围场满族蒙古族自治县合伙企业(有限合伙)  无关联关系  None
+123  002636.SZ  20240124  金安国纪  其他,未依法履行其他职责  个人  周印军  无关联关系  None
+124  002636.SZ  20240125  金安国纪  未依法履行其他职责  公司  天原企业管理咨询服务围场满族蒙古族自治县合伙企业(有限合伙)  无关联关系  None
+125  002636.SZ  20240125  金安国纪  未依法履行其他职责  个人  周印军  无关联关系  None
+126  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  鲍俊  公司高管  None
+127  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  公司  苏州扬子江新型材料股份有限公司  公司本身  None
+128  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  胡卫林  公司高管  None
+129  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  秦玮  公司高管  None
+130  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  孙哲峰  公司高管  None
+131  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  王功虎  公司高管  None
+132  002699.SZ  20240119  *ST美盛  未依法履行其他职责  公司  美盛文化创意股份有限公司  公司本身  None
+133  002712.SZ  20240108  思美传媒  其他,未依法履行其他职责  公司  思美传媒股份有限公司  公司本身  None
+134  002712.SZ  20240108  思美传媒  其他,未依法履行其他职责  个人  李子木  公司高管  None
+135  002712.SZ  20240120  思美传媒  未依法履行其他职责  公司  思美传媒股份有限公司  公司本身  250.0
+136  002712.SZ  20240120  思美传媒  未依法履行其他职责  个人  李子木  公司高管  250.0
+137  002810.SZ  20240103  山东赫达  未依法履行其他职责  个人  邱建军  公司高管  10.0
+138  002864.SZ  20240113  盘龙药业  其他  公司  陕西盘龙药业集团股份有限公司  公司本身  None
+139  002864.SZ  20240113  盘龙药业  其他  个人  吴杰  公司高管  None
+140  002864.SZ  20240113  盘龙药业  其他  个人  谢晓林  公司高管  None
+141  002945.SZ  20240127  华林证券  未依法履行其他职责  公司  华林证券股份有限公司  公司本身  None
+142  002988.SZ  20240111  豪美新材  未依法履行其他职责,其他  个人  陈涛  公司高管  None
+143  002988.SZ  20240111  豪美新材  未依法履行其他职责,其他  个人  董卫峰  公司高管  None
+144  002988.SZ  20240111  豪美新材  未依法履行其他职责,其他  公司  广东豪美新材股份有限公司  公司本身  None
+145  002988.SZ  20240112  豪美新材  未依法履行其他职责,其他  个人  陈涛  公司高管  None
+146  002988.SZ  20240112  豪美新材  未依法履行其他职责,其他  个人  董卫峰  公司高管  None
+147  002988.SZ  20240112  豪美新材  未依法履行其他职责,其他  公司  广东豪美新材股份有限公司  公司本身  None
+148  300003.SZ  20240126  乐普医疗  其他  个人  郭同军  公司高管  None
+149  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  白雪华  公司高管  None
+150  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  天海融合防务装备技术股份有限公司  公司本身  None
+151  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  翟宏玲  公司高管  None
+152  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  吉春林  公司高管  None
+153  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  李露  公司高管  None
+154  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  刘楠  公司高管  None
+155  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  王志宏  公司高管  None
+156  300078.SZ  20240109  思创智联  信息披露虚假或严重误导性陈述  公司  思创医惠科技股份有限公司  公司本身  8570.0
+157  300078.SZ  20240109  思创智联  信息披露虚假或严重误导性陈述  个人  章笠中  公司高管  750.0
+158  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  公司  思创医惠科技股份有限公司  公司本身  None
+159  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  孙新军  公司高管  None
+160  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  汪骏  公司高管  None
+161  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  王凛  公司高管  None
+162  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  章笠中  公司高管  None
+163  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  季伟  公司高管  None
+164  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  金通灵科技集团股份有限公司  公司本身  None
+165  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  坤明  公司高管  None
+166  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  冒鑫鹏  公司高管  None
+167  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  袁学礼  公司高管  None
+168  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  陈树军  公司高管  None
+169  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  冯霞  公司高管  None
+170  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  冯霞  公司高管  None
+171  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  季伟  公司高管  200.0
+172  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  季伟  公司高管  None
+173  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  金通灵科技集团股份有限公司  公司本身  150.0
+174  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  公司  金通灵科技集团股份有限公司  公司本身  None
+175  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  冒鑫鹏  公司高管  60.0
+176  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  申志刚  公司高管  None
+177  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  许坤明  公司高管  60.0
+178  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  袁学礼  公司高管  100.0
+179  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  袁学礼  公司高管  None
+180  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  张建华  公司高管  None
+181  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  张建华  公司高管  None
+182  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  朱军  公司高管  None
+183  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  朱军  公司高管  None
+184  300165.SZ  20240105  天瑞仪器  其他  公司  安岳天瑞水务有限公司  公司控股参股公司  30.1
+185  300167.SZ  20240105  ST迪威迅  其他  公司  深圳市迪威迅股份有限公司  公司本身  None
+186  300167.SZ  20240105  ST迪威迅  其他  个人  季刚  公司高管  None
+187  300167.SZ  20240105  ST迪威迅  其他  个人  季红  公司高管  None
+188  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  公司  朗源股份有限公司  公司本身  None
+189  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  个人  戚永楙  公司高管  None
+190  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  个人  张丽娜  公司高管  None
+191  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  个人  张涛  公司高管  None
+192  300198.SZ  20240131  *ST纳川  未依法履行其他职责  公司  北京睿汇海纳科技产业基金(有限合伙)  无关联关系  None
+193  300198.SZ  20240131  *ST纳川  未依法履行其他职责  个人  陈志江  公司高管  None
+194  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  公司  上海金力泰化工股份有限公司  公司本身  200.0
+195  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  景总法  公司高管  50.0
+196  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  隋静媛  公司高管  50.0
+197  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  汤洋  公司高管  50.0
+198  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  严家华  公司高管  100.0
+199  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  袁翔  公司高管  100.0
+```
+
 **（九）股东行为：**
 
 **1. get_stock_pledge - 获取A股公司股权质押**
@@ -3959,10 +5235,10 @@ symbol  announcement_date  planned_ratio  actual_ratio  actual_shares  allotment
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -4218,9 +5494,9 @@ symbol  publish_date  hold_shares  hold_ratio
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -4464,10 +5740,10 @@ pledge_begin_date  pledge_end_date  data_source  unrestricted_avg_pledge_ratio  
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -4718,6 +5994,68 @@ symbol  info_date  name  first_info_date  progress  begin_date  end_date  shareh
 199  000912.SZ  20251211  泸天化  20250820  已完成  20250910  20251209  中国农业银行股份有限公司宁夏回族自治区分行  股东  减持  61771398.0  15680000.0  1.0  股东经营之需要  None  None  None  None  None  None  None  None  None
 ```
 
+**4. get_stock_equity_placard - 获取被举牌公司明细**
+
+**4.1. 方法名：get_stock_equity_placard**
+
+**4.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| start_date | string | 查询起始日期（公告日期），格式为 "YYYYMMDD" | 必填 |
+| end_date | string | 查询结束日期（公告日期），格式为 "YYYYMMDD" | 必填 |
+
+**4.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 股票简称 |
+| info_date | string | 公告日期 |
+| shareholder_name | string | 股东名称 |
+| shareholder_type | string | 股东类型 |
+| actual_controller | string | 股东实际控制人 |
+| begin_date | string | 变动起始日期 |
+| end_date | string | 变动截止日期 |
+| increase_num | integer | 本次增持数量 |
+| total_share_ratio | float | 占总股本比例(%) |
+| average_price | float | 本次交易均价 |
+| price_note | string | 本次交易均价说明 |
+| share_holding | long | 变动后持股总数 |
+| share_holding_ratio | float | 变动后持股比例(%) |
+| increase_plan | string | 未来12个月内是否拟继续增持 |
+
+**4.4. 使用示例**
+
+**4.4.1. 获取一定日期范围内所有被举牌公司明细的部分字段数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_equity_placard(
+    symbol="",
+    start_date="20240101",
+    end_date="20240131",
+    fields=["symbol","info_date","name","shareholder_name","increase_num","total_share_ratio","average_price"]
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  info_date  name  shareholder_name  increase_num  total_share_ratio  average_price
+0  000812.SZ  20240131  陕西金叶  陈启来  8660000  1.1266  5.6
+1  001267.SZ  20240103  汇绿生态  李晓伟  50000  0.0064  5.2
+2  002117.SZ  20240125  东港股份  费占军,张靖华,费战武,刘秀敏,白江涛,新天科技股份有限公司  5404957  0.9906  7.3
+3  600084.SH  20240106  *ST尼雅  孙伟  11237350  1.0  7.96
+4  600236.SH  20240123  桂冠电力  中国长江电力股份有限公司  50581537  0.64  5.52
+5  600620.SH  20240106  天宸股份  杭州清哲投资管理有限公司-清哲和融7号私募证券投资基金  3934525  0.573  9.83
+6  600908.SH  20240112  无锡银行  长城人寿保险股份有限公司  9999925  0.46  5.0
+7  603880.SH  20240127  南卫股份  徐东  18000  0.01  4.9
+```
+
 **（十）业绩预告：**
 
 **1. get_fina_forecast - 获取业绩预告数据**
@@ -4728,10 +6066,10 @@ symbol  info_date  name  first_info_date  progress  begin_date  end_date  shareh
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| info_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_quarter | string | 报告季度，格式为 "YYYYqN" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| info_date | Optional[string] | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| end_quarter | Optional[string] | 报告季度，格式为 "YYYYqN" | 非必填 |
 
 **1.3. 响应参数**
 
@@ -4786,10 +6124,10 @@ symbol  info_date  end_date  forecast_description  forecast_earning_ceiling  for
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
-| fields | string | 需要返回的字段列表 | 非必填 |
-| info_date | string | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
-| end_quarter | string | 报告季度，格式为 "YYYYqN" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+| info_date | Optional[string] | 信息发布日期，格式为 "YYYYMMDD" | 非必填 |
+| end_quarter | Optional[string] | 报告季度，格式为 "YYYYqN" | 非必填 |
 
 **1.3. 响应参数**
 
@@ -4802,42 +6140,42 @@ symbol  info_date  end_date  forecast_description  forecast_earning_ceiling  for
 | gross_profit | float | 主营业务利润(元) |
 | operating_profit | float | 营业利润(元) |
 | total_profit | float | 利润总额(元) |
-| np_parent_owners | float | 归属母公司净利润(元) |
-| net_profit_cut | float | 扣除非经常性损益后净利润(元) |
-| net_operate_cashflow | float | 经营活动现金流量净额(元) |
+| net_profit_parent | float | 归属母公司净利润(元) |
+| net_profit_excluding_nonrecurring | float | 扣除非经常性损益后净利润(元) |
+| net_cash_flow_operating | float | 经营活动现金流量净额(元) |
 | total_assets | float | 总资产(元) |
-| se_without_minority | float | 归属母公司普通股东权益(元) |
-| se_parent_owners | float | 归属母公司股东权益(元) |
+| equity_parent_common | float | 归属母公司普通股东权益(元) |
+| equity_parent | float | 归属母公司股东权益(元) |
 | total_shares | float | 总股本(股) |
 | basic_eps | float | 基本每股收益 |
 | eps_weighted | float | 每股收益(加权)(元) |
-| eps_cut_epscut | float | 每股收益(扣除)(元) |
-| eps_cut_weighted | float | 每股收益(扣除加权)(元) |
-| roe | float | 净资产收益率(摊薄)(%) |
+| eps_excluding_nonrecurring | float | 每股收益(扣除)(元) |
+| eps_excluding_nonrecurring_weighted | float | 每股收益(扣除加权)(元) |
+| roe_diluted | float | 净资产收益率(摊薄)(%) |
 | roe_weighted | float | 净资产收益率(加权)(%) |
-| roe_cut | float | 净资产收益率(扣除摊薄)(%) |
-| roe_cut_weighted | float | 净资产收益率(扣除加权)(%) |
-| net_operate_cashflow_per_share | float | 每股经营活动现金流量净额(元) |
-| equity_per_share | float | 每股净资产(元) |
+| roe_excluding_nonrecurring_diluted | float | 净资产收益率(扣除摊薄)(%) |
+| roe_excluding_nonrecurring_weighted | float | 净资产收益率(扣除加权)(%) |
+| cf_operating_per_share | float | 每股经营活动现金流量净额(元) |
+| bvps | float | 每股净资产(元) |
 | operating_revenue_yoy | float | 主营业务收入同比(%) |
 | gross_profit_yoy | float | 主营业务利润同比(%) |
 | operating_profit_yoy | float | 营业利润同比(%) |
 | total_profit_yoy | float | 利润总额同比(%) |
-| np_parent_minority_pany_yoy | float | 归属母公司净利润同比(%) |
-| ne_t_minority_ty_yoy | float | 扣除非经常性损益后净利润同比(%) |
-| net_operate_cash_flow_yoy | float | 经营活动现金流量净额同比(%) |
-| total_assets_to_opening | float | 总资产较期初比(%) |
-| se_without_minority_to_opening | float | 归属母公司股东权益较期初比(%) |
+| net_profit_parent_yoy | float | 归属母公司净利润同比(%) |
+| net_profit_excluding_nonrecurring_yoy | float | 扣除非经常性损益后净利润同比(%) |
+| net_cash_flow_operating_yoy | float | 经营活动现金流量净额同比(%) |
+| total_assets_growth_rate | float | 总资产较期初比(%) |
+| equity_parent_growth_rate | float | 归属母公司股东权益较期初比(%) |
 | basic_eps_yoy | float | 每股收益(摊薄) 同比(%) |
 | eps_weighted_yoy | float | 每股收益(加权) 同比(%) |
-| eps_cut_yoy | float | 每股收益(扣除) 同比(%) |
-| eps_cut_weighted_yoy | float | 每股收益(扣除加权) 同比(%) |
-| roe_yoy | float | 净资产收益率(摊薄) 同比(%) |
+| eps_excluding_nonrecurring_yoy | float | 每股收益(扣除) 同比(%) |
+| eps_excluding_nonrecurring_weighted_yoy | float | 每股收益(扣除加权) 同比(%) |
+| roe_diluted_yoy | float | 净资产收益率(摊薄) 同比(%) |
 | roe_weighted_yoy | float | 净资产收益率(加权) 同比(%) |
-| roe_cut_yoy | float | 净资产收益率(扣除摊薄) 同比(%) |
-| roe_cut_weighted_yoy | float | 净资产收益率(扣除加权) 同比(%) |
-| net_operate_cash_flow_per_share_yoy | float | 每股经营活动现金流量净额同比(%) |
-| net_asset_psto_opening | float | 每股净资产较期初比(%) |
+| roe_excluding_nonrecurring_diluted_yoy | float | 净资产收益率(扣除摊薄) 同比(%) |
+| roe_excluding_nonrecurring_weighted_yoy | float | 净资产收益率(扣除加权) 同比(%) |
+| cf_operating_per_share_yoy | float | 每股经营活动现金流量净额同比(%) |
+| bvps_growth_rate | float | 每股净资产较期初比(%) |
 
 **1.4. 使用示例**
 
@@ -4849,8 +6187,8 @@ result = panda_data.get_fina_performance(
         info_date="20251107",
         symbol="688235.SH",
         end_quarter="2025q4",
-        fields=["symbol", "info_date", "end_date", "basic_eps", "eps_cut_epscut",
-                "ne_t_minority_ty_yoy", "np_parent_owners"]
+        fields=["symbol", "info_date", "end_date", "basic_eps", "eps_excluding_nonrecurring",
+                "net_profit_excluding_nonrecurring_yoy", "net_profit_parent"]
 )
 print(result)
 ```
@@ -4858,8 +6196,8 @@ print(result)
 **响应示例**
 
 ```text
-symbol  info_date  end_date  basic_eps  eps_cut_epscut  ne_t_minority_ty_yoy  np_parent_owners
-0  688235.SH  20251107  20250930  0.81  0.6292  124.295951  1138596000.0
+symbol  info_date  basic_eps  end_date  net_profit_parent  eps_excluding_nonrecurring  net_profit_excluding_nonrecurring_yoy
+0  688235.SH  20251107  0.81  20250930  1138596000.0  0.6292  124.295951
 ```
 
 **2. get_fina_reports - 获取财务季度报告**
@@ -4871,9 +6209,9 @@ symbol  info_date  end_date  basic_eps  eps_cut_epscut  ne_t_minority_ty_yoy  np
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, list]] | 股票名称 | 非必填 |
-| start_quarter | string | 起始季度，格式为 "YYYYqN"（与end_quarter同用，end_quarter启用时必填） | 非必填 |
-| end_quarter | string | 结束季度，格式为 "YYYYqN"（与start_quarter同用，start_quarter启用时必填） | 非必填 |
-| date | string | 公告日期,返回该日期及之前的数据（当start_quarter和end_quarter均不启用时此字段必填） | 非必填 |
+| start_quarter | Optional[string] | 起始季度，格式为 "YYYYqN"（与end_quarter同用，end_quarter启用时必填） | 非必填 |
+| end_quarter | Optional[string] | 结束季度，格式为 "YYYYqN"（与start_quarter同用，start_quarter启用时必填） | 非必填 |
+| date | Optional[string] | 公告日期,返回该日期及之前的数据（当start_quarter和end_quarter均不启用时此字段必填） | 非必填 |
 | is_latest | Optional[bool] | True：返回最新披露数据，False：返回全部。默认为True | 非必填 |
 | fields | Optional[Union[string, list]] | 返回字段 | 非必填 |
 
@@ -4957,11 +6295,11 @@ symbol  quarter  date  bs_acct_payable  is_adj_credit_impair  cfs_cash_inflow_op
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_quarter | string | 开始季度,eg:"2025q1" | 非必填 |
-| end_quarter | string | 结束季度,eg:"2025q3" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| market | string | 市场,默认'cn'为中国内地市场 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_quarter | Optional[string] | 开始季度,eg:"2025q1" | 非必填 |
+| end_quarter | Optional[string] | 结束季度,eg:"2025q3" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| market | Optional[string] | 市场,默认"cn"为中国内地市场 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -5002,6 +6340,248 @@ symbol  quarter  date  agency  audit_type  opinion
 5  000001.SZ  2025q1  20250419  None  financial_statements  no_audit_performed
 ```
 
+**（十二）股东结构：**
+
+**1. get_stock_equity_nature - 获取个股企业性质**
+
+**1.1. 方法名：get_stock_equity_nature**
+
+**1.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
+
+**1.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 股票简称 |
+| full_name | string | 股票全称 |
+| company_nature | string | 公司性质 |
+| introduction | string | 公司介绍 |
+
+**1.4. 使用示例**
+
+**1.4.1. 获取一定日期范围内全部个股企业性质的部分字段信息**
+
+```python
+import panda_data
+result = panda_data.get_stock_equity_nature(
+    symbol="",
+    fields=["symbol","name","full_name","company_nature"]
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  info_date  name  illegal_type  illegal_subject  punish_subject  punish_relation  punish_amount
+0  000409.SZ  20240127  云鼎科技  未依法履行其他职责  公司  云鼎科技股份有限公司  公司本身  None
+1  000415.SZ  20240105  渤海租赁  未依法履行其他职责,未及时披露公司重大事项  公司  天津通万投资合伙企业(有限合伙)  公司股东  None
+2  000415.SZ  20240106  渤海租赁  未依法履行其他职责  公司  天津通万投资合伙企业(有限合伙)  公司股东  None
+3  000718.SZ  20240110  苏宁环球  未依法履行其他职责  个人  张桂平  公司高管  15.0
+4  000889.SZ  20240106  中嘉博创  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  公司  中嘉博创信息技术股份有限公司  公司本身  None
+5  000889.SZ  20240106  中嘉博创  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  吴鹰  公司高管  None
+6  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  丁毅  公司高管  None
+7  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  高晓娟  公司高管  None
+8  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  李兴哲  公司高管  None
+9  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  公司  数源科技股份有限公司  公司本身  None
+10  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  吴小刚  公司高管  None
+11  000909.SZ  20240119  *ST数源  其他,未依法履行其他职责  个人  章国经  公司高管  None
+12  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  公司  数源科技股份有限公司  公司本身  None
+13  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  丁毅  公司高管  None
+14  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  高晓娟  公司高管  None
+15  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  李兴哲  公司高管  None
+16  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  吴小刚  公司高管  None
+17  000909.SZ  20240119  *ST数源  未依法履行其他职责,其他  个人  章国经  公司高管  None
+18  001309.SZ  20240116  德明利  未及时披露公司重大事项  公司  深圳市德明利技术股份有限公司  公司本身  None
+19  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  个人  安胜杰  公司高管  None
+20  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  公司  保利联合化工控股集团股份有限公司  公司本身  None
+21  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  个人  刘士彬  公司高管  None
+22  002037.SZ  20240116  保利联合  信息披露虚假或严重误导性陈述  个人  张毅  公司高管  None
+23  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  安胜杰  公司高管  120.0
+24  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  公司  保利联合化工控股集团股份有限公司  公司本身  300.0
+25  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  胡浩川  公司其它关联方  50.0
+26  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  刘士彬  公司高管  80.0
+27  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  王丽春  公司高管  65.0
+28  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  魏兴  公司其它关联方  50.0
+29  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  魏彦  公司高管  80.0
+30  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  文韬  公司其它关联方  50.0
+31  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  袁莉  公司高管  80.0
+32  002037.SZ  20240117  保利联合  信息披露虚假或严重误导性陈述  个人  张毅  公司高管  80.0
+33  002086.SZ  20240129  东方海洋  其他  公司  湖南神州行者资本管理有限公司  公司股东  None
+34  002086.SZ  20240129  东方海洋  其他  公司  湖南优禾神州股权投资合伙企业(有限合伙)  公司股东  None
+35  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  恒宝股份有限公司  公司本身  None
+36  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  陈妹妹  公司高管  None
+37  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  钱京  公司高管  None
+38  002104.SZ  20240112  恒宝股份  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  徐霄凌  公司高管  None
+39  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  艾路明  公司其它关联方  None
+40  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  公司  武汉三特索道集团股份有限公司  公司本身  None
+41  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  曹正  公司高管  None
+42  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  卢胜  公司高管  None
+43  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  王栎栎  公司高管  None
+44  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  张泉  公司高管  None
+45  002159.SZ  20240116  三特索道  未依法履行其他职责,未及时披露公司重大事项  个人  张云韵  公司高管  None
+46  002178.SZ  20240105  延华智能  其他  公司  上海延华智能科技(集团)股份有限公司  公司本身  None
+47  002178.SZ  20240105  延华智能  其他  个人  曹磊  公司高管  None
+48  002178.SZ  20240105  延华智能  其他  个人  龚保国  公司高管  None
+49  002178.SZ  20240105  延华智能  其他  个人  黄慧玲  公司高管  None
+50  002178.SZ  20240105  延华智能  其他  个人  唐文妍  公司高管  None
+51  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  上海延华智能科技(集团)股份有限公司  公司本身  200.0
+52  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  曹磊  公司高管  50.0
+53  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  龚保国  公司高管  100.0
+54  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  黄慧玲  公司高管  75.0
+55  002178.SZ  20240106  延华智能  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  唐文妍  公司高管  50.0
+56  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  公司  山东如意毛纺服装集团股份有限公司  公司本身  200.0
+57  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  杜元姝  公司高管  80.0
+58  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  胡骏华  公司高管  50.0
+59  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  黄利群  公司高管  55.0
+60  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  李井新  公司高管  55.0
+61  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  李艳宝  公司高管  50.0
+62  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  卢浩然  公司高管  50.0
+63  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  邱亚夫  公司高管  350.0
+64  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  苏晓  公司高管  65.0
+65  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  王科林  公司高管  50.0
+66  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  徐长瑞  公司高管  60.0
+67  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  杨成  公司高管  50.0
+68  002193.SZ  20240105  ST如意  信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  张义英  公司高管  90.0
+69  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  公司  日海智能科技股份有限公司  公司本身  400.0
+70  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  丁艺  公司高管  80.0
+71  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  刘平  公司高管  80.0
+72  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  马玉峰  公司高管  50.0
+73  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  宋德亮  公司高管  50.0
+74  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  杨涛  公司高管  100.0
+75  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  杨宇翔  公司高管  100.0
+76  002313.SZ  20240104  日海智能  信息披露虚假或严重误导性陈述  个人  余明  公司高管  50.0
+77  002343.SZ  20240110  慈文传媒  信息披露虚假或严重误导性陈述,业绩预测结果不准确或不及时  公司  慈文传媒股份有限公司  公司本身  None
+78  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  陈多佳  公司高管  None
+79  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  胡大富  公司高管  None
+80  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  胡丹  公司高管  None
+81  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项  公司  深圳市新力达电子集团有限公司  公司股东  None
+82  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  王伟华  公司高管  None
+83  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  伍娜  公司高管  None
+84  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  公司  新亚制程(浙江)股份有限公司  公司本身  None
+85  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项  个人  徐琦  公司高管  None
+86  002388.SZ  20240111  新亚制程  未依法履行其他职责,未及时披露公司重大事项,业绩预测结果不准确或不及时  个人  许雷宇  公司高管  None
+87  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  个人  李国富  公司股东  None
+88  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  个人  刘必安  公司其它关联方  None
+89  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  个人  刘彦茗  公司股东  None
+90  002397.SZ  20240122  梦洁股份  未依法履行其他职责,其他  公司  长沙金森新能源有限公司  公司股东  None
+91  002399.SZ  20240116  海普瑞  其他  公司  深圳市海普瑞药业集团股份有限公司  公司本身  None
+92  002473.SZ  20240105  圣莱退  其他  公司  宁波圣莱达电器股份有限公司  公司本身  None
+93  002483.SZ  20240104  润邦股份  未依法履行其他职责  个人  王春山  公司股东  15.0
+94  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  公司  鼎龙文化股份有限公司  公司本身  None
+95  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  方树坡  公司高管  None
+96  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  刘文康  公司高管  None
+97  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  龙学勤  公司高管  None
+98  002502.SZ  20240105  ST鼎龙  未依法履行其他职责  个人  王小平  公司高管  None
+99  002503.SZ  20240118  *ST搜特  其他  个人  何君  公司高管  50.0
+100  002503.SZ  20240118  *ST搜特  其他  个人  黎良望  公司高管  50.0
+101  002503.SZ  20240118  *ST搜特  其他  个人  周世权  公司高管  50.0
+102  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  公司  北京弘高创意建筑设计股份有限公司  公司本身  500.0
+103  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  何宁  公司高管  300.0
+104  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  贺利双  公司高管  20.0
+105  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  荆明  公司高管  100.0
+106  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  孙志新  公司高管  120.0
+107  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  杨立微  公司高管  100.0
+108  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  张艳宇  公司高管  70.0
+109  002504.SZ  20240102  *ST弘高  信息披露虚假或严重误导性陈述  个人  甄建涛  公司其它关联方  300.0
+110  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  公司  深圳丹邦科技股份有限公司  公司本身  400.0
+111  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  陈文彬  公司高管  50.0
+112  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  邓建峰  公司高管  200.0
+113  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  龚艳  公司高管  50.0
+114  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  刘萍  公司高管  800.0
+115  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  刘文魁  公司高管  100.0
+116  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  莫珊洁  公司高管  70.0
+117  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  任琥  公司高管  100.0
+118  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  谢凡  公司高管  200.0
+119  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  殷鹰  公司高管  60.0
+120  002618.SZ  20240126  丹邦退  信息披露虚假或严重误导性陈述  个人  周鸾斌  公司高管  60.0
+121  002629.SZ  20240103  仁智股份  其他  个人  陈敏  公司高管  None
+122  002636.SZ  20240124  金安国纪  其他,未依法履行其他职责  公司  天原企业管理咨询服务围场满族蒙古族自治县合伙企业(有限合伙)  无关联关系  None
+123  002636.SZ  20240124  金安国纪  其他,未依法履行其他职责  个人  周印军  无关联关系  None
+124  002636.SZ  20240125  金安国纪  未依法履行其他职责  公司  天原企业管理咨询服务围场满族蒙古族自治县合伙企业(有限合伙)  无关联关系  None
+125  002636.SZ  20240125  金安国纪  未依法履行其他职责  个人  周印军  无关联关系  None
+126  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  鲍俊  公司高管  None
+127  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  公司  苏州扬子江新型材料股份有限公司  公司本身  None
+128  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  胡卫林  公司高管  None
+129  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  秦玮  公司高管  None
+130  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  孙哲峰  公司高管  None
+131  002652.SZ  20240129  扬子新材  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项,其他  个人  王功虎  公司高管  None
+132  002699.SZ  20240119  *ST美盛  未依法履行其他职责  公司  美盛文化创意股份有限公司  公司本身  None
+133  002712.SZ  20240108  思美传媒  其他,未依法履行其他职责  公司  思美传媒股份有限公司  公司本身  None
+134  002712.SZ  20240108  思美传媒  其他,未依法履行其他职责  个人  李子木  公司高管  None
+135  002712.SZ  20240120  思美传媒  未依法履行其他职责  公司  思美传媒股份有限公司  公司本身  250.0
+136  002712.SZ  20240120  思美传媒  未依法履行其他职责  个人  李子木  公司高管  250.0
+137  002810.SZ  20240103  山东赫达  未依法履行其他职责  个人  邱建军  公司高管  10.0
+138  002864.SZ  20240113  盘龙药业  其他  公司  陕西盘龙药业集团股份有限公司  公司本身  None
+139  002864.SZ  20240113  盘龙药业  其他  个人  吴杰  公司高管  None
+140  002864.SZ  20240113  盘龙药业  其他  个人  谢晓林  公司高管  None
+141  002945.SZ  20240127  华林证券  未依法履行其他职责  公司  华林证券股份有限公司  公司本身  None
+142  002988.SZ  20240111  豪美新材  未依法履行其他职责,其他  个人  陈涛  公司高管  None
+143  002988.SZ  20240111  豪美新材  未依法履行其他职责,其他  个人  董卫峰  公司高管  None
+144  002988.SZ  20240111  豪美新材  未依法履行其他职责,其他  公司  广东豪美新材股份有限公司  公司本身  None
+145  002988.SZ  20240112  豪美新材  未依法履行其他职责,其他  个人  陈涛  公司高管  None
+146  002988.SZ  20240112  豪美新材  未依法履行其他职责,其他  个人  董卫峰  公司高管  None
+147  002988.SZ  20240112  豪美新材  未依法履行其他职责,其他  公司  广东豪美新材股份有限公司  公司本身  None
+148  300003.SZ  20240126  乐普医疗  其他  个人  郭同军  公司高管  None
+149  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  白雪华  公司高管  None
+150  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  天海融合防务装备技术股份有限公司  公司本身  None
+151  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  翟宏玲  公司高管  None
+152  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  吉春林  公司高管  None
+153  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  李露  公司高管  None
+154  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  刘楠  公司高管  None
+155  300008.SZ  20240112  天海防务  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  王志宏  公司高管  None
+156  300078.SZ  20240109  思创智联  信息披露虚假或严重误导性陈述  公司  思创医惠科技股份有限公司  公司本身  8570.0
+157  300078.SZ  20240109  思创智联  信息披露虚假或严重误导性陈述  个人  章笠中  公司高管  750.0
+158  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  公司  思创医惠科技股份有限公司  公司本身  None
+159  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  孙新军  公司高管  None
+160  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  汪骏  公司高管  None
+161  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  王凛  公司高管  None
+162  300078.SZ  20240122  思创智联  未依法履行其他职责,信息披露虚假或严重误导性陈述,未及时披露公司重大事项  个人  章笠中  公司高管  None
+163  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  季伟  公司高管  None
+164  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  金通灵科技集团股份有限公司  公司本身  None
+165  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  坤明  公司高管  None
+166  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  冒鑫鹏  公司高管  None
+167  300091.SZ  20240102  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  袁学礼  公司高管  None
+168  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  陈树军  公司高管  None
+169  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  冯霞  公司高管  None
+170  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  冯霞  公司高管  None
+171  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  季伟  公司高管  200.0
+172  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  季伟  公司高管  None
+173  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  公司  金通灵科技集团股份有限公司  公司本身  150.0
+174  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  公司  金通灵科技集团股份有限公司  公司本身  None
+175  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  冒鑫鹏  公司高管  60.0
+176  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  申志刚  公司高管  None
+177  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  许坤明  公司高管  60.0
+178  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  袁学礼  公司高管  100.0
+179  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  袁学礼  公司高管  None
+180  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  张建华  公司高管  None
+181  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  张建华  公司高管  None
+182  300091.SZ  20240103  *ST金灵  未依法履行其他职责,未及时披露公司重大事项  个人  朱军  公司高管  None
+183  300091.SZ  20240103  *ST金灵  未依法履行其他职责,信息披露虚假或严重误导性陈述  个人  朱军  公司高管  None
+184  300165.SZ  20240105  天瑞仪器  其他  公司  安岳天瑞水务有限公司  公司控股参股公司  30.1
+185  300167.SZ  20240105  ST迪威迅  其他  公司  深圳市迪威迅股份有限公司  公司本身  None
+186  300167.SZ  20240105  ST迪威迅  其他  个人  季刚  公司高管  None
+187  300167.SZ  20240105  ST迪威迅  其他  个人  季红  公司高管  None
+188  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  公司  朗源股份有限公司  公司本身  None
+189  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  个人  戚永楙  公司高管  None
+190  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  个人  张丽娜  公司高管  None
+191  300175.SZ  20240117  ST朗源  信息披露虚假或严重误导性陈述  个人  张涛  公司高管  None
+192  300198.SZ  20240131  *ST纳川  未依法履行其他职责  公司  北京睿汇海纳科技产业基金(有限合伙)  无关联关系  None
+193  300198.SZ  20240131  *ST纳川  未依法履行其他职责  个人  陈志江  公司高管  None
+194  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  公司  上海金力泰化工股份有限公司  公司本身  200.0
+195  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  景总法  公司高管  50.0
+196  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  隋静媛  公司高管  50.0
+197  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  汤洋  公司高管  50.0
+198  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  严家华  公司高管  100.0
+199  300225.SZ  20240104  *ST金泰  未依法履行其他职责,信息披露虚假或严重误导性陈述,其他  个人  袁翔  公司高管  100.0
+```
+
 **三. 期货数据**
 
 **（一）期货行情数据：**
@@ -5014,10 +6594,10 @@ symbol  quarter  date  agency  audit_type  opinion
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 期货代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -5089,45 +6669,45 @@ symbol  date  close  day_session_open  dominant_id  exchange  high  limit_down  
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" （查询上市日期） | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" （查询上市日期） | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 品种编码，如 "A"；可传单个或列表，为空则不按品种过滤 | 非必填 |
+| start_date | string | 开始日期，eg:"20260601" | 必填 |
+| end_date | string | 结束日期，eg:"20260610" | 必填 |
+| method | string | 复权方法，默认 "close_pcs"；可选 close_pcs（前一日收盘价价差复权）；close_os（当日开盘价价差复权）；close_pcr（前一日收盘价比例复权）；close_or（当日开盘价比例复权） | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集，自动补齐 symbol,date,dominant_id | 非必填 |
 
 **2.3. 响应参数**
 
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
-| symbol | string | 期货代码 |
-| date | string | 日期 |
-| amount | float | 成交额 |
-| close | float | 收盘价 |
-| day_session_open | float | 日盘开盘价 |
-| dominant_id | string | 主力合约代码 |
-| exchange | string | 交易所 |
-| high | float | 最高价 |
-| limit_down | float | 跌停价 |
-| limit_up | float | 涨停价 |
-| low | float | 最低价 |
+| symbol | string | 合约代码（如 A_DOMINANT.DCE） |
+| date | string | 交易日期 YYYYMMDD |
+| underlying_symbol | string | 品种编码 |
+| exchange | string | 交易所（3 位代码） |
+| dominant_id | string | 主力合约代码（如 CF509.CZC） |
 | open | float | 开盘价 |
-| open_interest | float | 累计持仓量 |
-| pre_settlement | float | 昨日结算价 |
-| settlement | float | 结算价 |
-| trading_code | string | 交易代码 |
-| underlying_symbol | string | 合约标的代码 |
+| high | float | 最高价 |
+| low | float | 最低价 |
+| close | float | 收盘价 |
 | volume | float | 成交量 |
+| open_interest | float | 持仓量 |
+| amount | float | 成交额 |
+| settlement | float | 结算价 |
+| pre_settlement | float | 昨结算价 |
+| limit_up | float | 涨停价 |
+| limit_down | float | 跌停价 |
+| day_session_open | float | 日盘开盘价 |
+| method | string | 复权方法，分别为close_pcs（前一日收盘价价差复权）；close_os（当日开盘价价差复权）；close_pcr（前一日收盘价比例复权）；close_or（当日开盘价比例复权） |
 
 **2.4. 使用示例**
 
-**2.4.1. 获取一定日期内某些期货的后复权数据**
+**2.4.1. 按品种编码获取期货主力连续合约后复权日线行情**
 
 ```python
 import panda_data
 result = panda_data.get_future_daily_post(
-    symbol=["A2511.DCE", "P2607.DCE","A_DOMINANT.DCE"],
-    start_date="20251101",
-    end_date="20251105",
-    fields=[]
+    underlying_symbol="CF",
+    start_date="20150901",
+    end_date="20150910",
 )
 print(result)
 ```
@@ -5135,16 +6715,41 @@ print(result)
 **响应示例**
 
 ```text
-symbol  date  amount  close  day_session_open  dominant_id  exchange  high  limit_down  limit_up  low  open  open_interest  pre_settlement  settlement  trading_code  underlying_symbol  volume
-0  A2511.DCE  20251103  3067820.0  4076.0  4097.0  A2511  DCE  4098.0  3838.0  4326.0  4076.0  4084.0  2739.0  4082.0  4090.0  a2511  A  75.0
-1  A2511.DCE  20251104  14227840.0  4044.0  4072.0  A2511  DCE  4084.0  3845.0  4335.0  4044.0  4084.0  2694.0  4090.0  4053.0  a2511  A  351.0
-2  A2511.DCE  20251105  486110.0  4048.0  4052.0  A2511  DCE  4052.0  3810.0  4296.0  4048.0  4052.0  2384.0  4053.0  4050.0  a2511  A  12.0
-3  A_DOMINANT.DCE  20251103  6358720340.0  4076.0  4094.0  A2601  DCE  4112.0  3850.0  4340.0  4070.0  4105.0  258446.0  4095.0  4092.0  a2601  A  155379.0
-4  A_DOMINANT.DCE  20251104  5539860030.0  4055.0  4086.0  A2601  DCE  4094.0  3847.0  4337.0  4051.0  4086.0  251451.0  4092.0  4076.0  a2601  A  135914.0
-5  A_DOMINANT.DCE  20251105  8857063530.0  4123.0  4040.0  A2601  DCE  4151.0  3832.0  4320.0  4032.0  4050.0  248256.0  4076.0  4077.0  a2601  A  217199.0
-6  P2607.DCE  20251103  2774500.0  8658.0  8662.0  P2607  DCE  8712.0  8128.0  9348.0  8624.0  8702.0  155.0  8738.0  8670.0  p2607  P  32.0
-7  P2607.DCE  20251104  3561680.0  8644.0  8694.0  P2607  DCE  8732.0  8064.0  9276.0  8630.0  8630.0  146.0  8670.0  8686.0  p2607  P  41.0
-8  P2607.DCE  20251105  3120200.0  8650.0  8670.0  P2607  DCE  8692.0  8078.0  9294.0  8634.0  8634.0  146.0  8686.0  8666.0  p2607  P  36.0
+symbol  date  dominant_id  underlying_symbol  exchange  open  high  low  close  volume  open_interest  amount  settlement  pre_settlement  limit_up  limit_down  day_session_open  method
+0  CF_DOMINANT.CZC  20150910  CF601.CZC  CF  CZC  6955.0  7015.0  6905.0  6990.0  102724.0  346364.0  0  6965.0  6945.0  7450.0  6440.0  6930.0  close_pcs
+1  CF_DOMINANT.CZC  20150909  CF601.CZC  CF  CZC  6905.0  6990.0  6890.0  6945.0  121288.0  344630.0  0  6945.0  6870.0  7370.0  6370.0  6960.0  close_pcs
+2  CF_DOMINANT.CZC  20150908  CF601.CZC  CF  CZC  6920.0  6920.0  6825.0  6880.0  65476.0  340754.0  0  6870.0  6920.0  7425.0  6415.0  6885.0  close_pcs
+3  CF_DOMINANT.CZC  20150907  CF601.CZC  CF  CZC  6840.0  6960.0  6840.0  6900.0  70822.0  343608.0  0  6920.0  6855.0  7480.0  6230.0  6840.0  close_pcs
+4  CF_DOMINANT.CZC  20150902  CF601.CZC  CF  CZC  6845.0  6910.0  6800.0  6880.0  85258.0  344858.0  0  6855.0  6860.0  7485.0  6235.0  6820.0  close_pcs
+5  CF_DOMINANT.CZC  20150901  CF601.CZC  CF  CZC  6745.0  6915.0  6735.0  6855.0  139716.0  358072.0  0  6860.0  6790.0  7290.0  6290.0  6860.0  close_pcs
+```
+
+**2.4.2. 指定复权方法查询某品种的期货主力连续合约后复权收盘价**
+
+```python
+import panda_data
+result = panda_data.get_future_daily_post(
+    underlying_symbol="A",
+    start_date="20260601",
+    end_date="20260610",
+    method="close_os",
+    fields=["close", "method"],
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  dominant_id  close  method
+0  A_DOMINANT.DCE  20260610  A2607.DCE  5649.0  close_os
+1  A_DOMINANT.DCE  20260609  A2607.DCE  5582.0  close_os
+2  A_DOMINANT.DCE  20260608  A2607.DCE  5655.0  close_os
+3  A_DOMINANT.DCE  20260605  A2607.DCE  5625.0  close_os
+4  A_DOMINANT.DCE  20260604  A2607.DCE  5638.0  close_os
+5  A_DOMINANT.DCE  20260603  A2607.DCE  5675.0  close_os
+6  A_DOMINANT.DCE  20260602  A2607.DCE  5623.0  close_os
+7  A_DOMINANT.DCE  20260601  A2607.DCE  5620.0  close_os
 ```
 
 **3. get_future_min - 获取期货分钟线**
@@ -5155,12 +6760,12 @@ symbol  date  amount  close  day_session_open  dominant_id  exchange  high  limi
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 指数代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 指数代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | time_zone | Optional[tuple] | 时间段过滤,格式为("HH:MM", "HH:MM")，例如("10:00", "23:00") | 非必填 |
-| frequency | string | 频率, 支持 "1m", "5m", "15m", "60m",默认为"1m"（指数仅支持1m） | 非必填 |
+| frequency | Optional[string] | 频率, 支持 "1m", "5m", "15m", "60m",默认为"1m" | 非必填 |
 
 **3.3. 响应参数**
 
@@ -5417,10 +7022,10 @@ symbol  date  datetime  minute  trading_date  amount  volume
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货代码 | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| exchange | string | 期货交易所后缀 | 非必填 |
-| is_trading | integer | 是否可交易 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 期货交易所后缀 | 非必填 |
+| is_trading | Optional[integer] | 是否可交易 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -5478,9 +7083,9 @@ symbol  underlying_symbol  market_tplus  name  margin_rate  maturity_date  type 
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
 
 **1.3. 响应参数**
 
@@ -5489,7 +7094,6 @@ symbol  underlying_symbol  market_tplus  name  margin_rate  maturity_date  type 
 | date | string | 日期 |
 | underlying_symbol | string | 期货品种 |
 | symbol | string | 主力合约代码 |
-| symbol_code | string | 主力合约期货代码 |
 | trading_code | string | 主力合约期货交易代码 |
 
 **1.4. 使用示例**
@@ -5538,11 +7142,11 @@ underlying_symbol  date  symbol  trading_code
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| broker | string | 席位名 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| broker | Optional[Union[string, List[string]]] | 席位名 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -5782,12 +7386,12 @@ underlying_symbol  date  broker  net_margin
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| max_rank | integer | 最大排行，查询排名小于等于该值的数据 | 非必填 |
-| type | string | 多空方向，可填long或short | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| max_rank | Optional[integer] | 最大排行，查询排名小于等于该值的数据 | 非必填 |
+| type | Optional[string] | 多空方向，可填long或short | 非必填 |
 
 **2.3. 响应参数**
 
@@ -6012,11 +7616,11 @@ underlying_symbol  date  position_type  rank  broker_name  exchange  net_positio
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| broker | string | 席位名 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| broker | Optional[Union[string, List[string]]] | 席位名 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -6256,7 +7860,7 @@ underlying_symbol  date  broker  margin_change
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| grade | string | 席位评级，有A,B,C,D,E共5种 | 非必填 |
+| grade | Optional[string] | 席位评级，有A,B,C,D,E共5种 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -6318,11 +7922,11 @@ broker  grade
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| broker | string | 席位名 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| broker | Optional[Union[string, List[string]]] | 席位名 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -6562,10 +8166,10 @@ underlying_symbol  date  broker  total_margin
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **6.3. 响应参数**
 
@@ -6624,10 +8228,10 @@ underlying_symbol  date  basis  basis_ratio  spot_price
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **7.3. 响应参数**
 
@@ -6686,10 +8290,10 @@ underlying_symbol  date  wr_change  wr_lot_change  wr_lot_quantity  wr_quantity
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 | broker_name | string | 席位名称 | 非必填 |
 | position_type | string | 多:"long"，空:"short" | 非必填 |
 
@@ -6734,16 +8338,16 @@ underlying_symbol  date  broker_name  money_flow  position_type
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货合约:"AL2501.SHF" | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货合约:"AL2501.SHF" | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **9.3. 响应参数**
 
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
-| symbol | string | 期货品种:\`AU2506.SHF\` |
+| symbol | string | 期货品种:\\`AU2506.SHF\\` |
 | date | string | 日期 |
 | line | Double | 牛熊线 (Bull-Bear Line) |
 | ratio | Double | 龙虎比 (Long-Hu Ratio) |
@@ -6804,11 +8408,11 @@ symbol  date  line  ratio
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
-| broker | string | 席位 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| broker | Optional[Union[string, List[string]]] | 席位 | 非必填 |
 
 **10.3. 响应参数**
 
@@ -6860,13 +8464,13 @@ underlying_symbol  date  broker  profit
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货商品 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货商品 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
 | position_type | string | 多:"long"，空:"short" | 非必填 |
 | broker_name | string | 席位名称 | 非必填 |
 | rank_max | integer | 排名 | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **11.3. 响应参数**
 
@@ -6876,7 +8480,7 @@ underlying_symbol  date  broker  profit
 | date | string | 日期 |
 | broker_name | string | 席位名称 |
 | change_oi | Int32 | 增减仓 |
-| open_interest | nt32 | 持仓量 |
+| open_interest | Int32 | 持仓量 |
 | position_type | string | 多空方向 |
 | rank_num | Int32 | 排名 |
 
@@ -6919,13 +8523,13 @@ underlying_symbol  date  broker_name  change_oi  open_interest  position_type  r
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
 | position_type | string | 多:"long"，空:"short" | 非必填 |
 | broker_name | string | 席位名称 | 非必填 |
 | rank_max | int32 | 排名 | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **12.3. 响应参数**
 
@@ -6977,9 +8581,9 @@ symbol  date  broker_name  change_oi  open_interest  position_type  rank_num
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
 
 **13.3. 响应参数**
 
@@ -7217,10 +8821,10 @@ symbol  date  ls_ratio
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| broker | string | 席位 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| broker | Optional[Union[string, List[string]]] | 席位 | 非必填 |
 
 **14.3. 响应参数**
 
@@ -7460,13 +9064,13 @@ symbol  date  broker  net_cap_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期货品种 | 非必填 |
-| underlying_symbol | string | 期货品种 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250802" | 非必填 |
-| type | string | 多空方向，可选long或short，为空时均返回 | 非必填 |
-| max_rank | integer | 最大排名 | 非必填 |
-| rank_type | string | 排名依据，仅接受ratio或line，ratio将返回龙虎比及对应排名信息，line则返回牛熊线及对应排名信息 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250802" | 必填 |
+| type | Optional[string] | 多空方向，可选long或short，为空时均返回 | 非必填 |
+| max_rank | Optional[integer] | 最大排名 | 非必填 |
+| rank_type | string | 排名依据，仅接受ratio或line，ratio将返回龙虎比及对应排名信息，line则返回牛熊线及对应排名信息 | 必填 |
 
 **15.3. 响应参数**
 
@@ -7712,9 +9316,9 @@ symbol  date  rank  position_type  line  underlying_symbol
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 合约代码：“SC2607.INE” | 非必填 |
-| start_date | string | 开始日期：“YYYYMMDD” | 非必填 |
-| end_date | string | 结束日期：“YYYYMMDD” | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 合约代码：“SC2607.INE” | 非必填 |
+| start_date | string | 开始日期：“YYYYMMDD” | 必填 |
+| end_date | string | 结束日期：“YYYYMMDD” | 必填 |
 
 **16.3. 响应参数**
 
@@ -7754,9 +9358,9 @@ symbol  date  close_price
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 合约代码：“SC2607.INE” | 非必填 |
-| start_date | string | 开始日期：“YYYYMMDD” | 非必填 |
-| end_date | string | 结束日期：“YYYYMMDD” | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 合约代码：“SC2607.INE” | 非必填 |
+| start_date | string | 开始日期：“YYYYMMDD” | 必填 |
+| end_date | string | 结束日期：“YYYYMMDD” | 必填 |
 
 **17.3. 响应参数**
 
@@ -7796,9 +9400,9 @@ underlying_symbol  date  inventory_qty
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| contract_symbol_1 | string | 合约代码1 | 非必填 |
-| contract_symbol_2 | string | 合约代码2 | 非必填 |
-| date | string | 日期：“YYYYMMDD” | 非必填 |
+| contract_symbol_1 | string | 合约代码1 | 必填 |
+| contract_symbol_2 | string | 合约代码2 | 必填 |
+| date | string | 日期：“YYYYMMDD” | 必填 |
 
 **18.3. 响应参数**
 
@@ -7840,9 +9444,9 @@ RB1901.SHF  RB1905.SHF  20180808  4109.0  3930.0  179.0
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| contract_symbol_1 | string | 合约代码1 | 非必填 |
-| contract_symbol_2 | string | 合约代码2 | 非必填 |
-| date | string | 日期：“YYYYMMDD” | 非必填 |
+| contract_symbol_1 | string | 合约代码1 | 必填 |
+| contract_symbol_2 | string | 合约代码2 | 必填 |
+| date | string | 日期：“YYYYMMDD” | 必填 |
 
 **19.3. 响应参数**
 
@@ -7884,9 +9488,9 @@ RB1901.SHF  HC1901.SHF  20180808  4094.0  4100.0  -6.0
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| contract_symbol_1 | string | 合约代码1 | 非必填 |
-| contract_symbol_2 | string | 合约代码2 | 非必填 |
-| date | string | 日期：“YYYYMMDD” | 非必填 |
+| contract_symbol_1 | string | 合约代码1 | 必填 |
+| contract_symbol_2 | string | 合约代码2 | 必填 |
+| date | string | 日期：“YYYYMMDD” | 必填 |
 
 **20.3. 响应参数**
 
@@ -8160,7 +9764,7 @@ broker  date  ls_ratio
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **26.3. 响应参数**
 
@@ -8202,7 +9806,7 @@ rank  date  broker  profit
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **27.3. 响应参数**
 
@@ -8245,8 +9849,8 @@ rank  date  broker  profit
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
 | broker | string | 券商名称 | 必填 |
-| symbol | string | 期货名称 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货名称 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **28.3. 响应参数**
 
@@ -8492,8 +10096,8 @@ date  broker  symbol  long  short  profit  net_hold  total_profit  cost
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| underlying_symbol | string | 期货品种名称 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种名称 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **29.3. 响应参数**
 
@@ -8737,8 +10341,8 @@ date  underlying_symbol  name  price  band  model  unit  trader_name
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| symbol | string | 期货合约名称 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货合约名称 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **30.3. 响应参数**
 
@@ -8781,8 +10385,8 @@ date  symbol  ratio  real_volume  virtual_volume
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| underlying_symbol | string | 期货品种名称 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种名称 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **31.3. 响应参数**
 
@@ -8826,8 +10430,8 @@ date  underlying_symbol  name  profit  unit  updateRate
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| underlying_symbol | string | 期货品种名称 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 期货品种名称 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **32.3. 响应参数**
 
@@ -8868,7 +10472,7 @@ date  margin_deposits_change  underlying_symbol
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| symbol | string | 期货品种名称 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货品种名称 | 必填 |
 
 **33.3. 响应参数**
 
@@ -8958,11 +10562,11 @@ symbol  date  position_direction  underlying_symbol
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期权代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期权代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | status | Optional[bool] | 是否包含已退市和未上市的期权 | 非必填 |
-| exchange | string | 交易市场 | 非必填 |
-| option_type | string | 品种类别 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| option_type | Optional[Union[string, List[string]]] | 品种类别 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -9214,9 +10818,9 @@ symbol  contract_symbol  ticker_symbol  underlying_simpol_name  underlying_symbo
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 期权代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| exchange | string | 交易市场 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 期权代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -9262,6 +10866,127 @@ symbol  underlying_ticker_symbol  exchange  call_put_code  listed_date  exercise
 1  SC  上能所原油期货  INE  CP  20210621  A  1000  最近两个连续月份合约，其后月份在标的期货合约结算后持仓量达到一定数值之后的第二个交易日挂盘  上午9:00-11:30下午13:30-15:00及上海国际能源交易中心规定的其他时间  买方可在到期日前任一交易日的交易时间提交行权申请；买方可在到期日15:30之前提交行权申请、放弃申请  标的期货合约交割月前第一月的倒数第13个交易日  标的期货合约交割月前第一月的倒数第13个交易日  买方可在到期日前任一交易日的交易时间提交行权申请；买方可在到期日15:30之前提交行权申请、放弃申请  P  10.0  元/手  0.05  元/桶  手
 ```
 
+**3. get_option_exercise - 获取期权行权交收信息**
+
+**3.1. 方法名：get_option_exercise**
+
+**3.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 期权代码 | 非必填 |
+| call_put_code | Optional[Union[string, List[string]]] | 认购认沽编码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**3.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 期权代码 |
+| date | string | 行权日 |
+| call_put_code | string | 认购认沽编码(CO:认购期权,PO:认沽期权;CP:认购、认沽期权) |
+| exercise_volume | integer | 行权数量 |
+
+**3.4. 使用示例**
+
+**3.4.1. 获取指定时间的数据**
+
+```python
+import panda_data
+result = panda_data.get_option_underlying_volatility(
+   start_date='20260310',
+    end_date='20260310',
+ )
+print(result)
+```
+
+**响应示例**
+
+```text
+date  symbol  call_put_code  exercise_volume
+0  20250528  510050.SH  PO  9003
+1  20250528  510050.SH  CO  9915
+```
+
+**4. get_option_static - 获取期权每日盘前静态数据**
+
+**4.1. 方法名：get_option_static**
+
+**4.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 交易代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| underlying_symbol | Optional[Union[string, List[string]]] | 标的交易代码 | 非必填 |
+| status | Optional[Union[string, List[string]]] | 合约状态 | 非必填 |
+| call_put_code | Optional[Union[string, List[string]]] | 认购认沽编码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**4.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| date | string | 交易日期 |
+| name | string | 合约简称 |
+| symbol | string | 交易代码 |
+| exchange | string | 交易市场 |
+| underlying_symbol_name | string | 标的证券简称 |
+| underlying_symbol | string | 标的交易代码 |
+| underlying_type | string | 标的证券类型(ETF：期权) |
+| exercise_style | string | 履约方式编码(E：欧式) |
+| call_put_code | string | 认购认沽编码(CO：认购期权,PO：认沽期权) |
+| contract_size | integer | 合约单位(经过除权除息调整) |
+| strike_price | float | 行权价格(经过除权除息调整) |
+| listed_date | string | 挂牌日期 |
+| last_date | string | 最后交易日 |
+| exercise_date | string | 行权日期 |
+| settlement_date | string | 交收日期 |
+| delisted_date | string | 合约到期日 |
+| contract_version | string | 合约版本号 |
+| open_interest | integer | 昨持仓量 |
+| pre_close | float | 昨收价 |
+| pre_settlement | float | 前结算价 |
+| underlying_pre_close | float | 标的证券昨收价 |
+| limit_type | string | 涨跌幅限类型(N：有涨跌幅限制) |
+| limit_up | float | 涨幅上限价格 |
+| limit_down | float | 跌幅下限价格 |
+| margin | float | 单位保证金(当日持有一张合约所需要的保证金数量，精确到分) |
+| margin_ratio1 | float | 交易所保证金计算比例参数一 |
+| margin_ratio2 | float | 交易所保证金计算比例参数二 |
+| lot_size | integer | 整手数(一手对应的合约数) |
+| limit_down_volume | integer | 单笔限价申报张数下限 |
+| limit_up_volume | integer | 单笔限价申报张数上限 |
+| market_down_volume | integer | 单笔市价申报张数下限 |
+| market_up_volume | integer | 单笔市价申报张数上限 |
+| tick_size | float | 最小报价变动数值 |
+| status | string | 合约状态(8位字符串，每位表示特定含义) |
+
+**4.4. 使用示例**
+
+**4.4.1. 获取指定时间的数据**
+
+```python
+import panda_data
+result = panda_data.get_option_static(
+    start_date="20250430",
+    end_date="20260430",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+date  symbol  call_put_code  contract_size  contract_version  delisted_date  exchange  exercise_date  exercise_style  last_date  limit_down  limit_down_volume  limit_type  limit_up  limit_up_volume  listed_date  lot_size  margin  margin_ratio1  margin_ratio2  market_down_volume  market_up_volume  name  open_interest  pre_close  pre_settlement  settlement_date  status  strike_price  tick_size  underlying_pre_close  underlying_symbol  underlying_symbol_name  underlying_type
+0  20250430  10008261.SH  CO  10205  0  20250625  SH  20250625  E  20250625  0.0001  1  N  0.4416  50  20241024  1  5058.82  12  7  1  10  50ETF购6月2548A  775  0.1700  0.1710  20250626  0000E0  2.548  0.0001  2.706  510050.SH  50ETF  F
+1  20250430  10008262.SH  CO  10205  0  20250625  SH  20250625  E  20250625  0.0001  1  N  0.4020  50  20241024  1  4654.70  12  7  1  10  50ETF购6月2597A  729  0.1351  0.1314  20250626  0000E0  2.597  0.0001  2.706  510050.SH  50ETF  F
+```
+
 **（二）期权日线行情：**
 
 **1. get_option_daily - 获取期权日线数据**
@@ -9272,10 +10997,10 @@ symbol  underlying_ticker_symbol  exchange  call_put_code  listed_date  exercise
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 期权代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 期权代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -9515,6 +11240,81 @@ date  symbol  ticker_symbol  exchange  pre_settlement  pre_close  open  high  lo
 199  20260205  10009647.SH  50ETF沽3月2874A  SH  0.0081  0.0081  0.0083  0.0136  0.0082  0.0088  0.0087  463  52741.57  6449
 ```
 
+**2. get_option_spot_market - 获取期权现货日行情**
+
+**2.1. 方法名：get_option_spot_market**
+
+**2.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 交易代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**2.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 交易代码 |
+| name | string | 证券简称 |
+| exchange | string | 交易所代码 |
+| date | string | 交易日期 |
+| open | float | 开盘价 |
+| high | float | 最高价 |
+| low | float | 最低价 |
+| close | float | 收盘价 |
+| change | float | 涨跌额 |
+| change_rate | float | 涨跌幅 |
+| vwap | float | 加权平均价 |
+| volume | float | 成交量 |
+| amount | float | 成交金额 |
+| open_interest | float | 持仓量 |
+| settlement_direction | integer | 交收方向(0:多支付空,1:空支付多) |
+| settlement_volume | float | 交收数量 |
+
+**2.4. 使用示例**
+
+**2.4.1. 获取指定时间的数据**
+
+```python
+import panda_data
+result = panda_data.get_option_spot_market(
+    start_date="20250430",
+    end_date="20260430",
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+date  symbol  amount  change  change_rate  close  exchange  high  low  name  open  open_interest  settlement_direction  settlement_volume  volume  vwap
+0  20250430  AG(T+D)  2.938140e+09  -39.00  -0.0048  8163.0  SGEX  8272.0  8150.00  白银(T+D)  8210.00  3499912.0  1.0  54600.0  358256.0  8201.0
+1  20250430  AU(T+D)  2.482539e+10  -5.22  -0.0067  779.5  SGEX  786.0  778.47  黄金(T+D)  781.69  208794.0  2.0  25246.0  31770.0  781.4
+```
+
+**2.4.2. 获取指定时间和指定品种的数据**
+
+```python
+import panda_data
+result = panda_data.get_option_spot_market(
+    start_date="20250430",
+    end_date="20260430",
+    symbol=['Au99.99']
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+date  symbol  amount  change  change_rate  close  exchange  high  low  name  open  open_interest  settlement_direction  settlement_volume  volume  vwap
+0  20250430  AU99.99  6.516399e+09  0.14  0.0002  780.19  SGEX  784.76  778.01  黄金9999  783.0  None  None  None  8343.96  780.97
+1  20250506  AU99.99  1.006130e+10  12.01  0.0154  792.20  SGEX  797.50  785.00  黄金9999  785.0  None  None  None  12694.96  792.54
+```
+
 **（三）期权波动率数据：**
 
 **1. get_option_implied_volatility - 获取期权隐含波动率**
@@ -9525,10 +11325,10 @@ date  symbol  ticker_symbol  exchange  pre_settlement  pre_close  open  high  lo
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 期权代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 期权代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -9567,11 +11367,11 @@ date  implied_volatility  symbol
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 期权标的代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| exchange | string | 交易市场 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 期权标的代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
 | period | integer | 历史波动率期限（5/10/30/60/90/120/180/250/500日） | 非必填 |
 
 **2.3. 响应参数**
@@ -9687,6 +11487,55 @@ date  symbol  ticker_symbol  exchange  is_adj  close  period  historical_volatil
 80  20260310  588080.SH  易方达上证科创板50成份ETF  SH  0  1.449  500  0.353985
 ```
 
+**3. get_option_risk_indicators - 获取期权风险指标**
+
+**3.1. 方法名：get_option_risk_indicators**
+
+**3.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 交易代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**3.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 交易代码 |
+| name | string | 合约简称 |
+| exchange | string | 交易市场 |
+| date | string | 交易日期 |
+| delta | float | DELTA，期权价格对标的价格的敏感度 |
+| theta | float | THETA，期权价格对到期时间的敏感度 |
+| gamma | float | GAMMA，DELTA对标的价格的敏感度 |
+| vega | float | VEGA，期权价格对隐含波动率的敏感度 |
+| rho | float | RHO，期权价格对无风险利率的敏感度 |
+
+**3.4. 使用示例**
+
+**3.4.1. 获取指定时间的数据**
+
+```python
+import panda_data
+result = panda_data.get_option_risk_indicators(
+    start_date="20250430",
+    end_date="20260430",
+)
+print(result.iloc[:2])
+```
+
+**响应示例**
+
+```text
+date  symbol  delta  exchange  gamma  name  rho  theta  vega
+0  20250506  A2507-C-3400.DCE  1.0  DCE  None  豆一购7月3400  None  None  None
+1  20250506  A2507-C-3500.DCE  1.0  DCE  None  豆一购7月3500  None  None  None
+```
+
 **五. 量化因子数据**
 
 **（一）回测因子：**
@@ -9699,12 +11548,12 @@ date  symbol  ticker_symbol  exchange  is_adj  close  period  historical_volatil
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| factors | string | 因子列表 | 非必填 |
-| type | string | 产品类型，支持"stock" ,"future"，默认为"stock" | 非必填 |
-| index_component | string | 股票池，参考本文档简介部分中的股票池说明，默认为空表示查询所有 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| factors | Union[string, List[string]] | 因子列表，下述响应参数中列出的为基础因子，其余因子仅股票类型可用，详见下载文件 | 必填 |
+| type | Optional[string] | 产品类型，支持"stock" ,"future"，默认为"stock" | 非必填 |
+| index_component | Optional[string] | 股票池，参考本文档概述部分部分中的股票池说明，默认为空表示查询所有 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -9731,7 +11580,6 @@ date  symbol  ticker_symbol  exchange  is_adj  close  period  historical_volatil
 | open_interest | float | 累计持仓量（仅期货） |
 | settlement | float | 结算价（仅期货） |
 | pre_settlement | float | 昨日结算价（仅期货） |
-| factors | float | 因子（仅股票类型可用，详见下载文件） |
 
 **1.4. 使用示例**
 
@@ -9784,10 +11632,10 @@ date  symbol  open  close
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| fields | string | 返回字段列表 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | Optional[string] | 开始日期,eg:"20250702" | 非必填 |
+| end_date | Optional[string] | 结束日期,eg:"20250702" | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -9834,10 +11682,10 @@ symbol  ex_date  announcement_date  ex_cum_factor  ex_end_date  ex_factor
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -9848,29 +11696,28 @@ symbol  ex_date  announcement_date  ex_cum_factor  ex_end_date  ex_factor
 | open | string | 开盘价 |
 | high | float | 最高价 |
 | low | float | 最低价 |
-| close | float | 理论收市价 |
-| volume | integer | 成交量 |
-| pre_close | float | 前一日收盘价 |
+| close | float | 收盘价 |
+| volume | float | 成交量 |
+| pre_close | float | 昨收价 |
 | name | string | 股票名称 |
-| trade_status | integer | 交易状态代码 |
-| alt_close | float | 调整收市价（同close） |
-| acvol_uns | integer | 成交股数（同volume） |
-| bid | float | 买盘价 |
-| ask | float | 卖盘价 |
+| trade_status | float | 交易状态代码 |
+| alt_close | float | 调整收盘价（剔除派息、送股、拆合股等公司行为影响） |
+| amount | float | 成交额 |
+| bid | float | 买盘价（收盘前最后一笔） |
+| ask | float | 卖盘价（收盘前最后一笔） |
 | vwap | float | 成交量加权平均价 |
 | vwap_vol | float | 计算VWAP的成交量 |
 | opn_aucvol | float | 开市竞价时段成交量 |
 | opn_auc | float | 开市竞价时段价格 |
 | lmt_refpr2 | float | 限价参考价 |
-| lolimit | float | 价格下限 |
-| uplimit | float | 价格上限 |
-| lolimit_2 | float | 二级价格下限 |
-| uplimit_2 | float | 二级价格上限 |
-| navalue | float | 资产净值 |
-| num_moves | integer | 成交笔数 |
-| uplimit_3 | float | 三级价格上限 |
-| lolimit_3 | float | 三级价格下限 |
-| cls_aucvol | integer | 收市竞价时段成交量 |
+| lolimit | float | 价格下限（是盘中触发“冷静期”时的临时限价 “±10%～20%”） |
+| uplimit | float | 价格上限（是盘中触发“冷静期”时的临时限价 “±10%～20%”） |
+| lolimit_2 | float | 二级价格下限（是开盘前和收盘竞价时的限价 “开市±15%、收市±5%”） |
+| uplimit_2 | float | 二级价格上限（是开盘前和收盘竞价时的限价 “开市±15%、收市±5%”） |
+| num_moves | float | 成交笔数 |
+| uplimit_3 | float | 三级价格上限（仅开盘竞价时段专用的独立限价，方便与收盘竞价区分） |
+| lolimit_3 | float | 三级价格下限（仅开盘竞价时段专用的独立限价，方便与收盘竞价区分） |
+| cls_aucvol | float | 收市竞价时段成交量 |
 
 **1.4. 使用示例**
 
@@ -9890,207 +11737,207 @@ print(result)
 **响应示例**
 
 ```text
-symbol  date  alt_close  amount  ask  bid  close  cls_aucvol  high  lmt_refpr2  lolimit  lolimit_2  lolimit_3  low  name  navalue  num_moves  open  opn_auc  opn_aucvol  pre_close  trade_status  uplimit  uplimit_2  uplimit_3  volume  vwap  vwap_vol
-0  0001.HK  20250102  41.05  170658280.0  41.1  40.95  41.05  577000.0  41.5  40.95  0.0  38.95  0.0  40.7  CK HUTCHISON HOLDINGS LIMITED  0.0  2432.0  41.3  41.3  18000.0  41.5  0.0  0.0  42.95  0.0  4164402.0  40.9803  4158500.0
-1  0001.HK  20250103  41.15  108033904.0  41.15  41.1  41.15  328500.0  41.55  41.15  0.0  39.1  0.0  40.9  CK HUTCHISON HOLDINGS LIMITED  0.0  1840.0  41.4  41.4  122000.0  41.05  0.0  0.0  43.2  0.0  2627730.0  41.113  2612000.0
-2  0001.HK  20250106  41.3  160524878.0  41.3  41.15  41.3  589500.0  41.8  41.15  0.0  39.1  0.0  40.95  CK HUTCHISON HOLDINGS LIMITED  0.0  2342.0  41.45  41.45  96000.0  41.15  0.0  0.0  43.2  0.0  3892729.0  41.2474  3670000.0
-3  0001.HK  20250107  41.05  188833658.0  41.05  41.0  41.05  819500.0  41.7  40.9  0.0  38.9  0.0  40.65  CK HUTCHISON HOLDINGS LIMITED  0.0  2552.0  41.4  41.4  141000.0  41.3  0.0  0.0  42.9  0.0  4598793.0  41.0616  4507000.0
-4  0001.HK  20250108  40.55  236128549.0  40.6  40.55  40.55  1177000.0  41.1  40.55  0.0  38.55  0.0  40.4  CK HUTCHISON HOLDINGS LIMITED  0.0  3057.0  41.0  41.0  277000.0  41.05  0.0  0.0  42.55  0.0  5808409.0  40.6327  5409500.0
-5  0001.HK  20250109  40.5  124046373.0  40.55  40.5  40.5  370000.0  40.75  40.5  0.0  38.5  0.0  40.35  CK HUTCHISON HOLDINGS LIMITED  0.0  1441.0  40.55  40.55  19000.0  40.55  0.0  0.0  42.5  0.0  3060041.0  40.532  2655000.0
-6  0001.HK  20250110  40.35  185886332.0  40.35  40.3  40.35  636500.0  40.9  40.25  0.0  38.25  0.0  40.1  CK HUTCHISON HOLDINGS LIMITED  0.0  2209.0  40.5  40.5  5500.0  40.5  0.0  0.0  42.25  0.0  4607674.0  40.2948  3590500.0
-7  0001.HK  20250113  39.8  193686326.0  39.8  39.75  39.8  775000.0  40.05  39.7  0.0  37.75  0.0  39.3  CK HUTCHISON HOLDINGS LIMITED  0.0  2479.0  40.05  40.05  73000.0  40.35  0.0  0.0  41.65  0.0  4876407.0  39.717  4648500.0
-8  0001.HK  20250114  39.8  315858763.0  39.85  39.8  39.8  1294500.0  39.9  39.8  0.0  37.85  0.0  39.35  CK HUTCHISON HOLDINGS LIMITED  0.0  3883.0  39.65  39.65  61000.0  39.8  0.0  0.0  41.75  0.0  7959404.0  39.6817  7300000.0
-9  0001.HK  20250115  39.95  152312835.0  39.95  39.9  39.95  836000.0  40.0  39.85  0.0  37.9  0.0  39.55  CK HUTCHISON HOLDINGS LIMITED  0.0  1968.0  39.55  39.55  86000.0  39.8  0.0  0.0  41.8  0.0  3820469.0  39.8673  3724000.0
-10  0001.HK  20250116  39.65  208772313.0  39.65  39.6  39.65  827500.0  40.15  39.65  0.0  37.7  0.0  39.55  CK HUTCHISON HOLDINGS LIMITED  0.0  2715.0  39.8  39.8  381000.0  39.95  0.0  0.0  41.6  0.0  5249583.0  39.7603  5091000.0
-11  0001.HK  20250117  40.2  208533700.0  40.2  40.15  40.2  1250000.0  40.3  40.05  0.0  38.05  0.0  39.5  CK HUTCHISON HOLDINGS LIMITED  0.0  2610.0  39.55  39.55  44500.0  39.65  0.0  0.0  42.05  0.0  5205136.0  40.0632  5180500.0
-12  0001.HK  20250120  40.1  152243623.0  40.1  40.05  40.1  528000.0  40.5  40.1  0.0  38.1  0.0  40.1  CK HUTCHISON HOLDINGS LIMITED  0.0  2256.0  40.35  40.35  91000.0  40.2  0.0  0.0  42.1  0.0  3781726.0  40.2578  3751000.0
-13  0001.HK  20250121  40.0  196568015.0  40.0  39.95  40.0  1208000.0  40.4  40.0  0.0  38.0  0.0  39.85  CK HUTCHISON HOLDINGS LIMITED  0.0  2064.0  40.4  40.4  56000.0  40.1  0.0  0.0  42.0  0.0  4911349.0  40.0233  4908000.0
-14  0001.HK  20250122  40.0  188789411.0  40.0  39.9  40.0  666000.0  40.15  39.9  0.0  37.95  0.0  39.7  CK HUTCHISON HOLDINGS LIMITED  0.0  3950.0  39.85  39.85  121000.0  40.0  0.0  0.0  41.85  0.0  4723515.0  39.9677  4607500.0
-15  0001.HK  20250123  39.2  249189511.0  39.25  39.2  39.2  887500.0  40.2  39.15  0.0  37.2  0.0  39.1  CK HUTCHISON HOLDINGS LIMITED  0.0  3737.0  40.0  40.0  35000.0  40.0  0.0  0.0  41.1  0.0  6318628.0  39.4349  6240500.0
-16  0001.HK  20250124  39.25  214555267.0  39.3  39.25  39.25  1073000.0  39.6  39.2  0.0  37.25  0.0  39.0  CK HUTCHISON HOLDINGS LIMITED  0.0  2896.0  39.2  39.2  166000.0  39.2  0.0  0.0  41.15  0.0  5462191.0  39.2802  5446500.0
-17  0001.HK  20250127  39.35  154416287.0  39.35  39.3  39.35  303500.0  39.8  39.35  0.0  37.4  0.0  39.25  CK HUTCHISON HOLDINGS LIMITED  0.0  2133.0  39.5  39.5  84500.0  39.25  0.0  0.0  41.3  0.0  3916809.0  39.4322  3714000.0
-18  0001.HK  20250128  39.2  139383403.0  39.3  39.2  39.2  877500.0  40.2  39.3  0.0  37.35  0.0  39.2  CK HUTCHISON HOLDINGS LIMITED  0.0  1799.0  39.75  39.75  67500.0  39.35  0.0  0.0  41.25  0.0  3526282.0  39.5271  3521500.0
-19  0002.HK  20250102  64.15  196936517.0  64.2  64.15  64.15  355500.0  65.25  64.1  0.0  60.9  0.0  63.85  Zhong Dian Kong Gu You Xian Gong Si  0.0  2198.0  65.25  65.25  4500.0  65.3  0.0  0.0  67.3  0.0  3065640.0  64.2394  3031000.0
-20  0002.HK  20250103  64.2  103356412.0  64.2  64.15  64.2  159000.0  64.5  64.05  0.0  60.85  0.0  63.9  Zhong Dian Kong Gu You Xian Gong Si  0.0  1648.0  64.15  64.15  18500.0  64.15  0.0  0.0  67.25  0.0  1611908.0  64.1212  1607000.0
-21  0002.HK  20250106  64.25  95495915.0  64.25  64.2  64.25  235000.0  64.65  64.2  0.0  61.0  0.0  64.0  Zhong Dian Kong Gu You Xian Gong Si  0.0  1308.0  64.1  64.1  4000.0  64.2  0.0  0.0  67.4  0.0  1486707.0  64.2346  1474500.0
-22  0002.HK  20250107  63.7  201587221.0  63.75  63.7  63.7  476000.0  64.25  63.7  0.0  60.55  0.0  63.1  Zhong Dian Kong Gu You Xian Gong Si  0.0  2338.0  63.75  63.75  64500.0  64.25  0.0  0.0  66.85  0.0  3170138.0  63.5882  3136500.0
-23  0002.HK  20250108  63.5  164605713.0  63.5  63.45  63.5  380500.0  63.9  63.5  0.0  60.35  0.0  63.25  Zhong Dian Kong Gu You Xian Gong Si  0.0  2087.0  63.35  63.35  93500.0  63.7  0.0  0.0  66.65  0.0  2591274.0  63.5171  2135000.0
-24  0002.HK  20250109  63.3  104156874.0  63.35  63.3  63.3  209000.0  63.8  63.4  0.0  60.25  0.0  63.2  Zhong Dian Kong Gu You Xian Gong Si  0.0  1543.0  63.5  63.5  1000.0  63.5  0.0  0.0  66.55  0.0  1641759.0  63.4421  1613500.0
-25  0002.HK  20250110  63.7  157456611.0  63.7  63.65  63.7  440000.0  64.0  63.7  0.0  60.55  0.0  63.3  Zhong Dian Kong Gu You Xian Gong Si  0.0  1684.0  63.3  63.3  31000.0  63.3  0.0  0.0  66.85  0.0  2474095.0  63.7027  1956500.0
-26  0002.HK  20250113  63.45  181842690.0  63.5  63.45  63.45  267000.0  63.7  63.6  0.0  60.45  0.0  62.3  Zhong Dian Kong Gu You Xian Gong Si  0.0  2205.0  63.7  63.7  2500.0  63.7  0.0  0.0  66.75  0.0  2883894.0  63.062  2785000.0
-27  0002.HK  20250114  64.05  176898954.0  64.05  64.0  64.05  548500.0  64.2  64.15  0.0  60.95  0.0  63.5  Zhong Dian Kong Gu You Xian Gong Si  0.0  2243.0  63.8  63.8  25500.0  63.45  0.0  0.0  67.35  0.0  2765878.0  63.9581  2751500.0
-28  0002.HK  20250115  64.15  173442044.0  64.15  64.05  64.15  556000.0  64.4  63.95  0.0  60.8  0.0  63.9  Zhong Dian Kong Gu You Xian Gong Si  0.0  1420.0  64.05  64.05  9000.0  64.05  0.0  0.0  67.1  0.0  2705273.0  64.1171  2177500.0
-29  0002.HK  20250116  64.8  159599379.0  64.8  64.7  64.8  677000.0  64.8  64.7  0.0  61.5  0.0  64.1  Zhong Dian Kong Gu You Xian Gong Si  0.0  1742.0  64.15  64.15  24000.0  64.15  0.0  0.0  67.9  0.0  2470931.0  64.6021  2375500.0
-30  0002.HK  20250117  65.55  283081236.0  65.55  65.5  65.55  751500.0  65.8  65.45  0.0  62.2  0.0  64.6  Zhong Dian Kong Gu You Xian Gong Si  0.0  2350.0  64.7  64.7  5500.0  64.8  0.0  0.0  68.7  0.0  4330048.0  65.4526  3785500.0
-31  0002.HK  20250120  65.95  163205653.0  65.95  65.9  65.95  200000.0  66.1  65.9  0.0  62.65  0.0  65.45  Zhong Dian Kong Gu You Xian Gong Si  0.0  1601.0  65.55  65.55  2000.0  65.55  0.0  0.0  69.15  0.0  2479151.0  65.8594  2234000.0
-32  0002.HK  20250121  65.6  130317911.0  65.6  65.55  65.6  398000.0  66.05  65.55  0.0  62.3  0.0  65.25  Zhong Dian Kong Gu You Xian Gong Si  0.0  1564.0  66.0  66.0  4500.0  65.95  0.0  0.0  68.8  0.0  1986859.0  65.5905  1964500.0
-33  0002.HK  20250122  64.65  158659150.0  64.7  64.65  64.65  527000.0  65.65  64.6  0.0  61.4  0.0  64.5  Zhong Dian Kong Gu You Xian Gong Si  0.0  1928.0  65.5  65.5  4500.0  65.6  0.0  0.0  67.8  0.0  2447901.0  64.8146  2441500.0
-34  0002.HK  20250123  64.65  124298295.0  64.65  64.6  64.65  408000.0  64.95  64.6  0.0  61.4  0.0  64.3  Zhong Dian Kong Gu You Xian Gong Si  0.0  1584.0  64.65  64.65  16000.0  64.65  0.0  0.0  67.8  0.0  1922995.0  64.6401  1891000.0
-35  0002.HK  20250124  64.75  127996683.0  64.8  64.75  64.75  350000.0  65.4  64.8  0.0  61.6  0.0  64.4  Zhong Dian Kong Gu You Xian Gong Si  0.0  1631.0  64.65  64.65  13000.0  64.65  0.0  0.0  68.0  0.0  1970998.0  64.9403  1945500.0
-36  0002.HK  20250127  64.5  87302722.0  64.6  64.5  64.5  169000.0  65.15  64.65  0.0  61.45  0.0  64.5  Zhong Dian Kong Gu You Xian Gong Si  0.0  1412.0  64.55  0.0  0.0  64.75  0.0  0.0  67.85  0.0  1349429.0  64.697  1330500.0
-37  0002.HK  20250128  64.75  41506856.0  64.75  64.7  64.75  221000.0  64.9  64.65  0.0  61.45  0.0  64.2  Zhong Dian Kong Gu You Xian Gong Si  0.0  599.0  64.5  64.5  1500.0  64.5  0.0  0.0  67.85  0.0  641767.0  64.6771  632000.0
-38  0003.HK  20250102  6.11  99293149.0  6.11  6.1  6.11  1035000.0  6.2  6.11  0.0  5.81  0.0  6.07  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2954.0  6.18  6.18  43000.0  6.21  0.0  0.0  6.41  0.0  16264561.0  6.105  15575000.0
-39  0003.HK  20250103  6.13  61172070.0  6.13  6.1  6.13  1137000.0  6.15  6.11  0.0  5.81  0.0  6.1  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2300.0  6.1  6.1  142000.0  6.11  0.0  0.0  6.41  0.0  9987946.0  6.1247  9951000.0
-40  0003.HK  20250106  6.12  63940370.0  6.12  6.11  6.12  2875000.0  6.19  6.12  0.0  5.82  0.0  6.09  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2277.0  6.14  6.14  61000.0  6.13  0.0  0.0  6.42  0.0  10438465.0  6.1256  10397000.0
-41  0003.HK  20250107  6.07  112379713.0  6.07  6.05  6.07  3122000.0  6.13  6.05  0.0  5.75  0.0  6.02  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2618.0  6.12  6.12  4000.0  6.12  0.0  0.0  6.35  0.0  18555884.0  6.0565  17982000.0
-42  0003.HK  20250108  6.04  97829383.0  6.04  6.03  6.04  1934000.0  6.09  6.04  0.0  5.74  0.0  6.0  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2769.0  6.09  6.09  149000.0  6.07  0.0  0.0  6.34  0.0  16215885.0  6.0329  15942000.0
-43  0003.HK  20250109  5.98  79492418.0  5.98  5.97  5.98  1747000.0  6.04  5.98  0.0  5.69  0.0  5.98  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2084.0  6.04  0.0  0.0  6.04  0.0  0.0  6.27  0.0  13253565.0  5.9978  13243000.0
-44  0003.HK  20250110  5.99  91925015.0  5.99  5.98  5.99  3076000.0  6.04  5.99  0.0  5.7  0.0  5.95  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2014.0  5.98  5.98  2000.0  5.98  0.0  0.0  6.28  0.0  15338199.0  5.991  13951000.0
-45  0003.HK  20250113  5.9  172380919.0  5.91  5.9  5.9  1775000.0  5.99  5.91  0.0  5.62  0.0  5.85  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  3642.0  5.99  5.99  6000.0  5.99  0.0  0.0  6.2  0.0  29177520.0  5.9085  28483000.0
-46  0003.HK  20250114  5.95  115797303.0  5.95  5.94  5.95  4279000.0  5.97  5.95  0.0  5.66  0.0  5.9  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2547.0  5.91  5.91  26000.0  5.9  0.0  0.0  6.24  0.0  19485632.0  5.9428  19334000.0
-47  0003.HK  20250115  5.93  113346291.0  5.94  5.93  5.93  2359000.0  5.97  5.92  0.0  5.63  0.0  5.9  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2864.0  5.93  5.93  87000.0  5.95  0.0  0.0  6.21  0.0  19117596.0  5.9292  18406000.0
-48  0003.HK  20250116  6.0  135445555.0  6.0  5.99  6.0  2844000.0  6.07  6.0  0.0  5.7  0.0  5.98  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2478.0  5.98  5.98  304000.0  5.93  0.0  0.0  6.3  0.0  22514356.0  6.0153  18834000.0
-49  0003.HK  20250117  6.05  128836830.0  6.05  6.03  6.05  3566000.0  6.06  6.03  0.0  5.73  0.0  5.97  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2687.0  6.0  6.0  8000.0  6.0  0.0  0.0  6.33  0.0  21355506.0  6.0353  19707000.0
-50  0003.HK  20250120  6.06  132129900.0  6.08  6.06  6.06  2093000.0  6.11  6.08  0.0  5.78  0.0  6.05  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2180.0  6.05  6.05  18000.0  6.05  0.0  0.0  6.38  0.0  21745351.0  6.082  14230000.0
-51  0003.HK  20250121  6.09  111239174.0  6.09  6.08  6.09  3680000.0  6.11  6.1  0.0  5.8  0.0  6.05  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2648.0  6.08  6.08  7000.0  6.06  0.0  0.0  6.4  0.0  18295483.0  6.0812  15515000.0
-52  0003.HK  20250122  5.96  87862344.0  5.97  5.96  5.96  2842000.0  6.1  5.97  0.0  5.68  0.0  5.96  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  1984.0  6.1  6.1  21000.0  6.09  0.0  0.0  6.26  0.0  14623816.0  6.0047  13756000.0
-53  0003.HK  20250123  5.92  124979221.0  5.92  5.91  5.92  1732000.0  6.0  5.93  0.0  5.64  0.0  5.9  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2887.0  6.0  6.0  2000.0  5.96  0.0  0.0  6.22  0.0  21076611.0  5.9298  21063000.0
-54  0003.HK  20250124  5.94  101323530.0  5.94  5.93  5.94  3401000.0  5.99  5.94  0.0  5.65  0.0  5.91  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2242.0  5.92  5.92  103000.0  5.92  0.0  0.0  6.23  0.0  17012142.0  5.9561  16961000.0
-55  0003.HK  20250127  6.02  76411295.0  6.02  6.0  6.02  774000.0  6.03  6.02  0.0  5.72  0.0  5.94  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  2921.0  5.98  0.0  0.0  5.94  0.0  0.0  6.32  0.0  12717678.0  6.0121  12038000.0
-56  0003.HK  20250128  5.97  35111773.0  5.97  5.96  5.97  2360000.0  6.02  5.97  0.0  5.68  0.0  5.95  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  0.0  869.0  6.02  6.02  5000.0  6.02  0.0  0.0  6.26  0.0  5871513.0  5.9799  5830000.0
-57  0004.HK  20250102  21.6  4986520.0  21.6  21.55  21.6  67000.0  21.75  21.6  0.0  21.3  0.0  21.45  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  174.0  21.55  0.0  0.0  21.85  0.0  0.0  22.65  0.0  230712.0  21.6142  229000.0
-58  0004.HK  20250103  21.5  6942300.0  21.5  21.4  21.5  205000.0  21.6  21.45  0.0  20.4  0.0  21.35  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  149.0  21.6  0.0  0.0  21.6  0.0  0.0  22.5  0.0  323000.0  21.4932  323000.0
-59  0004.HK  20250106  21.6  6303947.0  21.6  21.55  21.6  69000.0  21.8  21.6  0.0  21.2  0.0  21.35  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  205.0  21.35  0.0  0.0  21.5  0.0  0.0  22.65  0.0  291741.0  21.6084  290000.0
-60  0004.HK  20250107  21.75  14970323.0  21.75  21.7  21.75  251000.0  21.9  21.7  0.0  21.05  0.0  21.55  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  371.0  21.8  21.8  1000.0  21.6  0.0  0.0  22.75  0.0  688367.0  21.748  687000.0
-61  0004.HK  20250108  22.05  14289274.0  22.05  22.0  22.05  198000.0  22.25  22.05  0.0  20.95  0.0  21.65  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  407.0  21.65  0.0  0.0  21.75  0.0  0.0  23.15  0.0  648528.0  22.0346  641000.0
-62  0004.HK  20250109  22.05  9681526.0  22.05  22.0  22.05  49000.0  22.25  22.05  0.0  21.4  0.0  21.9  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  232.0  22.05  0.0  0.0  22.05  0.0  0.0  23.15  0.0  439044.0  22.0514  439000.0
-63  0004.HK  20250110  21.4  3846704.0  21.4  21.35  21.4  85000.0  22.05  21.4  0.0  20.35  0.0  21.4  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  105.0  22.05  0.0  0.0  22.05  0.0  0.0  22.45  0.0  178671.0  21.5274  177000.0
-64  0004.HK  20250113  21.0  9203546.0  21.0  20.95  21.0  143000.0  21.5  21.0  0.0  19.96  0.0  21.0  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  278.0  21.15  0.0  0.0  21.4  0.0  0.0  22.05  0.0  435397.0  21.1383  435000.0
-65  0004.HK  20250114  21.35  13193151.0  21.35  21.3  21.35  143000.0  21.6  21.35  0.0  20.3  0.0  21.0  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  374.0  21.6  21.6  3000.0  21.0  0.0  0.0  22.4  0.0  620868.0  21.2489  619000.0
-66  0004.HK  20250115  21.1  9605368.0  21.1  21.05  21.1  127000.0  21.5  21.1  0.0  20.05  0.0  21.1  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  292.0  21.45  21.45  3000.0  21.35  0.0  0.0  22.15  0.0  452326.0  21.235  448000.0
-67  0004.HK  20250116  20.5  8820391.0  20.5  20.45  20.5  131000.0  21.5  20.5  0.0  19.48  0.0  20.5  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  297.0  21.3  21.3  2000.0  21.1  0.0  0.0  21.5  0.0  427421.0  20.6342  419000.0
-68  0004.HK  20250117  20.9  9641413.0  20.9  20.75  20.9  171000.0  21.0  20.75  0.0  19.72  0.0  20.5  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  293.0  20.5  0.0  0.0  20.5  0.0  0.0  21.75  0.0  463047.0  20.8226  462000.0
-69  0004.HK  20250120  22.05  14460641.0  22.05  21.95  22.05  115000.0  22.05  22.0  0.0  21.7  0.0  20.9  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  438.0  20.9  0.0  0.0  20.9  0.0  0.0  23.1  0.0  664670.0  21.7578  663000.0
-70  0004.HK  20250121  21.7  12576333.0  21.7  21.65  21.7  116000.0  22.3  21.7  0.0  20.65  0.0  21.35  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  352.0  22.0  0.0  0.0  22.05  0.0  0.0  22.75  0.0  579745.0  21.6933  578000.0
-71  0004.HK  20250122  21.15  8313009.0  21.15  21.1  21.15  168000.0  22.25  21.15  0.0  20.1  0.0  21.15  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  212.0  22.25  22.25  2000.0  21.7  0.0  0.0  22.2  0.0  391618.0  21.2277  391000.0
-72  0004.HK  20250123  20.05  12814485.0  20.1  20.0  20.05  157000.0  21.35  20.1  0.0  19.1  0.0  20.05  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  317.0  21.15  21.15  8000.0  21.15  0.0  0.0  21.1  0.0  627195.0  20.4302  626000.0
-73  0004.HK  20250124  19.54  22188344.0  19.66  19.54  19.54  243000.0  20.25  19.66  0.0  18.68  0.0  19.54  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  505.0  20.05  20.05  2000.0  20.05  0.0  0.0  20.6  0.0  1125233.0  19.7188  1124000.0
-74  0004.HK  20250127  19.5  9376546.0  19.56  19.5  19.5  60000.0  20.0  19.58  0.0  18.62  0.0  19.5  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  282.0  19.54  19.54  1000.0  19.54  0.0  0.0  20.55  0.0  478335.0  19.6023  477000.0
-75  0004.HK  20250128  19.0  11542611.0  19.08  19.0  19.0  202000.0  19.94  19.08  0.0  18.14  0.0  19.0  Jiu Long Cang Ji Tuan You Xian Gong Si  0.0  356.0  19.94  19.94  1000.0  19.5  0.0  0.0  20.0  0.0  603961.0  19.1115  603000.0
-76  0005.HK  20250102  75.7  1193146546.0  75.7  75.65  75.7  1452800.0  75.85  75.25  0.0  71.5  0.0  74.65  HSBC HOLDINGS PLC  0.0  6839.0  75.8  75.8  128800.0  75.8  0.0  0.0  79.0  0.0  15851617.0  75.2701  15828800.0
-77  0005.HK  20250103  75.0  884157096.0  75.0  74.95  75.0  414000.0  75.75  74.95  0.0  71.25  0.0  74.9  HSBC HOLDINGS PLC  0.0  5319.0  75.3  75.3  63200.0  75.7  0.0  0.0  78.65  0.0  11755463.0  75.2095  11342800.0
-78  0005.HK  20250106  75.55  971750312.0  75.6  75.55  75.55  1792400.0  75.65  75.4  0.0  71.65  0.0  75.15  HSBC HOLDINGS PLC  0.0  5347.0  75.5  75.5  142000.0  75.0  0.0  0.0  79.15  0.0  12886461.0  75.4114  12420800.0
-79  0005.HK  20250107  75.3  1398269234.0  75.3  75.25  75.3  1669600.0  75.9  75.4  0.0  71.65  0.0  74.9  HSBC HOLDINGS PLC  0.0  8531.0  75.5  75.5  210800.0  75.55  0.0  0.0  79.15  0.0  18577225.0  75.2676  18518000.0
-80  0005.HK  20250108  75.95  1356961553.0  75.95  75.9  75.95  2738400.0  75.95  75.55  0.0  71.8  0.0  74.75  HSBC HOLDINGS PLC  0.0  6745.0  75.3  75.3  133200.0  75.3  0.0  0.0  79.3  0.0  18019505.0  75.3082  17724800.0
-81  0005.HK  20250109  75.6  916079216.0  75.65  75.6  75.6  1390400.0  76.2  75.85  0.0  72.1  0.0  75.6  HSBC HOLDINGS PLC  0.0  5532.0  75.9  75.9  64000.0  75.95  0.0  0.0  79.6  0.0  12063607.0  75.938  11992000.0
-82  0005.HK  20250110  76.5  1709011197.0  76.55  76.5  76.5  1828800.0  76.6  76.35  0.0  72.55  0.0  76.25  HSBC HOLDINGS PLC  0.0  10570.0  76.5  76.5  737200.0  75.6  0.0  0.0  80.15  0.0  22361611.0  76.4269  22242800.0
-83  0005.HK  20250113  75.3  1086291241.0  75.35  75.3  75.3  1007600.0  76.1  75.25  0.0  71.5  0.0  74.85  HSBC HOLDINGS PLC  0.0  5351.0  76.0  76.0  21200.0  76.5  0.0  0.0  79.0  0.0  14415841.0  75.3446  14214400.0
-84  0005.HK  20250114  75.95  971901953.0  75.95  75.9  75.95  971200.0  75.95  75.9  0.0  72.15  0.0  75.4  HSBC HOLDINGS PLC  0.0  5651.0  75.45  75.45  62800.0  75.3  0.0  0.0  79.65  0.0  12841705.0  75.6848  12416400.0
-85  0005.HK  20250115  76.0  901135913.0  76.0  75.95  76.0  1506400.0  76.0  75.95  0.0  73.7  0.0  75.35  HSBC HOLDINGS PLC  0.0  4513.0  75.75  75.75  149200.0  75.95  0.0  0.0  79.7  0.0  11891439.0  75.7807  11862000.0
-86  0005.HK  20250116  77.35  1794147723.0  77.4  77.35  77.35  2186000.0  77.5  77.4  0.0  73.55  0.0  76.25  HSBC HOLDINGS PLC  0.0  9450.0  76.95  76.95  422000.0  76.0  0.0  0.0  81.25  0.0  23222162.0  77.2602  23008400.0
-87  0005.HK  20250117  77.6  946118201.0  77.65  77.6  77.6  1075200.0  78.0  77.55  0.0  73.7  0.0  77.3  HSBC HOLDINGS PLC  0.0  5815.0  77.75  77.75  219200.0  77.35  0.0  0.0  81.4  0.0  12189547.0  77.6182  12164400.0
-88  0005.HK  20250120  78.35  1128700060.0  78.35  78.3  78.35  1081600.0  78.4  78.25  0.0  74.35  0.0  77.7  HSBC HOLDINGS PLC  0.0  7098.0  78.0  78.0  198800.0  77.6  0.0  0.0  82.15  0.0  14442370.0  78.1574  14021600.0
-89  0005.HK  20250121  78.85  987738149.0  78.85  78.8  78.85  1236800.0  79.0  78.75  0.0  76.4  0.0  78.55  HSBC HOLDINGS PLC  0.0  6367.0  78.8  78.8  322400.0  78.35  0.0  0.0  82.65  0.0  12526437.0  78.853  12258400.0
-90  0005.HK  20250122  79.25  1044287491.0  79.3  79.25  79.25  945200.0  79.35  79.05  0.0  76.7  0.0  78.85  HSBC HOLDINGS PLC  0.0  5978.0  79.0  79.0  206000.0  78.85  0.0  0.0  83.0  0.0  13195031.0  79.1435  13163200.0
-91  0005.HK  20250123  78.65  1017564154.0  78.7  78.65  78.65  1051600.0  79.25  78.5  0.0  74.6  0.0  78.3  HSBC HOLDINGS PLC  0.0  5410.0  78.9  78.9  86800.0  79.25  0.0  0.0  82.4  0.0  12912877.0  78.7977  12348400.0
-92  0005.HK  20250124  79.9  1679882034.0  79.9  79.85  79.9  1284800.0  80.0  79.7  0.0  77.35  0.0  79.3  HSBC HOLDINGS PLC  0.0  8867.0  79.55  79.55  656400.0  78.65  0.0  0.0  83.65  0.0  21067554.0  79.7398  20852400.0
-93  0005.HK  20250127  79.45  1052701275.0  79.5  79.45  79.45  809600.0  79.9  79.25  0.0  75.3  0.0  79.2  HSBC HOLDINGS PLC  0.0  6052.0  79.3  79.3  126800.0  79.9  0.0  0.0  83.2  0.0  13218510.0  79.6388  13176000.0
-94  0005.HK  20250128  79.95  713680973.0  80.0  79.95  79.95  762800.0  80.0  79.95  0.0  77.6  0.0  79.8  HSBC HOLDINGS PLC  0.0  3003.0  80.0  80.0  620800.0  79.45  0.0  0.0  83.9  0.0  8928135.0  79.9404  8820400.0
-95  0006.HK  20250102  53.15  140458301.0  53.25  53.15  53.15  170000.0  54.2  53.15  0.0  50.5  0.0  52.85  Dian Neng Shi Ye You Xian Gong Si  0.0  2258.0  54.2  0.0  0.0  54.2  0.0  0.0  55.8  0.0  2637062.0  53.2238  2527000.0
-96  0006.HK  20250103  53.15  104098280.0  53.15  53.1  53.15  195500.0  53.65  53.15  0.0  50.5  0.0  52.95  Dian Neng Shi Ye You Xian Gong Si  0.0  1973.0  53.15  53.15  25500.0  53.15  0.0  0.0  55.8  0.0  1956326.0  53.2109  1953000.0
-97  0006.HK  20250106  53.75  99075250.0  53.75  53.7  53.75  511000.0  53.95  53.75  0.0  51.1  0.0  52.95  Dian Neng Shi Ye You Xian Gong Si  0.0  1437.0  52.95  0.0  0.0  53.15  0.0  0.0  56.4  0.0  1847493.0  53.6276  1840000.0
-98  0006.HK  20250107  52.85  118794778.0  52.9  52.85  52.85  322500.0  53.8  52.8  0.0  50.2  0.0  52.7  Dian Neng Shi Ye You Xian Gong Si  0.0  1505.0  53.75  53.75  500.0  53.75  0.0  0.0  55.4  0.0  2240189.0  53.0335  1976500.0
-99  0006.HK  20250108  52.25  132680727.0  52.25  52.2  52.25  532000.0  53.5  52.3  0.0  49.7  0.0  52.25  Dian Neng Shi Ye You Xian Gong Si  0.0  2133.0  52.85  52.85  39500.0  52.85  0.0  0.0  54.9  0.0  2524040.0  52.5643  2435500.0
-100  0006.HK  20250109  52.45  126032249.0  52.55  52.45  52.45  286500.0  52.6  52.4  0.0  49.8  0.0  51.95  Dian Neng Shi Ye You Xian Gong Si  0.0  1721.0  52.25  52.25  6500.0  52.25  0.0  0.0  55.0  0.0  2408336.0  52.3323  2340500.0
-101  0006.HK  20250110  52.55  105164054.0  52.6  52.55  52.55  394000.0  53.1  52.5  0.0  49.9  0.0  52.0  Dian Neng Shi Ye You Xian Gong Si  0.0  1254.0  52.0  52.0  500.0  52.45  0.0  0.0  55.1  0.0  1997377.0  52.6524  1983000.0
-102  0006.HK  20250113  51.3  170725772.0  51.35  51.3  51.3  283500.0  52.6  51.35  0.0  48.8  0.0  50.8  Dian Neng Shi Ye You Xian Gong Si  0.0  2539.0  52.6  52.6  500.0  52.55  0.0  0.0  53.9  0.0  3319626.0  51.4287  3311000.0
-103  0006.HK  20250114  51.2  140023700.0  51.2  51.15  51.2  384500.0  51.8  51.2  0.0  48.65  0.0  51.1  Dian Neng Shi Ye You Xian Gong Si  0.0  2090.0  51.45  51.45  9000.0  51.3  0.0  0.0  53.75  0.0  2724554.0  51.3925  2562500.0
-104  0006.HK  20250115  51.0  106166926.0  51.0  50.95  51.0  292500.0  51.8  51.0  0.0  48.45  0.0  50.8  Dian Neng Shi Ye You Xian Gong Si  0.0  1585.0  51.2  51.2  5000.0  51.2  0.0  0.0  53.55  0.0  2081471.0  51.0057  2075500.0
-105  0006.HK  20250116  51.15  100760773.0  51.15  51.1  51.15  400000.0  51.8  51.15  0.0  48.6  0.0  51.05  Dian Neng Shi Ye You Xian Gong Si  0.0  1756.0  51.1  0.0  0.0  51.0  0.0  0.0  53.7  0.0  1966607.0  51.2358  1956500.0
-106  0006.HK  20250117  51.85  160204476.0  51.85  51.8  51.85  417500.0  52.3  51.8  0.0  49.25  0.0  51.15  Dian Neng Shi Ye You Xian Gong Si  0.0  2669.0  51.15  0.0  0.0  51.15  0.0  0.0  54.35  0.0  3091410.0  51.8227  3089500.0
-107  0006.HK  20250120  52.4  95919201.0  52.4  52.3  52.4  314000.0  52.75  52.4  0.0  49.8  0.0  51.75  Dian Neng Shi Ye You Xian Gong Si  0.0  1498.0  52.0  52.0  9000.0  51.85  0.0  0.0  55.0  0.0  1833395.0  52.3189  1827000.0
-108  0006.HK  20250121  51.8  76712572.0  51.9  51.8  51.8  370000.0  52.8  51.9  0.0  49.35  0.0  51.8  Dian Neng Shi Ye You Xian Gong Si  0.0  1084.0  52.75  52.75  2500.0  52.4  0.0  0.0  54.45  0.0  1472863.0  52.0839  1471500.0
-109  0006.HK  20250122  51.4  96415422.0  51.4  51.35  51.4  509500.0  52.3  51.4  0.0  48.85  0.0  51.3  Dian Neng Shi Ye You Xian Gong Si  0.0  1562.0  52.0  52.0  2500.0  51.8  0.0  0.0  53.95  0.0  1868169.0  51.6094  1851500.0
-110  0006.HK  20250123  51.0  105478572.0  51.15  51.0  51.0  241000.0  51.7  51.15  0.0  48.6  0.0  50.9  Dian Neng Shi Ye You Xian Gong Si  0.0  1536.0  51.4  51.4  2500.0  51.4  0.0  0.0  53.7  0.0  2058876.0  51.2314  2056000.0
-111  0006.HK  20250124  50.9  148319364.0  50.95  50.9  50.9  455000.0  51.7  50.95  0.0  48.45  0.0  50.8  Dian Neng Shi Ye You Xian Gong Si  0.0  2055.0  51.1  51.1  14000.0  51.0  0.0  0.0  53.45  0.0  2905170.0  51.0536  2900500.0
-112  0006.HK  20250127  50.75  81293476.0  50.8  50.75  50.75  185500.0  51.6  50.8  0.0  48.3  0.0  50.75  Dian Neng Shi Ye You Xian Gong Si  0.0  1482.0  50.95  50.95  500.0  50.9  0.0  0.0  53.3  0.0  1598473.0  50.8727  1578500.0
-113  0006.HK  20250128  50.35  67795724.0  50.5  50.35  50.35  326000.0  51.15  50.5  0.0  48.0  0.0  50.35  Dian Neng Shi Ye You Xian Gong Si  0.0  1087.0  50.75  0.0  0.0  50.75  0.0  0.0  53.0  0.0  1342561.0  50.497  1311000.0
-114  0007.HK  20250102  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-115  0007.HK  20250103  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-116  0007.HK  20250106  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-117  0007.HK  20250107  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-118  0007.HK  20250108  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-119  0007.HK  20250109  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-120  0007.HK  20250110  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-121  0007.HK  20250113  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-122  0007.HK  20250114  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-123  0007.HK  20250115  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-124  0007.HK  20250116  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-125  0007.HK  20250117  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-126  0007.HK  20250120  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-127  0007.HK  20250121  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-128  0007.HK  20250122  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-129  0007.HK  20250123  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-130  0007.HK  20250124  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-131  0007.HK  20250127  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-132  0007.HK  20250128  0.0  0.0  0.0  0.0  0.032  0.0  0.032  0.0  0.0  0.031  0.0  0.032  Wisdom Wealth Resources Investment Holding Gro...  0.0  0.0  0.032  0.0  0.0  0.032  1.0  0.0  0.033  0.0  0.0  0.0  0.0
-133  0008.HK  20250102  4.5  18291762.0  4.5  4.49  4.5  356000.0  4.51  4.49  0.0  4.27  0.0  4.46  Dian Xun Ying Ke You Xian Gong Si  0.0  847.0  4.5  0.0  0.0  4.52  0.0  0.0  4.71  0.0  4074414.0  4.4895  4067000.0
-134  0008.HK  20250103  4.51  23370405.0  4.51  4.5  4.51  469000.0  4.52  4.51  0.0  4.29  0.0  4.48  Dian Xun Ying Ke You Xian Gong Si  0.0  943.0  4.5  0.0  0.0  4.5  0.0  0.0  4.73  0.0  5191772.0  4.5015  5184000.0
-135  0008.HK  20250106  4.51  17924732.0  4.51  4.5  4.51  369000.0  4.51  4.51  0.0  4.29  0.0  4.46  Dian Xun Ying Ke You Xian Gong Si  0.0  849.0  4.51  4.51  8000.0  4.51  0.0  0.0  4.73  0.0  3984103.0  4.4992  3964000.0
-136  0008.HK  20250107  4.46  15589465.0  4.47  4.46  4.46  224000.0  4.51  4.45  0.0  4.23  0.0  4.43  Dian Xun Ying Ke You Xian Gong Si  0.0  863.0  4.51  4.51  1000.0  4.51  0.0  0.0  4.67  0.0  3494167.0  4.4616  3420000.0
-137  0008.HK  20250108  4.48  21190015.0  4.48  4.47  4.48  621000.0  4.49  4.48  0.0  4.26  0.0  4.42  Dian Xun Ying Ke You Xian Gong Si  0.0  891.0  4.46  0.0  0.0  4.46  0.0  0.0  4.7  0.0  4760800.0  4.4517  4464000.0
-138  0008.HK  20250109  4.5  21957342.0  4.5  4.49  4.5  105000.0  4.52  4.52  0.0  4.36  0.0  4.45  Dian Xun Ying Ke You Xian Gong Si  0.0  1156.0  4.47  0.0  0.0  4.48  0.0  0.0  4.74  0.0  4872478.0  4.5066  4715000.0
-139  0008.HK  20250110  4.53  37150818.0  4.53  4.52  4.53  362000.0  4.54  4.53  0.0  4.37  0.0  4.47  Dian Xun Ying Ke You Xian Gong Si  0.0  1174.0  4.5  4.5  5000.0  4.5  0.0  0.0  4.75  0.0  8233492.0  4.5125  7865000.0
-140  0008.HK  20250113  4.47  30025975.0  4.48  4.47  4.47  359000.0  4.53  4.48  0.0  4.26  0.0  4.47  Dian Xun Ying Ke You Xian Gong Si  0.0  1304.0  4.52  4.52  2000.0  4.53  0.0  0.0  4.7  0.0  6695093.0  4.4844  6460000.0
-141  0008.HK  20250114  4.48  34187898.0  4.5  4.48  4.48  449000.0  4.52  4.48  0.0  4.26  0.0  4.45  Dian Xun Ying Ke You Xian Gong Si  0.0  1724.0  4.45  0.0  0.0  4.47  0.0  0.0  4.7  0.0  7613466.0  4.4903  7223000.0
-142  0008.HK  20250115  4.55  63061578.0  4.56  4.55  4.55  675000.0  4.57  4.56  0.0  4.37  0.0  4.47  Dian Xun Ying Ke You Xian Gong Si  0.0  2010.0  4.48  0.0  0.0  4.48  0.0  0.0  4.78  0.0  13881225.0  4.543  13871000.0
-143  0008.HK  20250116  4.69  66425619.0  4.69  4.68  4.69  557000.0  4.7  4.69  0.0  4.46  0.0  4.56  Dian Xun Ying Ke You Xian Gong Si  0.0  2416.0  4.56  4.56  3000.0  4.55  0.0  0.0  4.92  0.0  14333129.0  4.6345  13993000.0
-144  0008.HK  20250117  4.71  61806663.0  4.71  4.7  4.71  1284000.0  4.72  4.71  0.0  4.56  0.0  4.67  Dian Xun Ying Ke You Xian Gong Si  0.0  1771.0  4.69  0.0  0.0  4.69  0.0  0.0  4.94  0.0  13157025.0  4.6976  13055000.0
-145  0008.HK  20250120  4.72  50309563.0  4.72  4.71  4.72  331000.0  4.75  4.72  0.0  4.56  0.0  4.68  Dian Xun Ying Ke You Xian Gong Si  0.0  2656.0  4.72  4.72  42000.0  4.71  0.0  0.0  4.95  0.0  10667180.0  4.7163  10637000.0
-146  0008.HK  20250121  4.68  22764300.0  4.68  4.67  4.68  534000.0  4.74  4.68  0.0  4.54  0.0  4.65  Dian Xun Ying Ke You Xian Gong Si  0.0  1227.0  4.74  4.74  60000.0  4.72  0.0  0.0  4.91  0.0  4858346.0  4.6859  4602000.0
-147  0008.HK  20250122  4.56  26222511.0  4.57  4.56  4.56  353000.0  4.69  4.57  0.0  4.35  0.0  4.56  Dian Xun Ying Ke You Xian Gong Si  0.0  1295.0  4.69  4.69  27000.0  4.68  0.0  0.0  4.79  0.0  5704475.0  4.5965  5525000.0
-148  0008.HK  20250123  4.57  18652620.0  4.59  4.57  4.57  152000.0  4.6  4.59  0.0  4.37  0.0  4.55  Dian Xun Ying Ke You Xian Gong Si  0.0  916.0  4.56  0.0  0.0  4.56  0.0  0.0  4.81  0.0  4076392.0  4.5758  3998000.0
-149  0008.HK  20250124  4.55  26380780.0  4.56  4.55  4.55  164000.0  4.58  4.56  0.0  4.34  0.0  4.49  Dian Xun Ying Ke You Xian Gong Si  0.0  1057.0  4.58  0.0  0.0  4.57  0.0  0.0  4.78  0.0  5823690.0  4.5299  5776000.0
-150  0008.HK  20250127  4.59  29790966.0  4.59  4.58  4.59  566000.0  4.6  4.59  0.0  4.5  0.0  4.53  Dian Xun Ying Ke You Xian Gong Si  0.0  1706.0  4.54  0.0  0.0  4.55  0.0  0.0  4.81  0.0  6516879.0  4.5714  6433000.0
-151  0008.HK  20250128  4.53  22016992.0  4.54  4.53  4.53  376000.0  4.59  4.54  0.0  4.32  0.0  4.52  Dian Xun Ying Ke You Xian Gong Si  0.0  809.0  4.58  4.58  23000.0  4.59  0.0  0.0  4.76  0.0  4839442.0  4.5495  4836000.0
-152  0010.HK  20250102  10.44  13562345.0  10.44  10.42  10.44  49000.0  10.48  10.42  0.0  10.42  0.0  10.24  Heng Long Ji Tuan You Xian Gong Si  0.0  404.0  10.46  10.46  2000.0  10.46  0.0  0.0  10.94  0.0  1303625.0  10.3729  842000.0
-153  0010.HK  20250103  10.36  13499238.0  10.36  10.34  10.36  64000.0  10.52  10.34  0.0  9.83  0.0  10.3  Heng Long Ji Tuan You Xian Gong Si  0.0  542.0  10.52  0.0  0.0  10.44  0.0  0.0  10.84  0.0  1301475.0  10.3722  1272000.0
-154  0010.HK  20250106  10.4  7857987.0  10.4  10.36  10.4  68000.0  10.46  10.38  0.0  10.16  0.0  10.22  Heng Long Ji Tuan You Xian Gong Si  0.0  461.0  10.46  0.0  0.0  10.36  0.0  0.0  10.88  0.0  760105.0  10.3381  759000.0
-155  0010.HK  20250107  10.32  7610948.0  10.32  10.26  10.32  29000.0  10.4  10.28  0.0  9.77  0.0  10.22  Heng Long Ji Tuan You Xian Gong Si  0.0  358.0  10.4  10.4  1000.0  10.4  0.0  0.0  10.78  0.0  739105.0  10.2982  716000.0
-156  0010.HK  20250108  10.28  6120927.0  10.28  10.22  10.28  66000.0  10.34  10.26  0.0  9.75  0.0  10.1  Heng Long Ji Tuan You Xian Gong Si  0.0  347.0  10.34  0.0  0.0  10.32  0.0  0.0  10.76  0.0  598861.0  10.2214  567000.0
-157  0010.HK  20250109  10.26  5707452.0  10.26  10.24  10.26  70000.0  10.34  10.26  0.0  10.26  0.0  10.22  Heng Long Ji Tuan You Xian Gong Si  0.0  337.0  10.26  0.0  0.0  10.28  0.0  0.0  10.76  0.0  556031.0  10.2646  512000.0
-158  0010.HK  20250110  10.12  5045201.0  10.12  10.1  10.12  36000.0  10.28  10.12  0.0  9.62  0.0  10.06  Heng Long Ji Tuan You Xian Gong Si  0.0  281.0  10.28  10.28  1000.0  10.26  0.0  0.0  10.62  0.0  497610.0  10.1394  472000.0
-159  0010.HK  20250113  10.06  5729550.0  10.06  10.04  10.06  51000.0  10.2  10.04  0.0  9.74  0.0  10.02  Heng Long Ji Tuan You Xian Gong Si  0.0  299.0  10.12  0.0  0.0  10.12  0.0  0.0  10.34  0.0  569640.0  10.0582  567000.0
-160  0010.HK  20250114  10.16  10929017.0  10.16  10.14  10.16  79000.0  10.18  10.14  0.0  9.84  0.0  10.02  Heng Long Ji Tuan You Xian Gong Si  0.0  437.0  10.12  0.0  0.0  10.06  0.0  0.0  10.64  0.0  1083312.0  10.0885  1083000.0
-161  0010.HK  20250115  10.12  7449902.0  10.12  10.1  10.12  84000.0  10.18  10.1  0.0  9.6  0.0  10.04  Heng Long Ji Tuan You Xian Gong Si  0.0  362.0  10.04  0.0  0.0  10.16  0.0  0.0  10.6  0.0  736704.0  10.1125  735000.0
-162  0010.HK  20250116  10.12  9703738.0  10.12  10.1  10.12  47000.0  10.32  10.14  0.0  9.64  0.0  10.08  Heng Long Ji Tuan You Xian Gong Si  0.0  388.0  10.16  0.0  0.0  10.12  0.0  0.0  10.64  0.0  956272.0  10.1475  956000.0
-163  0010.HK  20250117  10.32  11214440.0  10.34  10.26  10.32  30000.0  10.36  10.32  0.0  10.02  0.0  10.08  Heng Long Ji Tuan You Xian Gong Si  0.0  363.0  10.12  0.0  0.0  10.12  0.0  0.0  10.82  0.0  1094000.0  10.251  1091000.0
-164  0010.HK  20250120  10.3  9692160.0  10.3  10.26  10.3  7000.0  10.44  10.28  0.0  10.3  0.0  10.22  Heng Long Ji Tuan You Xian Gong Si  0.0  494.0  10.22  0.0  0.0  10.32  0.0  0.0  10.78  0.0  940000.0  10.3118  916000.0
-165  0010.HK  20250121  10.32  7657074.0  10.32  10.3  10.32  66000.0  10.4  10.3  0.0  9.79  0.0  10.28  Heng Long Ji Tuan You Xian Gong Si  0.0  381.0  10.3  10.3  3000.0  10.3  0.0  0.0  10.8  0.0  741924.0  10.3205  741000.0
-166  0010.HK  20250122  10.24  6447440.0  10.24  10.2  10.24  43000.0  10.32  10.2  0.0  9.69  0.0  10.18  Heng Long Ji Tuan You Xian Gong Si  0.0  259.0  10.32  0.0  0.0  10.32  0.0  0.0  10.7  0.0  630859.0  10.2201  629000.0
-167  0010.HK  20250123  10.34  7724528.0  10.34  10.28  10.34  75000.0  10.36  10.3  0.0  9.79  0.0  10.24  Heng Long Ji Tuan You Xian Gong Si  0.0  447.0  10.26  0.0  0.0  10.24  0.0  0.0  10.8  0.0  750467.0  10.2929  750000.0
-168  0010.HK  20250124  10.08  15873489.0  10.08  10.06  10.08  17000.0  10.36  10.08  0.0  9.58  0.0  10.02  Heng Long Ji Tuan You Xian Gong Si  0.0  581.0  10.28  0.0  0.0  10.34  0.0  0.0  10.58  0.0  1559000.0  10.182  1553000.0
-169  0010.HK  20250127  10.4  16380660.0  10.4  10.34  10.4  95000.0  10.4  10.36  0.0  10.06  0.0  10.16  Heng Long Ji Tuan You Xian Gong Si  0.0  466.0  10.18  10.18  1000.0  10.08  0.0  0.0  10.86  0.0  1589240.0  10.3073  1588000.0
-170  0010.HK  20250128  10.3  3095180.0  10.32  10.3  10.3  29000.0  10.36  10.34  0.0  9.83  0.0  10.3  Heng Long Ji Tuan You Xian Gong Si  0.0  140.0  10.36  0.0  0.0  10.4  0.0  0.0  10.84  0.0  300000.0  10.3172  298000.0
-171  0012.HK  20250102  23.15  69275894.0  23.15  23.1  23.15  274000.0  23.55  23.15  0.0  22.0  0.0  23.0  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  989.0  23.3  0.0  0.0  23.6  0.0  0.0  24.3  0.0  2980886.0  23.1705  2497000.0
-172  0012.HK  20250103  23.25  53200778.0  23.3  23.25  23.25  382000.0  23.6  23.2  0.0  22.05  0.0  23.15  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1107.0  23.15  23.15  5000.0  23.15  0.0  0.0  24.35  0.0  2278237.0  23.3518  2275000.0
-173  0012.HK  20250106  23.25  35781727.0  23.25  23.2  23.25  275000.0  23.45  23.25  0.0  22.1  0.0  23.15  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  745.0  23.2  0.0  0.0  23.25  0.0  0.0  24.4  0.0  1537914.0  23.267  1529000.0
-174  0012.HK  20250107  22.9  58411948.0  22.95  22.9  22.9  397000.0  23.2  22.9  0.0  21.8  0.0  22.75  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1158.0  23.2  23.2  12000.0  23.25  0.0  0.0  24.0  0.0  2551735.0  22.891  2541000.0
-175  0012.HK  20250108  22.4  117456584.0  22.4  22.35  22.4  606000.0  22.9  22.4  0.0  21.3  0.0  22.0  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  2223.0  22.7  22.7  30000.0  22.9  0.0  0.0  23.5  0.0  5259991.0  22.3309  5026000.0
-176  0012.HK  20250109  22.35  43785253.0  22.35  22.3  22.35  339000.0  22.5  22.35  0.0  21.25  0.0  22.3  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1017.0  22.35  0.0  0.0  22.4  0.0  0.0  23.45  0.0  1955183.0  22.3951  1903000.0
-177  0012.HK  20250110  22.3  53304425.0  22.35  22.3  22.3  279000.0  22.55  22.3  0.0  21.2  0.0  22.1  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1289.0  22.4  22.4  17000.0  22.35  0.0  0.0  23.4  0.0  2395208.0  22.2548  2385000.0
-178  0012.HK  20250113  21.9  99463842.0  21.95  21.9  21.9  448000.0  22.65  21.9  0.0  20.85  0.0  21.55  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1809.0  22.4  0.0  0.0  22.3  0.0  0.0  22.95  0.0  4565047.0  21.7882  4535000.0
-179  0012.HK  20250114  21.6  71737151.0  21.6  21.55  21.6  888000.0  22.05  21.6  0.0  20.55  0.0  21.6  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1204.0  21.9  21.9  3000.0  21.9  0.0  0.0  22.65  0.0  3295584.0  21.7658  3209000.0
-180  0012.HK  20250115  21.8  48116751.0  21.85  21.8  21.8  342000.0  21.85  21.8  0.0  20.75  0.0  21.5  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1026.0  21.65  21.65  9000.0  21.6  0.0  0.0  22.85  0.0  2215690.0  21.7175  2191000.0
-181  0012.HK  20250116  21.85  64326023.0  21.85  21.8  21.85  499000.0  22.25  21.8  0.0  20.75  0.0  21.55  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1045.0  22.0  0.0  0.0  21.8  0.0  0.0  22.85  0.0  2949231.0  21.8119  2863000.0
-182  0012.HK  20250117  22.45  67966418.0  22.45  22.4  22.45  598000.0  22.55  22.45  0.0  21.35  0.0  21.7  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1397.0  21.9  21.9  6000.0  21.85  0.0  0.0  23.55  0.0  3040911.0  22.3514  3032000.0
-183  0012.HK  20250120  22.55  54693997.0  22.55  22.5  22.55  274000.0  22.95  22.55  0.0  21.45  0.0  22.45  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1102.0  22.7  22.7  12000.0  22.45  0.0  0.0  23.65  0.0  2410645.0  22.6895  2395000.0
-184  0012.HK  20250121  22.35  47866432.0  22.35  22.3  22.35  527000.0  22.9  22.35  0.0  21.25  0.0  22.3  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  763.0  22.55  22.55  1000.0  22.55  0.0  0.0  23.45  0.0  2132638.0  22.4443  2086000.0
-185  0012.HK  20250122  22.05  35374370.0  22.1  22.05  22.05  363000.0  22.4  22.05  0.0  20.95  0.0  21.95  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  818.0  22.25  22.25  3000.0  22.35  0.0  0.0  23.15  0.0  1600122.0  22.1078  1573000.0
-186  0012.HK  20250123  21.85  47545591.0  21.85  21.8  21.85  386000.0  22.4  21.85  0.0  20.8  0.0  21.8  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1126.0  22.05  22.05  26000.0  22.05  0.0  0.0  22.9  0.0  2164293.0  21.9681  2152000.0
-187  0012.HK  20250124  21.9  51914043.0  21.95  21.9  21.9  721000.0  22.3  21.85  0.0  20.8  0.0  21.8  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  995.0  22.3  22.3  5000.0  21.85  0.0  0.0  22.9  0.0  2362955.0  21.9699  2349000.0
-188  0012.HK  20250127  21.95  40198247.0  21.95  21.9  21.95  206000.0  22.2  21.95  0.0  20.9  0.0  21.8  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  988.0  21.9  21.9  2000.0  21.9  0.0  0.0  23.0  0.0  1834126.0  21.9172  1827000.0
-189  0012.HK  20250128  21.6  56999983.0  21.65  21.6  21.6  686000.0  22.0  21.65  0.0  20.6  0.0  21.5  Heng Ji Zhao Ye Di Chan You Xian Gong Si  0.0  1021.0  21.95  21.95  1000.0  21.95  0.0  0.0  22.7  0.0  2634275.0  21.6381  2601000.0
-190  0013.HK  20250102  23.4  639611258.0  23.45  23.4  23.4  128000.0  25.2  23.4  0.0  22.25  0.0  23.1  HUTCHMED (CHINA) LIMITED  0.0  16261.0  23.25  23.25  232500.0  22.55  0.0  0.0  24.55  0.0  26730455.0  23.9283  26705500.0
-191  0013.HK  20250103  23.25  193325523.0  23.25  23.2  23.25  70500.0  24.2  23.25  0.0  22.1  0.0  22.85  HUTCHMED (CHINA) LIMITED  0.0  4937.0  23.55  23.55  19000.0  23.4  0.0  0.0  24.4  0.0  8269500.0  23.3791  8208000.0
-192  0013.HK  20250106  24.55  257434339.0  24.55  24.5  24.55  42000.0  24.7  24.55  0.0  23.35  0.0  23.4  HUTCHMED (CHINA) LIMITED  0.0  7256.0  23.5  23.5  28500.0  23.25  0.0  0.0  25.75  0.0  10647040.0  24.1769  10467000.0
-193  0013.HK  20250107  24.1  133774560.0  24.1  24.05  24.1  75000.0  24.6  24.1  0.0  22.9  0.0  23.7  HUTCHMED (CHINA) LIMITED  0.0  4420.0  24.55  24.55  23000.0  24.55  0.0  0.0  25.3  0.0  5551941.0  24.0952  5536000.0
-194  0013.HK  20250108  24.15  118412448.0  24.2  24.15  24.15  41000.0  24.45  24.15  0.0  23.45  0.0  23.25  HUTCHMED (CHINA) LIMITED  0.0  3882.0  24.1  0.0  0.0  24.1  0.0  0.0  25.35  0.0  4946652.0  23.938  4930000.0
-195  0013.HK  20250109  24.35  76092250.0  24.4  24.35  24.35  11500.0  24.65  24.4  0.0  23.2  0.0  23.8  HUTCHMED (CHINA) LIMITED  0.0  2711.0  24.1  0.0  0.0  24.15  0.0  0.0  25.6  0.0  3109428.0  24.4715  3109000.0
-196  0013.HK  20250110  23.75  49718809.0  23.8  23.75  23.75  87000.0  24.55  23.8  0.0  22.65  0.0  23.6  HUTCHMED (CHINA) LIMITED  0.0  1579.0  24.55  24.55  2000.0  24.35  0.0  0.0  24.95  0.0  2076500.0  23.9432  2052000.0
-197  0013.HK  20250113  22.95  62902775.0  22.95  22.9  22.95  17000.0  23.6  22.95  0.0  21.85  0.0  22.8  HUTCHMED (CHINA) LIMITED  0.0  2386.0  23.25  23.25  13000.0  23.75  0.0  0.0  24.05  0.0  2731280.0  23.0304  2731000.0
-198  0013.HK  20250114  23.55  68017494.0  23.55  23.5  23.55  33000.0  23.7  23.55  0.0  22.4  0.0  22.9  HUTCHMED (CHINA) LIMITED  0.0  3020.0  22.9  22.9  500.0  22.95  0.0  0.0  24.7  0.0  2903851.0  23.4234  2893000.0
-199  0013.HK  20250115  21.25  313170004.0  21.25  21.2  21.25  55500.0  23.5  21.25  0.0  20.2  0.0  21.05  HUTCHMED (CHINA) LIMITED  0.0  9792.0  23.5  0.0  0.0  23.55  0.0  0.0  22.3  0.0  14363879.0  21.806  14275500.0
+symbol  date  alt_close  amount  ask  bid  close  cls_aucvol  high  lmt_refpr2  lolimit  lolimit_2  lolimit_3  low  name  num_moves  open  opn_auc  opn_aucvol  pre_close  trade_status  uplimit  uplimit_2  uplimit_3  volume  vwap  vwap_vol
+0  0001.HK  20250102  41.05  170658280.0  41.1 40.95  41.05  577000  41.5  40.95  0  38.95  0  40.7  CK HUTCHISON HOLDINGS LIMITED  2432  41.3  41.3  18000  41.5  0  0  42.95  0  4164402.0 40.9803  4158500.0
+1  0001.HK  20250103  41.15  108033904.0 41.15  41.1  41.15  328500 41.55  41.15  0  39.1  0  40.9  CK HUTCHISON HOLDINGS LIMITED  1840  41.4  41.4  122000  41.05  0  0  43.2  0  2627730.0  41.113  2612000.0
+2  0001.HK  20250106  41.3  160524878.0  41.3 41.15  41.3  589500  41.8  41.15  0  39.1  0 40.95  CK HUTCHISON HOLDINGS LIMITED  2342 41.45  41.45  96000  41.15  0  0  43.2  0  3892729.0 41.2474  3670000.0
+3  0001.HK  20250107  41.05  188833658.0 41.05  41  41.05  819500  41.7  40.9  0  38.9  0 40.65  CK HUTCHISON HOLDINGS LIMITED  2552  41.4  41.4  141000  41.3  0  0  42.9  0  4598793.0 41.0616  4507000.0
+4  0001.HK  20250108  40.55  236128549.0  40.6 40.55  40.55  1177000.0  41.1  40.55  0  38.55  0  40.4  CK HUTCHISON HOLDINGS LIMITED  3057  41  41  277000  41.05  0  0  42.55  0  5808409.0 40.6327  5409500.0
+5  0001.HK  20250109  40.5  124046373.0 40.55  40.5  40.5  370000 40.75  40.5  0  38.5  0 40.35  CK HUTCHISON HOLDINGS LIMITED  1441 40.55  40.55  19000  40.55  0  0  42.5  0  3060041.0  40.532  2655000.0
+6  0001.HK  20250110  40.35  185886332.0 40.35  40.3  40.35  636500  40.9  40.25  0  38.25  0  40.1  CK HUTCHISON HOLDINGS LIMITED  2209  40.5  40.5  5500  40.5  0  0  42.25  0  4607674.0 40.2948  3590500.0
+7  0001.HK  20250113  39.8  193686326.0  39.8 39.75  39.8  775000 40.05  39.7  0  37.75  0  39.3  CK HUTCHISON HOLDINGS LIMITED  2479 40.05  40.05  73000  40.35  0  0  41.65  0  4876407.0  39.717  4648500.0
+8  0001.HK  20250114  39.8  315858763.0 39.85  39.8  39.8  1294500.0  39.9  39.8  0  37.85  0 39.35  CK HUTCHISON HOLDINGS LIMITED  3883 39.65  39.65  61000  39.8  0  0  41.75  0  7959404.0 39.6817  7300000.0
+9  0001.HK  20250115  39.95  152312835.0 39.95  39.9  39.95  836000  40  39.85  0  37.9  0 39.55  CK HUTCHISON HOLDINGS LIMITED  1968 39.55  39.55  86000  39.8  0  0  41.8  0  3820469.0 39.8673  3724000.0
+10  0001.HK  20250116  39.65  208772313.0 39.65  39.6  39.65  827500 40.15  39.65  0  37.7  0 39.55  CK HUTCHISON HOLDINGS LIMITED  2715  39.8  39.8  381000  39.95  0  0  41.6  0  5249583.0 39.7603  5091000.0
+11  0001.HK  20250117  40.2  208533700.0  40.2 40.15  40.2  1250000.0  40.3  40.05  0  38.05  0  39.5  CK HUTCHISON HOLDINGS LIMITED  2610 39.55  39.55  44500  39.65  0  0  42.05  0  5205136.0 40.0632  5180500.0
+12  0001.HK  20250120  40.1  152243623.0  40.1 40.05  40.1  528000  40.5  40.1  0  38.1  0  40.1  CK HUTCHISON HOLDINGS LIMITED  2256 40.35  40.35  91000  40.2  0  0  42.1  0  3781726.0 40.2578  3751000.0
+13  0001.HK  20250121  40  196568015.0  40 39.95  40  1208000.0  40.4  40  0  38  0 39.85  CK HUTCHISON HOLDINGS LIMITED  2064  40.4  40.4  56000  40.1  0  0  42  0  4911349.0 40.0233  4908000.0
+14  0001.HK  20250122  40  188789411.0  40  39.9  40  666000 40.15  39.9  0  37.95  0  39.7  CK HUTCHISON HOLDINGS LIMITED  3950 39.85  39.85  121000  40  0  0  41.85  0  4723515.0 39.9677  4607500.0
+15  0001.HK  20250123  39.2  249189511.0 39.25  39.2  39.2  887500  40.2  39.15  0  37.2  0  39.1  CK HUTCHISON HOLDINGS LIMITED  3737  40  40  35000  40  0  0  41.1  0  6318628.0 39.4349  6240500.0
+16  0001.HK  20250124  39.25  214555267.0  39.3 39.25  39.25  1073000.0  39.6  39.2  0  37.25  0  39  CK HUTCHISON HOLDINGS LIMITED  2896  39.2  39.2  166000  39.2  0  0  41.15  0  5462191.0 39.2802  5446500.0
+17  0001.HK  20250127  39.35  154416287.0 39.35  39.3  39.35  303500  39.8  39.35  0  37.4  0 39.25  CK HUTCHISON HOLDINGS LIMITED  2133  39.5  39.5  84500  39.25  0  0  41.3  0  3916809.0 39.4322  3714000.0
+18  0001.HK  20250128  39.2  139383403.0  39.3  39.2  39.2  877500  40.2  39.3  0  37.35  0  39.2  CK HUTCHISON HOLDINGS LIMITED  1799 39.75  39.75  67500  39.35  0  0  41.25  0  3526282.0 39.5271  3521500.0
+19  0002.HK  20250102  64.15  196936517.0  64.2 64.15  64.15  355500 65.25  64.1  0  60.9  0 63.85  Zhong Dian Kong Gu You Xian Gong Si  2198 65.25  65.25  4500  65.3  0  0  67.3  0  3065640.0 64.2394  3031000.0
+20  0002.HK  20250103  64.2  103356412.0  64.2 64.15  64.2  159000  64.5  64.05  0  60.85  0  63.9  Zhong Dian Kong Gu You Xian Gong Si  1648 64.15  64.15  18500  64.15  0  0  67.25  0  1611908.0 64.1212  1607000.0
+21  0002.HK  20250106  64.25  95495915.0 64.25  64.2  64.25  235000 64.65  64.2  0  61  0  64  Zhong Dian Kong Gu You Xian Gong Si  1308  64.1  64.1  4000  64.2  0  0  67.4  0  1486707.0 64.2346  1474500.0
+22  0002.HK  20250107  63.7  201587221.0 63.75  63.7  63.7  476000 64.25  63.7  0  60.55  0  63.1  Zhong Dian Kong Gu You Xian Gong Si  2338 63.75  63.75  64500  64.25  0  0  66.85  0  3170138.0 63.5882  3136500.0
+23  0002.HK  20250108  63.5  164605713.0  63.5 63.45  63.5  380500  63.9  63.5  0  60.35  0 63.25  Zhong Dian Kong Gu You Xian Gong Si  2087 63.35  63.35  93500  63.7  0  0  66.65  0  2591274.0 63.5171  2135000.0
+24  0002.HK  20250109  63.3  104156874.0 63.35  63.3  63.3  209000  63.8  63.4  0  60.25  0  63.2  Zhong Dian Kong Gu You Xian Gong Si  1543  63.5  63.5  1000  63.5  0  0  66.55  0  1641759.0 63.4421  1613500.0
+25  0002.HK  20250110  63.7  157456611.0  63.7 63.65  63.7  440000  64  63.7  0  60.55  0  63.3  Zhong Dian Kong Gu You Xian Gong Si  1684  63.3  63.3  31000  63.3  0  0  66.85  0  2474095.0 63.7027  1956500.0
+26  0002.HK  20250113  63.45  181842690.0  63.5 63.45  63.45  267000  63.7  63.6  0  60.45  0  62.3  Zhong Dian Kong Gu You Xian Gong Si  2205  63.7  63.7  2500  63.7  0  0  66.75  0  2883894.0  63.062  2785000.0
+27  0002.HK  20250114  64.05  176898954.0 64.05  64  64.05  548500  64.2  64.15  0  60.95  0  63.5  Zhong Dian Kong Gu You Xian Gong Si  2243  63.8  63.8  25500  63.45  0  0  67.35  0  2765878.0 63.9581  2751500.0
+28  0002.HK  20250115  64.15  173442044.0 64.15 64.05  64.15  556000  64.4  63.95  0  60.8  0  63.9  Zhong Dian Kong Gu You Xian Gong Si  1420 64.05  64.05  9000  64.05  0  0  67.1  0  2705273.0 64.1171  2177500.0
+29  0002.HK  20250116  64.8  159599379.0  64.8  64.7  64.8  677000  64.8  64.7  0  61.5  0  64.1  Zhong Dian Kong Gu You Xian Gong Si  1742 64.15  64.15  24000  64.15  0  0  67.9  0  2470931.0 64.6021  2375500.0
+30  0002.HK  20250117  65.55  283081236.0 65.55  65.5  65.55  751500  65.8  65.45  0  62.2  0  64.6  Zhong Dian Kong Gu You Xian Gong Si  2350  64.7  64.7  5500  64.8  0  0  68.7  0  4330048.0 65.4526  3785500.0
+31  0002.HK  20250120  65.95  163205653.0 65.95  65.9  65.95  200000  66.1  65.9  0  62.65  0 65.45  Zhong Dian Kong Gu You Xian Gong Si  1601 65.55  65.55  2000  65.55  0  0  69.15  0  2479151.0 65.8594  2234000.0
+32  0002.HK  20250121  65.6  130317911.0  65.6 65.55  65.6  398000 66.05  65.55  0  62.3  0 65.25  Zhong Dian Kong Gu You Xian Gong Si  1564  66  66  4500  65.95  0  0  68.8  0  1986859.0 65.5905  1964500.0
+33  0002.HK  20250122  64.65  158659150.0  64.7 64.65  64.65  527000 65.65  64.6  0  61.4  0  64.5  Zhong Dian Kong Gu You Xian Gong Si  1928  65.5  65.5  4500  65.6  0  0  67.8  0  2447901.0 64.8146  2441500.0
+34  0002.HK  20250123  64.65  124298295.0 64.65  64.6  64.65  408000 64.95  64.6  0  61.4  0  64.3  Zhong Dian Kong Gu You Xian Gong Si  1584 64.65  64.65  16000  64.65  0  0  67.8  0  1922995.0 64.6401  1891000.0
+35  0002.HK  20250124  64.75  127996683.0  64.8 64.75  64.75  350000  65.4  64.8  0  61.6  0  64.4  Zhong Dian Kong Gu You Xian Gong Si  1631 64.65  64.65  13000  64.65  0  0  68  0  1970998.0 64.9403  1945500.0
+36  0002.HK  20250127  64.5  87302722.0  64.6  64.5  64.5  169000 65.15  64.65  0  61.45  0  64.5  Zhong Dian Kong Gu You Xian Gong Si  1412 64.55  0  0  64.75  0  0  67.85  0  1349429.0  64.697  1330500.0
+37  0002.HK  20250128  64.75  41506856.0 64.75  64.7  64.75  221000  64.9  64.65  0  61.45  0  64.2  Zhong Dian Kong Gu You Xian Gong Si  599  64.5  64.5  1500  64.5  0  0  67.85  0  641767 64.6771  632000
+38  0003.HK  20250102  6.11  99293149.0  6.11  6.1  6.11  1035000.0  6.2  6.11  0  5.81  0  6.07  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2954  6.18  6.18  43000  6.21  0  0  6.41  0 16264561.0  6.105 15575000.0
+39  0003.HK  20250103  6.13  61172070.0  6.13  6.1  6.13  1137000.0  6.15  6.11  0  5.81  0  6.1  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2300  6.1  6.1  142000  6.11  0  0  6.41  0  9987946.0  6.1247  9951000.0
+40  0003.HK  20250106  6.12  63940370.0  6.12  6.11  6.12  2875000.0  6.19  6.12  0  5.82  0  6.09  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2277  6.14  6.14  61000  6.13  0  0  6.42  0 10438465.0  6.1256 10397000.0
+41  0003.HK  20250107  6.07  112379713.0  6.07  6.05  6.07  3122000.0  6.13  6.05  0  5.75  0  6.02  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2618  6.12  6.12  4000  6.12  0  0  6.35  0 18555884.0  6.0565 17982000.0
+42  0003.HK  20250108  6.04  97829383.0  6.04  6.03  6.04  1934000.0  6.09  6.04  0  5.74  0  6  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2769  6.09  6.09  149000  6.07  0  0  6.34  0 16215885.0  6.0329 15942000.0
+43  0003.HK  20250109  5.98  79492418.0  5.98  5.97  5.98  1747000.0  6.04  5.98  0  5.69  0  5.98  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2084  6.04  0  0  6.04  0  0  6.27  0 13253565.0  5.9978 13243000.0
+44  0003.HK  20250110  5.99  91925015.0  5.99  5.98  5.99  3076000.0  6.04  5.99  0  5.7  0  5.95  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2014  5.98  5.98  2000  5.98  0  0  6.28  0 15338199.0  5.991 13951000.0
+45  0003.HK  20250113  5.9  172380919.0  5.91  5.9  5.9  1775000.0  5.99  5.91  0  5.62  0  5.85  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  3642  5.99  5.99  6000  5.99  0  0  6.2  0 29177520.0  5.9085 28483000.0
+46  0003.HK  20250114  5.95  115797303.0  5.95  5.94  5.95  4279000.0  5.97  5.95  0  5.66  0  5.9  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2547  5.91  5.91  26000  5.9  0  0  6.24  0 19485632.0  5.9428 19334000.0
+47  0003.HK  20250115  5.93  113346291.0  5.94  5.93  5.93  2359000.0  5.97  5.92  0  5.63  0  5.9  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2864  5.93  5.93  87000  5.95  0  0  6.21  0 19117596.0  5.9292 18406000.0
+48  0003.HK  20250116  6  135445555.0  6  5.99  6  2844000.0  6.07  6  0  5.7  0  5.98  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2478  5.98  5.98  304000  5.93  0  0  6.3  0 22514356.0  6.0153 18834000.0
+49  0003.HK  20250117  6.05  128836830.0  6.05  6.03  6.05  3566000.0  6.06  6.03  0  5.73  0  5.97  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2687  6  6  8000  6  0  0  6.33  0 21355506.0  6.0353 19707000.0
+50  0003.HK  20250120  6.06  132129900.0  6.08  6.06  6.06  2093000.0  6.11  6.08  0  5.78  0  6.05  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2180  6.05  6.05  18000  6.05  0  0  6.38  0 21745351.0  6.082 14230000.0
+51  0003.HK  20250121  6.09  111239174.0  6.09  6.08  6.09  3680000.0  6.11  6.1  0  5.8  0  6.05  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2648  6.08  6.08  7000  6.06  0  0  6.4  0 18295483.0  6.0812 15515000.0
+52  0003.HK  20250122  5.96  87862344.0  5.97  5.96  5.96  2842000.0  6.1  5.97  0  5.68  0  5.96  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  1984  6.1  6.1  21000  6.09  0  0  6.26  0 14623816.0  6.0047 13756000.0
+53  0003.HK  20250123  5.92  124979221.0  5.92  5.91  5.92  1732000.0  6  5.93  0  5.64  0  5.9  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2887  6  6  2000  5.96  0  0  6.22  0 21076611.0  5.9298 21063000.0
+54  0003.HK  20250124  5.94  101323530.0  5.94  5.93  5.94  3401000.0  5.99  5.94  0  5.65  0  5.91  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2242  5.92  5.92  103000  5.92  0  0  6.23  0 17012142.0  5.9561 16961000.0
+55  0003.HK  20250127  6.02  76411295.0  6.02  6  6.02  774000  6.03  6.02  0  5.72  0  5.94  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  2921  5.98  0  0  5.94  0  0  6.32  0 12717678.0  6.0121 12038000.0
+56  0003.HK  20250128  5.97  35111773.0  5.97  5.96  5.97  2360000.0  6.02  5.97  0  5.68  0  5.95  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  869  6.02  6.02  5000  6.02  0  0  6.26  0  5871513.0  5.9799  5830000.0
+57  0004.HK  20250102  21.6  4986520.0  21.6 21.55  21.6  67000 21.75  21.6  0  21.3  0 21.45  Jiu Long Cang Ji Tuan You Xian Gong Si  174 21.55  0  0  21.85  0  0  22.65  0  230712 21.6142  229000
+58  0004.HK  20250103  21.5  6942300.0  21.5  21.4  21.5  205000  21.6  21.45  0  20.4  0 21.35  Jiu Long Cang Ji Tuan You Xian Gong Si  149  21.6  0  0  21.6  0  0  22.5  0  323000 21.4932  323000
+59  0004.HK  20250106  21.6  6303947.0  21.6 21.55  21.6  69000  21.8  21.6  0  21.2  0 21.35  Jiu Long Cang Ji Tuan You Xian Gong Si  205 21.35  0  0  21.5  0  0  22.65  0  291741 21.6084  290000
+60  0004.HK  20250107  21.75  14970323.0 21.75  21.7  21.75  251000  21.9  21.7  0  21.05  0 21.55  Jiu Long Cang Ji Tuan You Xian Gong Si  371  21.8  21.8  1000  21.6  0  0  22.75  0  688367  21.748  687000
+61  0004.HK  20250108  22.05  14289274.0 22.05  22  22.05  198000 22.25  22.05  0  20.95  0 21.65  Jiu Long Cang Ji Tuan You Xian Gong Si  407 21.65  0  0  21.75  0  0  23.15  0  648528 22.0346  641000
+62  0004.HK  20250109  22.05  9681526.0 22.05  22  22.05  49000 22.25  22.05  0  21.4  0  21.9  Jiu Long Cang Ji Tuan You Xian Gong Si  232 22.05  0  0  22.05  0  0  23.15  0  439044 22.0514  439000
+63  0004.HK  20250110  21.4  3846704.0  21.4 21.35  21.4  85000 22.05  21.4  0  20.35  0  21.4  Jiu Long Cang Ji Tuan You Xian Gong Si  105 22.05  0  0  22.05  0  0  22.45  0  178671 21.5274  177000
+64  0004.HK  20250113  21  9203546.0  21 20.95  21  143000  21.5  21  0  19.96  0  21  Jiu Long Cang Ji Tuan You Xian Gong Si  278 21.15  0  0  21.4  0  0  22.05  0  435397 21.1383  435000
+65  0004.HK  20250114  21.35  13193151.0 21.35  21.3  21.35  143000  21.6  21.35  0  20.3  0  21  Jiu Long Cang Ji Tuan You Xian Gong Si  374  21.6  21.6  3000  21  0  0  22.4  0  620868 21.2489  619000
+66  0004.HK  20250115  21.1  9605368.0  21.1 21.05  21.1  127000  21.5  21.1  0  20.05  0  21.1  Jiu Long Cang Ji Tuan You Xian Gong Si  292 21.45  21.45  3000  21.35  0  0  22.15  0  452326  21.235  448000
+67  0004.HK  20250116  20.5  8820391.0  20.5 20.45  20.5  131000  21.5  20.5  0  19.48  0  20.5  Jiu Long Cang Ji Tuan You Xian Gong Si  297  21.3  21.3  2000  21.1  0  0  21.5  0  427421 20.6342  419000
+68  0004.HK  20250117  20.9  9641413.0  20.9 20.75  20.9  171000  21  20.75  0  19.72  0  20.5  Jiu Long Cang Ji Tuan You Xian Gong Si  293  20.5  0  0  20.5  0  0  21.75  0  463047 20.8226  462000
+69  0004.HK  20250120  22.05  14460641.0 22.05 21.95  22.05  115000 22.05  22  0  21.7  0  20.9  Jiu Long Cang Ji Tuan You Xian Gong Si  438  20.9  0  0  20.9  0  0  23.1  0  664670 21.7578  663000
+70  0004.HK  20250121  21.7  12576333.0  21.7 21.65  21.7  116000  22.3  21.7  0  20.65  0 21.35  Jiu Long Cang Ji Tuan You Xian Gong Si  352  22  0  0  22.05  0  0  22.75  0  579745 21.6933  578000
+71  0004.HK  20250122  21.15  8313009.0 21.15  21.1  21.15  168000 22.25  21.15  0  20.1  0 21.15  Jiu Long Cang Ji Tuan You Xian Gong Si  212 22.25  22.25  2000  21.7  0  0  22.2  0  391618 21.2277  391000
+72  0004.HK  20250123  20.05  12814485.0  20.1  20  20.05  157000 21.35  20.1  0  19.1  0 20.05  Jiu Long Cang Ji Tuan You Xian Gong Si  317 21.15  21.15  8000  21.15  0  0  21.1  0  627195 20.4302  626000
+73  0004.HK  20250124  19.54  22188344.0 19.66 19.54  19.54  243000 20.25  19.66  0  18.68  0 19.54  Jiu Long Cang Ji Tuan You Xian Gong Si  505 20.05  20.05  2000  20.05  0  0  20.6  0  1125233.0 19.7188  1124000.0
+74  0004.HK  20250127  19.5  9376546.0 19.56  19.5  19.5  60000  20  19.58  0  18.62  0  19.5  Jiu Long Cang Ji Tuan You Xian Gong Si  282 19.54  19.54  1000  19.54  0  0  20.55  0  478335 19.6023  477000
+75  0004.HK  20250128  19  11542611.0 19.08  19  19  202000 19.94  19.08  0  18.14  0  19  Jiu Long Cang Ji Tuan You Xian Gong Si  356 19.94  19.94  1000  19.5  0  0  20  0  603961 19.1115  603000
+76  0005.HK  20250102  75.7 1193146546.0  75.7 75.65  75.7  1452800.0 75.85  75.25  0  71.5  0 74.65  HSBC HOLDINGS PLC  6839  75.8  75.8  128800  75.8  0  0  79  0 15851617.0 75.2701 15828800.0
+77  0005.HK  20250103  75  884157096.0  75 74.95  75  414000 75.75  74.95  0  71.25  0  74.9  HSBC HOLDINGS PLC  5319  75.3  75.3  63200  75.7  0  0  78.65  0 11755463.0 75.2095 11342800.0
+78  0005.HK  20250106  75.55  971750312.0  75.6 75.55  75.55  1792400.0 75.65  75.4  0  71.65  0 75.15  HSBC HOLDINGS PLC  5347  75.5  75.5  142000  75  0  0  79.15  0 12886461.0 75.4114 12420800.0
+79  0005.HK  20250107  75.3 1398269234.0  75.3 75.25  75.3  1669600.0  75.9  75.4  0  71.65  0  74.9  HSBC HOLDINGS PLC  8531  75.5  75.5  210800  75.55  0  0  79.15  0 18577225.0 75.2676 18518000.0
+80  0005.HK  20250108  75.95 1356961553.0 75.95  75.9  75.95  2738400.0 75.95  75.55  0  71.8  0 74.75  HSBC HOLDINGS PLC  6745  75.3  75.3  133200  75.3  0  0  79.3  0 18019505.0 75.3082 17724800.0
+81  0005.HK  20250109  75.6  916079216.0 75.65  75.6  75.6  1390400.0  76.2  75.85  0  72.1  0  75.6  HSBC HOLDINGS PLC  5532  75.9  75.9  64000  75.95  0  0  79.6  0 12063607.0  75.938 11992000.0
+82  0005.HK  20250110  76.5 1709011197.0 76.55  76.5  76.5  1828800.0  76.6  76.35  0  72.55  0 76.25  HSBC HOLDINGS PLC  10570  76.5  76.5  737200  75.6  0  0  80.15  0 22361611.0 76.4269 22242800.0
+83  0005.HK  20250113  75.3 1086291241.0 75.35  75.3  75.3  1007600.0  76.1  75.25  0  71.5  0 74.85  HSBC HOLDINGS PLC  5351  76  76  21200  76.5  0  0  79  0 14415841.0 75.3446 14214400.0
+84  0005.HK  20250114  75.95  971901953.0 75.95  75.9  75.95  971200 75.95  75.9  0  72.15  0  75.4  HSBC HOLDINGS PLC  5651 75.45  75.45  62800  75.3  0  0  79.65  0 12841705.0 75.6848 12416400.0
+85  0005.HK  20250115  76  901135913.0  76 75.95  76  1506400.0  76  75.95  0  73.7  0 75.35  HSBC HOLDINGS PLC  4513 75.75  75.75  149200  75.95  0  0  79.7  0 11891439.0 75.7807 11862000.0
+86  0005.HK  20250116  77.35 1794147723.0  77.4 77.35  77.35  2186000.0  77.5  77.4  0  73.55  0 76.25  HSBC HOLDINGS PLC  9450 76.95  76.95  422000  76  0  0  81.25  0 23222162.0 77.2602 23008400.0
+87  0005.HK  20250117  77.6  946118201.0 77.65  77.6  77.6  1075200.0  78  77.55  0  73.7  0  77.3  HSBC HOLDINGS PLC  5815 77.75  77.75  219200  77.35  0  0  81.4  0 12189547.0 77.6182 12164400.0
+88  0005.HK  20250120  78.35 1128700060.0 78.35  78.3  78.35  1081600.0  78.4  78.25  0  74.35  0  77.7  HSBC HOLDINGS PLC  7098  78  78  198800  77.6  0  0  82.15  0 14442370.0 78.1574 14021600.0
+89  0005.HK  20250121  78.85  987738149.0 78.85  78.8  78.85  1236800.0  79  78.75  0  76.4  0 78.55  HSBC HOLDINGS PLC  6367  78.8  78.8  322400  78.35  0  0  82.65  0 12526437.0  78.853 12258400.0
+90  0005.HK  20250122  79.25 1044287491.0  79.3 79.25  79.25  945200 79.35  79.05  0  76.7  0 78.85  HSBC HOLDINGS PLC  5978  79  79  206000  78.85  0  0  83  0 13195031.0 79.1435 13163200.0
+91  0005.HK  20250123  78.65 1017564154.0  78.7 78.65  78.65  1051600.0 79.25  78.5  0  74.6  0  78.3  HSBC HOLDINGS PLC  5410  78.9  78.9  86800  79.25  0  0  82.4  0 12912877.0 78.7977 12348400.0
+92  0005.HK  20250124  79.9 1679882034.0  79.9 79.85  79.9  1284800.0  80  79.7  0  77.35  0  79.3  HSBC HOLDINGS PLC  8867 79.55  79.55  656400  78.65  0  0  83.65  0 21067554.0 79.7398 20852400.0
+93  0005.HK  20250127  79.45 1052701275.0  79.5 79.45  79.45  809600  79.9  79.25  0  75.3  0  79.2  HSBC HOLDINGS PLC  6052  79.3  79.3  126800  79.9  0  0  83.2  0 13218510.0 79.6388 13176000.0
+94  0005.HK  20250128  79.95  713680973.0  80 79.95  79.95  762800  80  79.95  0  77.6  0  79.8  HSBC HOLDINGS PLC  3003  80  80  620800  79.45  0  0  83.9  0  8928135.0 79.9404  8820400.0
+95  0006.HK  20250102  53.15  140458301.0 53.25 53.15  53.15  170000  54.2  53.15  0  50.5  0 52.85  Dian Neng Shi Ye You Xian Gong Si  2258  54.2  0  0  54.2  0  0  55.8  0  2637062.0 53.2238  2527000.0
+96  0006.HK  20250103  53.15  104098280.0 53.15  53.1  53.15  195500 53.65  53.15  0  50.5  0 52.95  Dian Neng Shi Ye You Xian Gong Si  1973 53.15  53.15  25500  53.15  0  0  55.8  0  1956326.0 53.2109  1953000.0
+97  0006.HK  20250106  53.75  99075250.0 53.75  53.7  53.75  511000 53.95  53.75  0  51.1  0 52.95  Dian Neng Shi Ye You Xian Gong Si  1437 52.95  0  0  53.15  0  0  56.4  0  1847493.0 53.6276  1840000.0
+98  0006.HK  20250107  52.85  118794778.0  52.9 52.85  52.85  322500  53.8  52.8  0  50.2  0  52.7  Dian Neng Shi Ye You Xian Gong Si  1505 53.75  53.75  500  53.75  0  0  55.4  0  2240189.0 53.0335  1976500.0
+99  0006.HK  20250108  52.25  132680727.0 52.25  52.2  52.25  532000  53.5  52.3  0  49.7  0 52.25  Dian Neng Shi Ye You Xian Gong Si  2133 52.85  52.85  39500  52.85  0  0  54.9  0  2524040.0 52.5643  2435500.0
+100  0006.HK  20250109  52.45  126032249.0 52.55 52.45  52.45  286500  52.6  52.4  0  49.8  0 51.95  Dian Neng Shi Ye You Xian Gong Si  1721 52.25  52.25  6500  52.25  0  0  55  0  2408336.0 52.3323  2340500.0
+101  0006.HK  20250110  52.55  105164054.0  52.6 52.55  52.55  394000  53.1  52.5  0  49.9  0  52  Dian Neng Shi Ye You Xian Gong Si  1254  52  52  500  52.45  0  0  55.1  0  1997377.0 52.6524  1983000.0
+102  0006.HK  20250113  51.3  170725772.0 51.35  51.3  51.3  283500  52.6  51.35  0  48.8  0  50.8  Dian Neng Shi Ye You Xian Gong Si  2539  52.6  52.6  500  52.55  0  0  53.9  0  3319626.0 51.4287  3311000.0
+103  0006.HK  20250114  51.2  140023700.0  51.2 51.15  51.2  384500  51.8  51.2  0  48.65  0  51.1  Dian Neng Shi Ye You Xian Gong Si  2090 51.45  51.45  9000  51.3  0  0  53.75  0  2724554.0 51.3925  2562500.0
+104  0006.HK  20250115  51  106166926.0  51 50.95  51  292500  51.8  51  0  48.45  0  50.8  Dian Neng Shi Ye You Xian Gong Si  1585  51.2  51.2  5000  51.2  0  0  53.55  0  2081471.0 51.0057  2075500.0
+105  0006.HK  20250116  51.15  100760773.0 51.15  51.1  51.15  400000  51.8  51.15  0  48.6  0 51.05  Dian Neng Shi Ye You Xian Gong Si  1756  51.1  0  0  51  0  0  53.7  0  1966607.0 51.2358  1956500.0
+106  0006.HK  20250117  51.85  160204476.0 51.85  51.8  51.85  417500  52.3  51.8  0  49.25  0 51.15  Dian Neng Shi Ye You Xian Gong Si  2669 51.15  0  0  51.15  0  0  54.35  0  3091410.0 51.8227  3089500.0
+107  0006.HK  20250120  52.4  95919201.0  52.4  52.3  52.4  314000 52.75  52.4  0  49.8  0 51.75  Dian Neng Shi Ye You Xian Gong Si  1498  52  52  9000  51.85  0  0  55  0  1833395.0 52.3189  1827000.0
+108  0006.HK  20250121  51.8  76712572.0  51.9  51.8  51.8  370000  52.8  51.9  0  49.35  0  51.8  Dian Neng Shi Ye You Xian Gong Si  1084 52.75  52.75  2500  52.4  0  0  54.45  0  1472863.0 52.0839  1471500.0
+109  0006.HK  20250122  51.4  96415422.0  51.4 51.35  51.4  509500  52.3  51.4  0  48.85  0  51.3  Dian Neng Shi Ye You Xian Gong Si  1562  52  52  2500  51.8  0  0  53.95  0  1868169.0 51.6094  1851500.0
+110  0006.HK  20250123  51  105478572.0 51.15  51  51  241000  51.7  51.15  0  48.6  0  50.9  Dian Neng Shi Ye You Xian Gong Si  1536  51.4  51.4  2500  51.4  0  0  53.7  0  2058876.0 51.2314  2056000.0
+111  0006.HK  20250124  50.9  148319364.0 50.95  50.9  50.9  455000  51.7  50.95  0  48.45  0  50.8  Dian Neng Shi Ye You Xian Gong Si  2055  51.1  51.1  14000  51  0  0  53.45  0  2905170.0 51.0536  2900500.0
+112  0006.HK  20250127  50.75  81293476.0  50.8 50.75  50.75  185500  51.6  50.8  0  48.3  0 50.75  Dian Neng Shi Ye You Xian Gong Si  1482 50.95  50.95  500  50.9  0  0  53.3  0  1598473.0 50.8727  1578500.0
+113  0006.HK  20250128  50.35  67795724.0  50.5 50.35  50.35  326000 51.15  50.5  0  48  0 50.35  Dian Neng Shi Ye You Xian Gong Si  1087 50.75  0  0  50.75  0  0  53  0  1342561.0  50.497  1311000.0
+114  0007.HK  20250102  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+115  0007.HK  20250103  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+116  0007.HK  20250106  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+117  0007.HK  20250107  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+118  0007.HK  20250108  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+119  0007.HK  20250109  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+120  0007.HK  20250110  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+121  0007.HK  20250113  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+122  0007.HK  20250114  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+123  0007.HK  20250115  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+124  0007.HK  20250116  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+125  0007.HK  20250117  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+126  0007.HK  20250120  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+127  0007.HK  20250121  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+128  0007.HK  20250122  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+129  0007.HK  20250123  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+130  0007.HK  20250124  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+131  0007.HK  20250127  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+132  0007.HK  20250128  0  0  0  0  0.032  0 0.032  0  0  0.031  0 0.032  Wisdom Wealth Resources Investment Holding Group Limited  0 0.032  0  0  0.032  1  0  0.033  0  0  0  0
+133  0008.HK  20250102  4.5  18291762.0  4.5  4.49  4.5  356000  4.51  4.49  0  4.27  0  4.46  Dian Xun Ying Ke You Xian Gong Si  847  4.5  0  0  4.52  0  0  4.71  0  4074414.0  4.4895  4067000.0
+134  0008.HK  20250103  4.51  23370405.0  4.51  4.5  4.51  469000  4.52  4.51  0  4.29  0  4.48  Dian Xun Ying Ke You Xian Gong Si  943  4.5  0  0  4.5  0  0  4.73  0  5191772.0  4.5015  5184000.0
+135  0008.HK  20250106  4.51  17924732.0  4.51  4.5  4.51  369000  4.51  4.51  0  4.29  0  4.46  Dian Xun Ying Ke You Xian Gong Si  849  4.51  4.51  8000  4.51  0  0  4.73  0  3984103.0  4.4992  3964000.0
+136  0008.HK  20250107  4.46  15589465.0  4.47  4.46  4.46  224000  4.51  4.45  0  4.23  0  4.43  Dian Xun Ying Ke You Xian Gong Si  863  4.51  4.51  1000  4.51  0  0  4.67  0  3494167.0  4.4616  3420000.0
+137  0008.HK  20250108  4.48  21190015.0  4.48  4.47  4.48  621000  4.49  4.48  0  4.26  0  4.42  Dian Xun Ying Ke You Xian Gong Si  891  4.46  0  0  4.46  0  0  4.7  0  4760800.0  4.4517  4464000.0
+138  0008.HK  20250109  4.5  21957342.0  4.5  4.49  4.5  105000  4.52  4.52  0  4.36  0  4.45  Dian Xun Ying Ke You Xian Gong Si  1156  4.47  0  0  4.48  0  0  4.74  0  4872478.0  4.5066  4715000.0
+139  0008.HK  20250110  4.53  37150818.0  4.53  4.52  4.53  362000  4.54  4.53  0  4.37  0  4.47  Dian Xun Ying Ke You Xian Gong Si  1174  4.5  4.5  5000  4.5  0  0  4.75  0  8233492.0  4.5125  7865000.0
+140  0008.HK  20250113  4.47  30025975.0  4.48  4.47  4.47  359000  4.53  4.48  0  4.26  0  4.47  Dian Xun Ying Ke You Xian Gong Si  1304  4.52  4.52  2000  4.53  0  0  4.7  0  6695093.0  4.4844  6460000.0
+141  0008.HK  20250114  4.48  34187898.0  4.5  4.48  4.48  449000  4.52  4.48  0  4.26  0  4.45  Dian Xun Ying Ke You Xian Gong Si  1724  4.45  0  0  4.47  0  0  4.7  0  7613466.0  4.4903  7223000.0
+142  0008.HK  20250115  4.55  63061578.0  4.56  4.55  4.55  675000  4.57  4.56  0  4.37  0  4.47  Dian Xun Ying Ke You Xian Gong Si  2010  4.48  0  0  4.48  0  0  4.78  0 13881225.0  4.543 13871000.0
+143  0008.HK  20250116  4.69  66425619.0  4.69  4.68  4.69  557000  4.7  4.69  0  4.46  0  4.56  Dian Xun Ying Ke You Xian Gong Si  2416  4.56  4.56  3000  4.55  0  0  4.92  0 14333129.0  4.6345 13993000.0
+144  0008.HK  20250117  4.71  61806663.0  4.71  4.7  4.71  1284000.0  4.72  4.71  0  4.56  0  4.67  Dian Xun Ying Ke You Xian Gong Si  1771  4.69  0  0  4.69  0  0  4.94  0 13157025.0  4.6976 13055000.0
+145  0008.HK  20250120  4.72  50309563.0  4.72  4.71  4.72  331000  4.75  4.72  0  4.56  0  4.68  Dian Xun Ying Ke You Xian Gong Si  2656  4.72  4.72  42000  4.71  0  0  4.95  0 10667180.0  4.7163 10637000.0
+146  0008.HK  20250121  4.68  22764300.0  4.68  4.67  4.68  534000  4.74  4.68  0  4.54  0  4.65  Dian Xun Ying Ke You Xian Gong Si  1227  4.74  4.74  60000  4.72  0  0  4.91  0  4858346.0  4.6859  4602000.0
+147  0008.HK  20250122  4.56  26222511.0  4.57  4.56  4.56  353000  4.69  4.57  0  4.35  0  4.56  Dian Xun Ying Ke You Xian Gong Si  1295  4.69  4.69  27000  4.68  0  0  4.79  0  5704475.0  4.5965  5525000.0
+148  0008.HK  20250123  4.57  18652620.0  4.59  4.57  4.57  152000  4.6  4.59  0  4.37  0  4.55  Dian Xun Ying Ke You Xian Gong Si  916  4.56  0  0  4.56  0  0  4.81  0  4076392.0  4.5758  3998000.0
+149  0008.HK  20250124  4.55  26380780.0  4.56  4.55  4.55  164000  4.58  4.56  0  4.34  0  4.49  Dian Xun Ying Ke You Xian Gong Si  1057  4.58  0  0  4.57  0  0  4.78  0  5823690.0  4.5299  5776000.0
+150  0008.HK  20250127  4.59  29790966.0  4.59  4.58  4.59  566000  4.6  4.59  0  4.5  0  4.53  Dian Xun Ying Ke You Xian Gong Si  1706  4.54  0  0  4.55  0  0  4.81  0  6516879.0  4.5714  6433000.0
+151  0008.HK  20250128  4.53  22016992.0  4.54  4.53  4.53  376000  4.59  4.54  0  4.32  0  4.52  Dian Xun Ying Ke You Xian Gong Si  809  4.58  4.58  23000  4.59  0  0  4.76  0  4839442.0  4.5495  4836000.0
+152  0010.HK  20250102  10.44  13562345.0 10.44 10.42  10.44  49000 10.48  10.42  0  10.42  0 10.24  Heng Long Ji Tuan You Xian Gong Si  404 10.46  10.46  2000  10.46  0  0  10.94  0  1303625.0 10.3729  842000
+153  0010.HK  20250103  10.36  13499238.0 10.36 10.34  10.36  64000 10.52  10.34  0  9.83  0  10.3  Heng Long Ji Tuan You Xian Gong Si  542 10.52  0  0  10.44  0  0  10.84  0  1301475.0 10.3722  1272000.0
+154  0010.HK  20250106  10.4  7857987.0  10.4 10.36  10.4  68000 10.46  10.38  0  10.16  0 10.22  Heng Long Ji Tuan You Xian Gong Si  461 10.46  0  0  10.36  0  0  10.88  0  760105 10.3381  759000
+155  0010.HK  20250107  10.32  7610948.0 10.32 10.26  10.32  29000  10.4  10.28  0  9.77  0 10.22  Heng Long Ji Tuan You Xian Gong Si  358  10.4  10.4  1000  10.4  0  0  10.78  0  739105 10.2982  716000
+156  0010.HK  20250108  10.28  6120927.0 10.28 10.22  10.28  66000 10.34  10.26  0  9.75  0  10.1  Heng Long Ji Tuan You Xian Gong Si  347 10.34  0  0  10.32  0  0  10.76  0  598861 10.2214  567000
+157  0010.HK  20250109  10.26  5707452.0 10.26 10.24  10.26  70000 10.34  10.26  0  10.26  0 10.22  Heng Long Ji Tuan You Xian Gong Si  337 10.26  0  0  10.28  0  0  10.76  0  556031 10.2646  512000
+158  0010.HK  20250110  10.12  5045201.0 10.12  10.1  10.12  36000 10.28  10.12  0  9.62  0 10.06  Heng Long Ji Tuan You Xian Gong Si  281 10.28  10.28  1000  10.26  0  0  10.62  0  497610 10.1394  472000
+159  0010.HK  20250113  10.06  5729550.0 10.06 10.04  10.06  51000  10.2  10.04  0  9.74  0 10.02  Heng Long Ji Tuan You Xian Gong Si  299 10.12  0  0  10.12  0  0  10.34  0  569640 10.0582  567000
+160  0010.HK  20250114  10.16  10929017.0 10.16 10.14  10.16  79000 10.18  10.14  0  9.84  0 10.02  Heng Long Ji Tuan You Xian Gong Si  437 10.12  0  0  10.06  0  0  10.64  0  1083312.0 10.0885  1083000.0
+161  0010.HK  20250115  10.12  7449902.0 10.12  10.1  10.12  84000 10.18  10.1  0  9.6  0 10.04  Heng Long Ji Tuan You Xian Gong Si  362 10.04  0  0  10.16  0  0  10.6  0  736704 10.1125  735000
+162  0010.HK  20250116  10.12  9703738.0 10.12  10.1  10.12  47000 10.32  10.14  0  9.64  0 10.08  Heng Long Ji Tuan You Xian Gong Si  388 10.16  0  0  10.12  0  0  10.64  0  956272 10.1475  956000
+163  0010.HK  20250117  10.32  11214440.0 10.34 10.26  10.32  30000 10.36  10.32  0  10.02  0 10.08  Heng Long Ji Tuan You Xian Gong Si  363 10.12  0  0  10.12  0  0  10.82  0  1094000.0  10.251  1091000.0
+164  0010.HK  20250120  10.3  9692160.0  10.3 10.26  10.3  7000 10.44  10.28  0  10.3  0 10.22  Heng Long Ji Tuan You Xian Gong Si  494 10.22  0  0  10.32  0  0  10.78  0  940000 10.3118  916000
+165  0010.HK  20250121  10.32  7657074.0 10.32  10.3  10.32  66000  10.4  10.3  0  9.79  0 10.28  Heng Long Ji Tuan You Xian Gong Si  381  10.3  10.3  3000  10.3  0  0  10.8  0  741924 10.3205  741000
+166  0010.HK  20250122  10.24  6447440.0 10.24  10.2  10.24  43000 10.32  10.2  0  9.69  0 10.18  Heng Long Ji Tuan You Xian Gong Si  259 10.32  0  0  10.32  0  0  10.7  0  630859 10.2201  629000
+167  0010.HK  20250123  10.34  7724528.0 10.34 10.28  10.34  75000 10.36  10.3  0  9.79  0 10.24  Heng Long Ji Tuan You Xian Gong Si  447 10.26  0  0  10.24  0  0  10.8  0  750467 10.2929  750000
+168  0010.HK  20250124  10.08  15873489.0 10.08 10.06  10.08  17000 10.36  10.08  0  9.58  0 10.02  Heng Long Ji Tuan You Xian Gong Si  581 10.28  0  0  10.34  0  0  10.58  0  1559000.0  10.182  1553000.0
+169  0010.HK  20250127  10.4  16380660.0  10.4 10.34  10.4  95000  10.4  10.36  0  10.06  0 10.16  Heng Long Ji Tuan You Xian Gong Si  466 10.18  10.18  1000  10.08  0  0  10.86  0  1589240.0 10.3073  1588000.0
+170  0010.HK  20250128  10.3  3095180.0 10.32  10.3  10.3  29000 10.36  10.34  0  9.83  0  10.3  Heng Long Ji Tuan You Xian Gong Si  140 10.36  0  0  10.4  0  0  10.84  0  300000 10.3172  298000
+171  0012.HK  20250102  23.15  69275894.0 23.15  23.1  23.15  274000 23.55  23.15  0  22  0  23  Heng Ji Zhao Ye Di Chan You Xian Gong Si  989  23.3  0  0  23.6  0  0  24.3  0  2980886.0 23.1705  2497000.0
+172  0012.HK  20250103  23.25  53200778.0  23.3 23.25  23.25  382000  23.6  23.2  0  22.05  0 23.15  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1107 23.15  23.15  5000  23.15  0  0  24.35  0  2278237.0 23.3518  2275000.0
+173  0012.HK  20250106  23.25  35781727.0 23.25  23.2  23.25  275000 23.45  23.25  0  22.1  0 23.15  Heng Ji Zhao Ye Di Chan You Xian Gong Si  745  23.2  0  0  23.25  0  0  24.4  0  1537914.0  23.267  1529000.0
+174  0012.HK  20250107  22.9  58411948.0 22.95  22.9  22.9  397000  23.2  22.9  0  21.8  0 22.75  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1158  23.2  23.2  12000  23.25  0  0  24  0  2551735.0  22.891  2541000.0
+175  0012.HK  20250108  22.4  117456584.0  22.4 22.35  22.4  606000  22.9  22.4  0  21.3  0  22  Heng Ji Zhao Ye Di Chan You Xian Gong Si  2223  22.7  22.7  30000  22.9  0  0  23.5  0  5259991.0 22.3309  5026000.0
+176  0012.HK  20250109  22.35  43785253.0 22.35  22.3  22.35  339000  22.5  22.35  0  21.25  0  22.3  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1017 22.35  0  0  22.4  0  0  23.45  0  1955183.0 22.3951  1903000.0
+177  0012.HK  20250110  22.3  53304425.0 22.35  22.3  22.3  279000 22.55  22.3  0  21.2  0  22.1  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1289  22.4  22.4  17000  22.35  0  0  23.4  0  2395208.0 22.2548  2385000.0
+178  0012.HK  20250113  21.9  99463842.0 21.95  21.9  21.9  448000 22.65  21.9  0  20.85  0 21.55  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1809  22.4  0  0  22.3  0  0  22.95  0  4565047.0 21.7882  4535000.0
+179  0012.HK  20250114  21.6  71737151.0  21.6 21.55  21.6  888000 22.05  21.6  0  20.55  0  21.6  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1204  21.9  21.9  3000  21.9  0  0  22.65  0  3295584.0 21.7658  3209000.0
+180  0012.HK  20250115  21.8  48116751.0 21.85  21.8  21.8  342000 21.85  21.8  0  20.75  0  21.5  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1026 21.65  21.65  9000  21.6  0  0  22.85  0  2215690.0 21.7175  2191000.0
+181  0012.HK  20250116  21.85  64326023.0 21.85  21.8  21.85  499000 22.25  21.8  0  20.75  0 21.55  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1045  22  0  0  21.8  0  0  22.85  0  2949231.0 21.8119  2863000.0
+182  0012.HK  20250117  22.45  67966418.0 22.45  22.4  22.45  598000 22.55  22.45  0  21.35  0  21.7  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1397  21.9  21.9  6000  21.85  0  0  23.55  0  3040911.0 22.3514  3032000.0
+183  0012.HK  20250120  22.55  54693997.0 22.55  22.5  22.55  274000 22.95  22.55  0  21.45  0 22.45  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1102  22.7  22.7  12000  22.45  0  0  23.65  0  2410645.0 22.6895  2395000.0
+184  0012.HK  20250121  22.35  47866432.0 22.35  22.3  22.35  527000  22.9  22.35  0  21.25  0  22.3  Heng Ji Zhao Ye Di Chan You Xian Gong Si  763 22.55  22.55  1000  22.55  0  0  23.45  0  2132638.0 22.4443  2086000.0
+185  0012.HK  20250122  22.05  35374370.0  22.1 22.05  22.05  363000  22.4  22.05  0  20.95  0 21.95  Heng Ji Zhao Ye Di Chan You Xian Gong Si  818 22.25  22.25  3000  22.35  0  0  23.15  0  1600122.0 22.1078  1573000.0
+186  0012.HK  20250123  21.85  47545591.0 21.85  21.8  21.85  386000  22.4  21.85  0  20.8  0  21.8  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1126 22.05  22.05  26000  22.05  0  0  22.9  0  2164293.0 21.9681  2152000.0
+187  0012.HK  20250124  21.9  51914043.0 21.95  21.9  21.9  721000  22.3  21.85  0  20.8  0  21.8  Heng Ji Zhao Ye Di Chan You Xian Gong Si  995  22.3  22.3  5000  21.85  0  0  22.9  0  2362955.0 21.9699  2349000.0
+188  0012.HK  20250127  21.95  40198247.0 21.95  21.9  21.95  206000  22.2  21.95  0  20.9  0  21.8  Heng Ji Zhao Ye Di Chan You Xian Gong Si  988  21.9  21.9  2000  21.9  0  0  23  0  1834126.0 21.9172  1827000.0
+189  0012.HK  20250128  21.6  56999983.0 21.65  21.6  21.6  686000  22  21.65  0  20.6  0  21.5  Heng Ji Zhao Ye Di Chan You Xian Gong Si  1021 21.95  21.95  1000  21.95  0  0  22.7  0  2634275.0 21.6381  2601000.0
+190  0013.HK  20250102  23.4  639611258.0 23.45  23.4  23.4  128000  25.2  23.4  0  22.25  0  23.1  HUTCHMED (CHINA) LIMITED  16261 23.25  23.25  232500  22.55  0  0  24.55  0 26730455.0 23.9283 26705500.0
+191  0013.HK  20250103  23.25  193325523.0 23.25  23.2  23.25  70500  24.2  23.25  0  22.1  0 22.85  HUTCHMED (CHINA) LIMITED  4937 23.55  23.55  19000  23.4  0  0  24.4  0  8269500.0 23.3791  8208000.0
+192  0013.HK  20250106  24.55  257434339.0 24.55  24.5  24.55  42000  24.7  24.55  0  23.35  0  23.4  HUTCHMED (CHINA) LIMITED  7256  23.5  23.5  28500  23.25  0  0  25.75  0 10647040.0 24.1769 10467000.0
+193  0013.HK  20250107  24.1  133774560.0  24.1 24.05  24.1  75000  24.6  24.1  0  22.9  0  23.7  HUTCHMED (CHINA) LIMITED  4420 24.55  24.55  23000  24.55  0  0  25.3  0  5551941.0 24.0952  5536000.0
+194  0013.HK  20250108  24.15  118412448.0  24.2 24.15  24.15  41000 24.45  24.15  0  23.45  0 23.25  HUTCHMED (CHINA) LIMITED  3882  24.1  0  0  24.1  0  0  25.35  0  4946652.0  23.938  4930000.0
+195  0013.HK  20250109  24.35  76092250.0  24.4 24.35  24.35  11500 24.65  24.4  0  23.2  0  23.8  HUTCHMED (CHINA) LIMITED  2711  24.1  0  0  24.15  0  0  25.6  0  3109428.0 24.4715  3109000.0
+196  0013.HK  20250110  23.75  49718809.0  23.8 23.75  23.75  87000 24.55  23.8  0  22.65  0  23.6  HUTCHMED (CHINA) LIMITED  1579 24.55  24.55  2000  24.35  0  0  24.95  0  2076500.0 23.9432  2052000.0
+197  0013.HK  20250113  22.95  62902775.0 22.95  22.9  22.95  17000  23.6  22.95  0  21.85  0  22.8  HUTCHMED (CHINA) LIMITED  2386 23.25  23.25  13000  23.75  0  0  24.05  0  2731280.0 23.0304  2731000.0
+198  0013.HK  20250114  23.55  68017494.0 23.55  23.5  23.55  33000  23.7  23.55  0  22.4  0  22.9  HUTCHMED (CHINA) LIMITED  3020  22.9  22.9  500  22.95  0  0  24.7  0  2903851.0 23.4234  2893000.0
+199  0013.HK  20250115  21.25  313170004.0 21.25  21.2  21.25  55500  23.5  21.25  0  20.2  0 21.05  HUTCHMED (CHINA) LIMITED  9792  23.5  0  0  23.55  0  0  22.3  0 14363879.0  21.806 14275500.0
 ```
 
 **2. get_us_daily - 获取美股日线数据**
@@ -10101,25 +11948,31 @@ symbol  date  alt_close  amount  ask  bid  close  cls_aucvol  high  lmt_refpr2  
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"，与结束日期间不超过5年 | 必填 |
+| end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
+| date | string | 交易日 |
 | symbol | string | 股票代码 |
-| date | string | 日期 |
-| name | string | 股票名称 |
-| open | float | 开盘价 |
-| close | float | 收盘价 |
+| open | string | 开盘价 |
 | high | float | 最高价 |
 | low | float | 最低价 |
+| close | float | 收盘价 |
 | volume | float | 成交量 |
-| pre_close | float | 昨日结算价 |
+| pre_close | float | 昨收价 |
+| name | string | 股票名称 |
 | trade_status | float | 交易状态代码 |
+| blkcount | float | 大宗交易笔数 |
+| blkvolum | float | 大宗交易量数 |
+| bid | float | 买盘价（收盘前最后一笔） |
+| ask | float | 卖盘价（收盘前最后一笔） |
+| vwap | float | 成交量加权平均价 |
+| num_moves | float | 成交笔数 |
 
 **2.4. 使用示例**
 
@@ -10139,207 +11992,207 @@ print(result)
 **响应示例**
 
 ```text
-symbol  date  amount  ask  bid  blkcount  blkvolum  close  high  low  name  num_moves  open  pre_close  trade_status  volume  vwap
-0  A  20250102  64345522.0  133.54  133.35  12.0  42341.0  133.43  135.73  132.87  AGILENT TECHNOLOGIES, INC.  13064.0  135.21  134.34  0.0  953587.0  133.6856
-1  A  20250103  95527481.0  135.8  135.64  13.0  365497.0  135.69  136.05  132.755  AGILENT TECHNOLOGIES, INC.  12802.0  133.45  133.43  0.0  1246919.0  135.0829
-2  A  20250106  75653670.0  136.54  136.37  17.0  66144.0  136.43  138.34  135.34  AGILENT TECHNOLOGIES, INC.  13535.0  135.6  135.69  0.0  1047034.0  137.0353
-3  A  20250107  76933567.0  137.55  137.41  22.0  101912.0  137.41  140.28  135.98  AGILENT TECHNOLOGIES, INC.  13929.0  136.83  136.43  0.0  1056693.0  137.7331
-4  A  20250108  112541630.0  137.07  136.88  20.0  406349.0  137.0  137.68  135.63  AGILENT TECHNOLOGIES, INC.  12460.0  137.68  137.41  0.0  1684573.0  137.1211
-5  A  20250110  105981067.0  137.51  137.37  28.0  144723.0  137.47  140.14  134.709  AGILENT TECHNOLOGIES, INC.  17668.0  134.75  137.0  0.0  1369875.0  137.6988
-6  A  20250113  112540247.0  142.06  141.89  20.0  48978.0  141.95  142.82  137.0  AGILENT TECHNOLOGIES, INC.  18425.0  137.22  137.47  0.0  1561959.0  141.8156
-7  A  20250114  210679717.0  143.59  143.35  25.0  309811.0  143.43  145.38  140.15  AGILENT TECHNOLOGIES, INC.  23690.0  142.0  141.95  0.0  2445434.0  143.3105
-8  A  20250115  189969006.0  142.28  142.18  43.0  190130.0  142.23  146.5  138.68  AGILENT TECHNOLOGIES, INC.  21833.0  144.14  143.43  0.0  2328643.0  142.9805
-9  A  20250116  151526711.0  144.8  144.67  29.0  287030.0  144.72  145.11  140.43  AGILENT TECHNOLOGIES, INC.  17524.0  142.78  142.23  0.0  1661474.0  143.7399
-10  A  20250117  262521129.0  147.48  147.36  36.0  400764.0  147.36  148.46  145.195  AGILENT TECHNOLOGIES, INC.  29499.0  145.88  144.72  0.0  3210310.0  147.3796
-11  A  20250121  205568012.0  152.63  152.49  35.0  133169.0  152.57  153.18  148.01  AGILENT TECHNOLOGIES, INC.  26893.0  148.67  147.36  0.0  2759636.0  152.0675
-12  A  20250122  137100543.0  152.75  152.48  21.0  127279.0  152.6  153.76  151.72  AGILENT TECHNOLOGIES, INC.  17662.0  152.83  152.57  0.0  1730996.0  152.6401
-13  A  20250123  111220864.0  152.55  152.31  25.0  181209.0  152.45  152.955  148.18  AGILENT TECHNOLOGIES, INC.  15293.0  152.83  152.6  0.0  1332235.0  151.5305
-14  A  20250124  141651636.0  151.53  151.32  24.0  188072.0  151.44  152.77  150.78  AGILENT TECHNOLOGIES, INC.  16461.0  152.1  152.45  0.0  1844887.0  151.8604
-15  A  20250127  176833068.0  151.07  150.9  30.0  141160.0  150.96  152.22  148.7301  AGILENT TECHNOLOGIES, INC.  23216.0  151.56  151.44  0.0  2229590.0  150.6783
-16  A  20250128  137042848.0  150.49  150.29  25.0  171761.0  150.34  153.24  150.21  AGILENT TECHNOLOGIES, INC.  18890.0  152.61  150.96  0.0  1791623.0  151.5279
-17  A  20250129  129997903.0  147.22  147.04  34.0  174876.0  147.09  149.9  146.55  AGILENT TECHNOLOGIES, INC.  19102.0  148.99  150.34  0.0  1583243.0  147.6937
-18  A  20250130  120597195.0  151.47  151.34  32.0  89679.0  151.38  152.48  147.65  AGILENT TECHNOLOGIES, INC.  16703.0  148.95  147.09  0.0  1496057.0  151.3413
-19  A  20250131  124415809.0  151.64  151.46  22.0  99406.0  151.52  153.84  150.5  AGILENT TECHNOLOGIES, INC.  18061.0  150.96  151.38  0.0  1886605.0  152.4235
-20  AA  20250102  55559982.0  38.03  37.98  10.0  330198.0  37.99  39.04  37.9  ALCOA CORPORATION  19644.0  38.165  37.78  0.0  2703886.0  38.429
-21  AA  20250103  142165711.0  35.7  35.67  28.0  539255.0  35.71  37.95  35.3752  ALCOA CORPORATION  37554.0  37.95  37.99  0.0  7491799.0  35.9373
-22  AA  20250106  126633155.0  36.51  36.44  24.0  679504.0  36.49  37.075  35.92  ALCOA CORPORATION  34563.0  36.0  35.71  0.0  5983917.0  36.5015
-23  AA  20250107  64952610.0  36.24  36.2  10.0  138492.0  36.24  37.3  35.755  ALCOA CORPORATION  23958.0  36.89  36.49  0.0  3381466.0  36.1982
-24  AA  20250108  75533289.0  36.0  35.98  13.0  429533.0  36.0  36.03  34.75  ALCOA CORPORATION  25384.0  35.78  36.24  0.0  3775303.0  35.4279
-25  AA  20250110  57159576.0  35.91  35.89  20.0  199901.0  35.91  36.56  35.54  ALCOA CORPORATION  20678.0  36.25  36.0  0.0  2943696.0  35.931
-26  AA  20250113  84116984.0  36.49  36.47  11.0  394604.0  36.47  36.52  35.4  ALCOA CORPORATION  26874.0  35.58  35.91  0.0  4230003.0  36.0365
-27  AA  20250114  63412332.0  36.88  36.84  13.0  237347.0  36.88  36.91  35.85  ALCOA CORPORATION  21882.0  36.6  36.47  0.0  3351238.0  36.5084
-28  AA  20250115  120215757.0  38.19  38.16  22.0  1142705.0  38.19  38.3  37.1  ALCOA CORPORATION  26791.0  37.85  36.88  0.0  5156312.0  37.7943
-29  AA  20250116  94520680.0  38.94  38.91  12.0  314224.0  38.91  39.2  38.3  ALCOA CORPORATION  28503.0  38.44  38.19  0.0  4884266.0  38.8789
-30  AA  20250117  83204122.0  39.55  39.54  22.0  322257.0  39.53  39.87  38.94  ALCOA CORPORATION  24885.0  39.24  38.91  0.0  4477360.0  39.5525
-31  AA  20250121  116845953.0  38.64  38.61  20.0  456624.0  38.61  40.62  38.5656  ALCOA CORPORATION  31005.0  39.99  39.53  0.0  5448901.0  39.1494
-32  AA  20250122  194883061.0  38.86  38.81  48.0  613098.0  38.78  39.85  38.68  ALCOA CORPORATION  45316.0  39.61  38.61  0.0  9452189.0  38.9108
-33  AA  20250123  265575869.0  37.4  37.35  42.0  1280669.0  37.35  37.99  36.1  ALCOA CORPORATION  61317.0  37.6  38.78  0.0  11784535.0  37.0811
-34  AA  20250124  99340849.0  37.44  37.37  22.0  305858.0  37.43  37.85  36.7  ALCOA CORPORATION  31970.0  37.85  37.35  0.0  4983825.0  37.0977
-35  AA  20250127  194127691.0  35.03  34.95  32.0  2450359.0  34.97  36.6  34.91  ALCOA CORPORATION  37644.0  36.27  37.43  0.0  8969913.0  35.4222
-36  AA  20250128  98175625.0  34.18  34.15  14.0  178337.0  34.15  35.42  34.0362  ALCOA CORPORATION  36073.0  35.18  34.97  0.0  5684196.0  34.3834
-37  AA  20250129  114259754.0  35.15  35.13  20.0  895287.0  35.13  35.26  34.32  ALCOA CORPORATION  33501.0  34.32  34.15  0.0  5534714.0  34.926
-38  AA  20250130  72329361.0  35.53  35.48  5.0  83790.0  35.53  35.815  34.95  ALCOA CORPORATION  27766.0  35.53  35.13  0.0  4001162.0  35.3849
-39  AA  20250131  96374658.0  35.33  35.31  11.0  275422.0  35.32  36.24  35.16  ALCOA CORPORATION  31675.0  35.5  35.53  0.0  5315132.0  35.6622
-40  AACG  20250102  6834.0  0.91  0.88  0.0  0.0  0.88  0.9054  0.82  ATA Creativity Global  94.0  0.832  0.846  0.0  17613.0  0.8603
-41  AACG  20250103  13284.0  0.9  0.88  0.0  0.0  0.8999  0.91  0.88  ATA Creativity Global  117.0  0.88  0.88  0.0  23090.0  0.8944
-42  AACG  20250106  18961.0  0.94  0.9  0.0  0.0  0.9399  0.94  0.9  ATA Creativity Global  93.0  0.9  0.8999  0.0  33567.0  0.9163
-43  AACG  20250107  10854.0  0.95  0.93  0.0  0.0  0.9441  0.96  0.92  ATA Creativity Global  84.0  0.92  0.9399  0.0  19383.0  0.9395
-44  AACG  20250108  14343.0  0.9792  0.9603  0.0  0.0  0.9791  0.9792  0.9205  ATA Creativity Global  78.0  0.95  0.9441  0.0  24448.0  0.966
-45  AACG  20250110  16205.0  0.9792  0.94  0.0  0.0  0.9462  0.9791  0.8792  ATA Creativity Global  131.0  0.8792  0.9791  0.0  20972.0  0.9058
-46  AACG  20250113  8855.0  0.94  0.93  0.0  0.0  0.94  0.94  0.8851  ATA Creativity Global  55.0  0.92  0.9462  0.0  13616.0  0.9161
-47  AACG  20250114  11004.0  0.9299  0.92  0.0  0.0  0.9199  0.9299  0.9  ATA Creativity Global  73.0  0.9014  0.94  0.0  13812.0  0.9132
-48  AACG  20250115  58553.0  1.04  1.03  0.0  0.0  1.03  1.03  0.91  ATA Creativity Global  164.0  0.91  0.9199  0.0  84202.0  0.9865
-49  AACG  20250116  7408.0  1.0  0.952  0.0  0.0  0.99  1.04  0.97  ATA Creativity Global  100.0  1.04  1.03  0.0  11111.0  1.0133
-50  AACG  20250117  6753.0  0.95  0.92  0.0  0.0  0.95  0.995  0.92  ATA Creativity Global  62.0  0.995  0.99  0.0  9006.0  0.9439
-51  AACG  20250121  4174.0  0.94  0.92  0.0  0.0  0.94  1.0198  0.935  ATA Creativity Global  94.0  0.971  0.95  0.0  6962.0  0.969
-52  AACG  20250122  6651.0  0.94  0.8851  0.0  0.0  0.8888  0.96  0.8888  ATA Creativity Global  103.0  0.949  0.94  0.0  8867.0  0.9157
-53  AACG  20250123  1010.0  0.935  0.911  0.0  0.0  0.9128  0.9228  0.89  ATA Creativity Global  48.0  0.9  0.8888  0.0  2815.0  0.902
-54  AACG  20250124  42196.0  0.8367  0.8278  1.0  28556.0  0.84  0.9129  0.84  ATA Creativity Global  128.0  0.91  0.9128  0.0  54164.0  0.8647
-55  AACG  20250127  15395.0  0.84  0.82  0.0  0.0  0.8301  0.8401  0.8  ATA Creativity Global  100.0  0.8  0.84  0.0  22187.0  0.8286
-56  AACG  20250128  4635.0  0.84  0.8301  0.0  0.0  0.84  0.8613  0.83  ATA Creativity Global  56.0  0.83  0.8301  0.0  8035.0  0.8389
-57  AACG  20250129  9315.0  0.8559  0.82  0.0  0.0  0.8559  0.86  0.82  ATA Creativity Global  119.0  0.86  0.84  0.0  17312.0  0.8255
-58  AACG  20250130  3082.0  0.82  0.8  0.0  0.0  0.82  0.86  0.82  ATA Creativity Global  66.0  0.86  0.8559  0.0  5563.0  0.8412
-59  AACG  20250131  9411.0  0.83  0.783  0.0  0.0  0.7932  0.85  0.7804  ATA Creativity Global  90.0  0.81  0.82  0.0  16796.0  0.8118
-60  AAL  20250102  242376468.0  17.0  16.99  119.0  2892640.0  17.0  17.63  16.83  AMERICAN AIRLINES GROUP INC.  55662.0  17.4  17.43  0.0  19027519.0  17.1082
-61  AAL  20250103  308105266.0  16.98  16.97  138.0  4640829.0  16.97  17.03  16.27  AMERICAN AIRLINES GROUP INC.  57829.0  17.03  17.0  0.0  23806983.0  16.7574
-62  AAL  20250106  419710797.0  17.53  17.52  142.0  7104711.0  17.52  17.94  17.38  AMERICAN AIRLINES GROUP INC.  77486.0  17.64  16.97  0.0  31834608.0  17.6811
-63  AAL  20250107  369251215.0  17.7  17.69  187.0  6735758.0  17.69  17.99  17.53  AMERICAN AIRLINES GROUP INC.  54482.0  17.58  17.52  0.0  25491193.0  17.7153
-64  AAL  20250108  314236482.0  17.61  17.6  131.0  4774442.0  17.6  17.72  17.075  AMERICAN AIRLINES GROUP INC.  52875.0  17.53  17.69  0.0  23093606.0  17.428
-65  AAL  20250110  578347305.0  18.36  18.35  188.0  7475437.0  18.38  18.45  17.8  AMERICAN AIRLINES GROUP INC.  101592.0  17.93  17.6  0.0  43954004.0  18.2444
-66  AAL  20250113  379129908.0  17.6  17.59  118.0  3802768.0  17.6  17.98  17.32  AMERICAN AIRLINES GROUP INC.  67266.0  17.915  18.38  0.0  28427221.0  17.5607
-67  AAL  20250114  386241069.0  18.21  18.2  111.0  5855673.0  18.21  18.24  17.79  AMERICAN AIRLINES GROUP INC.  52029.0  17.79  17.6  0.0  26175829.0  18.0922
-68  AAL  20250115  284515741.0  18.07  18.06  81.0  3126971.0  18.07  18.56  17.97  AMERICAN AIRLINES GROUP INC.  50438.0  18.54  18.21  0.0  20401951.0  18.1765
-69  AAL  20250116  312156065.0  18.29  18.28  87.0  4729224.0  18.29  18.33  17.78  AMERICAN AIRLINES GROUP INC.  50000.0  18.02  18.07  0.0  22031769.0  18.1505
-70  AAL  20250117  284026191.0  18.28  18.27  87.0  1924827.0  18.27  18.57  18.16  AMERICAN AIRLINES GROUP INC.  49990.0  18.55  18.29  0.0  20438502.0  18.2792
-71  AAL  20250121  463308873.0  18.64  18.63  118.0  5899181.0  18.64  18.65  18.27  AMERICAN AIRLINES GROUP INC.  66518.0  18.52  18.27  0.0  30731602.0  18.4982
-72  AAL  20250122  781247986.0  18.68  18.67  303.0  12029921.0  18.66  19.1  18.37  AMERICAN AIRLINES GROUP INC.  106176.0  19.085  18.64  0.0  58392393.0  18.6232
-73  AAL  20250123  1142143991.0  17.03  17.02  526.0  13805045.0  17.03  17.536  16.73  AMERICAN AIRLINES GROUP INC.  173235.0  17.3  18.66  0.0  94892398.0  17.0805
-74  AAL  20250124  470181140.0  16.96  16.95  250.0  6681488.0  16.96  17.34  16.55  AMERICAN AIRLINES GROUP INC.  69769.0  16.845  17.03  0.0  37782479.0  17.0023
-75  AAL  20250127  519464060.0  17.21  17.2  198.0  5421112.0  17.2  17.54  16.705  AMERICAN AIRLINES GROUP INC.  78760.0  16.82  16.96  0.0  40497957.0  17.2188
-76  AAL  20250128  412420950.0  17.15  17.14  119.0  5945300.0  17.15  17.47  16.955  AMERICAN AIRLINES GROUP INC.  61865.0  17.08  17.2  0.0  29817403.0  17.202
-77  AAL  20250129  323831334.0  17.34  17.33  120.0  3868376.0  17.33  17.34  16.9405  AMERICAN AIRLINES GROUP INC.  53267.0  17.14  17.15  0.0  24719434.0  17.1543
-78  AAL  20250130  534789613.0  16.92  16.91  282.0  7092862.0  16.9  17.23  16.8  AMERICAN AIRLINES GROUP INC.  75883.0  16.93  17.33  0.0  42121224.0  16.9657
-79  AAL  20250131  380362108.0  16.94  16.93  139.0  4214992.0  16.92  17.23  16.91  AMERICAN AIRLINES GROUP INC.  61411.0  16.96  16.9  0.0  30197038.0  17.034
-80  AAME  20250102  1890.0  1.5  1.47  0.0  0.0  1.485  1.54  1.47  ATLANTIC AMERICAN CORPORATION  39.0  1.54  1.54  0.0  1323.0  1.4991
-81  AAME  20250103  4133.0  1.5  1.49  0.0  0.0  1.5  1.5  1.46  ATLANTIC AMERICAN CORPORATION  49.0  1.5  1.485  0.0  3157.0  1.4921
-82  AAME  20250106  19140.0  1.48  1.45  0.0  0.0  1.46  1.55  1.46  ATLANTIC AMERICAN CORPORATION  77.0  1.48  1.5  0.0  16843.0  1.4838
-83  AAME  20250107  16672.0  1.51  1.48  0.0  0.0  1.5  1.5404  1.4444  ATLANTIC AMERICAN CORPORATION  79.0  1.5404  1.46  0.0  11601.0  1.492
-84  AAME  20250108  2096.0  1.52  1.47  0.0  0.0  1.52  1.53  1.4651  ATLANTIC AMERICAN CORPORATION  28.0  1.47  1.5  0.0  1621.0  1.4969
-85  AAME  20250110  4554.0  1.5  1.47  0.0  0.0  1.485  1.51  1.485  ATLANTIC AMERICAN CORPORATION  36.0  1.5076  1.52  0.0  4026.0  1.5038
-86  AAME  20250113  6165.0  1.54  1.51  0.0  0.0  1.53  1.53  1.42  ATLANTIC AMERICAN CORPORATION  51.0  1.42  1.485  0.0  5935.0  1.4877
-87  AAME  20250114  2735.0  1.54  1.51  0.0  0.0  1.54  1.54  1.48  ATLANTIC AMERICAN CORPORATION  33.0  1.4812  1.53  0.0  2071.0  1.4929
-88  AAME  20250115  9677.0  1.54  1.5  0.0  0.0  1.52  1.54  1.48  ATLANTIC AMERICAN CORPORATION  46.0  1.48  1.54  0.0  6504.0  1.5275
-89  AAME  20250116  3999.0  1.54  1.5  0.0  0.0  1.5023  1.55  1.5  ATLANTIC AMERICAN CORPORATION  35.0  1.5  1.52  0.0  2824.0  1.5187
-90  AAME  20250117  1674.0  1.5  1.48  0.0  0.0  1.476  1.55  1.476  ATLANTIC AMERICAN CORPORATION  36.0  1.55  1.5023  0.0  1217.0  1.5132
-91  AAME  20250121  1841.0  1.54  1.5  0.0  0.0  1.505  1.505  1.48  ATLANTIC AMERICAN CORPORATION  57.0  1.48  1.476  0.0  1841.0  1.4909
-92  AAME  20250122  13204.0  1.54  1.51  0.0  0.0  1.51  1.5467  1.485  ATLANTIC AMERICAN CORPORATION  68.0  1.505  1.505  0.0  8993.0  1.5103
-93  AAME  20250123  1786.0  1.51  1.49  0.0  0.0  1.515  1.515  1.48  ATLANTIC AMERICAN CORPORATION  30.0  1.48  1.51  0.0  1560.0  1.5005
-94  AAME  20250124  813.0  1.53  1.51  0.0  0.0  1.515  1.515  1.515  ATLANTIC AMERICAN CORPORATION  35.0  1.515  1.515  0.0  547.0  1.5165
-95  AAME  20250127  35159.0  1.65  1.62  0.0  0.0  1.65  1.65  1.44  ATLANTIC AMERICAN CORPORATION  240.0  1.44  1.515  0.0  33465.0  1.5503
-96  AAME  20250128  7462.0  1.7  1.65  0.0  0.0  1.7  1.7  1.54  ATLANTIC AMERICAN CORPORATION  51.0  1.595  1.65  0.0  9296.0  1.6534
-97  AAME  20250129  5517.0  1.72  1.7  0.0  0.0  1.7001  1.725  1.52  ATLANTIC AMERICAN CORPORATION  65.0  1.69  1.7  0.0  4691.0  1.6958
-98  AAME  20250130  5272.0  1.7  1.66  0.0  0.0  1.72  1.75  1.61  ATLANTIC AMERICAN CORPORATION  60.0  1.7495  1.7001  0.0  3578.0  1.7224
-99  AAME  20250131  2876.0  1.71  1.69  0.0  0.0  1.69  1.7699  1.6  ATLANTIC AMERICAN CORPORATION  36.0  1.7126  1.72  0.0  2318.0  1.6871
-100  AAMI  20250102  1373605.0  26.09  25.62  0.0  0.0  25.79  26.83  25.51  ACADIAN ASSET MANAGEMENT INC.  2382.0  26.83  26.34  0.0  127170.0  25.883
-101  AAMI  20250103  1704845.0  25.84  25.53  0.0  0.0  25.84  26.04  25.545  ACADIAN ASSET MANAGEMENT INC.  2796.0  25.97  25.79  0.0  133141.0  25.757
-102  AAMI  20250106  2460998.0  25.8  25.54  1.0  9834.0  25.74  26.25  25.23  ACADIAN ASSET MANAGEMENT INC.  2891.0  25.74  25.84  0.0  177675.0  25.9151
-103  AAMI  20250107  4487710.0  25.16  25.11  1.0  118558.0  25.16  25.9  24.92  ACADIAN ASSET MANAGEMENT INC.  2633.0  25.73  25.74  0.0  255073.0  25.2346
-104  AAMI  20250108  1148353.0  25.06  24.98  0.0  0.0  25.04  25.135  24.8  ACADIAN ASSET MANAGEMENT INC.  2970.0  24.98  25.16  0.0  115338.0  24.9844
-105  AAMI  20250110  5302740.0  24.08  23.99  1.0  144700.0  24.04  24.67  23.68  ACADIAN ASSET MANAGEMENT INC.  2744.0  24.59  25.04  0.0  309713.0  24.0094
-106  AAMI  20250113  6494498.0  24.08  23.84  3.0  168498.0  24.06  24.53  23.54  ACADIAN ASSET MANAGEMENT INC.  2706.0  23.91  24.04  0.0  424194.0  23.8604
-107  AAMI  20250114  1771160.0  24.45  24.18  0.0  0.0  24.45  24.54  24.0  ACADIAN ASSET MANAGEMENT INC.  2161.0  24.06  24.06  0.0  143151.0  24.2514
-108  AAMI  20250115  1480065.0  24.78  24.28  0.0  0.0  24.56  25.41  24.47  ACADIAN ASSET MANAGEMENT INC.  2063.0  25.0  24.45  0.0  176719.0  24.6703
-109  AAMI  20250116  1396600.0  25.2  24.86  0.0  0.0  25.15  25.335  24.59  ACADIAN ASSET MANAGEMENT INC.  2005.0  24.8  24.56  0.0  142674.0  24.8866
-110  AAMI  20250117  2081752.0  25.02  24.9  1.0  51200.0  24.97  25.5  24.78  ACADIAN ASSET MANAGEMENT INC.  1636.0  25.46  25.15  0.0  150168.0  24.9504
-111  AAMI  20250121  3119664.0  25.64  25.6  1.0  51200.0  25.6  25.72  24.97  ACADIAN ASSET MANAGEMENT INC.  1851.0  25.205  24.97  0.0  180154.0  25.5214
-112  AAMI  20250122  2059699.0  25.45  25.34  1.0  24429.0  25.4  25.83  25.06  ACADIAN ASSET MANAGEMENT INC.  2605.0  25.55  25.6  0.0  145874.0  25.2885
-113  AAMI  20250123  1459497.0  25.84  25.58  0.0  0.0  25.66  25.85  25.22  ACADIAN ASSET MANAGEMENT INC.  2626.0  25.22  25.4  0.0  125445.0  25.6
-114  AAMI  20250124  1319403.0  25.8  25.74  0.0  0.0  25.8  25.83  25.165  ACADIAN ASSET MANAGEMENT INC.  2396.0  25.58  25.66  0.0  121975.0  25.5758
-115  AAMI  20250127  1642867.0  25.39  25.33  1.0  8878.0  25.38  25.87  25.0  ACADIAN ASSET MANAGEMENT INC.  2971.0  25.0  25.8  0.0  116176.0  25.3889
-116  AAMI  20250128  963227.0  25.52  25.43  0.0  0.0  25.49  25.59  25.28  ACADIAN ASSET MANAGEMENT INC.  2092.0  25.28  25.38  0.0  91229.0  25.4535
-117  AAMI  20250129  1095185.0  25.39  25.29  0.0  0.0  25.33  25.57  25.12  ACADIAN ASSET MANAGEMENT INC.  2145.0  25.37  25.49  0.0  88837.0  25.3084
-118  AAMI  20250130  1220737.0  25.28  25.23  0.0  0.0  25.28  25.83  25.17  ACADIAN ASSET MANAGEMENT INC.  2510.0  25.68  25.33  0.0  104781.0  25.4013
-119  AAMI  20250131  1144348.0  24.93  24.62  0.0  0.0  24.92  25.28  24.7  ACADIAN ASSET MANAGEMENT INC.  2226.0  25.27  25.28  0.0  117911.0  24.9377
-120  AAOI  20250102  86637985.0  35.6  35.57  20.0  515539.0  35.6  37.3274  33.14  APPLIED OPTOELECTRONICS, INC.  24228.0  35.97  36.86  0.0  3488187.0  34.6579
-121  AAOI  20250103  62310892.0  37.86  37.84  20.0  153389.0  37.9  38.63  35.32  APPLIED OPTOELECTRONICS, INC.  17156.0  35.85  35.6  0.0  2406000.0  37.5534
-122  AAOI  20250106  114645323.0  33.93  33.92  25.0  358952.0  33.93  39.85  33.53  APPLIED OPTOELECTRONICS, INC.  34601.0  39.5  37.9  0.0  4706902.0  35.4886
-123  AAOI  20250107  48277620.0  32.98  32.97  1.0  6850.0  32.98  34.65  32.51  APPLIED OPTOELECTRONICS, INC.  18069.0  33.98  33.93  0.0  1974747.0  33.5497
-124  AAOI  20250108  71355745.0  32.37  32.31  9.0  996551.0  32.37  34.005  31.8935  APPLIED OPTOELECTRONICS, INC.  18654.0  32.7  32.98  0.0  2644561.0  32.6776
-125  AAOI  20250110  40499147.0  31.61  31.6  6.0  57315.0  31.6  32.1  30.34  APPLIED OPTOELECTRONICS, INC.  17319.0  31.95  32.37  0.0  1718104.0  31.2368
-126  AAOI  20250113  47678210.0  28.98  28.97  11.0  128127.0  28.99  30.3  28.4  APPLIED OPTOELECTRONICS, INC.  19205.0  30.26  31.6  0.0  2206251.0  29.1374
-127  AAOI  20250114  47310601.0  27.79  27.78  6.0  79812.0  27.79  29.91  27.0  APPLIED OPTOELECTRONICS, INC.  20606.0  29.87  28.99  0.0  2625809.0  28.0734
-128  AAOI  20250115  54429560.0  31.18  31.15  11.0  148669.0  31.18  31.29  28.6  APPLIED OPTOELECTRONICS, INC.  17744.0  28.8  27.79  0.0  2657243.0  30.2318
-129  AAOI  20250116  41386226.0  30.93  30.88  10.0  215672.0  30.88  32.43  30.84  APPLIED OPTOELECTRONICS, INC.  14516.0  31.95  31.18  0.0  1928668.0  31.5019
-130  AAOI  20250117  51172506.0  31.02  30.96  16.0  340786.0  31.03  32.1097  29.88  APPLIED OPTOELECTRONICS, INC.  16559.0  31.87  30.88  0.0  2358727.0  30.89
-131  AAOI  20250121  148568819.0  30.16  30.13  39.0  742117.0  30.15  35.433  29.61  APPLIED OPTOELECTRONICS, INC.  39410.0  33.21  31.03  0.0  6208463.0  31.6917
-132  AAOI  20250122  107203317.0  33.32  33.29  22.0  395193.0  33.3  34.2  30.9  APPLIED OPTOELECTRONICS, INC.  29873.0  31.06  30.15  0.0  4503486.0  32.6785
-133  AAOI  20250123  44440593.0  32.5  32.48  11.0  266418.0  32.5  33.39  31.61  APPLIED OPTOELECTRONICS, INC.  14996.0  32.24  33.3  0.0  1827566.0  32.3556
-134  AAOI  20250124  45032097.0  30.68  30.67  5.0  55198.0  30.69  32.98  30.64  APPLIED OPTOELECTRONICS, INC.  17236.0  32.85  32.5  0.0  1914886.0  31.5101
-135  AAOI  20250127  116965313.0  24.55  24.53  36.0  602580.0  24.54  29.72  23.94  APPLIED OPTOELECTRONICS, INC.  36100.0  28.58  30.69  0.0  6410993.0  25.9269
-136  AAOI  20250128  65245752.0  26.67  26.64  17.0  377689.0  26.67  27.07  23.65  APPLIED OPTOELECTRONICS, INC.  21677.0  25.08  24.54  0.0  3500464.0  25.345
-137  AAOI  20250129  40328890.0  26.53  26.51  5.0  391522.0  26.53  27.01  25.5  APPLIED OPTOELECTRONICS, INC.  16571.0  26.42  26.67  0.0  1998458.0  26.3245
-138  AAOI  20250130  44747125.0  28.07  28.06  14.0  227651.0  28.07  29.0  27.14  APPLIED OPTOELECTRONICS, INC.  17030.0  27.14  26.53  0.0  2273348.0  28.1471
-139  AAOI  20250131  42909819.0  27.93  27.91  12.0  175526.0  27.92  29.32  27.41  APPLIED OPTOELECTRONICS, INC.  15914.0  28.48  28.07  0.0  2120751.0  28.3055
-140  AAON  20250102  33964205.0  118.01  117.93  15.0  80350.0  117.94  120.6153  116.43  AAON, INC.  6459.0  119.14  117.68  0.0  344312.0  118.1893
-141  AAON  20250103  48005343.0  120.0  119.87  21.0  150428.0  120.01  120.25  116.94  AAON, INC.  6734.0  118.13  117.94  0.0  471497.0  119.5146
-142  AAON  20250106  76405410.0  122.38  122.31  42.0  205104.0  122.32  122.45  119.25  AAON, INC.  9543.0  121.03  120.01  0.0  749998.0  121.3226
-143  AAON  20250107  54026931.0  120.52  120.44  20.0  137199.0  120.44  123.62  119.65  AAON, INC.  8749.0  122.89  122.32  0.0  525285.0  121.1284
-144  AAON  20250108  45829742.0  120.21  120.12  15.0  85975.0  120.19  121.04  118.03  AAON, INC.  8243.0  119.98  120.44  0.0  470584.0  119.9469
-145  AAON  20250110  52616459.0  122.14  122.07  18.0  133472.0  122.07  123.4299  118.0601  AAON, INC.  9095.0  118.5  120.19  0.0  522892.0  121.1375
-146  AAON  20250113  58029667.0  123.51  123.4  20.0  79650.0  123.4  123.89  118.635  AAON, INC.  9838.0  120.44  122.07  0.0  599230.0  122.6662
-147  AAON  20250114  51262249.0  128.24  128.18  9.0  40846.0  128.11  129.13  124.61  AAON, INC.  10668.0  124.61  123.4  0.0  494123.0  127.785
-148  AAON  20250115  63706828.0  130.02  129.94  24.0  81186.0  129.95  132.055  127.41  AAON, INC.  10110.0  130.95  128.11  0.0  630161.0  129.6556
-149  AAON  20250116  52195762.0  131.55  131.52  21.0  69798.0  131.53  133.64  130.68  AAON, INC.  9321.0  131.11  129.95  0.0  502163.0  131.8634
-150  AAON  20250117  124709455.0  130.18  130.13  49.0  545686.0  130.18  132.92  128.38  AAON, INC.  9712.0  132.39  131.53  0.0  1095486.0  130.8173
-151  AAON  20250121  48251870.0  132.43  132.14  15.0  72665.0  132.15  134.39  131.02  AAON, INC.  8594.0  132.08  130.18  0.0  459687.0  132.3889
-152  AAON  20250122  65163064.0  137.04  136.94  19.0  118511.0  136.95  137.9  131.46  AAON, INC.  9937.0  132.52  132.15  0.0  622551.0  135.6283
-153  AAON  20250123  66330906.0  134.79  134.76  19.0  75664.0  134.76  136.62  133.69  AAON, INC.  9976.0  136.26  136.95  0.0  608714.0  135.0115
-154  AAON  20250124  58909772.0  132.75  132.64  23.0  126981.0  132.71  136.35  131.73  AAON, INC.  8937.0  134.33  134.76  0.0  528204.0  133.8672
-155  AAON  20250127  158424489.0  112.7  112.66  45.0  294102.0  112.7  129.385  110.82  AAON, INC.  20870.0  129.28  132.71  0.0  1792761.0  115.3847
-156  AAON  20250128  109305508.0  111.79  111.68  27.0  142120.0  111.77  114.96  108.8  AAON, INC.  17250.0  113.56  112.7  0.0  1354286.0  111.2649
-157  AAON  20250129  79198988.0  110.5  110.3  32.0  138682.0  110.4  112.69  108.62  AAON, INC.  11017.0  112.03  111.77  0.0  874918.0  110.4127
-158  AAON  20250130  92106103.0  116.6  116.39  29.0  190438.0  116.6  117.0  112.02  AAON, INC.  13865.0  113.35  110.4  0.0  1011241.0  115.4577
-159  AAON  20250131  85037778.0  116.37  116.32  38.0  224843.0  116.38  118.875  114.39  AAON, INC.  12621.0  117.09  116.6  0.0  913226.0  116.56
-160  AAP  20250102  45375905.0  48.13  48.04  10.0  81921.0  48.14  48.15  46.66  ADVANCE AUTO PARTS, INC.  17458.0  47.36  47.29  0.0  1856379.0  47.668
-161  AAP  20250103  42576224.0  46.41  46.21  9.0  74199.0  46.34  48.67  45.5  ADVANCE AUTO PARTS, INC.  15545.0  48.19  48.14  0.0  1700729.0  46.2861
-162  AAP  20250106  65589769.0  47.84  47.72  9.0  86242.0  47.78  49.5193  46.61  ADVANCE AUTO PARTS, INC.  21357.0  46.78  46.34  0.0  2766806.0  48.1836
-163  AAP  20250107  49741905.0  46.12  45.94  9.0  338183.0  45.99  48.1  45.638  ADVANCE AUTO PARTS, INC.  13661.0  47.95  47.78  0.0  2116713.0  46.1887
-164  AAP  20250108  32810724.0  45.58  45.45  3.0  32275.0  45.53  46.24  44.66  ADVANCE AUTO PARTS, INC.  13958.0  45.6  45.99  0.0  1549322.0  45.3531
-165  AAP  20250110  40321368.0  46.24  46.17  7.0  44196.0  46.2  46.76  44.36  ADVANCE AUTO PARTS, INC.  16019.0  45.25  45.53  0.0  1787261.0  46.0668
-166  AAP  20250113  73669676.0  44.87  44.79  5.0  340953.0  44.85  46.22  44.42  ADVANCE AUTO PARTS, INC.  18899.0  45.83  46.2  0.0  2820542.0  45.2667
-167  AAP  20250114  36359160.0  44.72  44.64  4.0  69381.0  44.69  45.53  43.78  ADVANCE AUTO PARTS, INC.  11616.0  45.1  44.85  0.0  1539688.0  44.447
-168  AAP  20250115  25331855.0  44.41  44.28  9.0  50078.0  44.37  46.47  44.36  ADVANCE AUTO PARTS, INC.  10634.0  46.1  44.69  0.0  1097773.0  45.2028
-169  AAP  20250116  25567801.0  45.82  45.7  4.0  35150.0  45.73  45.98  43.71  ADVANCE AUTO PARTS, INC.  12198.0  44.2  44.37  0.0  1108593.0  45.117
-170  AAP  20250117  34764349.0  46.01  45.9  7.0  70148.0  45.91  47.19  45.89  ADVANCE AUTO PARTS, INC.  13108.0  46.16  45.73  0.0  1338412.0  46.3632
-171  AAP  20250121  35700999.0  46.26  46.11  3.0  32325.0  46.18  46.837  45.51  ADVANCE AUTO PARTS, INC.  15225.0  45.97  45.91  0.0  1684851.0  46.2436
-172  AAP  20250122  33821713.0  46.52  46.48  10.0  59196.0  46.48  47.1899  45.73  ADVANCE AUTO PARTS, INC.  12930.0  46.11  46.18  0.0  1404391.0  46.5823
-173  AAP  20250123  44013012.0  47.41  47.34  7.0  62698.0  47.37  48.17  46.29  ADVANCE AUTO PARTS, INC.  15247.0  46.48  46.48  0.0  1693500.0  47.4441
-174  AAP  20250124  34631225.0  48.47  48.34  5.0  55271.0  48.44  48.58  47.025  ADVANCE AUTO PARTS, INC.  13583.0  47.36  47.37  0.0  1326840.0  48.0296
-175  AAP  20250127  46814007.0  49.27  49.23  2.0  18953.0  49.22  49.38  47.9941  ADVANCE AUTO PARTS, INC.  18390.0  48.35  48.44  0.0  1782425.0  48.9107
-176  AAP  20250128  30747508.0  48.83  48.72  7.0  56622.0  48.76  49.5  48.01  ADVANCE AUTO PARTS, INC.  13600.0  49.21  49.22  0.0  1124164.0  48.6719
-177  AAP  20250129  32683214.0  48.85  48.74  5.0  67030.0  48.74  49.265  48.21  ADVANCE AUTO PARTS, INC.  12173.0  48.8  48.76  0.0  1209092.0  48.9103
-178  AAP  20250130  49292907.0  49.81  49.63  8.0  156442.0  49.79  50.59  49.09  ADVANCE AUTO PARTS, INC.  15273.0  49.24  48.74  0.0  1919395.0  49.8469
-179  AAP  20250131  35244339.0  48.52  48.4  5.0  27394.0  48.5  49.8899  48.02  ADVANCE AUTO PARTS, INC.  15791.0  49.55  49.79  0.0  1543878.0  48.7639
-180  AAPG  20250124  28828529.0  17.28  17.25  15.0  519012.0  17.38  18.0  16.5  None  5901.0  17.25  0.0  0.0  2217300.0  17.2297
-181  AAPG  20250127  2637680.0  17.37  17.1  2.0  30300.0  17.25  17.5  17.0  None  844.0  17.39  17.38  0.0  315841.0  17.2303
-182  AAPG  20250128  608288.0  17.25  17.2  0.0  0.0  17.2  17.38  17.025  None  209.0  17.37  17.25  0.0  39824.0  17.2242
-183  AAPG  20250129  2023676.0  17.38  17.33  1.0  80859.0  17.33  17.45  17.19  None  187.0  17.39  17.2  0.0  120981.0  17.304
-184  AAPG  20250130  3211975.0  17.61  17.5  1.0  119141.0  17.6  17.86  17.2799  None  975.0  17.45  17.33  0.0  228961.0  17.5344
-185  AAPG  20250131  682972.0  17.68  17.66  0.0  0.0  17.68  17.9716  17.43  None  356.0  17.9716  17.6  0.0  63349.0  17.616
-186  AAPL  20250102  9791613291.0  243.87  243.84  4382.0  16711985.0  243.85  249.1  241.8201  APPLE INC.  488040.0  248.93  250.42  0.0  55740731.0  244.317
-187  AAPL  20250103  7380267208.0  243.36  243.3  3374.0  14230027.0  243.36  244.18  241.89  APPLE INC.  362147.0  243.36  243.85  0.0  40244114.0  243.0764
-188  AAPL  20250106  8795807101.0  244.99  244.98  2928.0  20850132.0  245.0  247.33  243.2  APPLE INC.  360407.0  244.31  243.36  0.0  45045571.0  245.2307
-189  AAPL  20250107  7338898468.0  242.25  242.21  3082.0  14862905.0  242.21  245.55  241.35  APPLE INC.  332104.0  242.98  245.0  0.0  40855960.0  242.9763
-190  AAPL  20250108  7172420478.0  242.73  242.71  2415.0  15990508.0  242.7  243.7123  240.05  APPLE INC.  291429.0  241.92  242.21  0.0  37628940.0  242.2763
-191  AAPL  20250110  11275431222.0  236.94  236.93  4278.0  23460410.0  236.85  240.16  233.0  APPLE INC.  497920.0  240.01  242.7  0.0  61710856.0  236.5838
-192  AAPL  20250113  8853579397.0  234.42  234.37  3406.0  19089685.0  234.4  234.67  229.72  APPLE INC.  404255.0  233.53  236.85  0.0  49630725.0  232.6294
-193  AAPL  20250114  7211089660.0  233.32  233.28  2356.0  15757370.0  233.28  236.12  232.472  APPLE INC.  312244.0  234.75  234.4  0.0  39435294.0  233.9467
-194  AAPL  20250115  7584470332.0  237.88  237.84  2447.0  17226285.0  237.87  238.96  234.43  APPLE INC.  304792.0  234.635  233.28  0.0  39831969.0  237.5983
-195  AAPL  20250116  12211611395.0  228.25  228.23  5228.0  22416624.0  228.26  238.01  228.03  APPLE INC.  550632.0  237.35  237.87  0.0  71759052.0  230.5952
-196  AAPL  20250117  11935458639.0  230.0  229.97  4040.0  30413902.0  229.98  232.29  228.48  APPLE INC.  397655.0  232.115  228.26  0.0  68488301.0  230.6085
-197  AAPL  20250121  16455371898.0  222.66  222.64  7030.0  34953667.0  222.64  224.42  219.38  APPLE INC.  871764.0  224.0  229.98  0.0  98070429.0  221.5795
-198  AAPL  20250122  11228598157.0  223.78  223.76  4757.0  26330330.0  223.83  224.12  219.79  APPLE INC.  492101.0  219.79  222.64  0.0  64126500.0  222.7352
-199  AAPL  20250123  10297964551.0  223.65  223.64  4456.0  21821008.0  223.66  227.03  222.3  APPLE INC.  443169.0  224.74  223.83  0.0  60234760.0  224.1803
+symbol  date  num_moves  vwap  volume  high  pre_close  low  blkvolum  trade_status  ask  name  bid  blkcount  close  open
+0  A  20250131  18061.0  152.4235  1886605.0  153.8400  151.3800  150.5000  99406.0  0.0  151.6400  AGILENT TECHNOLOGIES, INC.  151.4600  22.0  151.5200  150.9600
+1  A  20250130  16703.0  151.3413  1496057.0  152.4800  147.0900  147.6500  89679.0  0.0  151.4700  AGILENT TECHNOLOGIES, INC.  151.3400  32.0  151.3800  148.9500
+2  A  20250129  19102.0  147.6937  1583243.0  149.9000  150.3400  146.5500  174876.0  0.0  147.2200  AGILENT TECHNOLOGIES, INC.  147.0400  34.0  147.0900  148.9900
+3  A  20250128  18890.0  151.5279  1791623.0  153.2400  150.9600  150.2100  171761.0  0.0  150.4900  AGILENT TECHNOLOGIES, INC.  150.2900  25.0  150.3400  152.6100
+4  A  20250127  23216.0  150.6783  2229590.0  152.2200  151.4400  148.7301  141160.0  0.0  151.0700  AGILENT TECHNOLOGIES, INC.  150.9000  30.0  150.9600  151.5600
+5  A  20250124  16461.0  151.8604  1844887.0  152.7700  152.4500  150.7800  188072.0  0.0  151.5300  AGILENT TECHNOLOGIES, INC.  151.3200  24.0  151.4400  152.1000
+6  A  20250123  15293.0  151.5305  1332235.0  152.9550  152.6000  148.1800  181209.0  0.0  152.5500  AGILENT TECHNOLOGIES, INC.  152.3100  25.0  152.4500  152.8300
+7  A  20250122  17662.0  152.6401  1730996.0  153.7600  152.5700  151.7200  127279.0  0.0  152.7500  AGILENT TECHNOLOGIES, INC.  152.4800  21.0  152.6000  152.8300
+8  A  20250121  26893.0  152.0675  2759636.0  153.1800  147.3600  148.0100  133169.0  0.0  152.6300  AGILENT TECHNOLOGIES, INC.  152.4900  35.0  152.5700  148.6700
+9  A  20250117  29499.0  147.3796  3210310.0  148.4600  144.7200  145.1950  400764.0  0.0  147.4800  AGILENT TECHNOLOGIES, INC.  147.3600  36.0  147.3600  145.8800
+10  A  20250116  17524.0  143.7399  1661474.0  145.1100  142.2300  140.4300  287030.0  0.0  144.8000  AGILENT TECHNOLOGIES, INC.  144.6700  29.0  144.7200  142.7800
+11  A  20250115  21833.0  142.9805  2328643.0  146.5000  143.4300  138.6800  190130.0  0.0  142.2800  AGILENT TECHNOLOGIES, INC.  142.1800  43.0  142.2300  144.1400
+12  A  20250114  23690.0  143.3105  2445434.0  145.3800  141.9500  140.1500  309811.0  0.0  143.5900  AGILENT TECHNOLOGIES, INC.  143.3500  25.0  143.4300  142.0000
+13  A  20250113  18425.0  141.8156  1561959.0  142.8200  137.4700  137.0000  48978.0  0.0  142.0600  AGILENT TECHNOLOGIES, INC.  141.8900  20.0  141.9500  137.2200
+14  A  20250110  17668.0  137.6988  1369875.0  140.1400  137.0000  134.7090  144723.0  0.0  137.5100  AGILENT TECHNOLOGIES, INC.  137.3700  28.0  137.4700  134.7500
+15  A  20250108  12460.0  137.1211  1684573.0  137.6800  137.4100  135.6300  406349.0  0.0  137.0700  AGILENT TECHNOLOGIES, INC.  136.8800  20.0  137.0000  137.6800
+16  A  20250107  13929.0  137.7331  1056693.0  140.2800  136.4300  135.9800  101912.0  0.0  137.5500  AGILENT TECHNOLOGIES, INC.  137.4100  22.0  137.4100  136.8300
+17  A  20250106  13535.0  137.0353  1047034.0  138.3400  135.6900  135.3400  66144.0  0.0  136.5400  AGILENT TECHNOLOGIES, INC.  136.3700  17.0  136.4300  135.6000
+18  A  20250103  12802.0  135.0829  1246919.0  136.0500  133.4300  132.7550  365497.0  0.0  135.8000  AGILENT TECHNOLOGIES, INC.  135.6400  13.0  135.6900  133.4500
+19  A  20250102  13064.0  133.6856  953587.0  135.7300  134.3400  132.8700  42341.0  0.0  133.5400  AGILENT TECHNOLOGIES, INC.  133.3500  12.0  133.4300  135.2100
+20  AA  20250131  31675.0  35.6622  5315132.0  36.2400  35.5300  35.1600  275422.0  0.0  35.3300  ALCOA CORPORATION  35.3100  11.0  35.3200  35.5000
+21  AA  20250130  27766.0  35.3849  4001162.0  35.8150  35.1300  34.9500  83790.0  0.0  35.5300  ALCOA CORPORATION  35.4800  5.0  35.5300  35.5300
+22  AA  20250129  33501.0  34.9260  5534714.0  35.2600  34.1500  34.3200  895287.0  0.0  35.1500  ALCOA CORPORATION  35.1300  20.0  35.1300  34.3200
+23  AA  20250128  36073.0  34.3834  5684196.0  35.4200  34.9700  34.0362  178337.0  0.0  34.1800  ALCOA CORPORATION  34.1500  14.0  34.1500  35.1800
+24  AA  20250127  37644.0  35.4222  8969913.0  36.6000  37.4300  34.9100  2450359.0  0.0  35.0300  ALCOA CORPORATION  34.9500  32.0  34.9700  36.2700
+25  AA  20250124  31970.0  37.0977  4983825.0  37.8500  37.3500  36.7000  305858.0  0.0  37.4400  ALCOA CORPORATION  37.3700  22.0  37.4300  37.8500
+26  AA  20250123  61317.0  37.0811  11784535.0  37.9900  38.7800  36.1000  1280669.0  0.0  37.4000  ALCOA CORPORATION  37.3500  42.0  37.3500  37.6000
+27  AA  20250122  45316.0  38.9108  9452189.0  39.8500  38.6100  38.6800  613098.0  0.0  38.8600  ALCOA CORPORATION  38.8100  48.0  38.7800  39.6100
+28  AA  20250121  31005.0  39.1494  5448901.0  40.6200  39.5300  38.5656  456624.0  0.0  38.6400  ALCOA CORPORATION  38.6100  20.0  38.6100  39.9900
+29  AA  20250117  24885.0  39.5525  4477360.0  39.8700  38.9100  38.9400  322257.0  0.0  39.5500  ALCOA CORPORATION  39.5400  22.0  39.5300  39.2400
+30  AA  20250116  28503.0  38.8789  4884266.0  39.2000  38.1900  38.3000  314224.0  0.0  38.9400  ALCOA CORPORATION  38.9100  12.0  38.9100  38.4400
+31  AA  20250115  26791.0  37.7943  5156312.0  38.3000  36.8800  37.1000  1142705.0  0.0  38.1900  ALCOA CORPORATION  38.1600  22.0  38.1900  37.8500
+32  AA  20250114  21882.0  36.5084  3351238.0  36.9100  36.4700  35.8500  237347.0  0.0  36.8800  ALCOA CORPORATION  36.8400  13.0  36.8800  36.6000
+33  AA  20250113  26874.0  36.0365  4230003.0  36.5200  35.9100  35.4000  394604.0  0.0  36.4900  ALCOA CORPORATION  36.4700  11.0  36.4700  35.5800
+34  AA  20250110  20678.0  35.9310  2943696.0  36.5600  36.0000  35.5400  199901.0  0.0  35.9100  ALCOA CORPORATION  35.8900  20.0  35.9100  36.2500
+35  AA  20250108  25384.0  35.4279  3775303.0  36.0300  36.2400  34.7500  429533.0  0.0  36.0000  ALCOA CORPORATION  35.9800  13.0  36.0000  35.7800
+36  AA  20250107  23958.0  36.1982  3381466.0  37.3000  36.4900  35.7550  138492.0  0.0  36.2400  ALCOA CORPORATION  36.2000  10.0  36.2400  36.8900
+37  AA  20250106  34563.0  36.5015  5983917.0  37.0750  35.7100  35.9200  679504.0  0.0  36.5100  ALCOA CORPORATION  36.4400  24.0  36.4900  36.0000
+38  AA  20250103  37554.0  35.9373  7491799.0  37.9500  37.9900  35.3752  539255.0  0.0  35.7000  ALCOA CORPORATION  35.6700  28.0  35.7100  37.9500
+39  AA  20250102  19644.0  38.4290  2703886.0  39.0400  37.7800  37.9000  330198.0  0.0  38.0300  ALCOA CORPORATION  37.9800  10.0  37.9900  38.1650
+40  AACG  20250131  90.0  0.8118  16796.0  0.8500  0.8200  0.7804  0.0  0.0  0.8300  ATA Creativity Global  0.7830  0.0  0.7932  0.8100
+41  AACG  20250130  66.0  0.8412  5563.0  0.8600  0.8559  0.8200  0.0  0.0  0.8200  ATA Creativity Global  0.8000  0.0  0.8200  0.8600
+42  AACG  20250129  119.0  0.8255  17312.0  0.8600  0.8400  0.8200  0.0  0.0  0.8559  ATA Creativity Global  0.8200  0.0  0.8559  0.8600
+43  AACG  20250128  56.0  0.8389  8035.0  0.8613  0.8301  0.8300  0.0  0.0  0.8400  ATA Creativity Global  0.8301  0.0  0.8400  0.8300
+44  AACG  20250127  100.0  0.8286  22187.0  0.8401  0.8400  0.8000  0.0  0.0  0.8400  ATA Creativity Global  0.8200  0.0  0.8301  0.8000
+45  AACG  20250124  128.0  0.8647  54164.0  0.9129  0.9128  0.8400  28556.0  0.0  0.8367  ATA Creativity Global  0.8278  1.0  0.8400  0.9100
+46  AACG  20250123  48.0  0.9020  2815.0  0.9228  0.8888  0.8900  0.0  0.0  0.9350  ATA Creativity Global  0.9110  0.0  0.9128  0.9000
+47  AACG  20250122  103.0  0.9157  8867.0  0.9600  0.9400  0.8888  0.0  0.0  0.9400  ATA Creativity Global  0.8851  0.0  0.8888  0.9490
+48  AACG  20250121  94.0  0.9690  6962.0  1.0198  0.9500  0.9350  0.0  0.0  0.9400  ATA Creativity Global  0.9200  0.0  0.9400  0.9710
+49  AACG  20250117  62.0  0.9439  9006.0  0.9950  0.9900  0.9200  0.0  0.0  0.9500  ATA Creativity Global  0.9200  0.0  0.9500  0.9950
+50  AACG  20250116  100.0  1.0133  11111.0  1.0400  1.0300  0.9700  0.0  0.0  1.0000  ATA Creativity Global  0.9520  0.0  0.9900  1.0400
+51  AACG  20250115  164.0  0.9865  84202.0  1.0300  0.9199  0.9100  0.0  0.0  1.0400  ATA Creativity Global  1.0300  0.0  1.0300  0.9100
+52  AACG  20250114  73.0  0.9132  13812.0  0.9299  0.9400  0.9000  0.0  0.0  0.9299  ATA Creativity Global  0.9200  0.0  0.9199  0.9014
+53  AACG  20250113  55.0  0.9161  13616.0  0.9400  0.9462  0.8851  0.0  0.0  0.9400  ATA Creativity Global  0.9300  0.0  0.9400  0.9200
+54  AACG  20250110  131.0  0.9058  20972.0  0.9791  0.9791  0.8792  0.0  0.0  0.9792  ATA Creativity Global  0.9400  0.0  0.9462  0.8792
+55  AACG  20250108  78.0  0.9660  24448.0  0.9792  0.9441  0.9205  0.0  0.0  0.9792  ATA Creativity Global  0.9603  0.0  0.9791  0.9500
+56  AACG  20250107  84.0  0.9395  19383.0  0.9600  0.9399  0.9200  0.0  0.0  0.9500  ATA Creativity Global  0.9300  0.0  0.9441  0.9200
+57  AACG  20250106  93.0  0.9163  33567.0  0.9400  0.8999  0.9000  0.0  0.0  0.9400  ATA Creativity Global  0.9000  0.0  0.9399  0.9000
+58  AACG  20250103  117.0  0.8944  23090.0  0.9100  0.8800  0.8800  0.0  0.0  0.9000  ATA Creativity Global  0.8800  0.0  0.8999  0.8800
+59  AACG  20250102  94.0  0.8603  17613.0  0.9054  0.8460  0.8200  0.0  0.0  0.9100  ATA Creativity Global  0.8800  0.0  0.8800  0.8320
+60  AAL  20250131  61411.0  17.0340  30197038.0  17.2300  16.9000  16.9100  4214992.0  0.0  16.9400  AMERICAN AIRLINES GROUP INC.  16.9300  139.0  16.9200  16.9600
+61  AAL  20250130  75883.0  16.9657  42121224.0  17.2300  17.3300  16.8000  7092862.0  0.0  16.9200  AMERICAN AIRLINES GROUP INC.  16.9100  282.0  16.9000  16.9300
+62  AAL  20250129  53267.0  17.1543  24719434.0  17.3400  17.1500  16.9405  3868376.0  0.0  17.3400  AMERICAN AIRLINES GROUP INC.  17.3300  120.0  17.3300  17.1400
+63  AAL  20250128  61865.0  17.2020  29817403.0  17.4700  17.2000  16.9550  5945300.0  0.0  17.1500  AMERICAN AIRLINES GROUP INC.  17.1400  119.0  17.1500  17.0800
+64  AAL  20250127  78760.0  17.2188  40497957.0  17.5400  16.9600  16.7050  5421112.0  0.0  17.2100  AMERICAN AIRLINES GROUP INC.  17.2000  198.0  17.2000  16.8200
+65  AAL  20250124  69769.0  17.0023  37782479.0  17.3400  17.0300  16.5500  6681488.0  0.0  16.9600  AMERICAN AIRLINES GROUP INC.  16.9500  250.0  16.9600  16.8450
+66  AAL  20250123  173235.0  17.0805  94892398.0  17.5360  18.6600  16.7300  13805045.0  0.0  17.0300  AMERICAN AIRLINES GROUP INC.  17.0200  526.0  17.0300  17.3000
+67  AAL  20250122  106176.0  18.6232  58392393.0  19.1000  18.6400  18.3700  12029921.0  0.0  18.6800  AMERICAN AIRLINES GROUP INC.  18.6700  303.0  18.6600  19.0850
+68  AAL  20250121  66518.0  18.4982  30731602.0  18.6500  18.2700  18.2700  5899181.0  0.0  18.6400  AMERICAN AIRLINES GROUP INC.  18.6300  118.0  18.6400  18.5200
+69  AAL  20250117  49990.0  18.2792  20438502.0  18.5700  18.2900  18.1600  1924827.0  0.0  18.2800  AMERICAN AIRLINES GROUP INC.  18.2700  87.0  18.2700  18.5500
+70  AAL  20250116  50000.0  18.1505  22031769.0  18.3300  18.0700  17.7800  4729224.0  0.0  18.2900  AMERICAN AIRLINES GROUP INC.  18.2800  87.0  18.2900  18.0200
+71  AAL  20250115  50438.0  18.1765  20401951.0  18.5600  18.2100  17.9700  3126971.0  0.0  18.0700  AMERICAN AIRLINES GROUP INC.  18.0600  81.0  18.0700  18.5400
+72  AAL  20250114  52029.0  18.0922  26175829.0  18.2400  17.6000  17.7900  5855673.0  0.0  18.2100  AMERICAN AIRLINES GROUP INC.  18.2000  111.0  18.2100  17.7900
+73  AAL  20250113  67266.0  17.5607  28427221.0  17.9800  18.3800  17.3200  3802768.0  0.0  17.6000  AMERICAN AIRLINES GROUP INC.  17.5900  118.0  17.6000  17.9150
+74  AAL  20250110  101592.0  18.2444  43954004.0  18.4500  17.6000  17.8000  7475437.0  0.0  18.3600  AMERICAN AIRLINES GROUP INC.  18.3500  188.0  18.3800  17.9300
+75  AAL  20250108  52875.0  17.4280  23093606.0  17.7200  17.6900  17.0750  4774442.0  0.0  17.6100  AMERICAN AIRLINES GROUP INC.  17.6000  131.0  17.6000  17.5300
+76  AAL  20250107  54482.0  17.7153  25491193.0  17.9900  17.5200  17.5300  6735758.0  0.0  17.7000  AMERICAN AIRLINES GROUP INC.  17.6900  187.0  17.6900  17.5800
+77  AAL  20250106  77486.0  17.6811  31834608.0  17.9400  16.9700  17.3800  7104711.0  0.0  17.5300  AMERICAN AIRLINES GROUP INC.  17.5200  142.0  17.5200  17.6400
+78  AAL  20250103  57829.0  16.7574  23806983.0  17.0300  17.0000  16.2700  4640829.0  0.0  16.9800  AMERICAN AIRLINES GROUP INC.  16.9700  138.0  16.9700  17.0300
+79  AAL  20250102  55662.0  17.1082  19027519.0  17.6300  17.4300  16.8300  2892640.0  0.0  17.0000  AMERICAN AIRLINES GROUP INC.  16.9900  119.0  17.0000  17.4000
+80  AAME  20250131  36.0  1.6871  2318.0  1.7699  1.7200  1.6000  0.0  0.0  1.7100  ATLANTIC AMERICAN CORPORATION  1.6900  0.0  1.6900  1.7126
+81  AAME  20250130  60.0  1.7224  3578.0  1.7500  1.7001  1.6100  0.0  0.0  1.7000  ATLANTIC AMERICAN CORPORATION  1.6600  0.0  1.7200  1.7495
+82  AAME  20250129  65.0  1.6958  4691.0  1.7250  1.7000  1.5200  0.0  0.0  1.7200  ATLANTIC AMERICAN CORPORATION  1.7000  0.0  1.7001  1.6900
+83  AAME  20250128  51.0  1.6534  9296.0  1.7000  1.6500  1.5400  0.0  0.0  1.7000  ATLANTIC AMERICAN CORPORATION  1.6500  0.0  1.7000  1.5950
+84  AAME  20250127  240.0  1.5503  33465.0  1.6500  1.5150  1.4400  0.0  0.0  1.6500  ATLANTIC AMERICAN CORPORATION  1.6200  0.0  1.6500  1.4400
+85  AAME  20250124  35.0  1.5165  547.0  1.5150  1.5150  1.5150  0.0  0.0  1.5300  ATLANTIC AMERICAN CORPORATION  1.5100  0.0  1.5150  1.5150
+86  AAME  20250123  30.0  1.5005  1560.0  1.5150  1.5100  1.4800  0.0  0.0  1.5100  ATLANTIC AMERICAN CORPORATION  1.4900  0.0  1.5150  1.4800
+87  AAME  20250122  68.0  1.5103  8993.0  1.5467  1.5050  1.4850  0.0  0.0  1.5400  ATLANTIC AMERICAN CORPORATION  1.5100  0.0  1.5100  1.5050
+88  AAME  20250121  57.0  1.4909  1841.0  1.5050  1.4760  1.4800  0.0  0.0  1.5400  ATLANTIC AMERICAN CORPORATION  1.5000  0.0  1.5050  1.4800
+89  AAME  20250117  36.0  1.5132  1217.0  1.5500  1.5023  1.4760  0.0  0.0  1.5000  ATLANTIC AMERICAN CORPORATION  1.4800  0.0  1.4760  1.5500
+90  AAME  20250116  35.0  1.5187  2824.0  1.5500  1.5200  1.5000  0.0  0.0  1.5400  ATLANTIC AMERICAN CORPORATION  1.5000  0.0  1.5023  1.5000
+91  AAME  20250115  46.0  1.5275  6504.0  1.5400  1.5400  1.4800  0.0  0.0  1.5400  ATLANTIC AMERICAN CORPORATION  1.5000  0.0  1.5200  1.4800
+92  AAME  20250114  33.0  1.4929  2071.0  1.5400  1.5300  1.4800  0.0  0.0  1.5400  ATLANTIC AMERICAN CORPORATION  1.5100  0.0  1.5400  1.4812
+93  AAME  20250113  51.0  1.4877  5935.0  1.5300  1.4850  1.4200  0.0  0.0  1.5400  ATLANTIC AMERICAN CORPORATION  1.5100  0.0  1.5300  1.4200
+94  AAME  20250110  36.0  1.5038  4026.0  1.5100  1.5200  1.4850  0.0  0.0  1.5000  ATLANTIC AMERICAN CORPORATION  1.4700  0.0  1.4850  1.5076
+95  AAME  20250108  28.0  1.4969  1621.0  1.5300  1.5000  1.4651  0.0  0.0  1.5200  ATLANTIC AMERICAN CORPORATION  1.4700  0.0  1.5200  1.4700
+96  AAME  20250107  79.0  1.4920  11601.0  1.5404  1.4600  1.4444  0.0  0.0  1.5100  ATLANTIC AMERICAN CORPORATION  1.4800  0.0  1.5000  1.5404
+97  AAME  20250106  77.0  1.4838  16843.0  1.5500  1.5000  1.4600  0.0  0.0  1.4800  ATLANTIC AMERICAN CORPORATION  1.4500  0.0  1.4600  1.4800
+98  AAME  20250103  49.0  1.4921  3157.0  1.5000  1.4850  1.4600  0.0  0.0  1.5000  ATLANTIC AMERICAN CORPORATION  1.4900  0.0  1.5000  1.5000
+99  AAME  20250102  39.0  1.4991  1323.0  1.5400  1.5400  1.4700  0.0  0.0  1.5000  ATLANTIC AMERICAN CORPORATION  1.4700  0.0  1.4850  1.5400
+100  AAMI  20250131  2226.0  24.9377  117911.0  25.2800  25.2800  24.7000  0.0  0.0  24.9300  ACADIAN ASSET MANAGEMENT INC.  24.6200  0.0  24.9200  25.2700
+101  AAMI  20250130  2510.0  25.4013  104781.0  25.8300  25.3300  25.1700  0.0  0.0  25.2800  ACADIAN ASSET MANAGEMENT INC.  25.2300  0.0  25.2800  25.6800
+102  AAMI  20250129  2145.0  25.3084  88837.0  25.5700  25.4900  25.1200  0.0  0.0  25.3900  ACADIAN ASSET MANAGEMENT INC.  25.2900  0.0  25.3300  25.3700
+103  AAMI  20250128  2092.0  25.4535  91229.0  25.5900  25.3800  25.2800  0.0  0.0  25.5200  ACADIAN ASSET MANAGEMENT INC.  25.4300  0.0  25.4900  25.2800
+104  AAMI  20250127  2971.0  25.3889  116176.0  25.8700  25.8000  25.0000  8878.0  0.0  25.3900  ACADIAN ASSET MANAGEMENT INC.  25.3300  1.0  25.3800  25.0000
+105  AAMI  20250124  2396.0  25.5758  121975.0  25.8300  25.6600  25.1650  0.0  0.0  25.8000  ACADIAN ASSET MANAGEMENT INC.  25.7400  0.0  25.8000  25.5800
+106  AAMI  20250123  2626.0  25.6000  125445.0  25.8500  25.4000  25.2200  0.0  0.0  25.8400  ACADIAN ASSET MANAGEMENT INC.  25.5800  0.0  25.6600  25.2200
+107  AAMI  20250122  2605.0  25.2885  145874.0  25.8300  25.6000  25.0600  24429.0  0.0  25.4500  ACADIAN ASSET MANAGEMENT INC.  25.3400  1.0  25.4000  25.5500
+108  AAMI  20250121  1851.0  25.5214  180154.0  25.7200  24.9700  24.9700  51200.0  0.0  25.6400  ACADIAN ASSET MANAGEMENT INC.  25.6000  1.0  25.6000  25.2050
+109  AAMI  20250117  1636.0  24.9504  150168.0  25.5000  25.1500  24.7800  51200.0  0.0  25.0200  ACADIAN ASSET MANAGEMENT INC.  24.9000  1.0  24.9700  25.4600
+110  AAMI  20250116  2005.0  24.8866  142674.0  25.3350  24.5600  24.5900  0.0  0.0  25.2000  ACADIAN ASSET MANAGEMENT INC.  24.8600  0.0  25.1500  24.8000
+111  AAMI  20250115  2063.0  24.6703  176719.0  25.4100  24.4500  24.4700  0.0  0.0  24.7800  ACADIAN ASSET MANAGEMENT INC.  24.2800  0.0  24.5600  25.0000
+112  AAMI  20250114  2161.0  24.2514  143151.0  24.5400  24.0600  24.0000  0.0  0.0  24.4500  ACADIAN ASSET MANAGEMENT INC.  24.1800  0.0  24.4500  24.0600
+113  AAMI  20250113  2706.0  23.8604  424194.0  24.5300  24.0400  23.5400  168498.0  0.0  24.0800  ACADIAN ASSET MANAGEMENT INC.  23.8400  3.0  24.0600  23.9100
+114  AAMI  20250110  2744.0  24.0094  309713.0  24.6700  25.0400  23.6800  144700.0  0.0  24.0800  ACADIAN ASSET MANAGEMENT INC.  23.9900  1.0  24.0400  24.5900
+115  AAMI  20250108  2970.0  24.9844  115338.0  25.1350  25.1600  24.8000  0.0  0.0  25.0600  ACADIAN ASSET MANAGEMENT INC.  24.9800  0.0  25.0400  24.9800
+116  AAMI  20250107  2633.0  25.2346  255073.0  25.9000  25.7400  24.9200  118558.0  0.0  25.1600  ACADIAN ASSET MANAGEMENT INC.  25.1100  1.0  25.1600  25.7300
+117  AAMI  20250106  2891.0  25.9151  177675.0  26.2500  25.8400  25.2300  9834.0  0.0  25.8000  ACADIAN ASSET MANAGEMENT INC.  25.5400  1.0  25.7400  25.7400
+118  AAMI  20250103  2796.0  25.7570  133141.0  26.0400  25.7900  25.5450  0.0  0.0  25.8400  ACADIAN ASSET MANAGEMENT INC.  25.5300  0.0  25.8400  25.9700
+119  AAMI  20250102  2382.0  25.8830  127170.0  26.8300  26.3400  25.5100  0.0  0.0  26.0900  ACADIAN ASSET MANAGEMENT INC.  25.6200  0.0  25.7900  26.8300
+120  AAOI  20250131  15914.0  28.3055  2120751.0  29.3200  28.0700  27.4100  175526.0  0.0  27.9300  APPLIED OPTOELECTRONICS, INC.  27.9100  12.0  27.9200  28.4800
+121  AAOI  20250130  17030.0  28.1471  2273348.0  29.0000  26.5300  27.1400  227651.0  0.0  28.0700  APPLIED OPTOELECTRONICS, INC.  28.0600  14.0  28.0700  27.1400
+122  AAOI  20250129  16571.0  26.3245  1998458.0  27.0100  26.6700  25.5000  391522.0  0.0  26.5300  APPLIED OPTOELECTRONICS, INC.  26.5100  5.0  26.5300  26.4200
+123  AAOI  20250128  21677.0  25.3450  3500464.0  27.0700  24.5400  23.6500  377689.0  0.0  26.6700  APPLIED OPTOELECTRONICS, INC.  26.6400  17.0  26.6700  25.0800
+124  AAOI  20250127  36100.0  25.9269  6410993.0  29.7200  30.6900  23.9400  602580.0  0.0  24.5500  APPLIED OPTOELECTRONICS, INC.  24.5300  36.0  24.5400  28.5800
+125  AAOI  20250124  17236.0  31.5101  1914886.0  32.9800  32.5000  30.6400  55198.0  0.0  30.6800  APPLIED OPTOELECTRONICS, INC.  30.6700  5.0  30.6900  32.8500
+126  AAOI  20250123  14996.0  32.3556  1827566.0  33.3900  33.3000  31.6100  266418.0  0.0  32.5000  APPLIED OPTOELECTRONICS, INC.  32.4800  11.0  32.5000  32.2400
+127  AAOI  20250122  29873.0  32.6785  4503486.0  34.2000  30.1500  30.9000  395193.0  0.0  33.3200  APPLIED OPTOELECTRONICS, INC.  33.2900  22.0  33.3000  31.0600
+128  AAOI  20250121  39410.0  31.6917  6208463.0  35.4330  31.0300  29.6100  742117.0  0.0  30.1600  APPLIED OPTOELECTRONICS, INC.  30.1300  39.0  30.1500  33.2100
+129  AAOI  20250117  16559.0  30.8900  2358727.0  32.1097  30.8800  29.8800  340786.0  0.0  31.0200  APPLIED OPTOELECTRONICS, INC.  30.9600  16.0  31.0300  31.8700
+130  AAOI  20250116  14516.0  31.5019  1928668.0  32.4300  31.1800  30.8400  215672.0  0.0  30.9300  APPLIED OPTOELECTRONICS, INC.  30.8800  10.0  30.8800  31.9500
+131  AAOI  20250115  17744.0  30.2318  2657243.0  31.2900  27.7900  28.6000  148669.0  0.0  31.1800  APPLIED OPTOELECTRONICS, INC.  31.1500  11.0  31.1800  28.8000
+132  AAOI  20250114  20606.0  28.0734  2625809.0  29.9100  28.9900  27.0000  79812.0  0.0  27.7900  APPLIED OPTOELECTRONICS, INC.  27.7800  6.0  27.7900  29.8700
+133  AAOI  20250113  19205.0  29.1374  2206251.0  30.3000  31.6000  28.4000  128127.0  0.0  28.9800  APPLIED OPTOELECTRONICS, INC.  28.9700  11.0  28.9900  30.2600
+134  AAOI  20250110  17319.0  31.2368  1718104.0  32.1000  32.3700  30.3400  57315.0  0.0  31.6100  APPLIED OPTOELECTRONICS, INC.  31.6000  6.0  31.6000  31.9500
+135  AAOI  20250108  18654.0  32.6776  2644561.0  34.0050  32.9800  31.8935  996551.0  0.0  32.3700  APPLIED OPTOELECTRONICS, INC.  32.3100  9.0  32.3700  32.7000
+136  AAOI  20250107  18069.0  33.5497  1974747.0  34.6500  33.9300  32.5100  6850.0  0.0  32.9800  APPLIED OPTOELECTRONICS, INC.  32.9700  1.0  32.9800  33.9800
+137  AAOI  20250106  34601.0  35.4886  4706902.0  39.8500  37.9000  33.5300  358952.0  0.0  33.9300  APPLIED OPTOELECTRONICS, INC.  33.9200  25.0  33.9300  39.5000
+138  AAOI  20250103  17156.0  37.5534  2406000.0  38.6300  35.6000  35.3200  153389.0  0.0  37.8600  APPLIED OPTOELECTRONICS, INC.  37.8400  20.0  37.9000  35.8500
+139  AAOI  20250102  24228.0  34.6579  3488187.0  37.3274  36.8600  33.1400  515539.0  0.0  35.6000  APPLIED OPTOELECTRONICS, INC.  35.5700  20.0  35.6000  35.9700
+140  AAON  20250131  12621.0  116.5600  913226.0  118.8750  116.6000  114.3900  224843.0  0.0  116.3700  AAON, INC.  116.3200  38.0  116.3800  117.0900
+141  AAON  20250130  13865.0  115.4577  1011241.0  117.0000  110.4000  112.0200  190438.0  0.0  116.6000  AAON, INC.  116.3900  29.0  116.6000  113.3500
+142  AAON  20250129  11017.0  110.4127  874918.0  112.6900  111.7700  108.6200  138682.0  0.0  110.5000  AAON, INC.  110.3000  32.0  110.4000  112.0300
+143  AAON  20250128  17250.0  111.2649  1354286.0  114.9600  112.7000  108.8000  142120.0  0.0  111.7900  AAON, INC.  111.6800  27.0  111.7700  113.5600
+144  AAON  20250127  20870.0  115.3847  1792761.0  129.3850  132.7100  110.8200  294102.0  0.0  112.7000  AAON, INC.  112.6600  45.0  112.7000  129.2800
+145  AAON  20250124  8937.0  133.8672  528204.0  136.3500  134.7600  131.7300  126981.0  0.0  132.7500  AAON, INC.  132.6400  23.0  132.7100  134.3300
+146  AAON  20250123  9976.0  135.0115  608714.0  136.6200  136.9500  133.6900  75664.0  0.0  134.7900  AAON, INC.  134.7600  19.0  134.7600  136.2600
+147  AAON  20250122  9937.0  135.6283  622551.0  137.9000  132.1500  131.4600  118511.0  0.0  137.0400  AAON, INC.  136.9400  19.0  136.9500  132.5200
+148  AAON  20250121  8594.0  132.3889  459687.0  134.3900  130.1800  131.0200  72665.0  0.0  132.4300  AAON, INC.  132.1400  15.0  132.1500  132.0800
+149  AAON  20250117  9712.0  130.8173  1095486.0  132.9200  131.5300  128.3800  545686.0  0.0  130.1800  AAON, INC.  130.1300  49.0  130.1800  132.3900
+150  AAON  20250116  9321.0  131.8634  502163.0  133.6400  129.9500  130.6800  69798.0  0.0  131.5500  AAON, INC.  131.5200  21.0  131.5300  131.1100
+151  AAON  20250115  10110.0  129.6556  630161.0  132.0550  128.1100  127.4100  81186.0  0.0  130.0200  AAON, INC.  129.9400  24.0  129.9500  130.9500
+152  AAON  20250114  10668.0  127.7850  494123.0  129.1300  123.4000  124.6100  40846.0  0.0  128.2400  AAON, INC.  128.1800  9.0  128.1100  124.6100
+153  AAON  20250113  9838.0  122.6662  599230.0  123.8900  122.0700  118.6350  79650.0  0.0  123.5100  AAON, INC.  123.4000  20.0  123.4000  120.4400
+154  AAON  20250110  9095.0  121.1375  522892.0  123.4299  120.1900  118.0601  133472.0  0.0  122.1400  AAON, INC.  122.0700  18.0  122.0700  118.5000
+155  AAON  20250108  8243.0  119.9469  470584.0  121.0400  120.4400  118.0300  85975.0  0.0  120.2100  AAON, INC.  120.1200  15.0  120.1900  119.9800
+156  AAON  20250107  8749.0  121.1284  525285.0  123.6200  122.3200  119.6500  137199.0  0.0  120.5200  AAON, INC.  120.4400  20.0  120.4400  122.8900
+157  AAON  20250106  9543.0  121.3226  749998.0  122.4500  120.0100  119.2500  205104.0  0.0  122.3800  AAON, INC.  122.3100  42.0  122.3200  121.0300
+158  AAON  20250103  6734.0  119.5146  471497.0  120.2500  117.9400  116.9400  150428.0  0.0  120.0000  AAON, INC.  119.8700  21.0  120.0100  118.1300
+159  AAON  20250102  6459.0  118.1893  344312.0  120.6153  117.6800  116.4300  80350.0  0.0  118.0100  AAON, INC.  117.9300  15.0  117.9400  119.1400
+160  AAP  20250131  15791.0  48.7639  1543878.0  49.8899  49.7900  48.0200  27394.0  0.0  48.5200  ADVANCE AUTO PARTS, INC.  48.4000  5.0  48.5000  49.5500
+161  AAP  20250130  15273.0  49.8469  1919395.0  50.5900  48.7400  49.0900  156442.0  0.0  49.8100  ADVANCE AUTO PARTS, INC.  49.6300  8.0  49.7900  49.2400
+162  AAP  20250129  12173.0  48.9103  1209092.0  49.2650  48.7600  48.2100  67030.0  0.0  48.8500  ADVANCE AUTO PARTS, INC.  48.7400  5.0  48.7400  48.8000
+163  AAP  20250128  13600.0  48.6719  1124164.0  49.5000  49.2200  48.0100  56622.0  0.0  48.8300  ADVANCE AUTO PARTS, INC.  48.7200  7.0  48.7600  49.2100
+164  AAP  20250127  18390.0  48.9107  1782425.0  49.3800  48.4400  47.9941  18953.0  0.0  49.2700  ADVANCE AUTO PARTS, INC.  49.2300  2.0  49.2200  48.3500
+165  AAP  20250124  13583.0  48.0296  1326840.0  48.5800  47.3700  47.0250  55271.0  0.0  48.4700  ADVANCE AUTO PARTS, INC.  48.3400  5.0  48.4400  47.3600
+166  AAP  20250123  15247.0  47.4441  1693500.0  48.1700  46.4800  46.2900  62698.0  0.0  47.4100  ADVANCE AUTO PARTS, INC.  47.3400  7.0  47.3700  46.4800
+167  AAP  20250122  12930.0  46.5823  1404391.0  47.1899  46.1800  45.7300  59196.0  0.0  46.5200  ADVANCE AUTO PARTS, INC.  46.4800  10.0  46.4800  46.1100
+168  AAP  20250121  15225.0  46.2436  1684851.0  46.8370  45.9100  45.5100  32325.0  0.0  46.2600  ADVANCE AUTO PARTS, INC.  46.1100  3.0  46.1800  45.9700
+169  AAP  20250117  13108.0  46.3632  1338412.0  47.1900  45.7300  45.8900  70148.0  0.0  46.0100  ADVANCE AUTO PARTS, INC.  45.9000  7.0  45.9100  46.1600
+170  AAP  20250116  12198.0  45.1170  1108593.0  45.9800  44.3700  43.7100  35150.0  0.0  45.8200  ADVANCE AUTO PARTS, INC.  45.7000  4.0  45.7300  44.2000
+171  AAP  20250115  10634.0  45.2028  1097773.0  46.4700  44.6900  44.3600  50078.0  0.0  44.4100  ADVANCE AUTO PARTS, INC.  44.2800  9.0  44.3700  46.1000
+172  AAP  20250114  11616.0  44.4470  1539688.0  45.5300  44.8500  43.7800  69381.0  0.0  44.7200  ADVANCE AUTO PARTS, INC.  44.6400  4.0  44.6900  45.1000
+173  AAP  20250113  18899.0  45.2667  2820542.0  46.2200  46.2000  44.4200  340953.0  0.0  44.8700  ADVANCE AUTO PARTS, INC.  44.7900  5.0  44.8500  45.8300
+174  AAP  20250110  16019.0  46.0668  1787261.0  46.7600  45.5300  44.3600  44196.0  0.0  46.2400  ADVANCE AUTO PARTS, INC.  46.1700  7.0  46.2000  45.2500
+175  AAP  20250108  13958.0  45.3531  1549322.0  46.2400  45.9900  44.6600  32275.0  0.0  45.5800  ADVANCE AUTO PARTS, INC.  45.4500  3.0  45.5300  45.6000
+176  AAP  20250107  13661.0  46.1887  2116713.0  48.1000  47.7800  45.6380  338183.0  0.0  46.1200  ADVANCE AUTO PARTS, INC.  45.9400  9.0  45.9900  47.9500
+177  AAP  20250106  21357.0  48.1836  2766806.0  49.5193  46.3400  46.6100  86242.0  0.0  47.8400  ADVANCE AUTO PARTS, INC.  47.7200  9.0  47.7800  46.7800
+178  AAP  20250103  15545.0  46.2861  1700729.0  48.6700  48.1400  45.5000  74199.0  0.0  46.4100  ADVANCE AUTO PARTS, INC.  46.2100  9.0  46.3400  48.1900
+179  AAP  20250102  17458.0  47.6680  1856379.0  48.1500  47.2900  46.6600  81921.0  0.0  48.1300  ADVANCE AUTO PARTS, INC.  48.0400  10.0  48.1400  47.3600
+180  AAPG  20250131  356.0  17.6160  63349.0  17.9716  17.6000  17.4300  0.0  0.0  17.6800  None  17.6600  0.0  17.6800  17.9716
+181  AAPG  20250130  975.0  17.5344  228961.0  17.8600  17.3300  17.2799  119141.0  0.0  17.6100  None  17.5000  1.0  17.6000  17.4500
+182  AAPG  20250129  187.0  17.3040  120981.0  17.4500  17.2000  17.1900  80859.0  0.0  17.3800  None  17.3300  1.0  17.3300  17.3900
+183  AAPG  20250128  209.0  17.2242  39824.0  17.3800  17.2500  17.0250  0.0  0.0  17.2500  None  17.2000  0.0  17.2000  17.3700
+184  AAPG  20250127  844.0  17.2303  315841.0  17.5000  17.3800  17.0000  30300.0  0.0  17.3700  None  17.1000  2.0  17.2500  17.3900
+185  AAPG  20250124  5901.0  17.2297  2217300.0  18.0000  0.0000  16.5000  519012.0  0.0  17.2800  None  17.2500  15.0  17.3800  17.2500
+186  AAPL  20250131  636761.0  238.6635  101075128.0  247.1900  237.5900  233.4400  40026139.0  0.0  235.9700  APPLE INC.  235.8400  7499.0  236.0000  247.1900
+187  AAPL  20250130  407867.0  238.6248  55658279.0  240.7900  239.3600  237.2100  15649257.0  0.0  237.6000  APPLE INC.  237.5200  3904.0  237.5900  238.6650
+188  AAPL  20250129  355343.0  237.5515  45486100.0  239.8550  238.2600  234.0100  14926416.0  0.0  239.3500  APPLE INC.  239.3000  3204.0  239.3600  234.1200
+189  AAPL  20250128  537423.0  237.6513  75707569.0  240.1900  229.8600  230.8100  26870962.0  0.0  238.2600  APPLE INC.  238.2400  5342.0  238.2600  230.8500
+190  AAPL  20250127  666186.0  229.1072  94863418.0  232.1500  222.7800  223.9800  31971001.0  0.0  230.0000  APPLE INC.  229.9300  5726.0  229.8600  224.0200
+191  AAPL  20250124  404576.0  223.0902  54697907.0  225.6300  223.6600  221.4100  20476245.0  0.0  222.7900  APPLE INC.  222.7800  3906.0  222.7800  224.7800
+192  AAPL  20250123  443169.0  224.1803  60234760.0  227.0300  223.8300  222.3000  21821008.0  0.0  223.6500  APPLE INC.  223.6400  4456.0  223.6600  224.7400
+193  AAPL  20250122  492101.0  222.7352  64126500.0  224.1200  222.6400  219.7900  26330330.0  0.0  223.7800  APPLE INC.  223.7600  4757.0  223.8300  219.7900
+194  AAPL  20250121  871764.0  221.5795  98070429.0  224.4200  229.9800  219.3800  34953667.0  0.0  222.6600  APPLE INC.  222.6400  7030.0  222.6400  224.0000
+195  AAPL  20250117  397655.0  230.6085  68488301.0  232.2900  228.2600  228.4800  30413902.0  0.0  230.0000  APPLE INC.  229.9700  4040.0  229.9800  232.1150
+196  AAPL  20250116  550632.0  230.5952  71759052.0  238.0100  237.8700  228.0300  22416624.0  0.0  228.2500  APPLE INC.  228.2300  5228.0  228.2600  237.3500
+197  AAPL  20250115  304792.0  237.5983  39831969.0  238.9600  233.2800  234.4300  17226285.0  0.0  237.8800  APPLE INC.  237.8400  2447.0  237.8700  234.6350
+198  AAPL  20250114  312244.0  233.9467  39435294.0  236.1200  234.4000  232.4720  15757370.0  0.0  233.3200  APPLE INC.  233.2800  2356.0  233.2800  234.7500
+199  AAPL  20250113  404255.0  232.6294  49630725.0  234.6700  236.8500  229.7200  19089685.0  0.0  234.4200  APPLE INC.  234.3700  3406.0  234.4000  233.5300
 ```
 
 **（二）港股股票基础信息：**
@@ -10352,9 +12205,9 @@ symbol  date  amount  ask  bid  blkcount  blkvolum  close  high  low  name  num_
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| status | integer | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| status | Optional[integer] | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -10363,17 +12216,16 @@ symbol  date  amount  ask  bid  blkcount  blkvolum  close  high  low  name  num_
 | symbol | string | 股票代码 |
 | name | string | 股票名称 |
 | cn_name | string | 中文名 |
-| local_name | string | 本地组织名称 |
+| local_name | string | 当地股票名称 |
 | status | integer | 股票状态 |
 | isin_code | string | 国际证券识别编码 |
 | abbrev_symbol | string | 股票的名称缩写 |
 | min_order_amount | string | 一手对应多少股 |
 | trading_code | string | 交易代码 |
-| asset_state | string | 交易状态 |
 | rcs_asset_category_name | string | 资产类别名称 |
-| business_sector | string | 业务领域名称 |
-| economic_sector | string | 经济领域名称 |
-| industry_group | string | 行业组名称 |
+| business_sector | string | 业务领域名称（如“Banking & Investment Services”） |
+| economic_sector | string | 经济领域名称（如“Financials”） |
+| industry_group | string | 行业组名称（如“Banking Services”） |
 | incorp_date | string | 公司成立日期 |
 | office_address | string | 公司总部地址 |
 | office_city | string | 总部城市 |
@@ -10402,10 +12254,10 @@ print(result)
 **响应示例**
 
 ```text
-symbol  abbrev_symbol  asset_state  board_type  business_sector  cn_name  delisted_date  economic_sector  incorp_date  industry_group  isin_code  issuer_oa_perm_id  listed_date  local_name  min_order_amount  name  office_address  office_city  office_country  office_region  postal_code  rcs_asset_category_name  status  trading_code  website
-0  0001.HK  CKHUH  AC  MAIN  Retailers  長和  None  Consumer Cyclicals  2014-12-11  Specialty Retailers  KYG217651051  5045492543  1972-11-01  CK HUTCHISON HOLDINGS LIMITED  500.0  CK HUTCHISON HOLDINGS LIMITED  48th Floor, Cheung Kong Center, 2 Queen's Road...  None  Hong Kong  Asia  None  Equity\Ordinary Share  1  0001  https://www.ckh.com.hk/
-1  0002.HK  CLPHL  AC  MAIN  Utilities  中電控股  None  Utilities  1997-10-24  Electric Utilities & IPPs  HK0002007356  4295871540  1980-01-02  中電控股有限公司  500.0  Zhong Dian Kong Gu You Xian Gong Si  8 Laguna Verde Avenue, Hung Hom, Kowloon  None  Hong Kong  Asia  None  Equity\Ordinary Share  1  0002  https://www.clpgroup.com/
-2  0003.HK  HKCNG  AC  MAIN  Utilities  香港中華煤氣  None  Utilities  1982-10-14  Natural Gas Utilities  HK0003000038  4295871290  1960-04-11  香港中華煤氣有限公司  1000.0  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  23rd Floor, 363 Java Road, North Point  None  Hong Kong  Asia  None  Equity\Ordinary Share  1  0003|864603  https://www.towngas.com/
+symbol  abbrev_symbol  board_type  business_sector  cn_name  delisted_date  economic_sector  incorp_date  industry_group  isin_code  issuer_oa_perm_id  listed_date  local_name  min_order_amount  name  office_address  office_city  office_country  office_region  postal_code  rcs_asset_category_name  status  trading_code  website
+0  0001.HK  CKHUH  MAIN  Retailers  長和  None  Consumer Cyclicals  2014-12-11  Specialty Retailers  KYG217651051  5045492543  1972-11-01  CK HUTCHISON HOLDINGS LIMITED  500.0  CK HUTCHISON HOLDINGS LIMITED  48th Floor, Cheung Kong Center, 2 Queen's Road Central, Central  None  Hong Kong  Asia  None  Equity\Ordinary Share  1  0001  https://www.ckh.com.hk/
+1  0002.HK  CLPHL  MAIN  Utilities  中電控股  None  Utilities  1997-10-24  Electric Utilities & IPPs  HK0002007356  4295871540  1980-01-02  中電控股有限公司  500.0  Zhong Dian Kong Gu You Xian Gong Si  8 Laguna Verde Avenue, Hung Hom, Kowloon  None  Hong Kong  Asia  None  Equity\Ordinary Share  1  0002  https://www.clpgroup.com/
+2  0003.HK  HKCNG  MAIN  Utilities  香港中華煤氣  None  Utilities  1982-10-14  Natural Gas Utilities  HK0003000038  4295871290  1960-04-11  香港中華煤氣有限公司  1000.0  Xiang Gang Zhong Hua Mei Qi You Xian Gong Si  23rd Floor, 363 Java Road, North Point  None  Hong Kong  Asia  None  Equity\Ordinary Share  1  0003|864603  https://www.towngas.com/
 ```
 
 **（三）美股股票基础信息：**
@@ -10418,30 +12270,28 @@ symbol  abbrev_symbol  asset_state  board_type  business_sector  cn_name  delist
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| status | integer | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| status | Optional[integer] | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
 
 **1.3. 响应参数**
 
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
 | symbol | string | 股票代码 |
-| original_symbol | string | 原始股票代码 |
 | name | string | 股票名称 |
 | listed_date | string | 上市日期 |
-| local_name | string | 本地组织名称 |
+| local_name | string | 当地股票名称 |
 | exchange_name | string | 交易所名称 |
 | status | integer | 股票状态 |
 | isin_code | string | 国际证券识别编码 |
 | abbrev_symbol | string | 股票的名称缩写 |
 | min_order_amount | string | 一手对应多少股 |
 | trading_code | string | 交易代码 |
-| asset_state | string | 交易状态 |
 | rcs_asset_category_name | string | 资产类别名称 |
-| business_sector | string | 业务领域名称 |
-| economic_sector | string | 经济领域名称 |
-| industry_group | string | 行业组名称 |
+| business_sector | string | 业务领域名称（如“Banking & Investment Services”） |
+| economic_sector | string | 经济领域名称（如“Financials”） |
+| industry_group | string | 行业组名称（如“Banking Services”） |
 | incorp_date | string | 公司成立日期 |
 | office_address | string | 公司总部地址 |
 | office_city | string | 总部城市 |
@@ -10467,9 +12317,9 @@ print(result)
 **响应示例**
 
 ```text
-symbol  abbrev_symbol  asset_state  business_sector  economic_sector  exchange_name  incorp_date  industry_group  isin_code  issuer_oa_perm_id  listed_date  local_name  min_order_amount  name  office_address  office_city  office_country  office_region  original_symbol  postal_code  rcs_asset_category_name  status  trading_code  website
-0  AAPL  AAPL  AC  Technology Equipment  Technology  NASDAQ BASIC - NASDAQ  1977-01-03  Computers, Phones & Household Electronics  US0378331005  4295905573  1980-12-12  APPLE INC.  40.0  APPLE INC.  One Apple Park Way  CUPERTINO  United States of America  Americas  AAPL.O  95014  Equity\Ordinary Share  1  865985  https://www.apple.com/
-1  TELA  TELAX  AC  Healthcare Services & Equipment  Healthcare  NASDAQ BASIC - NASDAQ  2012-04-17  Healthcare Equipment & Supplies  US8723811084  5037990546  2019-11-08  TELA BIO, INC.  100.0  TELA BIO, INC.  1 Great Valley Parkway, Suite 24  MALVERN  United States of America  Americas  TELA.O  19355  Equity\Ordinary Share  1  None  https://www.telabio.com/
+symbol  abbrev_symbol  business_sector  economic_sector  exchange_name  incorp_date  industry_group  isin_code  issuer_oa_perm_id  listed_date  local_name  min_order_amount  name  office_address  office_city  office_country  office_region  postal_code  rcs_asset_category_name  status  trading_code  website
+0  AAPL  AAPL  Technology Equipment  Technology  NASDAQ BASIC - NASDAQ  1977-01-03  Computers, Phones & Household Electronics  US0378331005  4295905573  1980-12-12  APPLE INC.  100.0  APPLE INC.  One Apple Park Way  CUPERTINO  United States of America  Americas  95014  Equity\Ordinary Share  1  865985  https://www.apple.com/
+1  TELA  TELAX  Healthcare Services & Equipment  Healthcare  NASDAQ BASIC - NASDAQ  2012-04-17  Healthcare Equipment & Supplies  US8723811084  5037990546  2019-11-08  TELA BIO, INC.  100.0  TELA BIO, INC.  1 Great Valley Parkway, Suite 24  MALVERN  United States of America  Americas  19355  Equity\Ordinary Share  1  NaN  https://www.telabio.com/
 ```
 
 **（四）港股公司事件：**
@@ -10482,10 +12332,10 @@ symbol  abbrev_symbol  asset_state  business_sector  economic_sector  exchange_n
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -10494,7 +12344,7 @@ symbol  abbrev_symbol  asset_state  business_sector  economic_sector  exchange_n
 | publish_date | string | 事件公告发布日期（日期筛选依据） |
 | symbol | string | 股票代码 |
 | excute_date | string | 事件执行日期 |
-| event_type | string | 事件类型 |
+| event_type | string | 事件类型：ExDividends（除息），SpecialDividendsCash（现金特别股息），RegularDividendCashWithAlternative（常规现金股息，可选择股票股息），RegularDividendStockWithAlternative（常规股票股息，可选择现金股息），SpecialDividendsStock（股票特别股息），StockSplits（股票拆分），SpecialDividendCashWithAlternative（特别现金股息，可选择股票股息），RegularDividendsStock（常规股票股息），SpecialDividendStockWithAlternative（特别股票股息，可选择现金股息） |
 | number | string | 每股金额 |
 | currency | string | 交易币种 |
 | event | string | 事件 |
@@ -10533,10 +12383,10 @@ symbol  publish_date  excute_date  event_type  number  currency  event
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -10547,6 +12397,7 @@ symbol  publish_date  excute_date  event_type  number  currency  event
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：IpoLockupExpirations（IPO锁定期到期），SecondaryFilings（二次发行备案），SecondaryPricings（二次发行定价），SecondaryWithdrawals（二次发行撤销），IpoPricings（IPO定价），IpoFilings（IPO备案） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
@@ -10571,23 +12422,23 @@ print(result)
 symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal_quarter
 0  0020.HK  20260329  20260329  SenseTime Group Inc Prices US$405M Follow-On  0  20251230  IpoLockupExpirations  None
 1  0092.HK  20260203  20260203  Champion Tech Hldg Ltd Prices US$3M Follow-On  0  20260205  SecondaryPricings  None
-2  0139.HK  20260122  20260122  Smart Fish Wealthlink Hldg Ltd Announces US$5M...  0  20260309  SecondaryFilings  None
+2  0139.HK  20260122  20260122  Smart Fish Wealthlink Hldg Ltd Announces US$5M Follow-On  0  20260309  SecondaryFilings  None
 3  0167.HK  20260213  20260213  IDT International Ltd Prices US$21M Follow-On  0  20260312  SecondaryFilings  None
 4  0167.HK  20260312  20260312  IDT International Ltd Prices US$21M Follow-On  0  20260312  SecondaryPricings  None
-5  0199.HK  20260119  20260119  ITC Properties Group Ltd Announces US$21M Foll...  0  20260305  SecondaryFilings  None
+5  0199.HK  20260119  20260119  ITC Properties Group Ltd Announces US$21M Follow-On  0  20260305  SecondaryFilings  None
 6  0209.HK  20260119  20260119  Winshine Science Co Ltd Prices US$23M Follow-On  0  20260115  SecondaryPricings  None
-7  0248.HK  20260220  20260220  HKC International Holdings Ltd Prices US$3M Fo...  0  20260317  SecondaryFilings  None
-8  0248.HK  20260318  20260318  HKC International Holdings Ltd Prices US$3M Fo...  0  20260317  SecondaryPricings  None
+7  0248.HK  20260220  20260220  HKC International Holdings Ltd Prices US$3M Follow-On  0  20260317  SecondaryFilings  None
+8  0248.HK  20260318  20260318  HKC International Holdings Ltd Prices US$3M Follow-On  0  20260317  SecondaryPricings  None
 9  0264.HK  20260127  20260127  China Intl Dvlp Corp Ltd Prices US$4M Follow-On  0  20260129  SecondaryPricings  None
-10  0290.HK  20260317  20260317  GoFintech Quantum Innovation Prices US$169M Fo...  0  20260317  SecondaryPricings  None
-11  0310.HK  20260210  20260210  Prosperity Invest Hldg Ltd Announces US$4M Fol...  0  20260213  SecondaryFilings  None
+10  0290.HK  20260317  20260317  GoFintech Quantum Innovation Prices US$169M Follow-On  0  20260317  SecondaryPricings  None
+11  0310.HK  20260210  20260210  Prosperity Invest Hldg Ltd Announces US$4M Follow-On  0  20260213  SecondaryFilings  None
 12  0328.HK  20260324  20260324  Alco Holdings Ltd Announces US$17M Follow-On  0  20260325  SecondaryFilings  None
 13  0401.HK  20260325  20260325  Wanjia Group Holdings Ltd Prices US$6M Follow-On  0  20260401  SecondaryPricings  None
 14  0442.HK  20260123  20260123  Domaine Power Holdings Ltd Prices US$8M Follow-On  0  20260123  SecondaryPricings  None
-15  0470.HK  20260211  20260211  Wuxi Lead Intelligent Equip Co Prices US$631M ...  0  20260309  SecondaryPricings  None
+15  0470.HK  20260211  20260211  Wuxi Lead Intelligent Equip Co Prices US$631M Follow-On  0  20260309  SecondaryPricings  None
 16  0471.HK  20260203  20260203  Silkwave Inc Prices US$21M Follow-On  0  20260302  SecondaryFilings  None
 17  0471.HK  20260304  20260304  Silkwave Inc Prices US$21M Follow-On  0  20260302  SecondaryPricings  None
-18  0524.HK  20260330  20260330  Great Wall Terroir Hldg Ltd Announces US$3M Fo...  0  20260331  SecondaryFilings  None
+18  0524.HK  20260330  20260330  Great Wall Terroir Hldg Ltd Announces US$3M Follow-On  0  20260331  SecondaryFilings  None
 19  0607.HK  20260126  20260126  Fullshare Holdings Ltd Announces US$17M Follow-On  0  20260316  SecondaryFilings  None
 20  0616.HK  20260126  20260126  Eminence Enterprise Ltd Prices US$5M Follow-On  0  20260127  SecondaryPricings  None
 21  0638.HK  20260420  20260420  Fibocom Wireless Inc Prices US$374M Follow-On  0  20251117  IpoLockupExpirations  None
@@ -10595,19 +12446,19 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 23  0653.HK  20260223  20260223  Bonjour Holdings Ltd Prices US$1M Follow-On  0  20260224  SecondaryPricings  None
 24  0653.HK  20260317  20260317  Bonjour Holdings Ltd Prices US$1M Follow-On  0  20260323  SecondaryFilings  None
 25  0653.HK  20260323  20260323  Bonjour Holdings Ltd Prices US$1M Follow-On  0  20260323  SecondaryPricings  None
-26  0666.HK  20260129  20260129  Rept Battero Energy Co Ltd Prices US$103M Foll...  0  20251126  IpoLockupExpirations  None
+26  0666.HK  20260129  20260129  Rept Battero Energy Co Ltd Prices US$103M Follow-On  0  20251126  IpoLockupExpirations  None
 27  0673.HK  20260202  20260202  China Health Group Ltd Prices US$3M Follow-On  0  20260227  SecondaryFilings  None
 28  0673.HK  20260226  20260226  China Health Group Ltd Prices US$3M Follow-On  0  20260227  SecondaryPricings  None
-29  0699.HK  20260505  20260505  Ningbo Joyson Electronic Corp Prices US$439M F...  0  20260114  IpoLockupExpirations  None
+29  0699.HK  20260505  20260505  Ningbo Joyson Electronic Corp Prices US$439M Follow-On  0  20260114  IpoLockupExpirations  None
 30  0700.HK  20260204  20260204  Tencent Holdings Ltd Prices US$888M Follow-On  0  20260210  SecondaryFilings  None
 31  0700.HK  20260205  20260205  Tencent Holdings Ltd Prices US$888M Follow-On  0  20260210  SecondaryPricings  None
 32  0720.HK  20260213  20260213  Auto Italia Holdings Ltd Prices US$2M Follow-On  0  20260301  SecondaryFilings  None
 33  0720.HK  20260226  20260226  Auto Italia Holdings Ltd Prices US$2M Follow-On  0  20260301  SecondaryPricings  None
-34  0721.HK  20260311  20260311  China Finl Intl Invests Ltd Announces US$11M F...  0  20260311  SecondaryFilings  None
-35  0727.HK  20260129  20260129  Crown International Corp Ltd Prices US$79M Fol...  0  20260223  SecondaryFilings  None
-36  0727.HK  20260226  20260226  Crown International Corp Ltd Prices US$79M Fol...  0  20260223  SecondaryPricings  None
-37  0770.HK  20260213  20260213  Shanghai Intl Shanghai Growth Prices US$1M Fol...  0  20260324  SecondaryFilings  None
-38  0770.HK  20260324  20260324  Shanghai Intl Shanghai Growth Prices US$1M Fol...  0  20260324  SecondaryPricings  None
+34  0721.HK  20260311  20260311  China Finl Intl Invests Ltd Announces US$11M Follow-On  0  20260311  SecondaryFilings  None
+35  0727.HK  20260129  20260129  Crown International Corp Ltd Prices US$79M Follow-On  0  20260223  SecondaryFilings  None
+36  0727.HK  20260226  20260226  Crown International Corp Ltd Prices US$79M Follow-On  0  20260223  SecondaryPricings  None
+37  0770.HK  20260213  20260213  Shanghai Intl Shanghai Growth Prices US$1M Follow-On  0  20260324  SecondaryFilings  None
+38  0770.HK  20260324  20260324  Shanghai Intl Shanghai Growth Prices US$1M Follow-On  0  20260324  SecondaryPricings  None
 39  0800.HK  20260505  20260505  WeRide Inc Prices US$308M Follow-On  0  20260107  IpoLockupExpirations  None
 40  0815.HK  20260213  20260213  China Silver Group Ltd Announces US$59M Follow-On  0  20260327  SecondaryFilings  None
 41  0863.HK  20260128  20260128  OSL Group Ltd Prices US$200M Follow-On  0  20260205  SecondaryFilings  None
@@ -10615,11 +12466,11 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 43  0863.HK  20260429  20260429  OSL Group Ltd Prices US$200M Follow-On  0  20260205  IpoLockupExpirations  None
 44  0866.HK  20260305  20260305  China Qinfa Group Ltd Prices US$40M Follow-On  0  20260316  SecondaryFilings  None
 45  0866.HK  20260313  20260313  China Qinfa Group Ltd Prices US$40M Follow-On  0  20260316  SecondaryPricings  None
-46  0914.HK  20260225  20260225  Anhui Conch Cement Co Ltd Prices US$253M Follo...  0  20260302  SecondaryFilings  None
-47  0914.HK  20260226  20260226  Anhui Conch Cement Co Ltd Prices US$253M Follo...  0  20260302  SecondaryPricings  None
-48  0914.HK  20260327  20260327  Anhui Conch Cement Co Ltd Prices US$253M Follo...  0  20260302  IpoLockupExpirations  None
-49  0927.HK  20260130  20260130  Fujikon Industrial Hldg  Ltd Prices US$6M Foll...  0  20260204  SecondaryPricings  None
-50  0970.HK  20260224  20260224  New Spkle Roll Intl Grp Ltd Prices US$5M Follo...  0  20260224  SecondaryPricings  None
+46  0914.HK  20260225  20260225  Anhui Conch Cement Co Ltd Prices US$253M Follow-On  0  20260302  SecondaryFilings  None
+47  0914.HK  20260226  20260226  Anhui Conch Cement Co Ltd Prices US$253M Follow-On  0  20260302  SecondaryPricings  None
+48  0914.HK  20260327  20260327  Anhui Conch Cement Co Ltd Prices US$253M Follow-On  0  20260302  IpoLockupExpirations  None
+49  0927.HK  20260130  20260130  Fujikon Industrial Hldg Ltd Prices US$6M Follow-On  0  20260204  SecondaryPricings  None
+50  0970.HK  20260224  20260224  New Spkle Roll Intl Grp Ltd Prices US$5M Follow-On  0  20260224  SecondaryPricings  None
 51  0990.HK  20260213  20260213  Deep Source Holdings Ltd Prices US$45M Follow-On  0  20260213  SecondaryPricings  None
 52  0990.HK  20260514  20260514  Deep Source Holdings Ltd Prices US$45M Follow-On  0  20260213  IpoLockupExpirations  None
 53  1020.HK  20260313  20260313  Ciprun Tech Hldg Co Ltd Prices US$1M Follow-On  0  20260330  SecondaryFilings  None
@@ -10627,8 +12478,8 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 55  1021.HK  20260315  20260315  Guangdong Huayan Robotics Co Prices US$202M IPO  0  20260329  IpoFilings  None
 56  1021.HK  20260330  20260330  Guangdong Huayan Robotics Co Prices US$202M IPO  0  20260329  IpoPricings  None
 57  1025.HK  20260311  20260311  KNT Holdings Ltd Prices US$5M Follow-On  0  20260316  SecondaryPricings  None
-58  1027.HK  20260303  20260303  Asia Strategy Digit Tech Hldg Prices US$1M Fol...  0  20260326  SecondaryFilings  None
-59  1027.HK  20260326  20260326  Asia Strategy Digit Tech Hldg Prices US$1M Fol...  0  20260326  SecondaryPricings  None
+58  1027.HK  20260303  20260303  Asia Strategy Digit Tech Hldg Prices US$1M Follow-On  0  20260326  SecondaryFilings  None
+59  1027.HK  20260326  20260326  Asia Strategy Digit Tech Hldg Prices US$1M Follow-On  0  20260326  SecondaryPricings  None
 60  1029.HK  20260202  20260202  IRC Ltd Prices US$42M Follow-On  0  20260206  SecondaryPricings  None
 61  1030.HK  20260205  20260205  Seazen Group Ltd Prices US$61M Follow-On  0  20260212  SecondaryFilings  None
 62  1030.HK  20260209  20260209  Seazen Group Ltd Prices US$61M Follow-On  0  20260212  SecondaryPricings  None
@@ -10636,34 +12487,34 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 64  1050.HK  20260129  20260129  Karrie Intl Hldg Ltd Prices US$20M Follow-On  0  20260212  SecondaryFilings  None
 65  1050.HK  20260206  20260206  Karrie Intl Hldg Ltd Prices US$20M Follow-On  0  20260212  SecondaryPricings  None
 66  1050.HK  20260507  20260507  Karrie Intl Hldg Ltd Prices US$20M Follow-On  0  20260212  IpoLockupExpirations  None
-67  1069.HK  20260327  20260327  China Health Tech Grp Hldg Co Announces US$7M ...  0  20260330  SecondaryFilings  None
-68  1071.HK  20260218  20260218  Huadian Power Intl Corp Ltd Prices US$477M Fol...  0  20250827  IpoLockupExpirations  None
+67  1069.HK  20260327  20260327  China Health Tech Grp Hldg Co Announces US$7M Follow-On  0  20260330  SecondaryFilings  None
+68  1071.HK  20260218  20260218  Huadian Power Intl Corp Ltd Prices US$477M Follow-On  0  20250827  IpoLockupExpirations  None
 69  1138.HK  20260420  20260420  COSCO SHIPPING Energy Prices US$1,121M Follow-On  0  20251024  IpoLockupExpirations  None
 70  1142.HK  20260313  20260313  E&P Global Holdings Ltd Cancels US$60M Follow-On  0  20260316  SecondaryWithdrawals  None
-71  1228.HK  20260215  20260215  CANbridge Pharmaceuticals Inc Prices US$26M Fo...  0  20260312  SecondaryFilings  None
-72  1228.HK  20260310  20260310  CANbridge Pharmaceuticals Inc Prices US$26M Fo...  0  20260312  SecondaryPricings  None
+71  1228.HK  20260215  20260215  CANbridge Pharmaceuticals Inc Prices US$26M Follow-On  0  20260312  SecondaryFilings  None
+72  1228.HK  20260310  20260310  CANbridge Pharmaceuticals Inc Prices US$26M Follow-On  0  20260312  SecondaryPricings  None
 73  1333.HK  20260507  20260507  Breton Technology Co Ltd Prices US$30M IPO  0  20250918  IpoLockupExpirations  None
-74  1349.HK  20260331  20260331  Shanghai Fudan-Zhangjiang Cancels US$41M Follo...  0  20260331  SecondaryWithdrawals  None
-75  1349.HK  20260331  20260331  Shanghai Fudan-Zhangjiang Announces US$43M Fol...  0  20260331  SecondaryFilings  None
+74  1349.HK  20260331  20260331  Shanghai Fudan-Zhangjiang Cancels US$41M Follow-On  0  20260331  SecondaryWithdrawals  None
+75  1349.HK  20260331  20260331  Shanghai Fudan-Zhangjiang Announces US$43M Follow-On  0  20260331  SecondaryFilings  None
 76  1364.HK  20260212  20260212  Guming Holdings Ltd Prices US$233M IPO  0  20250309  IpoLockupExpirations  None
-77  1372.HK  20260126  20260126  China Carbon Neutral Dvlp Grp Prices US$6M Fol...  0  20260127  SecondaryPricings  None
-78  1372.HK  20260306  20260306  China Carbon Neutral Dvlp Grp Cancels US$5M Fo...  0  20260316  SecondaryFilings  None
-79  1372.HK  20260313  20260313  China Carbon Neutral Dvlp Grp Cancels US$5M Fo...  0  20260316  SecondaryWithdrawals  None
-80  1378.HK  20260218  20260218  China Hongqiao Group Ltd Prices US$1,502M Foll...  0  20251125  IpoLockupExpirations  None
-81  1396.HK  20260203  20260203  Guangdong-Hong Kong Greater Prices US$16M Foll...  0  20260216  SecondaryFilings  None
-82  1396.HK  20260209  20260209  Guangdong-Hong Kong Greater Prices US$16M Foll...  0  20260216  SecondaryPricings  None
+77  1372.HK  20260126  20260126  China Carbon Neutral Dvlp Grp Prices US$6M Follow-On  0  20260127  SecondaryPricings  None
+78  1372.HK  20260306  20260306  China Carbon Neutral Dvlp Grp Cancels US$5M Follow-On  0  20260316  SecondaryFilings  None
+79  1372.HK  20260313  20260313  China Carbon Neutral Dvlp Grp Cancels US$5M Follow-On  0  20260316  SecondaryWithdrawals  None
+80  1378.HK  20260218  20260218  China Hongqiao Group Ltd Prices US$1,502M Follow-On  0  20251125  IpoLockupExpirations  None
+81  1396.HK  20260203  20260203  Guangdong-Hong Kong Greater Prices US$16M Follow-On  0  20260216  SecondaryFilings  None
+82  1396.HK  20260209  20260209  Guangdong-Hong Kong Greater Prices US$16M Follow-On  0  20260216  SecondaryPricings  None
 83  1421.HK  20260128  20260128  Prosperity Grp Intl Ltd Prices US$1M Follow-On  0  20260129  SecondaryPricings  None
-84  1468.HK  20260309  20260309  Jakota Capital (Holding) Group Announces US$4M...  0  20260330  SecondaryFilings  None
+84  1468.HK  20260309  20260309  Jakota Capital (Holding) Group Announces US$4M Follow-On  0  20260330  SecondaryFilings  None
 85  1483.HK  20260130  20260130  Net-A-Go Technology Co Ltd Prices US$9M Follow-On  0  20260301  SecondaryFilings  None
 86  1483.HK  20260226  20260226  Net-A-Go Technology Co Ltd Prices US$9M Follow-On  0  20260301  SecondaryPricings  None
-87  1501.HK  20260122  20260122  Shanghai INT Med Instr Co Ltd Prices US$117M F...  0  20260123  SecondaryPricings  None
+87  1501.HK  20260122  20260122  Shanghai INT Med Instr Co Ltd Prices US$117M Follow-On  0  20260123  SecondaryPricings  None
 88  1530.HK  20260309  20260309  3SBio Inc Prices US$400M Follow-On  0  20251210  IpoLockupExpirations  None
 89  1559.HK  20260216  20260216  Kwan On Holdings Ltd Prices US$8M Follow-On  0  20260316  SecondaryFilings  None
 90  1559.HK  20260316  20260316  Kwan On Holdings Ltd Prices US$8M Follow-On  0  20260316  SecondaryPricings  None
-91  1575.HK  20260205  20260205  Regal Partners Holdings Ltd Prices US$4M Follo...  0  20260226  SecondaryFilings  None
-92  1575.HK  20260225  20260225  Regal Partners Holdings Ltd Prices US$4M Follo...  0  20260226  SecondaryPricings  None
+91  1575.HK  20260205  20260205  Regal Partners Holdings Ltd Prices US$4M Follow-On  0  20260226  SecondaryFilings  None
+92  1575.HK  20260225  20260225  Regal Partners Holdings Ltd Prices US$4M Follow-On  0  20260226  SecondaryPricings  None
 93  1591.HK  20260203  20260203  Shun Wo Group Holdings Ltd Prices US$2M Follow-On  0  20260204  SecondaryPricings  None
-94  1613.HK  20260220  20260220  Synertone Communication Corp Prices US$2M Foll...  0  20260216  SecondaryPricings  None
+94  1613.HK  20260220  20260220  Synertone Communication Corp Prices US$2M Follow-On  0  20260216  SecondaryPricings  None
 95  1672.HK  20260203  20260203  Ascletis Pharma Inc Prices US$108M Follow-On  0  20260211  SecondaryFilings  None
 96  1672.HK  20260210  20260210  Ascletis Pharma Inc Prices US$108M Follow-On  0  20260211  SecondaryPricings  None
 97  1672.HK  20260511  20260511  Ascletis Pharma Inc Prices US$108M Follow-On  0  20260211  IpoLockupExpirations  None
@@ -10674,11 +12525,11 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 102  1718.HK  20260227  20260227  Wan Kei Group Holdings Ltd Prices US$2M Follow-On  0  20260302  SecondaryPricings  None
 103  1726.HK  20260204  20260204  HKE Holdings Ltd Prices US$10M Follow-On  0  20260301  SecondaryFilings  None
 104  1726.HK  20260226  20260226  HKE Holdings Ltd Prices US$10M Follow-On  0  20260301  SecondaryPricings  None
-105  1729.HK  20260210  20260210  Time Interconnect Tech Ltd Prices US$210M Foll...  0  20260223  SecondaryFilings  None
-106  1729.HK  20260220  20260220  Time Interconnect Tech Ltd Prices US$210M Foll...  0  20260223  SecondaryPricings  None
+105  1729.HK  20260210  20260210  Time Interconnect Tech Ltd Prices US$210M Follow-On  0  20260223  SecondaryFilings  None
+106  1729.HK  20260220  20260220  Time Interconnect Tech Ltd Prices US$210M Follow-On  0  20260223  SecondaryPricings  None
 107  1736.HK  20260119  20260119  China Parenting Network Hldg Prices Follow-On  0  20260120  SecondaryPricings  None
-108  1747.HK  20260223  20260223  Home Control International Ltd Prices US$14M F...  0  20251126  IpoLockupExpirations  None
-109  1751.HK  20260306  20260306  AI Energy Engineering Hldg Ltd Announces US$20...  0  20260323  SecondaryFilings  None
+108  1747.HK  20260223  20260223  Home Control International Ltd Prices US$14M Follow-On  0  20251126  IpoLockupExpirations  None
+109  1751.HK  20260306  20260306  AI Energy Engineering Hldg Ltd Announces US$20M Follow-On  0  20260323  SecondaryFilings  None
 110  1762.HK  20260311  20260311  Wanka Online Inc Prices US$45M Follow-On  0  20260324  SecondaryFilings  None
 111  1762.HK  20260324  20260324  Wanka Online Inc Prices US$45M Follow-On  0  20260324  SecondaryPricings  None
 112  1768.HK  20260128  20260128  Busy Ming Group Co Ltd Prices US$471M IPO  0  20260223  IpoPricings  None
@@ -10689,16 +12540,16 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 117  1796.HK  20260312  20260312  Metaspacex Ltd Cancels US$6M Follow-On  0  20260312  SecondaryWithdrawals  None
 118  1823.HK  20260211  20260211  Huayu Expressway Grp Ltd Prices US$7M Follow-On  0  20260306  SecondaryFilings  None
 119  1823.HK  20260305  20260305  Huayu Expressway Grp Ltd Prices US$7M Follow-On  0  20260306  SecondaryPricings  None
-120  1825.HK  20260122  20260122  Sterling Group Holdings Ltd Prices US$1M Follo...  0  20260123  SecondaryPricings  None
+120  1825.HK  20260122  20260122  Sterling Group Holdings Ltd Prices US$1M Follow-On  0  20260123  SecondaryPricings  None
 121  1826.HK  20260211  20260211  FDB Holdings Ltd Prices US$5M Follow-On  0  20260212  SecondaryPricings  None
 122  1894.HK  20260327  20260327  Hang Yick Holdings Co Ltd Prices US$11M Follow-On  0  20260329  SecondaryPricings  None
 123  1910.HK  20260216  20260216  Samsonite Group SA Announces Follow-On  0  20260319  SecondaryFilings  None
 124  1943.HK  20260412  20260412  Kings Stone Hldg Grp Ltd Prices US$12M Follow-On  0  20251015  IpoLockupExpirations  None
-125  1989.HK  20260320  20260320  Delton Tech (Guangzhou) Inc Prices US$422M Fol...  0  20260325  SecondaryPricings  None
+125  1989.HK  20260320  20260320  Delton Tech (Guangzhou) Inc Prices US$422M Follow-On  0  20260325  SecondaryPricings  None
 126  2026.HK  20260505  20260505  Pony AI Inc Prices US$863M Follow-On  0  20251203  IpoLockupExpirations  None
 127  2076.HK  20260307  20260307  Kanzhun Ltd Prices US$200M Follow-On  0  20260107  IpoLockupExpirations  None
 128  2097.HK  20260303  20260303  MIXUE Group Prices US$444M IPO  0  20250328  IpoLockupExpirations  None
-129  2147.HK  20260122  20260122  Zhengwei Group Holdings Co Ltd Prices US$1M Fo...  0  20260122  SecondaryPricings  None
+129  2147.HK  20260122  20260122  Zhengwei Group Holdings Co Ltd Prices US$1M Follow-On  0  20260122  SecondaryPricings  None
 130  2187.HK  20260126  20260126  Zhixin Group Holding Ltd Prices US$13M Follow-On  0  20260322  SecondaryFilings  None
 131  2187.HK  20260320  20260320  Zhixin Group Holding Ltd Prices US$13M Follow-On  0  20260322  SecondaryPricings  None
 132  2221.HK  20260206  20260206  New Concepts Holdings Ltd Prices US$4M Follow-On  0  20260209  SecondaryPricings  None
@@ -10706,12 +12557,12 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 134  2250.HK  20260225  20260225  B.Duck Semk Hldg Intl Ltd Prices US$6M Follow-On  0  20260225  SecondaryPricings  None
 135  2257.HK  20260309  20260309  Sirnaomics Ltd Prices US$7M Follow-On  0  20260310  SecondaryPricings  None
 136  2259.HK  20260329  20260329  Zijin Gold Intl Co Ltd Prices US$3,051M IPO  0  20251027  IpoLockupExpirations  None
-137  2269.HK  20260416  20260416  WuXi Biologics (Cayman) Inc Prices US$741M Fol...  0  20260119  IpoLockupExpirations  None
-138  2271.HK  20260209  20260209  Zhong An Intelligent Living Prices US$5M Follo...  0  20260302  SecondaryFilings  None
-139  2271.HK  20260227  20260227  Zhong An Intelligent Living Prices US$5M Follo...  0  20260302  SecondaryPricings  None
-140  2276.HK  20260126  20260126  Shanghai Conant Optical Co Ltd Prices US$180M ...  0  20260205  SecondaryFilings  None
-141  2276.HK  20260203  20260203  Shanghai Conant Optical Co Ltd Prices US$180M ...  0  20260205  SecondaryPricings  None
-142  2276.HK  20260404  20260404  Shanghai Conant Optical Co Ltd Prices US$180M ...  0  20260205  IpoLockupExpirations  None
+137  2269.HK  20260416  20260416  WuXi Biologics (Cayman) Inc Prices US$741M Follow-On  0  20260119  IpoLockupExpirations  None
+138  2271.HK  20260209  20260209  Zhong An Intelligent Living Prices US$5M Follow-On  0  20260302  SecondaryFilings  None
+139  2271.HK  20260227  20260227  Zhong An Intelligent Living Prices US$5M Follow-On  0  20260302  SecondaryPricings  None
+140  2276.HK  20260126  20260126  Shanghai Conant Optical Co Ltd Prices US$180M Follow-On  0  20260205  SecondaryFilings  None
+141  2276.HK  20260203  20260203  Shanghai Conant Optical Co Ltd Prices US$180M Follow-On  0  20260205  SecondaryPricings  None
+142  2276.HK  20260404  20260404  Shanghai Conant Optical Co Ltd Prices US$180M Follow-On  0  20260205  IpoLockupExpirations  None
 143  2324.HK  20260305  20260305  Capital VC Ltd Prices US$7M Follow-On  0  20260312  SecondaryPricings  None
 144  2402.HK  20260323  20260323  Beijing SinoHytec Co Ltd Prices US$26M Follow-On  0  20251223  IpoLockupExpirations  None
 145  2422.HK  20260126  20260126  Rego Interactive Co Ltd Prices US$9M Follow-On  0  20260127  SecondaryPricings  None
@@ -10719,14 +12570,14 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 147  2432.HK  20260313  20260313  Shenzhen Dobot Corp Ltd Announces Follow-On  0  20260316  SecondaryFilings  None
 148  2459.HK  20260125  20260125  Sanergy Group Ltd Prices US$2M Follow-On  0  20260316  SecondaryFilings  None
 149  2459.HK  20260220  20260220  Sanergy Group Ltd Prices US$2M Follow-On  0  20260316  SecondaryPricings  None
-150  2503.HK  20260326  20260326  Zhongshen Jianye Holding Ltd Announces US$44M ...  0  20260327  SecondaryFilings  None
+150  2503.HK  20260326  20260326  Zhongshen Jianye Holding Ltd Announces US$44M Follow-On  0  20260327  SecondaryFilings  None
 151  2513.HK  20260127  20260127  Rumor: Knowledge Atlas Tech Joint Follow-On  0  20260213  SecondaryFilings  None
-152  2515.HK  20260211  20260211  Tianjin Constr Dvlp Grp Co Ltd Prices US$4M Fo...  0  20260310  SecondaryFilings  None
-153  2515.HK  20260309  20260309  Tianjin Constr Dvlp Grp Co Ltd Prices US$4M Fo...  0  20260310  SecondaryPricings  None
+152  2515.HK  20260211  20260211  Tianjin Constr Dvlp Grp Co Ltd Prices US$4M Follow-On  0  20260310  SecondaryFilings  None
+153  2515.HK  20260309  20260309  Tianjin Constr Dvlp Grp Co Ltd Prices US$4M Follow-On  0  20260310  SecondaryPricings  None
 154  2525.HK  20260315  20260315  Hesai Group Prices US$534M Follow-On  0  20251012  IpoLockupExpirations  None
 155  2526.HK  20260330  20260330  Hangzhou Diagens Biotech Co Prices US$101M IPO  0  20260329  IpoPricings  None
-156  2533.HK  20260306  20260306  Black Sesame Intl Hldg Ltd Prices US$69M Follo...  0  20260308  SecondaryPricings  None
-157  2533.HK  20260309  20260309  Black Sesame Intl Hldg Ltd Announces US$81M Fo...  0  20260320  SecondaryFilings  None
+156  2533.HK  20260306  20260306  Black Sesame Intl Hldg Ltd Prices US$69M Follow-On  0  20260308  SecondaryPricings  None
+157  2533.HK  20260309  20260309  Black Sesame Intl Hldg Ltd Announces US$81M Follow-On  0  20260320  SecondaryFilings  None
 158  2543.HK  20260308  20260308  Dahon Tech (Shenzhen) Co Ltd Prices US$50M IPO  0  20251006  IpoLockupExpirations  None
 159  2561.HK  20260321  20260321  VISEN Pharmaceuticals Prices US$101M IPO  0  20250521  IpoLockupExpirations  None
 160  2565.HK  20260322  20260322  PegBio Co Ltd Prices US$39M Follow-On  0  20260105  IpoLockupExpirations  None
@@ -10735,23 +12586,23 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 163  2570.HK  20260126  20260126  Shanghai REFIRE Group Ltd Prices US$34M Follow-On  0  20260127  SecondaryPricings  None
 164  2570.HK  20260225  20260225  Shanghai REFIRE Group Ltd Prices US$34M Follow-On  0  20260127  IpoLockupExpirations  None
 165  2575.HK  20260413  20260413  Xuanzhu Biopharm Co Ltd Prices US$95M IPO  0  20251014  IpoLockupExpirations  None
-166  2577.HK  20260123  20260123  InnoScience (Suzhou) Tech Hldg Prices US$251M ...  0  20260126  SecondaryFilings  None
-167  2577.HK  20260126  20260126  InnoScience (Suzhou) Tech Hldg Prices US$251M ...  0  20260126  SecondaryPricings  None
-168  2577.HK  20260225  20260225  InnoScience (Suzhou) Tech Hldg Prices US$251M ...  0  20260126  IpoLockupExpirations  None
+166  2577.HK  20260123  20260123  InnoScience (Suzhou) Tech Hldg Prices US$251M Follow-On  0  20260126  SecondaryFilings  None
+167  2577.HK  20260126  20260126  InnoScience (Suzhou) Tech Hldg Prices US$251M Follow-On  0  20260126  SecondaryPricings  None
+168  2577.HK  20260225  20260225  InnoScience (Suzhou) Tech Hldg Prices US$251M Follow-On  0  20260126  IpoLockupExpirations  None
 169  2580.HK  20260301  20260301  Aux Electric Co Ltd Prices US$532M IPO  0  20250928  IpoLockupExpirations  None
-170  2582.HK  20260310  20260310  Jiangsu Guofu Hydrogen Energy Prices US$19M Fo...  0  20260319  SecondaryFilings  None
-171  2582.HK  20260318  20260318  Jiangsu Guofu Hydrogen Energy Prices US$19M Fo...  0  20260319  SecondaryPricings  None
+170  2582.HK  20260310  20260310  Jiangsu Guofu Hydrogen Energy Prices US$19M Follow-On  0  20260319  SecondaryFilings  None
+171  2582.HK  20260318  20260318  Jiangsu Guofu Hydrogen Energy Prices US$19M Follow-On  0  20260319  SecondaryPricings  None
 172  2589.HK  20260508  20260508  Auntea Jenny (Shanghai) Prices US$35M IPO  0  20250618  IpoLockupExpirations  None
 173  2595.HK  20260318  20260318  GenFleet Therapeutics Prices US$234M IPO  0  20251216  IpoLockupExpirations  None
 174  2610.HK  20260325  20260325  Nanshan Aluminium Intl Hldg Prices US$302M IPO  0  20250610  IpoLockupExpirations  None
-175  2610.HK  20260121  20260121  Nanshan Aluminium Intl Hldg Prices US$256M Fol...  0  20260204  SecondaryFilings  None
-176  2610.HK  20260122  20260122  Nanshan Aluminium Intl Hldg Prices US$256M Fol...  0  20260204  SecondaryPricings  None
-177  2610.HK  20260422  20260422  Nanshan Aluminium Intl Hldg Prices US$256M Fol...  0  20260204  IpoLockupExpirations  None
-178  2615.HK  20260324  20260324  Sichuan Biokin Pharm Co Ltd Prices US$529M Fol...  0  20250929  IpoLockupExpirations  None
-179  2617.HK  20260120  20260120  TransThera Sciences (Nanjing) Prices US$25M Fo...  0  20260121  SecondaryPricings  None
-180  2617.HK  20260420  20260420  TransThera Sciences (Nanjing) Prices US$25M Fo...  0  20260121  IpoLockupExpirations  None
-181  2623.HK  20260306  20260306  Add New Energy Invest Hldg Grp Prices US$64M F...  0  20260329  SecondaryFilings  None
-182  2623.HK  20260331  20260331  Add New Energy Invest Hldg Grp Prices US$64M F...  0  20260329  SecondaryPricings  None
+175  2610.HK  20260121  20260121  Nanshan Aluminium Intl Hldg Prices US$256M Follow-On  0  20260204  SecondaryFilings  None
+176  2610.HK  20260122  20260122  Nanshan Aluminium Intl Hldg Prices US$256M Follow-On  0  20260204  SecondaryPricings  None
+177  2610.HK  20260422  20260422  Nanshan Aluminium Intl Hldg Prices US$256M Follow-On  0  20260204  IpoLockupExpirations  None
+178  2615.HK  20260324  20260324  Sichuan Biokin Pharm Co Ltd Prices US$529M Follow-On  0  20250929  IpoLockupExpirations  None
+179  2617.HK  20260120  20260120  TransThera Sciences (Nanjing) Prices US$25M Follow-On  0  20260121  SecondaryPricings  None
+180  2617.HK  20260420  20260420  TransThera Sciences (Nanjing) Prices US$25M Follow-On  0  20260121  IpoLockupExpirations  None
+181  2623.HK  20260306  20260306  Add New Energy Invest Hldg Grp Prices US$64M Follow-On  0  20260329  SecondaryFilings  None
+182  2623.HK  20260331  20260331  Add New Energy Invest Hldg Grp Prices US$64M Follow-On  0  20260329  SecondaryPricings  None
 183  2625.HK  20260331  20260331  Jiangsu Horizon Chain Prices US$17M IPO  0  20250625  IpoLockupExpirations  None
 184  2629.HK  20260217  20260217  Mirxes Holding Co Ltd Prices US$139M IPO  0  20250715  IpoLockupExpirations  None
 185  2629.HK  20260128  20260128  Mirxes Holding Co Ltd Prices US$91M Follow-On  0  20260212  SecondaryFilings  None
@@ -10766,7 +12617,7 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 194  2677.HK  20260206  20260206  Distinct Healthcare Hldg Ltd Prices US$36M IPO  0  20260305  IpoPricings  None
 195  2692.HK  20260309  20260309  Shenzhen Zhaowei Mach & Prices US$244M Follow-On  0  20260308  SecondaryPricings  None
 196  2698.HK  20260509  20260509  Softcare Ltd Prices US$306M IPO  0  20260331  IpoLockupExpirations  None
-197  2699.HK  20260216  20260216  Xinming China Holdings Ltd Announces US$14M Fo...  0  20260330  SecondaryFilings  None
+197  2699.HK  20260216  20260216  Xinming China Holdings Ltd Announces US$14M Follow-On  0  20260330  SecondaryFilings  None
 198  2701.HK  20260323  20260323  Nsing Technologies Inc Prices US$131M Follow-On  0  20260322  SecondaryPricings  None
 199  2706.HK  20260213  20260213  Beijing Haizhi Tech Grp Co Ltd Prices US$97M IPO  0  20260212  IpoPricings  None
 ```
@@ -10779,10 +12630,10 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -10793,6 +12644,7 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：ShareholderAndAnnualMeetings（股东及年度会议），ExtraordinaryShareholdersMeeting（特别股东大会），M&APresentation（并购演示），CorporateSalesRelease（公司销售发布），CorporatePresentation（公司演示），OtherCorporate（其他公司事件） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
@@ -11025,10 +12877,10 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -11039,12 +12891,13 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：EarningsPresentation（财报演示），EarningsReleases（财报发布），EarningsCallsAndPresentations（财报电话会议及演示），GuidanceCallsAndPresentations（业绩指引电话会议及演示），InterimManagementStatementRelease（中期管理层声明发布），InterimManagementStatementCall（中期管理层声明电话会议），EarningsPressConference（财报新闻发布会），GuidancePresentation（业绩指引演示） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
 **4.4. 使用示例**
 
-**4.4.1. 获取一定时间内全部港股财务批量相关的事件**
+**4.4.1. 获取一定时间内全部港股财务披露相关的事件**
 
 ```python
 import panda_data
@@ -11271,10 +13124,10 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -11285,6 +13138,7 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：CorporateAnalystMeetings（公司分析师会议），ConferencePresentations（会议演示），CorporateCallsAndPresentations（公司电话会议及演示），BrokerageAnalystCalls（券商分析师电话会议），CorporateInvestorRoadshow（公司投资者路演），Conferences（会议），SalesConferenceCall（销售电话会议），SyndicateRoadshows（银团路演），BrokerageAnalystMeetings（券商分析师会议），CompanyVisits（公司实地考察），SalesPresentation（销售演示），IndustrySpecificCall（行业特定电话会议），IndustrySpecificPresentation（行业特定演示），SalesAndTradingStatementCallsAndPresentations（销售与交易声明电话会议及演示） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
@@ -11519,10 +13373,10 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -11531,7 +13385,7 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 | publish_date | string | 事件公告发布日期（日期筛选依据） |
 | symbol | string | 股票代码 |
 | excute_date | string | 事件执行日期 |
-| event_type | string | 事件类型 |
+| event_type | string | 事件类型：ExDividends（除息），SpecialDividendsCash（现金特别股息），StockSplits（股票拆分），CapitalGainsCash（资本收益现金分配），RegularDividendCashWithAlternative（常规现金股息，可选择股票股息），RegularDividendStockWithAlternative（常规股票股息，可选择现金股息），RegularDividendsStock（常规股票股息），SpecialDividendCashWithAlternative（特别现金股息，可选择股票股息），OtherDividendsCash（其他现金股息），SpecialDividendsStock（股票特别股息），SpecialDividendStockWithAlternative（特别股票股息，可选择现金股息） |
 | number | string | 每股金额 |
 | currency | string | 交易币种 |
 | event | string | 事件 |
@@ -11542,7 +13396,7 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 ```python
 import panda_data
-result = panda_data.get_stock_dividend_event(
+result = panda_data.get_stock_dividend_activity(
     symbol="AAPL",
     fields=[],
     start_date="20250101",
@@ -11555,206 +13409,11 @@ print(result)
 
 ```text
 symbol  publish_date  excute_date  event_type  number  currency  event
-0  A.NB  20250401  20250423  ExDividends  0.248  USD  A.NB Interim Cash Dividend of gross USD 0.248 ...
-1  A.NB  20250701  20250723  ExDividends  0.248  USD  A.NB Interim Cash Dividend of gross USD 0.248 ...
-2  A.NB  20250930  20251022  ExDividends  0.248  USD  A.NB Final Cash Dividend of gross USD 0.248 pa...
-3  A.NB  20260106  20260128  ExDividends  0.255  USD  A.NB Interim Cash Dividend of gross USD 0.255 ...
-4  A.NB  20260331  20260422  ExDividends  0.255  USD  A.NB Interim Cash Dividend of gross USD 0.255 ...
-5  AA.NB  20250304  20250320  ExDividends  0.1  USD  AA.NB Interim Cash Dividend of gross USD 0.1 p...
-6  AA.NB  20250520  20250606  ExDividends  0.1  USD  AA.NB Interim Cash Dividend of gross USD 0.1 p...
-7  AA.NB  20250812  20250828  ExDividends  0.1  USD  AA.NB Interim Cash Dividend of gross USD 0.1 p...
-8  AA.NB  20251104  20251121  ExDividends  0.1  USD  AA.NB Final Cash Dividend of gross USD 0.1 pai...
-9  AA.NB  20260310  20260326  ExDividends  0.1  USD  AA.NB Interim Cash Dividend of gross USD 0.1 p...
-10  AAME.NB  20250409  20250423  ExDividends  0.02  USD  AAME.NB Final Cash Dividend of gross USD 0.02 ...
-11  AAMI.NB  20250314  20250328  ExDividends  0.01  USD  AAMI.NB Interim Cash Dividend of gross USD 0.0...
-12  AAMI.NB  20250613  20250627  ExDividends  0.01  USD  AAMI.NB Interim Cash Dividend of gross USD 0.0...
-13  AAMI.NB  20250912  20250926  ExDividends  0.01  USD  AAMI.NB Interim Cash Dividend of gross USD 0.0...
-14  AAMI.NB  20251212  20251224  ExDividends  0.01  USD  AAMI.NB Final Cash Dividend of gross USD 0.01 ...
-15  AAMI.NB  20260313  20260327  ExDividends  0.1  USD  AAMI.NB Interim Cash Dividend of gross USD 0.1...
-16  AAON.NB  20250318  20250328  ExDividends  0.1  USD  AAON.NB Interim Cash Dividend of gross USD 0.1...
-17  AAON.NB  20250606  20250627  ExDividends  0.1  USD  AAON.NB Interim Cash Dividend of gross USD 0.1...
-18  AAON.NB  20250905  20250926  ExDividends  0.1  USD  AAON.NB Interim Cash Dividend of gross USD 0.1...
-19  AAON.NB  20251126  20251218  ExDividends  0.1  USD  AAON.NB Final Cash Dividend of gross USD 0.1 p...
-20  AAON.NB  20260318  20260330  ExDividends  0.1  USD  AAON.NB Interim Cash Dividend of gross USD 0.1...
-21  AAP.NB  20250110  20250124  ExDividends  0.25  USD  AAP.NB Interim Cash Dividend of gross USD 0.25...
-22  AAP.NB  20250411  20250425  ExDividends  0.25  USD  AAP.NB Interim Cash Dividend of gross USD 0.25...
-23  AAP.NB  20250711  20250725  ExDividends  0.25  USD  AAP.NB Interim Cash Dividend of gross USD 0.25...
-24  AAP.NB  20251010  20251024  ExDividends  0.25  USD  AAP.NB Final Cash Dividend of gross USD 0.25 p...
-25  AAP.NB  20260109  20260123  ExDividends  0.25  USD  AAP.NB Interim Cash Dividend of gross USD 0.25...
-26  AAP.NB  20260410  20260424  ExDividends  0.25  USD  AAP.NB Interim Cash Dividend of gross USD 0.25...
-27  AAPL.NB  20250210  20250213  ExDividends  0.25  USD  AAPL.NB Interim Cash Dividend of gross USD 0.2...
-28  AAPL.NB  20250512  20250515  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.2...
-29  AAPL.NB  20250811  20250814  ExDividends  0.26  USD  AAPL.NB Final Cash Dividend of gross USD 0.26 ...
-30  AAPL.NB  20251110  20251113  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.2...
-31  AAPL.NB  20260209  20260212  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.2...
-32  AAT.NB  20250306  20250320  ExDividends  0.14048  USD  AAT.NB Interim Cash Dividend of gross USD 0.14...
-33  AAT.NB  20250320  20250320  SpecialDividendsCash  0.139869  USD  AAT.NB Extra Cash Dividend of gross USD 0.1398...
-34  AAT.NB  20250320  20250320  CapitalGainsCash  0.059651  USD  AAT.NB Capital gains, long term Cash Dividend ...
-35  AAT.NB  20250605  20250619  ExDividends  0.14048  USD  AAT.NB Interim Cash Dividend of gross USD 0.14...
-36  AAT.NB  20250619  20250619  SpecialDividendsCash  0.139869  USD  AAT.NB Extra Cash Dividend of gross USD 0.1398...
-37  AAT.NB  20250619  20250619  CapitalGainsCash  0.059651  USD  AAT.NB Capital gains, long term Cash Dividend ...
-38  AAT.NB  20250904  20250918  ExDividends  0.14048  USD  AAT.NB Interim Cash Dividend of gross USD 0.14...
-39  AAT.NB  20250918  20250918  SpecialDividendsCash  0.139869  USD  AAT.NB Extra Cash Dividend of gross USD 0.1398...
-40  AAT.NB  20250918  20250918  CapitalGainsCash  0.059651  USD  AAT.NB Capital gains, long term Cash Dividend ...
-41  AAT.NB  20251204  20251218  ExDividends  0.14048  USD  AAT.NB Final Cash Dividend of gross USD 0.1404...
-42  AAT.NB  20251218  20251218  SpecialDividendsCash  0.139869  USD  AAT.NB Extra Cash Dividend of gross USD 0.1398...
-43  AAT.NB  20251218  20251218  CapitalGainsCash  0.059651  USD  AAT.NB Capital gains, long term Cash Dividend ...
-44  AAT.NB  20260305  20260319  ExDividends  0.34  USD  AAT.NB Interim Cash Dividend of gross USD 0.34...
-45  ABBV.NB  20250115  20250214  ExDividends  1.64  USD  ABBV.NB Final Cash Dividend of gross USD 1.64 ...
-46  ABBV.NB  20250415  20250515  ExDividends  1.64  USD  ABBV.NB Interim Cash Dividend of gross USD 1.6...
-47  ABBV.NB  20250715  20250815  ExDividends  1.64  USD  ABBV.NB Interim Cash Dividend of gross USD 1.6...
-48  ABBV.NB  20251015  20251114  ExDividends  1.64  USD  ABBV.NB Interim Cash Dividend of gross USD 1.6...
-49  ABBV.NB  20260116  20260217  ExDividends  1.73  USD  ABBV.NB Final Cash Dividend of gross USD 1.73 ...
-50  ABBV.NB  20260415  20260515  ExDividends  1.73  USD  ABBV.NB Interim Cash Dividend of gross USD 1.7...
-51  ABCB.NB  20250331  20250407  ExDividends  0.2  USD  ABCB.NB Interim Cash Dividend of gross USD 0.2...
-52  ABCB.NB  20250630  20250707  ExDividends  0.2  USD  ABCB.NB Interim Cash Dividend of gross USD 0.2...
-53  ABCB.NB  20250930  20251006  ExDividends  0.2  USD  ABCB.NB Interim Cash Dividend of gross USD 0.2...
-54  ABCB.NB  20251231  20260105  ExDividends  0.2  USD  ABCB.NB Final Cash Dividend of gross USD 0.2 p...
-55  ABCB.NB  20260331  20260406  ExDividends  0.2  USD  ABCB.NB Interim Cash Dividend of gross USD 0.2...
-56  ABEV.NB  20250109  20250109  SpecialDividendsCash  0.039717  USD  ABEV.NB Extra Cash Dividend of gross USD 0.039...
-57  ABEV.NB  20250318  20250414  ExDividends  0.022416  USD  ABEV.NB Interim Cash Dividend of gross USD 0.0...
-58  ABEV.NB  20250519  20250717  ExDividends  0.023625  USD  ABEV.NB Interim Cash Dividend of gross USD 0.0...
-59  ABEV.NB  20250811  20251014  ExDividends  0.024006  USD  ABEV.NB Interim Cash Dividend of gross USD 0.0...
-60  ABEV.NB  20251222  20260109  ExDividends  0.083252  USD  ABEV.NB Final Cash Dividend of gross USD 0.083...
-61  ABEV.NB  20251222  20260416  SpecialDividendsCash  0.014534  USD  ABEV.NB Extra Cash Dividend of gross USD 0.014...
-62  ABEV.NB  20260416  20260416  SpecialDividendsCash  0.014534  USD  ABEV.NB Extra Cash Dividend of gross USD 0.014...
-63  ABI.NB  20250710  20250711  ExDividends  0.01517  USD  ABI.NB Interim Cash Dividend of gross USD 0.01...
-64  ABI.NB  20250806  20250807  ExDividends  0.083425  USD  ABI.NB Interim Cash Dividend of gross USD 0.08...
-65  ABI.NB  20250908  20250909  ExDividends  0.132826  USD  ABI.NB Interim Cash Dividend of gross USD 0.13...
-66  ABI.NB  20251009  20251010  ExDividends  0.146893  USD  ABI.NB Interim Cash Dividend of gross USD 0.14...
-67  ABI.NB  20251107  20251110  ExDividends  0.122586  USD  ABI.NB Interim Cash Dividend of gross USD 0.12...
-68  ABI.NB  20251209  20251210  ExDividends  0  None  ABI.NB Interim Cash Dividend of gross  0 paid ...
-69  ABI.NB  20251211  20251212  ExDividends  0.246907  USD  ABI.NB Final Cash Dividend of gross USD 0.2469...
-70  ABI.NB  20260108  20260109  ExDividends  0.022803  USD  ABI.NB Interim Cash Dividend of gross USD 0.02...
-71  ABI.NB  20260209  20260210  ExDividends  0.127291  USD  ABI.NB Interim Cash Dividend of gross USD 0.12...
-72  ABI.NB  20260310  20260311  ExDividends  0.130438  USD  ABI.NB Interim Cash Dividend of gross USD 0.13...
-73  ABI.NB  20260409  20260410  ExDividends  0.136095  USD  ABI.NB Interim Cash Dividend of gross USD 0.13...
-74  ABM.NB  20250102  20250203  ExDividends  0.265  USD  ABM.NB Interim Cash Dividend of gross USD 0.26...
-75  ABM.NB  20250403  20250505  ExDividends  0.265  USD  ABM.NB Interim Cash Dividend of gross USD 0.26...
-76  ABM.NB  20250703  20250804  ExDividends  0.265  USD  ABM.NB Interim Cash Dividend of gross USD 0.26...
-77  ABM.NB  20251002  20251103  ExDividends  0.265  USD  ABM.NB Final Cash Dividend of gross USD 0.265 ...
-78  ABM.NB  20260114  20260202  ExDividends  0.29  USD  ABM.NB Interim Cash Dividend of gross USD 0.29...
-79  ABM.NB  20260402  20260504  ExDividends  0.29  USD  ABM.NB Interim Cash Dividend of gross USD 0.29...
-80  ABR.NB  20250307  20250321  ExDividends  0.24  USD  ABR.NB Final Cash Dividend of gross USD 0.24 p...
-81  ABR.NB  20250321  20250321  SpecialDividendsCash  0.19  USD  ABR.NB Extra Cash Dividend of gross USD 0.19 p...
-82  ABR.NB  20250516  20250530  ExDividends  0.17  USD  ABR.NB Interim Cash Dividend of gross USD 0.17...
-83  ABR.NB  20250530  20250530  SpecialDividendsCash  0.13  USD  ABR.NB Extra Cash Dividend of gross USD 0.13 p...
-84  ABR.NB  20250815  20250829  ExDividends  0.17  USD  ABR.NB Interim Cash Dividend of gross USD 0.17...
-85  ABR.NB  20250829  20250829  SpecialDividendsCash  0.13  USD  ABR.NB Extra Cash Dividend of gross USD 0.13 p...
-86  ABR.NB  20251114  20251126  ExDividends  0.17  USD  ABR.NB Interim Cash Dividend of gross USD 0.17...
-87  ABR.NB  20251126  20251126  SpecialDividendsCash  0.13  USD  ABR.NB Extra Cash Dividend of gross USD 0.13 p...
-88  ABR.NB  20260310  20260324  ExDividends  0.3  USD  ABR.NB Final Cash Dividend of gross USD 0.3 pa...
-89  ABR_pd.NB  20250115  20250130  ExDividends  0.220068  USD  ABR_pd.NB Final Cash Dividend of gross USD 0.2...
-90  ABR_pd.NB  20250130  20250130  SpecialDividendsCash  0.178369  USD  ABR_pd.NB Extra Cash Dividend of gross USD 0.1...
-91  ABR_pd.NB  20250415  20250430  ExDividends  0.220068  USD  ABR_pd.NB Interim Cash Dividend of gross USD 0...
-92  ABR_pd.NB  20250430  20250430  SpecialDividendsCash  0.178369  USD  ABR_pd.NB Extra Cash Dividend of gross USD 0.1...
-93  ABR_pd.NB  20250715  20250730  ExDividends  0.220068  USD  ABR_pd.NB Interim Cash Dividend of gross USD 0...
-94  ABR_pd.NB  20250730  20250730  SpecialDividendsCash  0.178369  USD  ABR_pd.NB Extra Cash Dividend of gross USD 0.1...
-95  ABR_pd.NB  20251015  20251030  ExDividends  0.220068  USD  ABR_pd.NB Interim Cash Dividend of gross USD 0...
-96  ABR_pd.NB  20251030  20251030  SpecialDividendsCash  0.178369  USD  ABR_pd.NB Extra Cash Dividend of gross USD 0.1...
-97  ABR_pd.NB  20260115  20260130  ExDividends  0.398438  USD  ABR_pd.NB Final Cash Dividend of gross USD 0.3...
-98  ABR_pd.NB  20260415  20260430  ExDividends  0.398438  USD  ABR_pd.NB Interim Cash Dividend of gross USD 0...
-99  ABR_pf.NB  20250115  20250130  ExDividends  0.215754  USD  ABR_pf.NB Interim Cash Dividend of gross USD 0...
-100  ABR_pf.NB  20250130  20250130  SpecialDividendsCash  0.174871  USD  ABR_pf.NB Extra Cash Dividend of gross USD 0.1...
-101  ABR_pf.NB  20250415  20250430  ExDividends  0.215754  USD  ABR_pf.NB Interim Cash Dividend of gross USD 0...
-102  ABR_pf.NB  20250430  20250430  SpecialDividendsCash  0.174871  USD  ABR_pf.NB Extra Cash Dividend of gross USD 0.1...
-103  ABR_pf.NB  20250715  20250730  ExDividends  0.215754  USD  ABR_pf.NB Interim Cash Dividend of gross USD 0...
-104  ABR_pf.NB  20250730  20250730  SpecialDividendsCash  0.174871  USD  ABR_pf.NB Extra Cash Dividend of gross USD 0.1...
-105  ABR_pf.NB  20251015  20251030  ExDividends  0.215754  USD  ABR_pf.NB Final Cash Dividend of gross USD 0.2...
-106  ABR_pf.NB  20251030  20251030  SpecialDividendsCash  0.174871  USD  ABR_pf.NB Extra Cash Dividend of gross USD 0.1...
-107  ABR_pf.NB  20260115  20260130  ExDividends  0.390625  USD  ABR_pf.NB Interim Cash Dividend of gross USD 0...
-108  ABR_pf.NB  20260415  20260430  ExDividends  0.390625  USD  ABR_pf.NB Interim Cash Dividend of gross USD 0...
-109  ABT.NB  20250115  20250214  ExDividends  0.59  USD  ABT.NB Final Cash Dividend of gross USD 0.59 p...
-110  ABT.NB  20250415  20250515  ExDividends  0.59  USD  ABT.NB Interim Cash Dividend of gross USD 0.59...
-111  ABT.NB  20250715  20250815  ExDividends  0.59  USD  ABT.NB Interim Cash Dividend of gross USD 0.59...
-112  ABT.NB  20251015  20251117  ExDividends  0.59  USD  ABT.NB Interim Cash Dividend of gross USD 0.59...
-113  ABT.NB  20260115  20260213  ExDividends  0.63  USD  ABT.NB Final Cash Dividend of gross USD 0.63 p...
-114  ABT.NB  20260415  20260515  ExDividends  0.63  USD  ABT.NB Interim Cash Dividend of gross USD 0.63...
-115  ABX.NB  20251202  20251217  ExDividends  0.2  USD  ABX.NB Final Cash Dividend of gross USD 0.2 pa...
-116  ABXL.NB  20250213  20250214  ExDividends  0.61718  USD  ABXL.NB Interim Cash Dividend of gross USD 0.6...
-117  ABXL.NB  20250513  20250515  ExDividends  0.617188  USD  ABXL.NB Interim Cash Dividend of gross USD 0.6...
-118  ABXL.NB  20250814  20250815  ExDividends  0.617188  USD  ABXL.NB Interim Cash Dividend of gross USD 0.6...
-119  ABXL.NB  20251113  20251114  ExDividends  0.617188  USD  ABXL.NB Final Cash Dividend of gross USD 0.617...
-120  ABXL.NB  20260213  20260217  ExDividends  0.6172  USD  ABXL.NB Interim Cash Dividend of gross USD 0.6...
-121  ACA.NB  20250115  20250131  ExDividends  0.05  USD  ACA.NB Interim Cash Dividend of gross USD 0.05...
-122  ACA.NB  20250415  20250430  ExDividends  0.05  USD  ACA.NB Interim Cash Dividend of gross USD 0.05...
-123  ACA.NB  20250715  20250731  ExDividends  0.05  USD  ACA.NB Interim Cash Dividend of gross USD 0.05...
-124  ACA.NB  20251015  20251031  ExDividends  0.05  USD  ACA.NB Final Cash Dividend of gross USD 0.05 p...
-125  ACA.NB  20260115  20260130  ExDividends  0.05  USD  ACA.NB Interim Cash Dividend of gross USD 0.05...
-126  ACA.NB  20260415  20260430  ExDividends  0.05  USD  ACA.NB Interim Cash Dividend of gross USD 0.05...
-127  ACCO.NB  20250314  20250326  ExDividends  0.075  USD  ACCO.NB Interim Cash Dividend of gross USD 0.0...
-128  ACCO.NB  20250523  20250618  ExDividends  0.075  USD  ACCO.NB Interim Cash Dividend of gross USD 0.0...
-129  ACCO.NB  20250822  20250910  ExDividends  0.075  USD  ACCO.NB Interim Cash Dividend of gross USD 0.0...
-130  ACCO.NB  20251121  20251210  ExDividends  0.075  USD  ACCO.NB Final Cash Dividend of gross USD 0.075...
-131  ACCO.NB  20260320  20260326  ExDividends  0.075  USD  ACCO.NB Interim Cash Dividend of gross USD 0.0...
-132  ACGLN.NB  20250314  20250331  ExDividends  0.284375  USD  ACGLN.NB Interim Cash Dividend of gross USD 0....
-133  ACGLN.NB  20250613  20250630  ExDividends  0.284375  USD  ACGLN.NB Interim Cash Dividend of gross USD 0....
-134  ACGLN.NB  20250915  20250930  ExDividends  0.284375  USD  ACGLN.NB Interim Cash Dividend of gross USD 0....
-135  ACGLN.NB  20251215  20251231  ExDividends  0.284375  USD  ACGLN.NB Final Cash Dividend of gross USD 0.28...
-136  ACGLN.NB  20260313  20260331  ExDividends  0.284375  USD  ACGLN.NB Interim Cash Dividend of gross USD 0....
-137  ACGLO.NB  20250314  20250331  ExDividends  0.340625  USD  ACGLO.NB Interim Cash Dividend of gross USD 0....
-138  ACGLO.NB  20250613  20250630  ExDividends  0.340625  USD  ACGLO.NB Interim Cash Dividend of gross USD 0....
-139  ACGLO.NB  20250915  20250930  ExDividends  0.340625  USD  ACGLO.NB Interim Cash Dividend of gross USD 0....
-140  ACGLO.NB  20251215  20251231  ExDividends  0.340625  USD  ACGLO.NB Final Cash Dividend of gross USD 0.34...
-141  ACGLO.NB  20260313  20260331  ExDividends  0.340625  USD  ACGLO.NB Interim Cash Dividend of gross USD 0....
-142  ACI.NB  20250124  20250207  ExDividends  0.15  USD  ACI.NB Final Cash Dividend of gross USD 0.15 p...
-143  ACI.NB  20250425  20250509  ExDividends  0.15  USD  ACI.NB Interim Cash Dividend of gross USD 0.15...
-144  ACI.NB  20250725  20250808  ExDividends  0.15  USD  ACI.NB Interim Cash Dividend of gross USD 0.15...
-145  ACI.NB  20251024  20251107  ExDividends  0.15  USD  ACI.NB Interim Cash Dividend of gross USD 0.15...
-146  ACI.NB  20260123  20260206  ExDividends  0.15  USD  ACI.NB Final Cash Dividend of gross USD 0.15 p...
-147  ACI.NB  20260424  20260508  ExDividends  0.17  USD  ACI.NB Interim Cash Dividend of gross USD 0.17...
-148  ACIC.NB  20250110  20250110  SpecialDividendsCash  0.5  USD  ACIC.NB Special Cash Dividend of gross USD 0.5...
-149  ACIC.NB  20260109  20260109  SpecialDividendsCash  0.75  USD  ACIC.NB Special Cash Dividend of gross USD 0.7...
-150  ACM.NB  20250102  20250117  ExDividends  0.26  USD  ACM.NB Final Cash Dividend of gross USD 0.26 p...
-151  ACM.NB  20250402  20250417  ExDividends  0.26  USD  ACM.NB Interim Cash Dividend of gross USD 0.26...
-152  ACM.NB  20250702  20250718  ExDividends  0.26  USD  ACM.NB Interim Cash Dividend of gross USD 0.26...
-153  ACM.NB  20251001  20251017  ExDividends  0.26  USD  ACM.NB Interim Cash Dividend of gross USD 0.26...
-154  ACM.NB  20260107  20260123  ExDividends  0.31  USD  ACM.NB Final Cash Dividend of gross USD 0.31 p...
-155  ACM.NB  20260401  20260417  ExDividends  0.31  USD  ACM.NB Interim Cash Dividend of gross USD 0.31...
-156  ACN.NB  20250116  20250214  ExDividends  1.48  USD  ACN.NB Interim Cash Dividend of gross USD 1.48...
-157  ACN.NB  20250410  20250515  ExDividends  1.48  USD  ACN.NB Interim Cash Dividend of gross USD 1.48...
-158  ACN.NB  20250710  20250815  ExDividends  1.48  USD  ACN.NB Interim Cash Dividend of gross USD 1.48...
-159  ACN.NB  20251010  20251114  ExDividends  1.63  USD  ACN.NB Final Cash Dividend of gross USD 1.63 p...
-160  ACN.NB  20260113  20260213  ExDividends  1.63  USD  ACN.NB Interim Cash Dividend of gross USD 1.63...
-161  ACN.NB  20260409  20260515  ExDividends  1.63  USD  ACN.NB Interim Cash Dividend of gross USD 1.63...
-162  ACNB.NB  20250228  20250314  ExDividends  0.32  USD  ACNB.NB Interim Cash Dividend of gross USD 0.3...
-163  ACNB.NB  20250530  20250613  ExDividends  0.34  USD  ACNB.NB Interim Cash Dividend of gross USD 0.3...
-164  ACNB.NB  20250829  20250915  ExDividends  0.34  USD  ACNB.NB Interim Cash Dividend of gross USD 0.3...
-165  ACNB.NB  20251201  20251215  ExDividends  0.38  USD  ACNB.NB Final Cash Dividend of gross USD 0.38 ...
-166  ACNB.NB  20260227  20260313  ExDividends  0.38  USD  ACNB.NB Interim Cash Dividend of gross USD 0.3...
-167  ACNB.NB  20260429  20260615  SpecialDividendsCash  0.5  USD  ACNB.NB Special Cash Dividend of gross USD 0.5...
-168  ACP.NB  20250124  20250131  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-169  ACP.NB  20250221  20250228  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-170  ACP.NB  20250325  20250331  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-171  ACP.NB  20250423  20250430  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-172  ACP.NB  20250522  20250530  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-173  ACP.NB  20250623  20250630  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-174  ACP.NB  20250724  20250731  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-175  ACP.NB  20250822  20250829  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-176  ACP.NB  20250923  20250930  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-177  ACP.NB  20251024  20251031  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-178  ACP.NB  20251121  20251128  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-179  ACP.NB  20251231  20260112  ExDividends  0.0775  USD  ACP.NB Final Cash Dividend of gross USD 0.0775...
-180  ACP.NB  20260123  20260130  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-181  ACP.NB  20260220  20260227  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-182  ACP.NB  20260324  20260331  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-183  ACP.NB  20260422  20260430  ExDividends  0.0775  USD  ACP.NB Interim Cash Dividend of gross USD 0.07...
-184  ACP_pa.NB  20250321  20250331  ExDividends  0.328125  USD  ACP_pa.NB Interim Cash Dividend of gross USD 0...
-185  ACP_pa.NB  20250620  20250630  ExDividends  0.328125  USD  ACP_pa.NB Interim Cash Dividend of gross USD 0...
-186  ACP_pa.NB  20250922  20250930  ExDividends  0.328125  USD  ACP_pa.NB Interim Cash Dividend of gross USD 0...
-187  ACP_pa.NB  20251219  20251231  ExDividends  0.328125  USD  ACP_pa.NB Final Cash Dividend of gross USD 0.3...
-188  ACP_pa.NB  20260320  20260331  ExDividends  0.328125  USD  ACP_pa.NB Interim Cash Dividend of gross USD 0...
-189  ACRE.NB  20250331  20250415  ExDividends  0.15  USD  ACRE.NB Interim Cash Dividend of gross USD 0.1...
-190  ACRE.NB  20250630  20250715  ExDividends  0.15  USD  ACRE.NB Interim Cash Dividend of gross USD 0.1...
-191  ACRE.NB  20250930  20251015  ExDividends  0.15  USD  ACRE.NB Interim Cash Dividend of gross USD 0.1...
-192  ACRE.NB  20251231  20260115  ExDividends  0.15  USD  ACRE.NB Final Cash Dividend of gross USD 0.15 ...
-193  ACRE.NB  20260331  20260415  ExDividends  0.15  USD  ACRE.NB Interim Cash Dividend of gross USD 0.1...
-194  ACR_pc.NB  20250102  20250130  ExDividends  0.657261  USD  ACR_pc.NB Final Cash Dividend of gross USD 0.6...
-195  ACR_pc.NB  20250401  20250430  ExDividends  0.638368  USD  ACR_pc.NB Interim Cash Dividend of gross USD 0...
-196  ACR_pc.NB  20250701  20250730  ExDividends  0.637916  USD  ACR_pc.NB Interim Cash Dividend of gross USD 0...
-197  ACR_pc.NB  20251001  20251030  ExDividends  0.63981  USD  ACR_pc.NB Interim Cash Dividend of gross USD 0...
-198  ACR_pc.NB  20260102  20260130  ExDividends  0.610333  USD  ACR_pc.NB Final Cash Dividend of gross USD 0.6...
-199  ACR_pc.NB  20260401  20260430  ExDividends  0.599615  USD  ACR_pc.NB Interim Cash Dividend of gross USD 0...
+0  AAPL  20250210  20250213  ExDividends  0.25  USD  AAPL.NB Interim Cash Dividend of gross USD 0.25 paid on Feb 13, 2025 going ex on Feb 10, 2025
+1  AAPL  20250512  20250515  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.26 paid on May 15, 2025 going ex on May 12, 2025
+2  AAPL  20250811  20250814  ExDividends  0.26  USD  AAPL.NB Final Cash Dividend of gross USD 0.26 paid on Aug 14, 2025 going ex on Aug 11, 2025
+3  AAPL  20251110  20251113  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.26 paid on Nov 13, 2025 going ex on Nov 10, 2025
+4  AAPL  20260209  20260212  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.26 paid on Feb 12, 2026 going ex on Feb 09, 2026
 ```
 
 **2. get_stock_market_activity - 获取市场活动相关的事件**
@@ -11765,10 +13424,10 @@ symbol  publish_date  excute_date  event_type  number  currency  event
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -11779,6 +13438,7 @@ symbol  publish_date  excute_date  event_type  number  currency  event
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：IpoPricings（IPO定价），IpoFilings（IPO备案），SecondaryFilings（二次发行备案），IpoLockupExpirations（IPO锁定期到期），SecondaryPricings（二次发行定价），SecondaryWithdrawals（二次发行撤销），IpoWithdrawals（IPO撤销） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
@@ -12011,10 +13671,10 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -12025,6 +13685,7 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：ShareholderAndAnnualMeetings（股东及年度会议），ExtraordinaryShareholdersMeeting（特别股东大会），OtherCorporate（其他公司事件），CorporateSalesRelease（公司销售发布），CorporatePresentation（公司演示），M&APresentation（并购演示） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
@@ -12257,10 +13918,10 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -12271,12 +13932,13 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：EarningsReleases（财报发布），EarningsCallsAndPresentations（财报电话会议及演示），GuidanceCallsAndPresentations（业绩指引电话会议及演示），EarningsPresentation（财报演示），GuidancePresentation（业绩指引演示），EarningsPressConference（财报新闻发布会），InterimManagementStatementRelease（中期管理层声明发布），InterimManagementStatementCall（中期管理层声明电话会议），InterimManagementStatementPresentation（中期管理层声明演示） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
 **4.4. 使用示例**
 
-**4.4.1. 获取一定时间内全部美股财务批量相关的事件**
+**4.4.1. 获取一定时间内全部美股财务披露相关的事件**
 
 ```python
 import panda_data
@@ -12503,10 +14165,10 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
-| end_date | string | 结束日期,eg:"20250702" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
+| end_date | string | 结束日期,eg:"20250702" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -12517,6 +14179,7 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 | start_date | string | 事件执行日期 |
 | end_date | string | 事件完成日期 |
 | is_estimated | integer | 事件是否被预计（0表示否，1表示是） |
+| event_type | string | 事件类型：ConferencePresentations（会议演示），CorporateAnalystMeetings（公司分析师会议），CorporateCallsAndPresentations（公司电话会议及演示），BrokerageAnalystMeetings（券商分析师会议），CompanyVisits（公司实地考察），Conferences（会议），IndustrySpecificCall（行业特定电话会议），CorporateInvestorRoadshow（公司投资者路演），SyndicateRoadshows（银团路演），BrokerageAnalystCalls（券商分析师电话会议），SalesAndTradingStatementCallsAndPresentations（销售与交易声明电话会议及演示），IndustrySpecificPresentation（行业特定演示），SalesConferenceCall（销售电话会议），SalesPresentation（销售演示），TradingStatementPresentation（交易声明演示） |
 | fiscal_quarter | string | 财年季度（若事件不涉及财年季度则此列为空） |
 | event | string | 事件 |
 
@@ -12751,8 +14414,8 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -12992,8 +14655,8 @@ symbol  currency  total_investors  investor_outstanding_ratio  total_sharehold  
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -13233,9 +14896,9 @@ symbol  currency  top_investors_num  investor_outstanding_ratio  sharehold  hold
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| max_rank | integer | 最大返回排名（小于等于20的正整数），默认为空返回前20名 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| max_rank | Optional[integer] | 最大返回排名（小于等于20的正整数），默认为空返回前20名 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -13480,10 +15143,10 @@ symbol  investor_name  investor_type  investor_outstanding_ratio  sharehold  sha
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"（此接口查询消息日期） | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"（此接口查询消息日期） | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"（此接口查询消息日期） | 必填 |
+| end_date | string | 结束日期,eg:"20250702"（此接口查询消息日期） | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -13548,10 +15211,10 @@ symbol  investor_name  info_date  investor_type  insider_role  is_main_role  ins
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"（此接口查询持股报告日期） | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"（此接口查询持股报告日期） | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"（此接口查询持股报告日期） | 必填 |
+| end_date | string | 结束日期,eg:"20250702"（此接口查询持股报告日期） | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -13616,8 +15279,8 @@ symbol  currency  investor_name  investor_category  investor_type  investment_ac
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -13857,8 +15520,8 @@ symbol  currency  total_investors  investor_outstanding_ratio  total_sharehold  
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -14098,9 +15761,9 @@ symbol  currency  top_investors_num  investor_outstanding_ratio  sharehold  hold
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
-| max_rank | integer | 最大返回排名（小于等于20的正整数），默认为空返回前20名 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| max_rank | Optional[integer] | 最大返回排名（小于等于20的正整数），默认为空返回前20名 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -14345,10 +16008,10 @@ symbol  currency  investor_name  investor_type  investor_outstanding_ratio  shar
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"（此接口查询消息日期） | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"（此接口查询消息日期） | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"（此接口查询消息日期） | 必填 |
+| end_date | string | 结束日期,eg:"20250702"（此接口查询消息日期） | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -14477,10 +16140,10 @@ symbol  investor_name  info_date  investor_type  insider_role  is_main_role  ins
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_date | string | 开始日期,eg:"20250702"（此接口查询持股报告日期） | 非必填 |
-| end_date | string | 结束日期,eg:"20250702"（此接口查询持股报告日期） | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702"（此接口查询持股报告日期） | 必填 |
+| end_date | string | 结束日期,eg:"20250702"（此接口查询持股报告日期） | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -14555,8 +16218,8 @@ symbol  currency  investor_name  investor_category  investor_type  investment_ac
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -14997,8 +16660,8 @@ symbol  date  imed_net_trade_cycle_days_ttm  imed_pretax_roa_ratio_ttm
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -15262,8 +16925,8 @@ symbol  pv_beta_5y  pv_rel_return_26w
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -15704,8 +17367,8 @@ symbol  date  imed_net_trade_cycle_days_ttm  imed_pretax_roa_ratio_ttm
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -15969,8 +17632,8 @@ symbol  pv_beta_5y  pv_rel_return_26w
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -15979,7 +17642,7 @@ symbol  pv_beta_5y  pv_rel_return_26w
 | symbol | string | 股票代码 |
 | currency | string | 货币单位 |
 | indicator | string | 指标名:LTGROWTH为未来3\~5年长期增长，TP为未来1年目标价 |
-| mean | float | 预测均值 |
+| mean | float | 预测均值，另注：对于除symbol，currency，indicator外的参数默认是最新日期的预测，且有历史维度衍生字段，衍生后缀有week，1month~12month对每个字段构成共十三个衍生字段，表示对应字段在一周，一个月~十二个月前的预测值，例如mean_week表示一周前的预测均值，std_6month表示6个月前的预测标准差 |
 | median | float | 预测中位数 |
 | high | float | 预测最高值 |
 | low | float | 预测最低值 |
@@ -16214,8 +17877,8 @@ symbol  indicator  mean  std_6month  high_week
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -16223,7 +17886,7 @@ symbol  indicator  mean  std_6month  high_week
 |:---|:---|:---|
 | symbol | string | 股票代码 |
 | currency | string | 货币单位 |
-| mean | float | 预期均值 |
+| mean | float | 预期均值，另注：对于除symbol，currency外的参数默认是最新日期的预测，且有历史维度衍生字段，衍生后缀有week，1month~12month对每个字段构成共十三个衍生字段，表示对应字段在一周，一个月~十二个月前的预测值，例如mean_week表示一周前的预测均值 |
 | median | float | 预期中位数 |
 | high | float | 预期最高值 |
 | low | float | 预期最低值 |
@@ -16464,8 +18127,8 @@ symbol  strong_buy_num  buy_num_week
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -16474,7 +18137,7 @@ symbol  strong_buy_num  buy_num_week
 | symbol | string | 股票代码 |
 | currency | string | 货币单位 |
 | indicator | string | 指标名:LTGROWTH为未来3\~5年长期增长，TP为未来1年目标价 |
-| mean | float | 预测均值 |
+| mean | float | 预测均值，另注：对于除symbol，currency，indicator外的参数默认是最新日期的预测，且有历史维度衍生字段，衍生后缀有week，1month~12month对每个字段构成共十三个衍生字段，表示对应字段在一周，一个月~十二个月前的预测值，例如mean_week表示一周前的预测均值，std_6month表示6个月前的预测标准差 |
 | median | float | 预测中位数 |
 | high | float | 预测最高值 |
 | low | float | 预测最低值 |
@@ -16499,206 +18162,206 @@ print(result)
 
 ```text
 symbol  indicator  mean  std_6month  high_week
-0  A.NB  LTGROWTH  None  1.26579  9.0
-1  A.NB  TP  None  10.66618  185.0
-2  AA.NB  TP  76.04167  3.22052  92.0
-3  AAL.NB  LTGROWTH  97.1775  2.98982  111.2
-4  AAL.NB  TP  15.02143  2.52321  20.0
-5  AAMI.NB  TP  65.33333  2.44949  70.0
-6  AAOI.NB  TP  144.58333  8.43933  260.0
-7  AAON.NB  LTGROWTH  16.0  0.0  16.0
-8  AAON.NB  TP  132.2  14.04849  150.0
-9  AAP.NB  LTGROWTH  None  None  None
-10  AAP.NB  TP  59.039  9.8877  70.0
-11  AAPG.NB  TP  48.14286  2.54951  55.0
-12  AAPL.NB  LTGROWTH  13.75  1.55  14.2
-13  AAPL.NB  TP  309.72615  30.87889  400.0
-14  AARD.NB  TP  14.8  9.53857  45.0
-15  AAT.NB  TP  20.5  0.5  23.0
-16  AAUC.NB  TP  43.35714  3.42041  44.0
-17  ABAT.NB  TP  6.5  0.0  7.0
-18  ABBV.NB  LTGROWTH  20.27  2.5123  24.45
-19  ABBV.NB  TP  252.596  24.7109  328.0
-20  ABCB.NB  TP  93.85714  3.18158  100.0
-21  ABCL.NB  TP  10.42857  3.02306  13.0
-22  ABEO.NB  TP  19.71429  4.84557  28.0
-23  ABEV.NB  LTGROWTH  8.4  None  8.4
-24  ABEV.NB  TP  3.15  0.61853  4.0
-25  ABG.NB  LTGROWTH  5.95  None  7.1
-26  ABG.NB  TP  223.875  22.23736  242.0
-27  ABM.NB  LTGROWTH  None  None  None
-28  ABM.NB  TP  51.42857  5.17687  68.0
-29  ABNB.NB  LTGROWTH  16.9  None  19.0
-30  ABNB.NB  TP  158.11265  20.95104  185.0
-31  ABOS.NB  TP  7.2  2.59808  10.0
-32  ABP.NB  TP  None  None  None
-33  ABR.NB  TP  7.66667  0.82916  8.5
-34  ABR_pd.NB  TP  7.66667  0.82916  8.5
-35  ABR_pe.NB  TP  7.66667  0.82916  8.5
-36  ABR_pf.NB  TP  7.66667  0.82916  8.5
-37  ABSI.NB  TP  9.01429  1.40146  12.0
-38  ABT.NB  LTGROWTH  9.625  0.15  10.0
-39  ABT.NB  TP  119.34846  8.73043  143.0
-40  ABTC.NB  TP  4.0  None  4.0
-41  ABUS.NB  TP  5.16667  0.94281  5.5
-42  ABVX.NB  TP  146.83333  22.47577  176.0
-43  ABXL.NB  LTGROWTH  9.5  None  9.5
-44  ABXL.NB  TP  13.58333  2.10713  15.0
-45  ACA.NB  LTGROWTH  None  None  None
-46  ACA.NB  TP  141.6  7.31247  152.0
-47  ACAD.NB  LTGROWTH  -1.96  None  None
-48  ACAD.NB  TP  31.55556  5.22015  45.0
-49  ACCO.NB  TP  7.66667  2.05481  9.0
-50  ACCS.NB  TP  12.5  0.5  13.0
-51  ACDC.NB  TP  5.09  1.16619  6.7
-52  ACEL.NB  LTGROWTH  None  None  None
-53  ACEL.NB  TP  15.71429  0.43301  17.0
-54  ACET.NB  TP  34.83333  21.70346  100.0
-55  ACGL.NB  LTGROWTH  1.5  8.11638  2.0
-56  ACGL.NB  TP  109.67647  12.67057  125.0
-57  ACGLN.NB  LTGROWTH  1.5  8.11638  2.0
-58  ACGLN.NB  TP  109.67647  12.67057  125.0
-59  ACGLO.NB  LTGROWTH  1.5  8.11638  2.0
-60  ACGLO.NB  TP  109.67647  12.67057  125.0
-61  ACH.NB  LTGROWTH  None  0.0  None
-62  ACH.NB  TP  4.49  1.20764  6.0
-63  ACHC.NB  LTGROWTH  -5.8  0.0  -5.8
-64  ACHC.NB  TP  28.46429  4.5419  39.0
-65  ACHV.NB  TP  13.5  4.93163  20.0
-66  ACI.NB  LTGROWTH  1.38  0.0  1.38
-67  ACI.NB  TP  21.44375  2.50038  29.0
-68  ACIC.NB  LTGROWTH  3.0  None  3.0
-69  ACIC.NB  TP  14.0  0.0  14.0
-70  ACIU.NB  TP  9.0  1.87083  12.0
-71  ACIW.NB  TP  63.174  11.47301  70.0
-72  ACLS.NB  LTGROWTH  4.4  None  4.4
-73  ACLS.NB  TP  156.8925  19.81769  180.0
-74  ACLX.NB  TP  None  9.86216  None
-75  ACM.NB  LTGROWTH  15.6  0.3  17.4
-76  ACM.NB  TP  107.365  11.6926  145.0
-77  ACMR.NB  TP  76.58333  4.28214  83.8
-78  ACN.NB  LTGROWTH  7.6  0.0  7.6
-79  ACN.NB  TP  252.37192  31.5058  329.0
-80  ACNB.NB  TP  57.0  0.47141  58.0
-81  ACOG.NB  TP  16.0  0.0  18.0
-82  ACR.NB  TP  24.5  0.0  24.5
-83  ACRE.NB  TP  5.125  0.36976  5.5
-84  ACRS.NB  TP  9.45  4.18994  16.0
-85  ACRV.NB  TP  11.5  4.59771  19.0
-86  ACR_pc.NB  TP  24.5  0.0  24.5
-87  ACR_pd.NB  TP  24.5  0.0  24.5
-88  ACT.NB  LTGROWTH  7.9  None  7.9
-89  ACT.NB  TP  41.398  1.0198  48.0
-90  ACTG.NB  TP  6.0  0.0  6.0
-91  ACTU.NB  TP  17.5  6.12372  35.0
-92  ACU.NB  LTGROWTH  None  None  None
-93  ACU.NB  TP  50.0  1.5  53.0
-94  ACVA.NB  TP  9.14546  3.58498  16.0
-95  ACXP.NB  TP  54.2  60.25587  165.8
-96  ADAG.NB  TP  11.345  5.13507  21.07
-97  ADAMG.NB  TP  9.35  0.39529  10.0
-98  ADAMH.NB  TP  9.35  0.39529  10.0
-99  ADAMI.NB  TP  9.35  0.39529  10.0
-100  ADAML.NB  TP  9.35  0.39529  10.0
-101  ADAMM.NB  TP  9.35  0.39529  10.0
-102  ADAMN.NB  TP  9.35  0.39529  10.0
-103  ADAMO.NB  TP  9.35  0.39529  10.0
-104  ADAMZ.NB  TP  9.35  0.39529  10.0
-105  ADBE.NB  LTGROWTH  13.14  1.18955  15.0
-106  ADBE.NB  TP  319.19161  73.48455  460.0
-107  ADC.NB  LTGROWTH  8.73  0.0  8.73
-108  ADC.NB  TP  85.0  4.08751  92.0
-109  ADCT.NB  TP  8.2  1.89737  10.0
-110  ADC_pa.NB  LTGROWTH  8.73  0.0  8.73
-111  ADC_pa.NB  TP  85.0  4.08751  92.0
-112  ADEA.NB  TP  37.0  4.20565  43.0
-113  ADGM.NB  TP  3.5  None  4.0
-114  ADI.NB  LTGROWTH  28.74  0.2  31.0
-115  ADI.NB  TP  446.50367  33.14134  515.0
-116  ADIL.NB  TP  25.0  15.59024  42.0
-117  ADM.NB  LTGROWTH  20.8  0.0  20.8
-118  ADM.NB  TP  73.93889  4.95386  90.0
-119  ADMA.NB  TP  16.75  5.9739  20.0
-120  ADNT.NB  LTGROWTH  30.79333  11.8983  43.4
-121  ADNT.NB  TP  30.37364  8.59957  52.11
-122  ADP.NB  LTGROWTH  None  None  None
-123  ADP.NB  TP  245.68933  22.54998  305.0
-124  ADPT.NB  TP  20.33333  1.84059  22.0
-125  ADSK.NB  LTGROWTH  15.16333  1.17  16.19
-126  ADSK.NB  TP  323.94207  25.03666  456.0
-127  ADT.NB  LTGROWTH  None  0.0  None
-128  ADT.NB  TP  8.21667  0.55281  9.0
-129  ADTN.NB  TP  19.43288  2.1923  23.0
-130  ADUS.NB  LTGROWTH  7.15  0.0  8.4
-131  ADUS.NB  TP  132.69231  12.33896  155.0
-132  ADV.NB  TP  42.5  21.24592  50.0
-133  ADXN.NB  TP  None  None  None
-134  AEBI.NB  TP  15.0  0.75  15.0
-135  AEC.NB  TP  18.85  0.0  18.85
-136  AEE.NB  LTGROWTH  8.7  0.0  9.3
-137  AEE.NB  TP  119.46  6.07682  136.0
-138  AEG.NB  TP  10.14697  0.0  11.54095
-139  AEHR.NB  LTGROWTH  None  0.0  None
-140  AEHR.NB  TP  63.66667  0.0  68.0
-141  AEIS.NB  LTGROWTH  30.1  0.0  30.1
-142  AEIS.NB  TP  384.15  16.7332  430.0
-143  AEM.NB  LTGROWTH  6.9  None  6.9
-144  AEM.NB  TP  271.86635  32.55739  370.0
-145  AEMD.NB  TP  11.5  2.625  15.0
-146  AEO.NB  LTGROWTH  5.5  4.6  8.8
-147  AEO.NB  TP  22.71556  2.94811  35.0
-148  AEON.NB  TP  5.2  0.2  5.4
-149  AEP.NB  LTGROWTH  8.36667  0.0  9.2
-150  AEP.NB  TP  145.0115  8.70004  173.0
-151  AER.NB  LTGROWTH  4.5  3.4  4.5
-152  AER.NB  TP  164.625  4.58258  175.0
-153  AERO.NB  TP  27.55  None  30.0
-154  AES.NB  LTGROWTH  None  0.0  None
-155  AES.NB  TP  14.665  3.43046  15.0
-156  AESI.NB  LTGROWTH  None  0.0  None
-157  AESI.NB  TP  19.63636  3.37406  28.0
-158  AEVA.NB  LTGROWTH  None  None  None
-159  AEVA.NB  TP  24.1  5.05256  33.0
-160  AEYE.NB  TP  15.75  2.48194  25.0
-161  AFCG.NB  TP  6.25  1.91621  8.0
-162  AFGB.NB  TP  142.83333  10.63203  158.0
-163  AFGC.NB  TP  142.83333  10.63203  158.0
-164  AFGD.NB  TP  142.83333  10.63203  158.0
-165  AFGE.NB  TP  142.83333  10.63203  158.0
-166  AFL.NB  LTGROWTH  3.55  1.95  8.1
-167  AFL.NB  TP  110.32714  8.43843  126.0
-168  AFRM.NB  LTGROWTH  2.0  0.0  2.0
-169  AFRM.NB  TP  82.98654  12.3604  100.0
-170  AFYA.NB  TP  16.60857  3.03214  20.26
-171  AG.NB  TP  30.75  1.30583  30.75
-172  AGBK.NB  LTGROWTH  29.0  None  29.0
-173  AGBK.NB  TP  15.33333  None  18.0
-174  AGCO.NB  LTGROWTH  2.0  2.95  2.0
-175  AGCO.NB  TP  125.58333  6.39896  152.0
-176  AGEN.NB  TP  15.5  7.58654  23.0
-177  AGI.NB  TP  81.3369  10.42335  85.8452
-178  AGIG.NB  TP  6.0  None  6.0
-179  AGIO.NB  LTGROWTH  None  None  None
-180  AGIO.NB  TP  41.85714  7.94414  60.0
-181  AGL.NB  TP  48.44231  11.19004  95.0
-182  AGM.NB  TP  219.66667  6.54896  228.0
-183  AGMB.NB  TP  32.33333  None  36.0
-184  AGM_pd.NB  TP  219.66667  6.54896  228.0
-185  AGM_pe.NB  TP  219.66667  6.54896  228.0
-186  AGM_pf.NB  TP  219.66667  6.54896  228.0
-187  AGM_pg.NB  TP  219.66667  6.54896  228.0
-188  AGM_ph.NB  TP  219.66667  6.54896  228.0
-189  AGM_pi.NB  TP  219.66667  6.54896  228.0
-190  AGNC.NB  TP  11.5  0.50309  12.5
-191  AGNCL.NB  TP  11.5  0.50309  12.5
-192  AGNCM.NB  TP  11.5  0.50309  12.5
-193  AGNCN.NB  TP  11.5  0.50309  12.5
-194  AGNCO.NB  TP  11.5  0.50309  12.5
-195  AGNCP.NB  TP  11.5  0.50309  12.5
-196  AGNCZ.NB  TP  11.5  0.50309  12.5
-197  AGNT.NB  TP  9.125  0.0  10.25
-198  AGO.NB  TP  92.33333  7.11805  103.0
-199  AGPU.NB  TP  None  None  None
+0  A  LTGROWTH  None  1.26579  9.0
+1  A  TP  None  10.66618  185.0
+2  AA  TP  76.04167  3.22052  92.0
+3  AAL  LTGROWTH  97.1775  2.98982  111.2
+4  AAL  TP  15.02143  2.52321  20.0
+5  AAMI  TP  65.33333  2.44949  70.0
+6  AAOI  TP  144.58333  8.43933  260.0
+7  AAON  LTGROWTH  16.0  0.0  16.0
+8  AAON  TP  132.2  14.04849  150.0
+9  AAP  LTGROWTH  None  None  None
+10  AAP  TP  59.039  9.8877  70.0
+11  AAPG  TP  48.14286  2.54951  55.0
+12  AAPL  LTGROWTH  13.75  1.55  14.2
+13  AAPL  TP  309.72615  30.87889  400.0
+14  AARD  TP  14.8  9.53857  45.0
+15  AAT  TP  20.5  0.5  23.0
+16  AAUC  TP  43.35714  3.42041  44.0
+17  ABAT  TP  6.5  0.0  7.0
+18  ABBV  LTGROWTH  20.27  2.5123  24.45
+19  ABBV  TP  252.596  24.7109  328.0
+20  ABCB  TP  93.85714  3.18158  100.0
+21  ABCL  TP  10.42857  3.02306  13.0
+22  ABEO  TP  19.71429  4.84557  28.0
+23  ABEV  LTGROWTH  8.4  None  8.4
+24  ABEV  TP  3.15  0.61853  4.0
+25  ABG  LTGROWTH  5.95  None  7.1
+26  ABG  TP  223.875  22.23736  242.0
+27  ABM  LTGROWTH  None  None  None
+28  ABM  TP  51.42857  5.17687  68.0
+29  ABNB  LTGROWTH  16.9  None  19.0
+30  ABNB  TP  158.11265  20.95104  185.0
+31  ABOS  TP  7.2  2.59808  10.0
+32  ABP  TP  None  None  None
+33  ABR  TP  7.66667  0.82916  8.5
+34  ABR_pd  TP  7.66667  0.82916  8.5
+35  ABR_pe  TP  7.66667  0.82916  8.5
+36  ABR_pf  TP  7.66667  0.82916  8.5
+37  ABSI  TP  9.01429  1.40146  12.0
+38  ABT  LTGROWTH  9.625  0.15  10.0
+39  ABT  TP  119.34846  8.73043  143.0
+40  ABTC  TP  4.0  None  4.0
+41  ABUS  TP  5.16667  0.94281  5.5
+42  ABVX  TP  146.83333  22.47577  176.0
+43  ABXL  LTGROWTH  9.5  None  9.5
+44  ABXL  TP  13.58333  2.10713  15.0
+45  ACA  LTGROWTH  None  None  None
+46  ACA  TP  141.6  7.31247  152.0
+47  ACAD  LTGROWTH  -1.96  None  None
+48  ACAD  TP  31.55556  5.22015  45.0
+49  ACCO  TP  7.66667  2.05481  9.0
+50  ACCS  TP  12.5  0.5  13.0
+51  ACDC  TP  5.09  1.16619  6.7
+52  ACEL  LTGROWTH  None  None  None
+53  ACEL  TP  15.71429  0.43301  17.0
+54  ACET  TP  34.83333  21.70346  100.0
+55  ACGL  LTGROWTH  1.5  8.11638  2.0
+56  ACGL  TP  109.67647  12.67057  125.0
+57  ACGLN  LTGROWTH  1.5  8.11638  2.0
+58  ACGLN  TP  109.67647  12.67057  125.0
+59  ACGLO  LTGROWTH  1.5  8.11638  2.0
+60  ACGLO  TP  109.67647  12.67057  125.0
+61  ACH  LTGROWTH  None  0.0  None
+62  ACH  TP  4.49  1.20764  6.0
+63  ACHC  LTGROWTH  -5.8  0.0  -5.8
+64  ACHC  TP  28.46429  4.5419  39.0
+65  ACHV  TP  13.5  4.93163  20.0
+66  ACI  LTGROWTH  1.38  0.0  1.38
+67  ACI  TP  21.44375  2.50038  29.0
+68  ACIC  LTGROWTH  3.0  None  3.0
+69  ACIC  TP  14.0  0.0  14.0
+70  ACIU  TP  9.0  1.87083  12.0
+71  ACIW  TP  63.174  11.47301  70.0
+72  ACLS  LTGROWTH  4.4  None  4.4
+73  ACLS  TP  156.8925  19.81769  180.0
+74  ACLX  TP  None  9.86216  None
+75  ACM  LTGROWTH  15.6  0.3  17.4
+76  ACM  TP  107.365  11.6926  145.0
+77  ACMR  TP  76.58333  4.28214  83.8
+78  ACN  LTGROWTH  7.6  0.0  7.6
+79  ACN  TP  252.37192  31.5058  329.0
+80  ACNB  TP  57.0  0.47141  58.0
+81  ACOG  TP  16.0  0.0  18.0
+82  ACR  TP  24.5  0.0  24.5
+83  ACRE  TP  5.125  0.36976  5.5
+84  ACRS  TP  9.45  4.18994  16.0
+85  ACRV  TP  11.5  4.59771  19.0
+86  ACR_pc  TP  24.5  0.0  24.5
+87  ACR_pd  TP  24.5  0.0  24.5
+88  ACT  LTGROWTH  7.9  None  7.9
+89  ACT  TP  41.398  1.0198  48.0
+90  ACTG  TP  6.0  0.0  6.0
+91  ACTU  TP  17.5  6.12372  35.0
+92  ACU  LTGROWTH  None  None  None
+93  ACU  TP  50.0  1.5  53.0
+94  ACVA  TP  9.14546  3.58498  16.0
+95  ACXP  TP  54.2  60.25587  165.8
+96  ADAG  TP  11.345  5.13507  21.07
+97  ADAMG  TP  9.35  0.39529  10.0
+98  ADAMH  TP  9.35  0.39529  10.0
+99  ADAMI  TP  9.35  0.39529  10.0
+100  ADAML  TP  9.35  0.39529  10.0
+101  ADAMM  TP  9.35  0.39529  10.0
+102  ADAMN  TP  9.35  0.39529  10.0
+103  ADAMO  TP  9.35  0.39529  10.0
+104  ADAMZ  TP  9.35  0.39529  10.0
+105  ADBE  LTGROWTH  13.14  1.18955  15.0
+106  ADBE  TP  319.19161  73.48455  460.0
+107  ADC  LTGROWTH  8.73  0.0  8.73
+108  ADC  TP  85.0  4.08751  92.0
+109  ADCT  TP  8.2  1.89737  10.0
+110  ADC_pa  LTGROWTH  8.73  0.0  8.73
+111  ADC_pa  TP  85.0  4.08751  92.0
+112  ADEA  TP  37.0  4.20565  43.0
+113  ADGM  TP  3.5  None  4.0
+114  ADI  LTGROWTH  28.74  0.2  31.0
+115  ADI  TP  446.50367  33.14134  515.0
+116  ADIL  TP  25.0  15.59024  42.0
+117  ADM  LTGROWTH  20.8  0.0  20.8
+118  ADM  TP  73.93889  4.95386  90.0
+119  ADMA  TP  16.75  5.9739  20.0
+120  ADNT  LTGROWTH  30.79333  11.8983  43.4
+121  ADNT  TP  30.37364  8.59957  52.11
+122  ADP  LTGROWTH  None  None  None
+123  ADP  TP  245.68933  22.54998  305.0
+124  ADPT  TP  20.33333  1.84059  22.0
+125  ADSK  LTGROWTH  15.16333  1.17  16.19
+126  ADSK  TP  323.94207  25.03666  456.0
+127  ADT  LTGROWTH  None  0.0  None
+128  ADT  TP  8.21667  0.55281  9.0
+129  ADTN  TP  19.43288  2.1923  23.0
+130  ADUS  LTGROWTH  7.15  0.0  8.4
+131  ADUS  TP  132.69231  12.33896  155.0
+132  ADV  TP  42.5  21.24592  50.0
+133  ADXN  TP  None  None  None
+134  AEBI  TP  15.0  0.75  15.0
+135  AEC  TP  18.85  0.0  18.85
+136  AEE  LTGROWTH  8.7  0.0  9.3
+137  AEE  TP  119.46  6.07682  136.0
+138  AEG  TP  10.14697  0.0  11.54095
+139  AEHR  LTGROWTH  None  0.0  None
+140  AEHR  TP  63.66667  0.0  68.0
+141  AEIS  LTGROWTH  30.1  0.0  30.1
+142  AEIS  TP  384.15  16.7332  430.0
+143  AEM  LTGROWTH  6.9  None  6.9
+144  AEM  TP  271.86635  32.55739  370.0
+145  AEMD  TP  11.5  2.625  15.0
+146  AEO  LTGROWTH  5.5  4.6  8.8
+147  AEO  TP  22.71556  2.94811  35.0
+148  AEON  TP  5.2  0.2  5.4
+149  AEP  LTGROWTH  8.36667  0.0  9.2
+150  AEP  TP  145.0115  8.70004  173.0
+151  AER  LTGROWTH  4.5  3.4  4.5
+152  AER  TP  164.625  4.58258  175.0
+153  AERO  TP  27.55  None  30.0
+154  AES  LTGROWTH  None  0.0  None
+155  AES  TP  14.665  3.43046  15.0
+156  AESI  LTGROWTH  None  0.0  None
+157  AESI  TP  19.63636  3.37406  28.0
+158  AEVA  LTGROWTH  None  None  None
+159  AEVA  TP  24.1  5.05256  33.0
+160  AEYE  TP  15.75  2.48194  25.0
+161  AFCG  TP  6.25  1.91621  8.0
+162  AFGB  TP  142.83333  10.63203  158.0
+163  AFGC  TP  142.83333  10.63203  158.0
+164  AFGD  TP  142.83333  10.63203  158.0
+165  AFGE  TP  142.83333  10.63203  158.0
+166  AFL  LTGROWTH  3.55  1.95  8.1
+167  AFL  TP  110.32714  8.43843  126.0
+168  AFRM  LTGROWTH  2.0  0.0  2.0
+169  AFRM  TP  82.98654  12.3604  100.0
+170  AFYA  TP  16.60857  3.03214  20.26
+171  AG  TP  30.75  1.30583  30.75
+172  AGBK  LTGROWTH  29.0  None  29.0
+173  AGBK  TP  15.33333  None  18.0
+174  AGCO  LTGROWTH  2.0  2.95  2.0
+175  AGCO  TP  125.58333  6.39896  152.0
+176  AGEN  TP  15.5  7.58654  23.0
+177  AGI  TP  81.3369  10.42335  85.8452
+178  AGIG  TP  6.0  None  6.0
+179  AGIO  LTGROWTH  None  None  None
+180  AGIO  TP  41.85714  7.94414  60.0
+181  AGL  TP  48.44231  11.19004  95.0
+182  AGM  TP  219.66667  6.54896  228.0
+183  AGMB  TP  32.33333  None  36.0
+184  AGM_pd  TP  219.66667  6.54896  228.0
+185  AGM_pe  TP  219.66667  6.54896  228.0
+186  AGM_pf  TP  219.66667  6.54896  228.0
+187  AGM_pg  TP  219.66667  6.54896  228.0
+188  AGM_ph  TP  219.66667  6.54896  228.0
+189  AGM_pi  TP  219.66667  6.54896  228.0
+190  AGNC  TP  11.5  0.50309  12.5
+191  AGNCL  TP  11.5  0.50309  12.5
+192  AGNCM  TP  11.5  0.50309  12.5
+193  AGNCN  TP  11.5  0.50309  12.5
+194  AGNCO  TP  11.5  0.50309  12.5
+195  AGNCP  TP  11.5  0.50309  12.5
+196  AGNCZ  TP  11.5  0.50309  12.5
+197  AGNT  TP  9.125  0.0  10.25
+198  AGO  TP  92.33333  7.11805  103.0
+199  AGPU  TP  None  None  None
 ```
 
 **2. get_stock_recommendation_estimate - 获取买卖建议一致预期**
@@ -16709,8 +18372,8 @@ symbol  indicator  mean  std_6month  high_week
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -16718,7 +18381,7 @@ symbol  indicator  mean  std_6month  high_week
 |:---|:---|:---|
 | symbol | string | 股票代码 |
 | currency | string | 货币单位 |
-| mean | float | 预期均值 |
+| mean | float | 预期均值，另注：对于除symbol，currency外的参数默认是最新日期的预测，且有历史维度衍生字段，衍生后缀有week，1month~12month对每个字段构成共十三个衍生字段，表示对应字段在一周，一个月~十二个月前的预测值，例如mean_week表示一周前的预测均值 |
 | median | float | 预期中位数 |
 | high | float | 预期最高值 |
 | low | float | 预期最低值 |
@@ -16746,210 +18409,210 @@ print(result)
 **响应示例**
 
 ```text
-symbol  strong_buy_num  buy_num_week
-0  A  4.0  11.0
-1  AA  3.0  6.0
-2  AAL  3.0  11.0
-3  AAMI  0.0  0.0
-4  AAOI  0.0  4.0
-5  AAON  4.0  2.0
-6  AAP  2.0  0.0
-7  AAPG  2.0  6.0
-8  AAPL  12.0  21.0
-9  AARD  4.0  3.0
-10  AAT  0.0  0.0
-11  AAUC  0.0  1.0
-12  ABAT  0.0  2.0
-13  ABBV  7.0  19.0
-14  ABCB  0.0  5.0
-15  ABCL  1.0  7.0
-16  ABEO  3.0  3.0
-17  ABEV  0.0  2.0
-18  ABG  2.0  0.0
-19  ABM  1.0  2.0
-20  ABNB  7.0  15.0
-21  ABOS  4.0  2.0
-22  ABP  None  None
-23  ABR  0.0  1.0
-24  ABR_pd  0.0  1.0
-25  ABR_pe  0.0  1.0
-26  ABR_pf  0.0  1.0
-27  ABSI  1.0  7.0
-28  ABT  9.0  13.0
-29  ABTC  0.0  2.0
-30  ABUS  1.0  2.0
-31  ABVX  4.0  6.0
-32  ABXL  0.0  5.0
-33  ACA  2.0  2.0
-34  ACAD  5.0  11.0
-35  ACB  0.0  3.0
-36  ACCO  1.0  1.0
-37  ACCS  0.0  2.0
-38  ACDC  0.0  0.0
-39  ACEL  0.0  6.0
-40  ACET  3.0  3.0
-41  ACGL  4.0  8.0
-42  ACGLN  4.0  8.0
-43  ACGLO  4.0  8.0
-44  ACH  1.0  0.0
-45  ACHC  2.0  5.0
-46  ACHV  0.0  8.0
-47  ACI  2.0  12.0
-48  ACIC  0.0  1.0
-49  ACIU  3.0  1.0
-50  ACIW  2.0  3.0
-51  ACLS  0.0  2.0
-52  ACLX  None  None
-53  ACM  3.0  9.0
-54  ACMR  1.0  6.0
-55  ACN  7.0  13.0
-56  ACNB  0.0  3.0
-57  ACOG  0.0  2.0
-58  ACR  0.0  1.0
-59  ACRE  0.0  1.0
-60  ACRS  6.0  4.0
-61  ACRV  2.0  6.0
-62  ACR_pc  0.0  1.0
-63  ACR_pd  0.0  1.0
-64  ACT  1.0  0.0
-65  ACTG  0.0  1.0
-66  ACTU  0.0  4.0
-67  ACU  1.0  0.0
-68  ACVA  2.0  6.0
-69  ACXP  0.0  3.0
-70  ADAG  2.0  3.0
-71  ADAMG  0.0  2.0
-72  ADAMH  0.0  2.0
-73  ADAMI  0.0  2.0
-74  ADAML  0.0  2.0
-75  ADAMM  0.0  2.0
-76  ADAMN  0.0  2.0
-77  ADAMO  0.0  2.0
-78  ADAMZ  0.0  2.0
-79  ADBE  8.0  6.0
-80  ADC  5.0  7.0
-81  ADCT  3.0  3.0
-82  ADC_pa  5.0  7.0
-83  ADEA  0.0  4.0
-84  ADGM  0.0  2.0
-85  ADI  11.0  19.0
-86  ADIL  0.0  2.0
-87  ADM  0.0  2.0
-88  ADMA  0.0  3.0
-89  ADNT  2.0  4.0
-90  ADP  2.0  3.0
-91  ADPT  3.0  4.0
-92  ADSK  10.0  21.0
-93  ADT  1.0  2.0
-94  ADTN  1.0  6.0
-95  ADUS  5.0  7.0
-96  ADV  0.0  1.0
-97  ADXN  None  None
-98  AEBI  0.0  2.0
-99  AEC  0.0  1.0
-100  AEE  4.0  6.0
-101  AEG  1.0  2.0
-102  AEHR  1.0  2.0
-103  AEIS  5.0  4.0
-104  AEM  4.0  10.0
-105  AEMD  0.0  0.0
-106  AEO  1.0  1.0
-107  AEON  0.0  2.0
-108  AEP  5.0  8.0
-109  AER  1.0  8.0
-110  AERO  1.0  8.0
-111  AES  0.0  0.0
-112  AESI  3.0  2.0
-113  AEVA  1.0  3.0
-114  AEYE  0.0  3.0
-115  AFCG  0.0  1.0
-116  AFGB  0.0  2.0
-117  AFGC  0.0  2.0
-118  AFGD  0.0  2.0
-119  AFGE  0.0  2.0
-120  AFL  1.0  2.0
-121  AFRM  6.0  18.0
-122  AFYA  0.0  1.0
-123  AG  0.0  1.0
-124  AGBK  2.0  7.0
-125  AGCO  2.0  2.0
-126  AGEN  0.0  2.0
-127  AGI  1.0  5.0
-128  AGIG  0.0  1.0
-129  AGIO  3.0  4.0
-130  AGL  1.0  3.0
-131  AGM  0.0  2.0
-132  AGMB  2.0  2.0
-133  AGM_pd  0.0  2.0
-134  AGM_pe  0.0  2.0
-135  AGM_pf  0.0  2.0
-136  AGM_pg  0.0  2.0
-137  AGM_ph  0.0  2.0
-138  AGM_pi  0.0  2.0
-139  AGNC  1.0  4.0
-140  AGNCL  1.0  4.0
-141  AGNCM  1.0  4.0
-142  AGNCN  1.0  4.0
-143  AGNCO  1.0  4.0
-144  AGNCP  1.0  4.0
-145  AGNCZ  1.0  4.0
-146  AGNT  0.0  2.0
-147  AGO  1.0  2.0
-148  AGPU  None  None
-149  AGRO  0.0  2.0
-150  AGX  0.0  3.0
-151  AGYS  2.0  4.0
-152  AHCO  2.0  4.0
-153  AHH  2.0  0.0
-154  AHH_pa  2.0  0.0
-155  AHL  None  None
-156  AHR  4.0  8.0
-157  AHRT  2.0  0.0
-158  AHRT_pa  2.0  0.0
-159  AHT  0.0  0.0
-160  AHT_pd  0.0  0.0
-161  AHT_pf  0.0  0.0
-162  AHT_pg  0.0  0.0
-163  AHT_ph  0.0  0.0
-164  AHT_pi  0.0  0.0
-165  AI  1.0  0.0
-166  AIFC  None  None
-167  AIG  2.0  7.0
-168  AII  1.0  4.0
-169  AIM  0.0  2.0
-170  AIN  0.0  0.0
-171  AIOT  2.0  5.0
-172  AIP  0.0  3.0
-173  AIR  2.0  4.0
-174  AIRE  0.0  1.0
-175  AIRG  0.0  4.0
-176  AIRI  None  None
-177  AIRO  0.0  2.0
-178  AIRS  0.0  0.0
-179  AIT  3.0  3.0
-180  AIV  None  None
-181  AIZN  1.0  7.0
-182  AJG  5.0  13.0
-183  AKA  0.0  2.0
-184  AKAM  5.0  10.0
-185  AKBA  3.0  2.0
-186  AKOb  1.0  2.0
-187  AKR  5.0  1.0
-188  AKTS  3.0  3.0
-189  AKTX  1.0  2.0
-190  AL  None  None
-191  ALAB  5.0  12.0
-192  ALAR  0.0  2.0
-193  ALB  5.0  8.0
-194  ALB_pa  5.0  8.0
-195  ALC  6.0  9.0
-196  ALCC  3.0  13.0
-197  ALCO  0.0  1.0
-198  ALDX  3.0  2.0
-199  ALEC  1.0  2.0
+symbol  indicator  mean  std_6month  high_week
+0  A  LTGROWTH  None  1.26579  9.0
+1  A  TP  None  10.66618  185.0
+2  AA  TP  76.04167  3.22052  92.0
+3  AAL  LTGROWTH  97.1775  2.98982  111.2
+4  AAL  TP  15.02143  2.52321  20.0
+5  AAMI  TP  65.33333  2.44949  70.0
+6  AAOI  TP  144.58333  8.43933  260.0
+7  AAON  LTGROWTH  16.0  0.0  16.0
+8  AAON  TP  132.2  14.04849  150.0
+9  AAP  LTGROWTH  None  None  None
+10  AAP  TP  59.039  9.8877  70.0
+11  AAPG  TP  48.14286  2.54951  55.0
+12  AAPL  LTGROWTH  13.75  1.55  14.2
+13  AAPL  TP  309.72615  30.87889  400.0
+14  AARD  TP  14.8  9.53857  45.0
+15  AAT  TP  20.5  0.5  23.0
+16  AAUC  TP  43.35714  3.42041  44.0
+17  ABAT  TP  6.5  0.0  7.0
+18  ABBV  LTGROWTH  20.27  2.5123  24.45
+19  ABBV  TP  252.596  24.7109  328.0
+20  ABCB  TP  93.85714  3.18158  100.0
+21  ABCL  TP  10.42857  3.02306  13.0
+22  ABEO  TP  19.71429  4.84557  28.0
+23  ABEV  LTGROWTH  8.4  None  8.4
+24  ABEV  TP  3.15  0.61853  4.0
+25  ABG  LTGROWTH  5.95  None  7.1
+26  ABG  TP  223.875  22.23736  242.0
+27  ABM  LTGROWTH  None  None  None
+28  ABM  TP  51.42857  5.17687  68.0
+29  ABNB  LTGROWTH  16.9  None  19.0
+30  ABNB  TP  158.11265  20.95104  185.0
+31  ABOS  TP  7.2  2.59808  10.0
+32  ABP  TP  None  None  None
+33  ABR  TP  7.66667  0.82916  8.5
+34  ABR_pd  TP  7.66667  0.82916  8.5
+35  ABR_pe  TP  7.66667  0.82916  8.5
+36  ABR_pf  TP  7.66667  0.82916  8.5
+37  ABSI  TP  9.01429  1.40146  12.0
+38  ABT  LTGROWTH  9.625  0.15  10.0
+39  ABT  TP  119.34846  8.73043  143.0
+40  ABTC  TP  4.0  None  4.0
+41  ABUS  TP  5.16667  0.94281  5.5
+42  ABVX  TP  146.83333  22.47577  176.0
+43  ABXL  LTGROWTH  9.5  None  9.5
+44  ABXL  TP  13.58333  2.10713  15.0
+45  ACA  LTGROWTH  None  None  None
+46  ACA  TP  141.6  7.31247  152.0
+47  ACAD  LTGROWTH  -1.96  None  None
+48  ACAD  TP  31.55556  5.22015  45.0
+49  ACCO  TP  7.66667  2.05481  9.0
+50  ACCS  TP  12.5  0.5  13.0
+51  ACDC  TP  5.09  1.16619  6.7
+52  ACEL  LTGROWTH  None  None  None
+53  ACEL  TP  15.71429  0.43301  17.0
+54  ACET  TP  34.83333  21.70346  100.0
+55  ACGL  LTGROWTH  1.5  8.11638  2.0
+56  ACGL  TP  109.67647  12.67057  125.0
+57  ACGLN  LTGROWTH  1.5  8.11638  2.0
+58  ACGLN  TP  109.67647  12.67057  125.0
+59  ACGLO  LTGROWTH  1.5  8.11638  2.0
+60  ACGLO  TP  109.67647  12.67057  125.0
+61  ACH  LTGROWTH  None  0.0  None
+62  ACH  TP  4.49  1.20764  6.0
+63  ACHC  LTGROWTH  -5.8  0.0  -5.8
+64  ACHC  TP  28.46429  4.5419  39.0
+65  ACHV  TP  13.5  4.93163  20.0
+66  ACI  LTGROWTH  1.38  0.0  1.38
+67  ACI  TP  21.44375  2.50038  29.0
+68  ACIC  LTGROWTH  3.0  None  3.0
+69  ACIC  TP  14.0  0.0  14.0
+70  ACIU  TP  9.0  1.87083  12.0
+71  ACIW  TP  63.174  11.47301  70.0
+72  ACLS  LTGROWTH  4.4  None  4.4
+73  ACLS  TP  156.8925  19.81769  180.0
+74  ACLX  TP  None  9.86216  None
+75  ACM  LTGROWTH  15.6  0.3  17.4
+76  ACM  TP  107.365  11.6926  145.0
+77  ACMR  TP  76.58333  4.28214  83.8
+78  ACN  LTGROWTH  7.6  0.0  7.6
+79  ACN  TP  252.37192  31.5058  329.0
+80  ACNB  TP  57.0  0.47141  58.0
+81  ACOG  TP  16.0  0.0  18.0
+82  ACR  TP  24.5  0.0  24.5
+83  ACRE  TP  5.125  0.36976  5.5
+84  ACRS  TP  9.45  4.18994  16.0
+85  ACRV  TP  11.5  4.59771  19.0
+86  ACR_pc  TP  24.5  0.0  24.5
+87  ACR_pd  TP  24.5  0.0  24.5
+88  ACT  LTGROWTH  7.9  None  7.9
+89  ACT  TP  41.398  1.0198  48.0
+90  ACTG  TP  6.0  0.0  6.0
+91  ACTU  TP  17.5  6.12372  35.0
+92  ACU  LTGROWTH  None  None  None
+93  ACU  TP  50.0  1.5  53.0
+94  ACVA  TP  9.14546  3.58498  16.0
+95  ACXP  TP  54.2  60.25587  165.8
+96  ADAG  TP  11.345  5.13507  21.07
+97  ADAMG  TP  9.35  0.39529  10.0
+98  ADAMH  TP  9.35  0.39529  10.0
+99  ADAMI  TP  9.35  0.39529  10.0
+100  ADAML  TP  9.35  0.39529  10.0
+101  ADAMM  TP  9.35  0.39529  10.0
+102  ADAMN  TP  9.35  0.39529  10.0
+103  ADAMO  TP  9.35  0.39529  10.0
+104  ADAMZ  TP  9.35  0.39529  10.0
+105  ADBE  LTGROWTH  13.14  1.18955  15.0
+106  ADBE  TP  319.19161  73.48455  460.0
+107  ADC  LTGROWTH  8.73  0.0  8.73
+108  ADC  TP  85.0  4.08751  92.0
+109  ADCT  TP  8.2  1.89737  10.0
+110  ADC_pa  LTGROWTH  8.73  0.0  8.73
+111  ADC_pa  TP  85.0  4.08751  92.0
+112  ADEA  TP  37.0  4.20565  43.0
+113  ADGM  TP  3.5  None  4.0
+114  ADI  LTGROWTH  28.74  0.2  31.0
+115  ADI  TP  446.50367  33.14134  515.0
+116  ADIL  TP  25.0  15.59024  42.0
+117  ADM  LTGROWTH  20.8  0.0  20.8
+118  ADM  TP  73.93889  4.95386  90.0
+119  ADMA  TP  16.75  5.9739  20.0
+120  ADNT  LTGROWTH  30.79333  11.8983  43.4
+121  ADNT  TP  30.37364  8.59957  52.11
+122  ADP  LTGROWTH  None  None  None
+123  ADP  TP  245.68933  22.54998  305.0
+124  ADPT  TP  20.33333  1.84059  22.0
+125  ADSK  LTGROWTH  15.16333  1.17  16.19
+126  ADSK  TP  323.94207  25.03666  456.0
+127  ADT  LTGROWTH  None  0.0  None
+128  ADT  TP  8.21667  0.55281  9.0
+129  ADTN  TP  19.43288  2.1923  23.0
+130  ADUS  LTGROWTH  7.15  0.0  8.4
+131  ADUS  TP  132.69231  12.33896  155.0
+132  ADV  TP  42.5  21.24592  50.0
+133  ADXN  TP  None  None  None
+134  AEBI  TP  15.0  0.75  15.0
+135  AEC  TP  18.85  0.0  18.85
+136  AEE  LTGROWTH  8.7  0.0  9.3
+137  AEE  TP  119.46  6.07682  136.0
+138  AEG  TP  10.14697  0.0  11.54095
+139  AEHR  LTGROWTH  None  0.0  None
+140  AEHR  TP  63.66667  0.0  68.0
+141  AEIS  LTGROWTH  30.1  0.0  30.1
+142  AEIS  TP  384.15  16.7332  430.0
+143  AEM  LTGROWTH  6.9  None  6.9
+144  AEM  TP  271.86635  32.55739  370.0
+145  AEMD  TP  11.5  2.625  15.0
+146  AEO  LTGROWTH  5.5  4.6  8.8
+147  AEO  TP  22.71556  2.94811  35.0
+148  AEON  TP  5.2  0.2  5.4
+149  AEP  LTGROWTH  8.36667  0.0  9.2
+150  AEP  TP  145.0115  8.70004  173.0
+151  AER  LTGROWTH  4.5  3.4  4.5
+152  AER  TP  164.625  4.58258  175.0
+153  AERO  TP  27.55  None  30.0
+154  AES  LTGROWTH  None  0.0  None
+155  AES  TP  14.665  3.43046  15.0
+156  AESI  LTGROWTH  None  0.0  None
+157  AESI  TP  19.63636  3.37406  28.0
+158  AEVA  LTGROWTH  None  None  None
+159  AEVA  TP  24.1  5.05256  33.0
+160  AEYE  TP  15.75  2.48194  25.0
+161  AFCG  TP  6.25  1.91621  8.0
+162  AFGB  TP  142.83333  10.63203  158.0
+163  AFGC  TP  142.83333  10.63203  158.0
+164  AFGD  TP  142.83333  10.63203  158.0
+165  AFGE  TP  142.83333  10.63203  158.0
+166  AFL  LTGROWTH  3.55  1.95  8.1
+167  AFL  TP  110.32714  8.43843  126.0
+168  AFRM  LTGROWTH  2.0  0.0  2.0
+169  AFRM  TP  82.98654  12.3604  100.0
+170  AFYA  TP  16.60857  3.03214  20.26
+171  AG  TP  30.75  1.30583  30.75
+172  AGBK  LTGROWTH  29.0  None  29.0
+173  AGBK  TP  15.33333  None  18.0
+174  AGCO  LTGROWTH  2.0  2.95  2.0
+175  AGCO  TP  125.58333  6.39896  152.0
+176  AGEN  TP  15.5  7.58654  23.0
+177  AGI  TP  81.3369  10.42335  85.8452
+178  AGIG  TP  6.0  None  6.0
+179  AGIO  LTGROWTH  None  None  None
+180  AGIO  TP  41.85714  7.94414  60.0
+181  AGL  TP  48.44231  11.19004  95.0
+182  AGM  TP  219.66667  6.54896  228.0
+183  AGMB  TP  32.33333  None  36.0
+184  AGM_pd  TP  219.66667  6.54896  228.0
+185  AGM_pe  TP  219.66667  6.54896  228.0
+186  AGM_pf  TP  219.66667  6.54896  228.0
+187  AGM_pg  TP  219.66667  6.54896  228.0
+188  AGM_ph  TP  219.66667  6.54896  228.0
+189  AGM_pi  TP  219.66667  6.54896  228.0
+190  AGNC  TP  11.5  0.50309  12.5
+191  AGNCL  TP  11.5  0.50309  12.5
+192  AGNCM  TP  11.5  0.50309  12.5
+193  AGNCN  TP  11.5  0.50309  12.5
+194  AGNCO  TP  11.5  0.50309  12.5
+195  AGNCP  TP  11.5  0.50309  12.5
+196  AGNCZ  TP  11.5  0.50309  12.5
+197  AGNT  TP  9.125  0.0  10.25
+198  AGO  TP  92.33333  7.11805  103.0
+199  AGPU  TP  None  None  None
 ```
 
-**（十二）港股财务与市场因子：**
+**（十二）港股财务数据：**
 
 **1. get_stock_operating_indicator - 获取公司标准化营运指标**
 
@@ -16959,10 +18622,10 @@ symbol  strong_buy_num  buy_num_week
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_year | string | 开始财年,eg:"2025" | 非必填 |
-| end_year | string | 结束财年,eg:"2025" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_year | string | 开始财年,eg:"2025" | 必填 |
+| end_year | string | 结束财年,eg:"2025" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -17212,8 +18875,8 @@ symbol  financial_year  is_final  financial_period_end_date  report_type  data_t
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -17596,11 +19259,11 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, list]] | 股票名称 | 非必填 |
-| start_quarter | string | 起始季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 非必填 |
-| end_quarter | string | 结束季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 非必填 |
-| date | string | 公告日期,返回该日期及之前的数据 | 非必填 |
+| start_quarter | string | 起始季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 必填 |
+| end_quarter | string | 结束季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 必填 |
+| date | Optional[string] | 公告日期,返回该日期及之前的数据 | 非必填 |
 | is_latest | Optional[bool] | True：返回最新披露数据，False：返回全部。默认为True | 非必填 |
-| interimType | Optional[string] | 报表类型；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
+| interim_type | Optional[string] | 报表类型，对应后端接口参数 interimType；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
 | fields | Optional[Union[string, list]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
@@ -17608,7 +19271,7 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
 | symbol | string | 股票代码 |
-| fields | float | 需要返回的财务字段 |
+| fields | float | 需要返回的财务字段(见下载文件) |
 | fy_period | string | 财务年时间段 |
 
 **3.4. 使用示例**
@@ -17623,7 +19286,7 @@ result = panda_data.get_fina_statement(
         end_quarter="2026q4",
         date="20241014",
         is_latest=True,
-        interimType="cumulative",
+        interim_type="cumulative",
         fields=["symbol", "bs_asset_accruals"],
         )
 print(result)
@@ -17636,7 +19299,7 @@ symbol  fy_period  date  bs_asset_accruals
 0  0700.HK  FY2024Q2  20240827  1.497963e+12
 ```
 
-**（十三）美股财务与市场因子：**
+**（十三）美股财务数据：**
 
 **1. get_stock_operating_metric - 获取公司标准化营运指标**
 
@@ -17646,10 +19309,10 @@ symbol  fy_period  date  bs_asset_accruals
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| start_year | string | 开始财年,eg:"2025" | 非必填 |
-| end_year | string | 结束财年,eg:"2025" | 非必填 |
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| start_year | string | 开始财年,eg:"2025" | 必填 |
+| end_year | string | 结束财年,eg:"2025" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -17899,8 +19562,8 @@ symbol  financial_year  is_final  financial_period_end_date  report_type  data_t
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 股票代码 | 非必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -18283,11 +19946,11 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, list]] | 股票名称 | 非必填 |
-| start_quarter | string | 起始季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 非必填 |
-| end_quarter | string | 结束季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 非必填 |
-| date | string | 公告日期,返回该日期及之前的数据 | 非必填 |
+| start_quarter | string | 起始季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 必填 |
+| end_quarter | string | 结束季度，格式为 "YYYYqN"（start_quarter与end_quarter间隔不能超5年） | 必填 |
+| date | Optional[string] | 公告日期,返回该日期及之前的数据 | 非必填 |
 | is_latest | Optional[bool] | True：返回最新披露数据，False：返回全部。默认为True | 非必填 |
-| interimType | Optional[string] | 报表类型；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
+| interim_type | Optional[string] | 报表类型，对应后端接口参数 interimType；可选值为 "single" 或 "cumulative"，省略时默认为 "cumulative" | 非必填 |
 | fields | Optional[Union[string, list]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
@@ -18295,7 +19958,7 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
 | symbol | string | 股票代码 |
-| fields | float | 需要返回的财务字段 |
+| fields | float | 需要返回的财务字段(见下载文件) |
 | fy_period | string | 财务年时间段 |
 
 **3.4. 使用示例**
@@ -18310,8 +19973,8 @@ result = panda_data.get_fina_ex(
         end_quarter="2026q4",
         date="20241014",
         is_latest=True,
-        interimType="cumulative",
-        fields=["symbol", "bs_asset_accruals"],
+        interim_type="cumulative",
+        fields=["symbol","bs_asset_accruals"],
         )
 print(result)
 ```
@@ -18335,9 +19998,9 @@ symbol  fy_period  date  bs_asset_accruals
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码（非空时将覆盖category的筛选进行查询） | 非必填 |
-| category | string | 指标分类代码（见下表） | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载（非空时将覆盖category的筛选进行查询） | 非必填 |
+| category | Union[string, List[string]] | 指标分类代码（为指标代码的两位前缀） | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -18357,8 +20020,8 @@ symbol  fy_period  date  bs_asset_accruals
 | importance | string | 重要性 |
 | info_source | string | 指标发布来源 |
 | note_text | string | 备注文本 |
-| data_begin_date | string | 指标起始日期 |
-| data_end_date | string | 指标截止日期 |
+| begin_date | string | 指标起始日期 |
+| end_date | string | 指标截止日期 |
 | is_update | string | 是否仍在更新 |
 | api_name | string | API名称 |
 
@@ -18592,10 +20255,10 @@ symbol  name  en_name  is_list  frequency  unit  stat_type  accuracy  region  co
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -18636,10 +20299,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -18680,10 +20343,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -18723,10 +20386,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -18766,10 +20429,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -18809,10 +20472,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **6.3. 响应参数**
 
@@ -18852,10 +20515,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **7.3. 响应参数**
 
@@ -18896,10 +20559,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **8.3. 响应参数**
 
@@ -18940,10 +20603,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **9.3. 响应参数**
 
@@ -18983,10 +20646,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **10.3. 响应参数**
 
@@ -19027,10 +20690,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **11.3. 响应参数**
 
@@ -19071,10 +20734,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **12.3. 响应参数**
 
@@ -19115,10 +20778,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **13.3. 响应参数**
 
@@ -19158,10 +20821,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **14.3. 响应参数**
 
@@ -19203,10 +20866,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **15.3. 响应参数**
 
@@ -19247,10 +20910,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **16.3. 响应参数**
 
@@ -19294,10 +20957,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -19340,10 +21003,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -19384,10 +21047,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -19428,10 +21091,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -19472,10 +21135,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -19517,10 +21180,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -19560,10 +21223,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **6.3. 响应参数**
 
@@ -19603,10 +21266,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **7.3. 响应参数**
 
@@ -19646,10 +21309,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **8.3. 响应参数**
 
@@ -19690,10 +21353,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **9.3. 响应参数**
 
@@ -19734,10 +21397,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **10.3. 响应参数**
 
@@ -19777,10 +21440,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **11.3. 响应参数**
 
@@ -19821,10 +21484,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **12.3. 响应参数**
 
@@ -19864,10 +21527,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **13.3. 响应参数**
 
@@ -19907,10 +21570,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **14.3. 响应参数**
 
@@ -19951,10 +21614,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **15.3. 响应参数**
 
@@ -19995,10 +21658,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **16.3. 响应参数**
 
@@ -20039,10 +21702,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **17.3. 响应参数**
 
@@ -20083,10 +21746,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **18.3. 响应参数**
 
@@ -20126,10 +21789,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **19.3. 响应参数**
 
@@ -20169,10 +21832,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **20.3. 响应参数**
 
@@ -20212,10 +21875,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **21.3. 响应参数**
 
@@ -20256,10 +21919,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **22.3. 响应参数**
 
@@ -20302,10 +21965,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -20345,10 +22008,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -20388,10 +22051,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -20432,10 +22095,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **4.3. 响应参数**
 
@@ -20475,10 +22138,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **5.3. 响应参数**
 
@@ -20518,10 +22181,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **6.3. 响应参数**
 
@@ -20561,10 +22224,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **7.3. 响应参数**
 
@@ -20605,10 +22268,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **8.3. 响应参数**
 
@@ -20649,10 +22312,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **9.3. 响应参数**
 
@@ -20692,10 +22355,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **10.3. 响应参数**
 
@@ -20736,10 +22399,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **11.3. 响应参数**
 
@@ -20780,10 +22443,10 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| symbol | string | 指标代码 | 非必填 |
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
-| fields | string | 返回字段 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **12.3. 响应参数**
 
@@ -20826,7 +22489,7 @@ symbol  period_date  data_value
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| event_code | string/list[string]/None | 日历指标代码 | 非必填 |
+| event_code | string/list[string]/None | 日历指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
 
@@ -20897,7 +22560,7 @@ event_code  pub_date_bj  event_name_cn  indicator_name_cn  indicator_name_en  pu
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| event_code | string/list[string]/None | 日历指标代码 | 非必填 |
+| event_code | string/list[string]/None | 日历指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string/None | 开始日期 YYYYMMDD | 必填 |
 | end_date | string/None | 结束日期 YYYYMMDD | 必填 |
 
@@ -20949,7 +22612,7 @@ event_code  pub_date_bj  indic_name  datadate  country_code  pub_date  pub_time 
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| event_code | string/list[string]/None | 日历指标代码 | 必填 |
+| event_code | string/list[string]/None | 日历指标代码，完整指标码表见文件下载 | 必填 |
 
 **1.3. 响应参数**
 
@@ -20979,4 +22642,1629 @@ event_code  indic_name  region_code  eco_name_cn
 0  CHN.001  官方制造业PMI  CHN  制造业PMI
 1  CHN.001  官方制造业PMI  CHN  制造业PMI:新订单
 2  CHN.001  官方制造业PMI  CHN  制造业PMI:新出口订单
+```
+
+**八. 基金数据**
+
+**（一）基金基础数据：**
+
+**1. get_fund_detail - 获取基金基本信息**
+
+**1.1. 方法名：get_fund_detail**
+
+**1.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "000001.OF"、"159919.SZ"、"510050.SH"，可传单个或列表，为空返回所有 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场，可传单个或列表：SZ(深交所)、SH(上交所)、OF(场外基金) | 非必填 |
+| type | Optional[Union[string, List[string]]] | 按投资对象分基金类型，可传单个或列表：E(股票型)、H(混合型)、B(债券型)、SB(短期理财债券)、M(货币型)、O(其他) | 非必填 |
+| operation_mode | Optional[Union[string, List[string]]] | 基金运作模式，可传单个或列表：O(开放式)、C(封闭式) | 非必填 |
+| etf_lof_type | Optional[Union[string, List[string]]] | ETF或LOF型基金，可传单个或列表：ETF、LOF、UN(未知) | 非必填 |
+| is_class_fund | Optional[Union[integer, List[integer]]] | 是否分级基金，可传单个或列表：1(母基金)、2(子基金A)、3(子基金B)、0(否) | 非必填 |
+| index_fund_type | Optional[Union[string, List[string]]] | 基金指数型属性，可传单个或列表：I(指数型)、EI(指数增强型)、UN(非指数基金) | 非必填 |
+| status | Optional[Union[string, List[string]]] | 上市状态，可传单个或列表：L(上市)、S(暂停)、DE(终止上市)、UN(未上市) | 非必填 |
+| fund_status | Optional[Union[string, List[string]]] | 基金状态，可传单个或列表：A(存续中)、E(已到期)、UN(未成立) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集，自动补齐 symbol | 非必填 |
+
+**1.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 基金代码 |
+| name | string | 证券简称 |
+| trade_name | string | 交易简称 |
+| full_name | string | 基金全称 |
+| exchange | string | 交易市场(SZ:深交所,SH:上交所,OF:场外基金) |
+| type | string | 按投资对象分基金类型(E:股票型,H:混合型,B:债券型,SB:短期理财债券,M:货币型,O:其他) |
+| operation_mode | string | 基金运作模式(O:开放式,C:封闭式) |
+| index_fund_type | string | 基金指数型属性(I:指数型,EI:指数增强型,UN:非指数基金) |
+| etf_lof_type | string | ETF或LOF型基金(ETF/LOF/UN) |
+| status | string | 上市状态(L:上市,S:暂停,DE:终止上市,UN:未上市) |
+| fund_status | string | 基金状态(A:存续中,E:已到期,UN:未成立) |
+| is_qdii_fund | string | 是否QDII基金 |
+| is_fof_fund | string | 是否FOF基金 |
+| is_guaranteed_fund | string | 是否保本基金 |
+| guarantee_period | string | 保本周期 |
+| guarantee_ratio | float | 保本比例 |
+| found_date | string | 成立日期 |
+| listed_date | string | 上市日期 |
+| delisted_date | string | 退市日期 |
+| due_date | string | 到期日期 |
+| management | string | 基金经理 |
+| management_institution | string | 管理人全称 |
+| custodian_institution | string | 托管人全称 |
+| management_short_name | string | 管理人简称 |
+| custodian_short_name | string | 托管人简称 |
+| investment_field | string | 投资范围 |
+| investment_objective | string | 投资目标 |
+| strategy | string | 投资策略 |
+| philosophy | string | 投资理念 |
+| mode | string | 管理模式 |
+| is_mom_fund | string | 是否MOM基金 |
+| dividend_policy | string | 分红条款 |
+| risk_return_profile | string | 风险收益特征 |
+| benchmark | string | 业绩比较基准 |
+| index_symbol | string | 跟踪指数代码 |
+| index_name | string | 跟踪指数名称 |
+| is_class_fund | integer | 是否分级基金(1:母基金,2:子基金A,3:子基金B,0:否) |
+| class_name | string | 分级基金名称 |
+| primary_fund_symbol | string | 母基金代码 |
+| subscription_redemption_symbol | string | 场内申赎代码 |
+| exchange_short_name | string | 场内简称 |
+| front_subscription_symbol | string | 前端申购代码 |
+| back_subscription_symbol | string | 后端申购代码 |
+| subscription_symbol | string | 申赎代码 |
+| circulating_shares | float | 流通份额 |
+| clearing_speed | string | 清算速度 |
+
+**1.4. 使用示例**
+
+**1.4.1. 按基金代码查询基金基本信息**
+
+```python
+import panda_data
+result = panda_data.get_fund_detail(
+    symbol="510050.SH",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  name  trade_name  full_name  exchange  type  operation_mode  index_fund_type  etf_lof_type  status  fund_status  is_qdii_fund  is_fof_fund  is_guaranteed_fund  guarantee_period  guarantee_ratio  found_date  listed_date  delisted_date  due_date  management  management_institution  custodian_institution  management_short_name  custodian_short_name  investment_field  investment_objective  strategy  philosophy  mode  is_mom_fund  dividend_policy  risk_return_profile  benchmark  index_symbol  index_name  is_class_fund  class_name  primary_fund_symbol  subscription_redemption_symbol  exchange_short_name  front_subscription_symbol  back_subscription_symbol  subscription_symbol  circulating_shares  clearing_speed
+510050.SH  华夏上证50ETF  华夏上证50ETF  上证50交易型开放式指数证券投资基金  SH  E  O  I  ETF  L  A  0  0  0  NaN  NaN  20041230  20050223  NaN  NaN  徐猛  华夏基金管理有限公司  中国工商银行股份有限公司  华夏基金  中国工商银行  本基金主要投资于标的指数成份股、备选成份股。为更好地实现投资目标,本基金可少量投资于新股、债券及中国证监会允许基金投资的其他金融工具。  紧密跟踪标的指数，追求跟踪偏离度和跟踪误差最小化。  本基金主要采取完全复制法,即完全按照标的指数的成份股组成及其权重构建基金股票投资组合,并根据标的指数成份股及其权重的变动而进行相应调整。但在因特殊情况(如流动性不足)导致无法获得足够数量的股票时,基金管理人将搭配使用其他合理方法进行适当的替代。  中国经济和资本市场将长期快速增长,指数化投资可以以最低的成本和较低的风险获得市场平均水平的长期回报。标的指数具有良好的市场代表性、流动性与蓝筹特征,通过完全复制法实现跟踪偏离度和跟踪误差最小化,可以满足投资者多种投资需求。  MF  0  1.每份基金份额享有同等分配权。2.基金当年收益先弥补以前年度亏损后,方可进行当年收益分配。3.如果基金投资当期出现净亏损,则不进行收益分配。4.基金收益评价日核定的基金累计报酬率超过标的指数同期累计报酬率达到1%以上,方可进行收益分配。5.在符合上述基金分红条件的前提下,本基金收益每年至少分配1次,最多分配2次,若自基金合同生效日起不满3个月可不进行收益分配。基金收益分配比例为符合上述基金分红条件的可分配部分的100%。6.本基金收益分配采取现金方式。7.法律法规或监管机关另有规定的,从其规定。  本基金属股票基金,风险与收益高于混合基金、债券基金与货币市场基金。本基金为指数型基金,采用完全复制策略,跟踪上证50指数,是股票基金中风险较低、收益中等的产品。  上海证券交易所50成份指数×100%  000016.SH  上证50  0.0  510050  510050  50ETF  510053  6.388867e+09  NaN
+```
+
+**1.4.2. 查询全部上市 ETF 基金，只取名称与管理人**
+
+```python
+import panda_data
+result = panda_data.get_fund_detail(
+    etf_lof_type="ETF",
+    status="L",
+    fields=["name", "management_short_name", "benchmark"],
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  name  management_short_name  benchmark
+0  159001.SZ  易方达保证金收益货币ETF-A  易方达基金  活期存款利率(税后)×100%
+1  159003.SZ  招商保证金快线货币ETF-A  招商基金  活期存款利率(税后)×100%
+2  159005.SZ  汇添富收益快钱货币ETF-A  汇添富基金  活期存款利率(税后)×100%
+3  159007.SZ  华泰柏瑞中证畜牧养殖产业ETF  华泰柏瑞基金  中证畜牧养殖产业指数收益率×100%
+4  159008.SZ  景顺长城中证全指证券公司ETF  景顺长城基金  中证全指证券公司指数收益率×100%
+5  159009.SZ  易方达创业板新能源ETF  易方达基金  创业板新能源指数收益率×100%
+6  159010.SZ  博时恒生港股通科技主题ETF  博时基金  恒生港股通科技主题指数收益率×100%
+7  159011.SZ  华安中证畜牧养殖产业ETF  华安基金  中证畜牧养殖产业指数收益率×100%
+8  159012.SZ  鹏华中证科创创业50ETF  鹏华基金  中证科创创业50指数收益率×100%
+9  159013.SZ  大成中证工业互联网主题ETF  大成基金  中证工业互联网主题指数收益率×100%
+10  159015.SZ  国联恒生港股通科技主题ETF  国联基金  恒生港股通科技主题指数收益率×100%
+11  159016.SZ  广发中证证券公司30ETF  广发基金  中证证券公司30指数收益率×100%
+12  159017.SZ  工银瑞信国证石油天然气ETF  工银瑞信基金  国证石油天然气指数收益率×100%
+13  159018.SZ  广发国证石油天然气ETF  广发基金  国证石油天然气指数同期收益率×100%
+14  159019.SZ  华宝国证石油天然气ETF  华宝基金  国证石油天然气指数收益率×100%
+15  159020.SZ  易方达中证畜牧养殖产业ETF  易方达基金  中证畜牧养殖产业指数收益率×100%
+16  159021.SZ  华夏国证大盘价值ETF  华夏基金  国证大盘价值指数收益率×100%
+17  159022.SZ  富国中证科创创业人工智能ETF  富国基金  中证科创创业人工智能指数收益率×100%
+18  159023.SZ  万家中证畜牧养殖产业ETF  万家基金  中证畜牧养殖产业指数收益率×100%
+19  159026.SZ  南方国证石油天然气ETF  南方基金  国证石油天然气指数收益率×100%
+20  159027.SZ  大成中证畜牧养殖产业ETF  大成基金  中证畜牧养殖产业指数收益率×100%
+21  159028.SZ  天弘恒生港股通汽车主题ETF  天弘基金  恒生港股通汽车主题指数收益率(经估值汇率调整)×100%
+22  159029.SZ  广发中证有色金属矿业主题ETF  广发基金  中证有色金属矿业主题指数收益率×100%
+23  159030.SZ  华夏国证粮食产业ETF  华夏基金  国证粮食产业指数收益率×100%
+24  159031.SZ  博时国证粮食产业ETF  博时基金  国证粮食产业指数收益率×100%
+25  159032.SZ  易方达中证工业有色金属主题ETF  易方达基金  中证工业有色金属主题指数收益率×100%
+26  159033.SZ  国泰国证粮食产业ETF  国泰基金  国证粮食产业指数收益率×100%
+27  159035.SZ  天弘中证软件服务ETF  天弘基金  中证软件服务指数收益率×100%
+28  159036.SZ  华宝中证全指软件开发ETF  华宝基金  中证全指软件开发指数收益率×100%
+29  159037.SZ  鹏华国证价值100ETF  鹏华基金  国证价值100指数收益率×100%
+30  159038.SZ  易方达国证粮食产业ETF  易方达基金  国证粮食产业指数收益率×100%
+31  159039.SZ  华安国证机器人产业ETF  华安基金  国证机器人产业指数收益率×100%
+32  159040.SZ  鹏华中证港股通互联网ETF  鹏华基金  中证港股通互联网指数(港元)收益率×100%
+33  159041.SZ  鹏华中证农业主题ETF  鹏华基金  中证农业主题指数收益率×100%
+34  159042.SZ  汇添富国证价值100ETF  汇添富基金  国证价值100指数收益率×100%
+35  159045.SZ  大成中证稀有金属主题ETF  大成基金  中证稀有金属主题指数收益率×100%
+36  159046.SZ  天弘国证绿色电力ETF  天弘基金  国证绿色电力指数收益率×100%
+37  159048.SZ  大成国证机器人产业ETF  大成基金  国证机器人产业指数收益率×100%
+38  159050.SZ  广发国证机器人产业ETF  广发基金  国证机器人产业指数收益率×100%
+39  159051.SZ  易方达中证全指医疗器械ETF  易方达基金  中证全指医疗器械指数收益率×100%
+40  159052.SZ  嘉实国证新能源电池ETF  嘉实基金  国证新能源电池指数收益率×100%
+41  159053.SZ  华夏中证稀有金属主题ETF  华夏基金  中证稀有金属主题指数收益率×100%
+42  159055.SZ  富国中证稀有金属主题ETF  富国基金  中证稀有金属主题指数收益率×100%
+43  159056.SZ  富国中证全指医疗器械ETF  富国基金  中证全指医疗器械指数收益率×100%
+44  159057.SZ  鹏华中证全指医疗器械ETF  鹏华基金  中证全指医疗器械指数收益率×100%
+45  159060.SZ  浦银安盛国证粮食产业ETF  浦银安盛基金  国证粮食产业指数收益率×100%
+46  159061.SZ  南方国证绿色电力ETF  南方基金  国证绿色电力指数收益率×100%
+47  159062.SZ  南方中证稀有金属主题ETF  南方基金  中证稀有金属主题指数收益率×100%
+48  159063.SZ  南方国证粮食产业ETF  南方基金  国证粮食产业指数收益率×100%
+49  159065.SZ  景顺长城中证工程机械主题ETF  景顺长城基金  中证工程机械主题指数收益率×100%
+50  159070.SZ  嘉实中证工程机械主题ETF  嘉实基金  中证工程机械主题指数收益率×100%
+51  159071.SZ  华宝国证新能源电池ETF  华宝基金  国证新能源电池指数收益率×100%
+52  159100.SZ  华夏布拉德斯科巴西伊博维斯帕ETF(QDII)  华夏基金  经估值汇率调整后的巴西伊博维斯帕指数收益率×100%
+53  159101.SZ  华夏国证港股通科技ETF  华夏基金  经估值汇率调整后的国证港股通科技指数收益率×100%
+54  159102.SZ  华安恒生生物科技ETF  华安基金  恒生生物科技指数收益率(经汇率调整)×100%
+55  159103.SZ  汇添富中证金融科技主题ETF  汇添富基金  中证金融科技主题指数收益率×100%
+56  159105.SZ  易方达恒生生物科技ETF  易方达基金  恒生生物科技指数收益率(使用估值汇率折算)×100%
+57  159106.SZ  前海开源中证民企300ETF  前海开源基金  中证民企300指数收益率×100%
+58  159107.SZ  富国创业板软件ETF  富国基金  创业板软件指数收益率×100%
+59  159108.SZ  博时国证工业软件主题ETF  博时基金  国证工业软件主题指数收益率×100%
+60  159109.SZ  景顺长城恒生港股通50ETF  景顺长城基金  恒生港股通50指数收益率×100%
+61  159110.SZ  万家深证AAA科技创新公司债ETF  万家基金  深证AAA科技创新公司债指数收益率×100%
+62  159111.SZ  天弘中证AAA科技创新公司债ETF  天弘基金  中证AAA科技创新公司债指数收益率×100%
+63  159112.SZ  银华中证AAA科技创新公司债ETF  银华基金  中证AAA科技创新公司债指数收益率×100%
+64  159113.SZ  大成中证AAA科技创新公司债ETF  大成基金  中证AAA科技创新公司债指数收益率×100%
+65  159115.SZ  华安中证AAA科技创新公司债ETF  华安基金  中证AAA科技创新公司债指数收益率×100%
+66  159116.SZ  工银瑞信中证AAA科技创新公司债ETF  工银瑞信基金  中证AAA科技创新公司债指数收益率×100%
+67  159117.SZ  鹏华标普港股通低波红利ETF  鹏华基金  标普港股通低波红利指数收益率(经汇率调整后)×100%
+68  159118.SZ  华夏标普港股通低波红利ETF  华夏基金  经估值汇率调整后的标普港股通低波红利指数收益率×100%
+69  159119.SZ  招商中证800自由现金流ETF  招商基金  中证800自由现金流指数收益率×100%
+70  159120.SZ  国联安恒生港股通科技主题ETF  国联安基金  经估值汇率折算后的恒生港股通科技主题指数收益率×100%
+71  159121.SZ  易方达恒生港股通汽车主题ETF  易方达基金  恒生港股通汽车主题指数收益率(使用估值汇率折算)×100%
+72  159122.SZ  富国创业板新能源ETF  富国基金  创业板新能源指数收益率×100%
+73  159123.SZ  嘉实中证光伏产业ETF  嘉实基金  中证光伏产业指数收益率×100%
+74  159125.SZ  招商国证港股通科技ETF  招商基金  经汇率调整后的国证港股通科技指数收益率×100%
+75  159126.SZ  南方中证港股通50ETF  南方基金  中证港股通50指数收益率×100%
+76  159127.SZ  南方中证港股通高股息投资ETF  南方基金  中证港股通高股息投资指数(经估值汇率调整后)收益率×100%
+77  159128.SZ  天弘国证港股通科技ETF  天弘基金  国证港股通科技指数收益率(经估值汇率调整)×100%
+78  159129.SZ  嘉实中证细分化工产业主题ETF  嘉实基金  中证细分化工产业主题指数收益率×100%
+79  159130.SZ  鹏华恒生生物科技ETF  鹏华基金  恒生生物科技指数收益率(经汇率调整后)×100%
+80  159131.SZ  华宝中证港股通信息技术综合ETF  华宝基金  经人民币汇率调整的中证港股通信息技术综合指数收益率×100%
+81  159132.SZ  富国恒生生物科技ETF  富国基金  恒生生物科技指数×100%
+82  159133.SZ  天弘中证细分化工产业主题ETF  天弘基金  中证细分化工产业主题指数收益率×100%
+83  159135.SZ  前海开源恒生港股通科技主题ETF  前海开源基金  恒生港股通科技主题指数收益率(经估值汇率调整)×100%
+84  159136.SZ  广发中证A50ETF  广发基金  中证A50指数收益率×100%
+85  159137.SZ  华宝中证港股通医疗主题ETF  华宝基金  经人民币汇率调整的中证港股通医疗主题指数收益率×100%
+86  159138.SZ  易方达中证工程机械主题ETF  易方达基金  中证工程机械主题指数收益率×100%
+87  159139.SZ  华泰柏瑞中证科创创业人工智能ETF  华泰柏瑞基金  中证科创创业人工智能指数收益率×100%
+88  159140.SZ  易方达中证科创创业人工智能ETF  易方达基金  中证科创创业人工智能指数收益率×100%
+89  159141.SZ  永赢中证科创创业人工智能ETF  永赢基金  中证科创创业人工智能指数收益率×100%
+90  159142.SZ  景顺长城中证科创创业人工智能ETF  景顺长城基金  中证科创创业人工智能指数收益率×100%
+91  159143.SZ  平安恒生港股通中国央企红利ETF  平安基金  恒生港股通中国央企红利指数收益率(经汇率调整)×100%
+92  159145.SZ  广发国证工业软件主题ETF  广发基金  国证工业软件主题指数收益率×100%
+93  159146.SZ  华宝中证全指电力公用事业ETF  华宝基金  中证全指电力公用事业指数收益率×100%
+94  159147.SZ  南方中证电池主题ETF  南方基金  中证电池主题指数×100%
+95  159148.SZ  富国国证石油天然气ETF  富国基金  国证石油天然气指数×100%
+96  159149.SZ  工银瑞信创业板新能源ETF  工银瑞信基金  创业板新能源指数收益率×100%
+97  159150.SZ  易方达深证50ETF  易方达基金  深证50指数收益率×100%
+98  159151.SZ  华夏中证全指食品ETF  华夏基金  中证全指食品指数收益率×100%
+99  159152.SZ  平安恒生港股通科技主题ETF  平安基金  恒生港股通科技主题指数收益率(经汇率调整)×100%
+100  159153.SZ  鹏华国证消费电子主题ETF  鹏华基金  国证消费电子主题指数收益率×100%
+101  159155.SZ  大成中证电池主题ETF  大成基金  中证电池主题指数收益率×100%
+102  159156.SZ  万家国证新能源车电池ETF  万家基金  国证新能源车电池指数收益率×100%
+103  159157.SZ  天弘中证工业有色金属主题ETF  天弘基金  中证工业有色金属主题指数收益率×100%
+104  159158.SZ  景顺长城中证全指电力公用事业ETF  景顺长城基金  中证全指电力公用事业指数收益率×100%
+105  159159.SZ  国投瑞银中证全指公用事业ETF  国投瑞银基金  中证全指公用事业指数收益率×100%
+106  159160.SZ  东财中证电池主题ETF  东财基金  中证电池主题指数收益率×100%
+107  159162.SZ  鹏华中证工业有色金属主题ETF  鹏华基金  中证工业有色金属主题指数收益率×100%
+108  159163.SZ  泰康中证有色金属矿业主题ETF  泰康基金  中证有色金属矿业主题指数收益率×100%
+109  159165.SZ  永赢中证畜牧养殖产业ETF  永赢基金  中证畜牧养殖产业指数收益率×100%
+110  159166.SZ  长城国证自由现金流ETF  长城基金  国证自由现金流指数收益率×100%
+111  159167.SZ  工银瑞信中证港股通医疗主题ETF  工银瑞信基金  经汇率调整后的中证港股通医疗主题指数收益率×100%
+112  159168.SZ  富国中证工业有色金属主题ETF  富国基金  中证工业有色金属主题指数收益率×100%
+113  159169.SZ  广发恒生生物科技ETF  广发基金  恒生生物科技指数收益率(使用估值汇率折算)×100%
+114  159170.SZ  永赢国证港股通互联网ETF  永赢基金  国证港股通互联网指数收益率(按照估值汇率折算)×100%
+115  159171.SZ  博时中证工业有色金属主题ETF  博时基金  中证工业有色金属主题指数收益率×100%
+116  159172.SZ  汇添富中证畜牧养殖产业ETF  汇添富基金  中证畜牧养殖产业指数收益率×100%
+117  159173.SZ  南方中证全指农牧渔ETF  南方基金  中证全指农牧渔指数收益率×100%
+118  159175.SZ  易方达中证电池主题ETF  易方达基金  中证电池主题指数×100%
+119  159176.SZ  华宝中证全指家用电器ETF  华宝基金  中证全指家用电器指数收益率×100%
+120  159177.SZ  鹏华中证工程机械主题ETF  鹏华基金  中证工程机械主题指数收益率×100%
+121  159178.SZ  汇添富国证消费电子主题ETF  汇添富基金  国证消费电子主题指数收益率×100%
+122  159179.SZ  工银瑞信中证港股通互联网ETF  工银瑞信基金  经汇率调整后的中证港股通互联网指数收益率×100%
+123  159180.SZ  银华国证工业软件主题ETF  银华基金  国证工业软件主题指数收益率×100%
+124  159181.SZ  易方达国证石油天然气ETF  易方达基金  国证石油天然气指数收益率×100%
+125  159182.SZ  南方中证全指家用电器ETF  南方基金  中证全指家用电器指数收益率×100%
+126  159183.SZ  招商中证新能源汽车ETF  招商基金  中证新能源汽车指数收益率×100%
+127  159185.SZ  鹏华中证港股通信息技术综合ETF  鹏华基金  中证港股通信息技术综合指数(港元)收益率×100%
+128  159186.SZ  鹏华恒生港股通汽车主题ETF  鹏华基金  恒生港股通汽车主题指数(港元)收益率×100%
+129  159187.SZ  景顺长城创业板新能源ETF  景顺长城基金  创业板新能源指数收益率×100%
+130  159188.SZ  景顺长城标普中国A股红利100ETF  景顺长城基金  标普中国A股红利100指数收益率×100%
+131  159189.SZ  华夏国证石油天然气ETF  华夏基金  国证石油天然气指数收益率×100%
+132  159190.SZ  天弘创业板新能源ETF  天弘基金  创业板新能源指数收益率×100%
+133  159191.SZ  易方达国证港股通科技ETF  易方达基金  国证港股通科技指数收益率(使用估值汇率折算)×100%
+134  159192.SZ  汇添富中证家电龙头ETF  汇添富基金  中证家电龙头指数收益率×100%
+135  159193.SZ  银华国证新能源电池ETF  银华基金  国证新能源电池指数收益率×100%
+136  159195.SZ  华安国证石油天然气ETF  华安基金  国证石油天然气指数收益率×100%
+137  159196.SZ  易方达中证港股通信息技术综合ETF  易方达基金  中证港股通信息技术综合指数(港元)收益率×100%
+138  159197.SZ  招商国证石油天然气ETF  招商基金  国证石油天然气指数收益率×100%
+139  159198.SZ  富国中证港股通信息技术综合ETF  富国基金  中证港股通信息技术综合指数收益率×100%
+140  159199.SZ  平安国证石油天然气ETF  平安基金  国证石油天然气指数收益率×100%
+141  159200.SZ  富国中证AAA科技创新公司债ETF  富国基金  中证AAA科技创新公司债指数收益率×100%
+142  159201.SZ  华夏国证自由现金流ETF  华夏基金  国证自由现金流指数收益率×100%
+143  159202.SZ  万家恒生互联网科技业ETF(QDII)  万家基金  恒生互联网科技业指数收益率(经估值汇率调整)×100%
+144  159203.SZ  博时国证大盘成长ETF  博时基金  国证大盘成长指数收益率×100%
+145  159205.SZ  东财创业板ETF  东财基金  创业板指数收益率×100%
+146  159206.SZ  永赢国证商用卫星通信产业ETF  永赢基金  国证商用卫星通信产业指数收益率×100%
+147  159207.SZ  广发中证智选高股息策略ETF  广发基金  中证智选高股息策略指数收益率×100%
+148  159208.SZ  万家国证航天航空行业ETF  万家基金  国证航天航空行业指数收益率×100%
+149  159209.SZ  招商中证全指红利质量ETF  招商基金  中证全指红利质量指数收益率×100%
+150  159210.SZ  汇添富中证港股通汽车产业主题ETF  汇添富基金  中证港股通汽车产业主题指数收益率(经估值汇率调整后)×100%
+151  159211.SZ  富国深证100ETF  富国基金  深证100指数收益率×100%
+152  159212.SZ  南方深证100ETF  南方基金  深证100指数收益率×100%
+153  159213.SZ  汇添富中证机器人ETF  汇添富基金  中证机器人指数收益率×100%
+154  159215.SZ  平安中证A500ETF  平安基金  中证A500指数收益率×100%
+155  159216.SZ  大成深证100ETF  大成基金  深证100指数收益率×100%
+156  159217.SZ  工银瑞信国证港股通创新药ETF  工银瑞信基金  国证港股通创新药指数收益率(经汇率调整后)×100%
+157  159218.SZ  招商中证卫星产业ETF  招商基金  中证卫星产业指数收益率×100%
+158  159219.SZ  融通深证100ETF  融通基金  深证100指数收益率×100%
+159  159220.SZ  华宝标普港股通低波红利ETF  华宝基金  经人民币汇率调整的标普港股通低波红利指数收益率×100%
+160  159221.SZ  嘉实国证自由现金流ETF  嘉实基金  国证自由现金流指数收益率×100%
+161  159222.SZ  易方达国证自由现金流ETF  易方达基金  国证自由现金流指数收益率×100%
+162  159223.SZ  永赢国证自由现金流ETF  永赢基金  国证自由现金流指数收益率×100%
+163  159225.SZ  银华国证自由现金流ETF  银华基金  国证自由现金流指数收益率×100%
+164  159226.SZ  国泰中证A500增强策略ETF  国泰基金  中证A500指数收益率×100%
+165  159227.SZ  华夏国证航天航空行业ETF  华夏基金  国证航天航空行业指数收益率×100%
+166  159228.SZ  长城中证红利低波动100ETF  长城基金  中证红利低波动100指数收益率×100%
+167  159229.SZ  广发中证800自由现金流ETF  广发基金  中证800自由现金流指数收益率×100%
+168  159230.SZ  华夏国证通用航空产业ETF  华夏基金  国证通用航空产业指数收益率×100%
+169  159231.SZ  华宝国证通用航空产业ETF  华宝基金  国证通用航空产业指数收益率×100%
+170  159232.SZ  南方中证全指自由现金流ETF  南方基金  中证全指自由现金流指数收益率×100%
+171  159233.SZ  平安中证全指自由现金流ETF  平安基金  中证全指自由现金流指数收益率×100%
+172  159235.SZ  大成中证全指自由现金流ETF  大成基金  中证全指自由现金流指数收益率×100%
+173  159236.SZ  工银瑞信中证全指自由现金流ETF  工银瑞信基金  中证全指自由现金流指数收益率×100%
+174  159237.SZ  工银瑞信中证港股通汽车产业主题ETF  工银瑞信基金  经汇率调整后的中证港股通汽车产业主题指数收益率×100%
+175  159238.SZ  景顺长城沪深300增强策略ETF  景顺长城基金  沪深300指数收益率×100%
+176  159239.SZ  富国恒生港股通汽车主题ETF  富国基金  恒生港股通汽车主题指数收益率(使用估值汇率折算)×100%
+177  159240.SZ  天弘中证A500增强策略ETF  天弘基金  中证A500指数收益率×100%
+178  159241.SZ  天弘国证航天航空行业ETF  天弘基金  国证航天航空行业指数收益率×100%
+179  159242.SZ  大成创业板人工智能ETF  大成基金  创业板人工智能指数收益率×100%
+180  159243.SZ  招商创业板人工智能ETF  招商基金  创业板人工智能指数收益率×100%
+181  159245.SZ  富国国证港股通消费主题ETF  富国基金  国证港股通消费主题指数收益率(使用估值汇率折算)×100%
+182  159246.SZ  富国创业板人工智能ETF  富国基金  创业板人工智能指数收益率×100%
+183  159247.SZ  汇添富创业板ETF  汇添富基金  创业板指数收益率×100%
+184  159248.SZ  万家中证人工智能主题ETF  万家基金  中证人工智能主题指数收益率×100%
+185  159249.SZ  工银瑞信中证A500增强策略ETF  工银瑞信基金  中证A500指数收益率×100%
+186  159251.SZ  万家国证港股通科技ETF  万家基金  经汇率调整后的国证港股通科技指数收益率×100%
+187  159253.SZ  博时中证银行ETF  博时基金  中证银行指数收益率×100%
+188  159255.SZ  易方达国证通用航空产业ETF  易方达基金  国证通用航空产业指数收益率×100%
+189  159256.SZ  华夏创业板软件ETF  华夏基金  创业板软件指数收益率×100%
+190  159257.SZ  汇添富国证通用航空产业ETF  汇添富基金  国证通用航空产业指数收益率×100%
+191  159258.SZ  南方中证机器人ETF  南方基金  中证机器人指数收益率×100%
+192  159259.SZ  易方达国证成长100ETF  易方达基金  国证成长100指数收益率×100%
+193  159260.SZ  博时中证全指证券公司ETF  博时基金  中证全指证券公司指数收益率×100%
+194  159261.SZ  鹏华创业板新能源ETF  鹏华基金  创业板新能源指数收益率×100%
+195  159262.SZ  广发恒生港股通科技主题ETF  广发基金  恒生港股通科技主题指数×100%
+196  159263.SZ  易方达国证价值100ETF  易方达基金  国证价值100指数收益率×100%
+197  159265.SZ  鹏华国证港股通消费主题ETF  鹏华基金  国证港股通消费主题指数收益率(经汇率调整后)×100%
+198  159266.SZ  永赢中证港股通央企红利ETF  永赢基金  中证港股通央企红利指数收益率(按照估值汇率折算)×100%
+199  159267.SZ  华安国证航天航空行业ETF  华安基金  国证航天航空行业指数收益率×100%
+```
+
+**（二）基金行情数据：**
+
+**1. get_fund_daily - 获取基金日行情数据**
+
+**1.1. 方法名：get_fund_daily**
+
+**1.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式YYYYMMDD，eg:"20250101" | 必填 |
+| end_date | string | 结束日期(交易日期)，格式YYYYMMDD，eg:"20251231" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "159915.SZ" 或 \["159915.SZ", "510050.SH"\]，可传单个或列表，为空返回所有 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场，可传单个或多个交易所代码，如 "SZ" 或 \["SZ", "SH"\] | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集，自动补齐 symbol,date,exchange | 非必填 |
+
+**1.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 基金代码 |
+| date | string | 交易日期 |
+| exchange | string | 交易市场 |
+| pre_close | float | 昨收盘价 |
+| open | float | 开盘价 |
+| high | float | 最高价 |
+| low | float | 最低价 |
+| close | float | 收盘价 |
+| change | float | 涨跌额 |
+| change_rate | float | 涨跌幅 |
+| volume | float | 成交量 |
+| amount | float | 成交金额 |
+| discount | float | 贴水 |
+| discount_rate | float | 贴水率 |
+| cum_adj_factor | float | 累计复权因子 |
+| price_limit | float | 涨跌幅限制 |
+| limit_up | float | 涨停价 |
+| limit_down | float | 跌停价 |
+| actual_pre_close | float | 实际昨收盘价 |
+| shares | float | 基金总份额 |
+| exchange_shares | float | 场内份额 |
+| floating_shares | float | 流通份额 |
+| restricted_shares | float | 限售份额 |
+| notes | string | 备注 |
+
+**1.4. 使用示例**
+
+**1.4.1. 按基金代码查询一段区间的日行情**
+
+```python
+import panda_data
+result = panda_data.get_fund_daily(
+    symbol="510050.SH",
+    start_date="20250601",
+    end_date="20250630",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  exchange  pre_close  open  high  low  close  change  change_rate  volume  amount  discount  discount_rate  cum_adj_factor
+0  510050.SH  20250630  SH  2.795  2.795  2.809  2.787  2.807  0.012  0.0043  789373449  2.210765e+09  -0.0006  -0.000214  1.410444
+1  510050.SH  20250627  SH  2.826  2.829  2.839  2.792  2.795  -0.031  -0.0110  735136118  2.068150e+09  0.0010  0.000358  1.410444
+2  510050.SH  20250626  SH  2.832  2.830  2.834  2.822  2.826  -0.006  -0.0021  591542718  1.672621e+09  0.0005  0.000177  1.410444
+3  510050.SH  20250625  SH  2.792  2.794  2.834  2.788  2.832  0.040  0.0143  974126991  2.736403e+09  -0.0018  -0.000636  1.410444
+4  510050.SH  20250624  SH  2.762  2.762  2.810  2.761  2.792  0.030  0.0109  958847700  2.675962e+09  0.0009  0.000322  1.410444
+5  510050.SH  20250623  SH  2.749  2.743  2.771  2.733  2.762  0.013  0.0047  755015613  2.076109e+09  -0.0010  -0.000362  1.410444
+6  510050.SH  20250620  SH  2.733  2.735  2.755  2.734  2.749  0.016  0.0059  788226011  2.165197e+09  0.0003  0.000109  1.410444
+7  510050.SH  20250619  SH  2.750  2.746  2.748  2.727  2.733  -0.017  -0.0062  806218699  2.206083e+09  0.0015  0.000549  1.410444
+8  510050.SH  20250618  SH  2.753  2.752  2.760  2.739  2.750  -0.003  -0.0011  427677032  1.175527e+09  -0.0005  -0.000182  1.410444
+9  510050.SH  20250617  SH  2.753  2.752  2.756  2.740  2.753  0.000  0.0000  571268034  1.570752e+09  -0.0001  -0.000036  1.410444
+10  510050.SH  20250616  SH  2.746  2.737  2.757  2.735  2.753  0.007  0.0026  578828372  1.590303e+09  0.0011  0.000399  1.410444
+11  510050.SH  20250613  SH  2.760  2.755  2.760  2.736  2.746  -0.014  -0.0051  651201333  1.788407e+09  -0.0003  -0.000109  1.410444
+12  510050.SH  20250612  SH  2.762  2.758  2.766  2.741  2.760  -0.002  -0.0007  392650273  1.081966e+09  0.0002  0.000072  1.410444
+13  510050.SH  20250611  SH  2.742  2.742  2.776  2.741  2.762  0.020  0.0073  585072791  1.616634e+09  -0.0005  -0.000181  1.410444
+14  510050.SH  20250610  SH  2.756  2.758  2.767  2.735  2.742  -0.014  -0.0051  917943537  2.523181e+09  0.0020  0.000729  1.410444
+15  510050.SH  20250609  SH  2.756  2.758  2.767  2.747  2.756  0.000  0.0000  709788198  1.957559e+09  -0.0010  -0.000363  1.410444
+16  510050.SH  20250606  SH  2.754  2.758  2.768  2.751  2.756  0.002  0.0007  506736659  1.397082e+09  0.0005  0.000181  1.410444
+17  510050.SH  20250605  SH  2.755  2.760  2.761  2.745  2.754  -0.001  -0.0004  416479500  1.146638e+09  0.0024  0.000871  1.410444
+18  510050.SH  20250604  SH  2.748  2.751  2.764  2.748  2.755  0.007  0.0026  318023306  8.767604e+08  -0.0005  -0.000182  1.410444
+19  510050.SH  20250603  SH  2.749  2.740  2.761  2.734  2.748  -0.001  -0.0004  501260254  1.377558e+09  0.0029  0.001054  1.410444
+```
+
+**1.4.2. 查询基金日行情，只取收盘价与涨跌停价**
+
+```python
+import panda_data
+result = panda_data.get_fund_daily(
+    symbol=["159915.SZ", "510050.SH"],
+    start_date="20250610",
+    end_date="20250613",
+    fields=["close", "limit_up", "limit_down"],
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  close
+0  159915.SZ  20250613  2.020
+1  159915.SZ  20250612  2.040
+2  159915.SZ  20250611  2.038
+3  159915.SZ  20250610  2.012
+4  510050.SH  20250613  2.746
+5  510050.SH  20250612  2.760
+6  510050.SH  20250611  2.762
+7  510050.SH  20250610  2.742
+```
+
+**2. get_fund_daily_post - 获取基金后复权日行情数据**
+
+**2.1. 方法名：get_fund_daily_post**
+
+**2.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式YYYYMMDD，eg:"20250101" | 必填 |
+| end_date | string | 结束日期(交易日期)，格式YYYYMMDD，eg:"20251231" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "159915.SZ" 或 \["159915.SZ", "510050.SH"\]，可传单个或列表，为空返回所有 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场，可传单个或多个交易所代码，如 "SZ" 或 \["SZ", "SH"\] | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集，自动补齐 symbol,date | 非必填 |
+
+**2.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 基金代码 |
+| date | string | 交易日期 |
+| exchange | string | 交易市场 |
+| pre_close | float | 昨收盘价(后复权) |
+| open | float | 开盘价(后复权) |
+| high | float | 最高价(后复权) |
+| low | float | 最低价(后复权) |
+| close | float | 收盘价(后复权) |
+| volume | float | 成交量 |
+| amount | float | 成交金额 |
+
+**2.4. 使用示例**
+
+**2.4.1. 按基金代码查询一段区间的后复权日行情**
+
+```python
+import panda_data
+result = panda_data.get_fund_daily_post(
+    symbol="510050.SH",
+    start_date="20250601",
+    end_date="20250630",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  amount  close  exchange  high  low  open  pre_close  volume
+0  510050.SH  20250603  1.377558e+09  3.8759  SH  3.8942  3.8562  3.8646  3.8773  501260254
+1  510050.SH  20250604  8.767604e+08  3.8858  SH  3.8985  3.8759  3.8801  3.8759  318023306
+2  510050.SH  20250605  1.146638e+09  3.8844  SH  3.8942  3.8717  3.8928  3.8858  416479500
+3  510050.SH  20250606  1.397082e+09  3.8872  SH  3.9041  3.8801  3.8900  3.8844  506736659
+4  510050.SH  20250609  1.957559e+09  3.8872  SH  3.9027  3.8745  3.8900  3.8872  709788198
+5  510050.SH  20250610  2.523181e+09  3.8674  SH  3.9027  3.8576  3.8900  3.8872  917943537
+6  510050.SH  20250611  1.616634e+09  3.8956  SH  3.9154  3.8660  3.8674  3.8674  585072791
+7  510050.SH  20250612  1.081966e+09  3.8928  SH  3.9013  3.8660  3.8900  3.8956  392650273
+8  510050.SH  20250613  1.788407e+09  3.8731  SH  3.8928  3.8590  3.8858  3.8928  651201333
+9  510050.SH  20250616  1.590303e+09  3.8830  SH  3.8886  3.8576  3.8604  3.8731  578828372
+10  510050.SH  20250617  1.570752e+09  3.8830  SH  3.8872  3.8646  3.8815  3.8830  571268034
+11  510050.SH  20250618  1.175527e+09  3.8787  SH  3.8928  3.8632  3.8815  3.8830  427677032
+12  510050.SH  20250619  2.206083e+09  3.8547  SH  3.8759  3.8463  3.8731  3.8787  806218699
+13  510050.SH  20250620  2.165197e+09  3.8773  SH  3.8858  3.8562  3.8576  3.8547  788226011
+14  510050.SH  20250623  2.076109e+09  3.8956  SH  3.9083  3.8547  3.8688  3.8773  755015613
+15  510050.SH  20250624  2.675962e+09  3.9380  SH  3.9633  3.8942  3.8956  3.8956  958847700
+16  510050.SH  20250625  2.736403e+09  3.9944  SH  3.9972  3.9323  3.9408  3.9380  974126991
+17  510050.SH  20250626  1.672621e+09  3.9859  SH  3.9972  3.9803  3.9916  3.9944  591542718
+18  510050.SH  20250627  2.068150e+09  3.9422  SH  4.0043  3.9380  3.9901  3.9859  735136118
+19  510050.SH  20250630  2.210765e+09  3.9591  SH  3.9619  3.9309  3.9422  3.9422  789373449
+```
+
+**2.4.2. 查询后复权行情，只取收盘价**
+
+```python
+import panda_data
+result = panda_data.get_fund_daily_post(
+    symbol="159915.SZ",
+    start_date="20250101",
+    end_date="20250630",
+    fields=["close"],
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  close
+0  159915.SZ  20250102  2.019
+1  159915.SZ  20250103  1.978
+2  159915.SZ  20250106  1.976
+3  159915.SZ  20250107  1.990
+4  159915.SZ  20250108  1.968
+5  159915.SZ  20250109  1.971
+6  159915.SZ  20250110  1.938
+7  159915.SZ  20250113  1.942
+8  159915.SZ  20250114  2.036
+9  159915.SZ  20250115  1.999
+10  159915.SZ  20250116  2.010
+11  159915.SZ  20250117  2.026
+12  159915.SZ  20250120  2.062
+13  159915.SZ  20250121  2.070
+14  159915.SZ  20250122  2.059
+15  159915.SZ  20250123  2.052
+16  159915.SZ  20250124  2.084
+17  159915.SZ  20250127  2.028
+18  159915.SZ  20250205  2.024
+19  159915.SZ  20250206  2.080
+20  159915.SZ  20250207  2.131
+21  159915.SZ  20250210  2.142
+22  159915.SZ  20250211  2.113
+23  159915.SZ  20250212  2.150
+24  159915.SZ  20250213  2.135
+25  159915.SZ  20250214  2.174
+26  159915.SZ  20250217  2.182
+27  159915.SZ  20250218  2.140
+28  159915.SZ  20250219  2.185
+29  159915.SZ  20250220  2.184
+30  159915.SZ  20250221  2.239
+31  159915.SZ  20250224  2.221
+32  159915.SZ  20250225  2.197
+33  159915.SZ  20250226  2.223
+34  159915.SZ  20250227  2.212
+35  159915.SZ  20250228  2.128
+36  159915.SZ  20250303  2.154
+37  159915.SZ  20250304  2.149
+38  159915.SZ  20250305  2.149
+39  159915.SZ  20250306  2.191
+40  159915.SZ  20250307  2.160
+41  159915.SZ  20250310  2.159
+42  159915.SZ  20250311  2.159
+43  159915.SZ  20250312  2.149
+44  159915.SZ  20250313  2.125
+45  159915.SZ  20250314  2.186
+46  159915.SZ  20250317  2.173
+47  159915.SZ  20250318  2.185
+48  159915.SZ  20250319  2.178
+49  159915.SZ  20250320  2.158
+50  159915.SZ  20250321  2.112
+51  159915.SZ  20250324  2.112
+52  159915.SZ  20250325  2.105
+53  159915.SZ  20250326  2.098
+54  159915.SZ  20250327  2.103
+55  159915.SZ  20250328  2.089
+56  159915.SZ  20250331  2.064
+57  159915.SZ  20250401  2.062
+58  159915.SZ  20250402  2.064
+59  159915.SZ  20250403  2.027
+60  159915.SZ  20250407  1.775
+61  159915.SZ  20250408  1.804
+62  159915.SZ  20250409  1.823
+63  159915.SZ  20250410  1.863
+64  159915.SZ  20250411  1.892
+65  159915.SZ  20250414  1.895
+66  159915.SZ  20250415  1.893
+67  159915.SZ  20250416  1.870
+68  159915.SZ  20250417  1.873
+69  159915.SZ  20250418  1.878
+70  159915.SZ  20250421  1.908
+71  159915.SZ  20250422  1.899
+72  159915.SZ  20250423  1.919
+73  159915.SZ  20250424  1.907
+74  159915.SZ  20250425  1.920
+75  159915.SZ  20250428  1.906
+76  159915.SZ  20250429  1.903
+77  159915.SZ  20250430  1.921
+78  159915.SZ  20250506  1.958
+79  159915.SZ  20250507  1.967
+80  159915.SZ  20250508  2.001
+81  159915.SZ  20250509  1.984
+82  159915.SZ  20250512  2.037
+83  159915.SZ  20250513  2.030
+84  159915.SZ  20250514  2.054
+85  159915.SZ  20250515  2.012
+86  159915.SZ  20250516  2.008
+87  159915.SZ  20250519  2.002
+88  159915.SZ  20250520  2.018
+89  159915.SZ  20250521  2.034
+90  159915.SZ  20250522  2.016
+91  159915.SZ  20250523  1.994
+92  159915.SZ  20250526  1.977
+93  159915.SZ  20250527  1.967
+94  159915.SZ  20250528  1.959
+95  159915.SZ  20250529  1.989
+96  159915.SZ  20250530  1.972
+97  159915.SZ  20250603  1.977
+98  159915.SZ  20250604  2.000
+99  159915.SZ  20250605  2.023
+100  159915.SZ  20250606  2.017
+101  159915.SZ  20250609  2.034
+102  159915.SZ  20250610  2.012
+103  159915.SZ  20250611  2.038
+104  159915.SZ  20250612  2.040
+105  159915.SZ  20250613  2.020
+106  159915.SZ  20250616  2.037
+107  159915.SZ  20250617  2.028
+108  159915.SZ  20250618  2.034
+109  159915.SZ  20250619  2.005
+110  159915.SZ  20250620  1.988
+111  159915.SZ  20250623  1.998
+112  159915.SZ  20250624  2.044
+113  159915.SZ  20250625  2.109
+114  159915.SZ  20250626  2.093
+115  159915.SZ  20250627  2.101
+116  159915.SZ  20250630  2.133
+```
+
+**3. get_fund_daily_pre - 获取基金前复权日行情数据**
+
+**3.1. 方法名：get_fund_daily_pre**
+
+**3.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式YYYYMMDD，eg:"20250101" | 必填 |
+| end_date | string | 结束日期(交易日期)，格式YYYYMMDD，eg:"20251231" | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "159915.SZ" 或 \["159915.SZ", "510050.SH"\]，可传单个或列表，为空返回所有 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场，可传单个或多个交易所代码，如 "SZ" 或 \["SZ", "SH"\] | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集，自动补齐 symbol,date | 非必填 |
+
+**3.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 基金代码 |
+| date | string | 交易日期 |
+| exchange | string | 交易市场 |
+| pre_close | float | 昨收盘价(前复权) |
+| open | float | 开盘价(前复权) |
+| high | float | 最高价(前复权) |
+| low | float | 最低价(前复权) |
+| close | float | 收盘价(前复权) |
+| volume | float | 成交量 |
+| amount | float | 成交金额 |
+
+**3.4. 使用示例**
+
+**3.4.1. 按基金代码查询一段区间的前复权日行情**
+
+```python
+import panda_data
+result = panda_data.get_fund_daily_pre(
+    symbol="510050.SH",
+    start_date="20250601",
+    end_date="20250630",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  amount  close  exchange  high  low  open  pre_close  volume
+0  510050.SH  20250603  1.377558e+09  2.6772  SH  2.6898  2.6635  2.6694  2.6781  501260254
+1  510050.SH  20250604  8.767604e+08  2.6840  SH  2.6927  2.6772  2.6801  2.6772  318023306
+2  510050.SH  20250605  1.146638e+09  2.6830  SH  2.6898  2.6742  2.6888  2.6840  416479500
+3  510050.SH  20250606  1.397082e+09  2.6849  SH  2.6966  2.6801  2.6869  2.6830  506736659
+4  510050.SH  20250609  1.957559e+09  2.6849  SH  2.6957  2.6762  2.6869  2.6849  709788198
+5  510050.SH  20250610  2.523181e+09  2.6713  SH  2.6957  2.6645  2.6869  2.6849  917943537
+6  510050.SH  20250611  1.616634e+09  2.6908  SH  2.7044  2.6703  2.6713  2.6713  585072791
+7  510050.SH  20250612  1.081966e+09  2.6888  SH  2.6947  2.6703  2.6869  2.6908  392650273
+8  510050.SH  20250613  1.788407e+09  2.6752  SH  2.6888  2.6655  2.6840  2.6888  651201333
+9  510050.SH  20250616  1.590303e+09  2.6820  SH  2.6859  2.6645  2.6664  2.6752  578828372
+10  510050.SH  20250617  1.570752e+09  2.6820  SH  2.6849  2.6694  2.6810  2.6820  571268034
+11  510050.SH  20250618  1.175527e+09  2.6791  SH  2.6888  2.6684  2.6810  2.6820  427677032
+12  510050.SH  20250619  2.206083e+09  2.6625  SH  2.6772  2.6567  2.6752  2.6791  806218699
+13  510050.SH  20250620  2.165197e+09  2.6781  SH  2.6840  2.6635  2.6645  2.6625  788226011
+14  510050.SH  20250623  2.076109e+09  2.6908  SH  2.6996  2.6625  2.6723  2.6781  755015613
+15  510050.SH  20250624  2.675962e+09  2.7200  SH  2.7376  2.6898  2.6908  2.6908  958847700
+16  510050.SH  20250625  2.736403e+09  2.7590  SH  2.7609  2.7161  2.7220  2.7200  974126991
+17  510050.SH  20250626  1.672621e+09  2.7531  SH  2.7609  2.7492  2.7570  2.7590  591542718
+18  510050.SH  20250627  2.068150e+09  2.7229  SH  2.7658  2.7200  2.7561  2.7531  735136118
+19  510050.SH  20250630  2.210765e+09  2.7346  SH  2.7366  2.7151  2.7229  2.7229  789373449
+```
+
+**3.4.2. 查询前复权行情，只取收盘价**
+
+```python
+import panda_data
+result = panda_data.get_fund_daily_pre(
+    symbol="159915.SZ",
+    start_date="20250101",
+    end_date="20250630",
+    fields=["close"],
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  close
+0  159915.SZ  20250102  2.019
+1  159915.SZ  20250103  1.978
+2  159915.SZ  20250106  1.976
+3  159915.SZ  20250107  1.990
+4  159915.SZ  20250108  1.968
+5  159915.SZ  20250109  1.971
+6  159915.SZ  20250110  1.938
+7  159915.SZ  20250113  1.942
+8  159915.SZ  20250114  2.036
+9  159915.SZ  20250115  1.999
+10  159915.SZ  20250116  2.010
+11  159915.SZ  20250117  2.026
+12  159915.SZ  20250120  2.062
+13  159915.SZ  20250121  2.070
+14  159915.SZ  20250122  2.059
+15  159915.SZ  20250123  2.052
+16  159915.SZ  20250124  2.084
+17  159915.SZ  20250127  2.028
+18  159915.SZ  20250205  2.024
+19  159915.SZ  20250206  2.080
+20  159915.SZ  20250207  2.131
+21  159915.SZ  20250210  2.142
+22  159915.SZ  20250211  2.113
+23  159915.SZ  20250212  2.150
+24  159915.SZ  20250213  2.135
+25  159915.SZ  20250214  2.174
+26  159915.SZ  20250217  2.182
+27  159915.SZ  20250218  2.140
+28  159915.SZ  20250219  2.185
+29  159915.SZ  20250220  2.184
+30  159915.SZ  20250221  2.239
+31  159915.SZ  20250224  2.221
+32  159915.SZ  20250225  2.197
+33  159915.SZ  20250226  2.223
+34  159915.SZ  20250227  2.212
+35  159915.SZ  20250228  2.128
+36  159915.SZ  20250303  2.154
+37  159915.SZ  20250304  2.149
+38  159915.SZ  20250305  2.149
+39  159915.SZ  20250306  2.191
+40  159915.SZ  20250307  2.160
+41  159915.SZ  20250310  2.159
+42  159915.SZ  20250311  2.159
+43  159915.SZ  20250312  2.149
+44  159915.SZ  20250313  2.125
+45  159915.SZ  20250314  2.186
+46  159915.SZ  20250317  2.173
+47  159915.SZ  20250318  2.185
+48  159915.SZ  20250319  2.178
+49  159915.SZ  20250320  2.158
+50  159915.SZ  20250321  2.112
+51  159915.SZ  20250324  2.112
+52  159915.SZ  20250325  2.105
+53  159915.SZ  20250326  2.098
+54  159915.SZ  20250327  2.103
+55  159915.SZ  20250328  2.089
+56  159915.SZ  20250331  2.064
+57  159915.SZ  20250401  2.062
+58  159915.SZ  20250402  2.064
+59  159915.SZ  20250403  2.027
+60  159915.SZ  20250407  1.775
+61  159915.SZ  20250408  1.804
+62  159915.SZ  20250409  1.823
+63  159915.SZ  20250410  1.863
+64  159915.SZ  20250411  1.892
+65  159915.SZ  20250414  1.895
+66  159915.SZ  20250415  1.893
+67  159915.SZ  20250416  1.870
+68  159915.SZ  20250417  1.873
+69  159915.SZ  20250418  1.878
+70  159915.SZ  20250421  1.908
+71  159915.SZ  20250422  1.899
+72  159915.SZ  20250423  1.919
+73  159915.SZ  20250424  1.907
+74  159915.SZ  20250425  1.920
+75  159915.SZ  20250428  1.906
+76  159915.SZ  20250429  1.903
+77  159915.SZ  20250430  1.921
+78  159915.SZ  20250506  1.958
+79  159915.SZ  20250507  1.967
+80  159915.SZ  20250508  2.001
+81  159915.SZ  20250509  1.984
+82  159915.SZ  20250512  2.037
+83  159915.SZ  20250513  2.030
+84  159915.SZ  20250514  2.054
+85  159915.SZ  20250515  2.012
+86  159915.SZ  20250516  2.008
+87  159915.SZ  20250519  2.002
+88  159915.SZ  20250520  2.018
+89  159915.SZ  20250521  2.034
+90  159915.SZ  20250522  2.016
+91  159915.SZ  20250523  1.994
+92  159915.SZ  20250526  1.977
+93  159915.SZ  20250527  1.967
+94  159915.SZ  20250528  1.959
+95  159915.SZ  20250529  1.989
+96  159915.SZ  20250530  1.972
+97  159915.SZ  20250603  1.977
+98  159915.SZ  20250604  2.000
+99  159915.SZ  20250605  2.023
+100  159915.SZ  20250606  2.017
+101  159915.SZ  20250609  2.034
+102  159915.SZ  20250610  2.012
+103  159915.SZ  20250611  2.038
+104  159915.SZ  20250612  2.040
+105  159915.SZ  20250613  2.020
+106  159915.SZ  20250616  2.037
+107  159915.SZ  20250617  2.028
+108  159915.SZ  20250618  2.034
+109  159915.SZ  20250619  2.005
+110  159915.SZ  20250620  1.988
+111  159915.SZ  20250623  1.998
+112  159915.SZ  20250624  2.044
+113  159915.SZ  20250625  2.109
+114  159915.SZ  20250626  2.093
+115  159915.SZ  20250627  2.101
+116  159915.SZ  20250630  2.133
+```
+
+**（三）ETF数据：**
+
+**1. get_fund_etf_cr_limits - 获取ETF申赎限制数据**
+
+**1.1. 方法名：get_fund_etf_cr_limits**
+
+**1.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(交易日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**1.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 交易代码 |
+| date | string | 交易日期 |
+| exchange | string | 交易市场 |
+| nav | float | 基金份额净值 |
+| min_cr_unit | integer | 最小申赎单位 |
+| purchase_limit | integer | 申购上限 |
+| redemption_limit | integer | 赎回上限 |
+| net_purchase_limit | integer | 净申购上限 |
+| net_redemption_limit | integer | 净赎回上限 |
+| account_net_purchase | integer | 单账户净申购上限 |
+| account_net_redemption | integer | 单账户净赎回上限 |
+| account_purchase_limit | integer | 单账户申购上限 |
+| account_redemption_limit | integer | 单账户赎回上限 |
+
+**1.4. 使用示例**
+
+**1.4.1. 获取一段时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_fund_etf_cr_limits(
+    start_date='20250501',
+    end_date="20250508"
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  exchange  min_cr_unit  nav  purchase_limit  redemption_limit  account_net_purchase  account_net_redemption  account_purchase_limit  account_redemption_limit  net_purchase_limit  net_redemption_limit
+0  159001.SZ  20250506  SZ  1  100.0  None  None  5000000.0  None  None  None  15000000.0  2000000.0
+1  159003.SZ  20250506  SZ  1  100.0  None  None  3000000.0  None  None  None  3000000.0  50000.0
+2  159005.SZ  20250506  SZ  1  100.0  2000000.0  2000000.0  200000.0  2000000.0  2000000.0  2000000.0  2000000.0  50000.0
+3  159150.SZ  20250506  SZ  1000000  1.1158  None  30000000.0  None  None  None  None  None  None
+4  159201.SZ  20250506  SZ  1000000  0.9561  None  500000000.0  None  None  None  None  None  None
+5  159202.SZ  20250506  SZ  1000000  1.0042  500000000.0  50000000.0  None  None  None  None  None  None
+6  159206.SZ  20250506  SZ  1000000  0.8777  None  15000000.0  None  None  None  None  None  None
+7  159207.SZ  20250506  SZ  500000  0.9958  None  110000000.0  None  None  None  None  None  None
+8  159209.SZ  20250506  SZ  1000000  0.9646  None  100000000.0  None  None  None  None  None  None
+9  159211.SZ  20250506  SZ  2000000  1.0159  None  6000000.0  None  None  None  None  None  None
+10  159212.SZ  20250506  SZ  2000000  1.0178  None  44000000.0  None  None  None  None  None  None
+11  159213.SZ  20250506  SZ  1500000  1.0355  None  30000000.0  None  None  None  None  None  None
+12  159215.SZ  20250506  SZ  3000000  0.9704  None  300000000.0  None  300000000.0  None  300000000.0  None  300000000.0
+13  159216.SZ  20250506  SZ  1500000  1.0439  None  15000000.0  None  None  None  None  None  None
+14  159217.SZ  20250506  SZ  1000000  1.0159  None  126000000.0  None  None  None  None  None  None
+15  159222.SZ  20250506  SZ  1000000  1.0125  None  100000000.0  None  None  None  None  None  None
+16  159225.SZ  20250506  SZ  1000000  1.0124  None  20000000.0  None  None  None  None  None  None
+17  159231.SZ  20250506  SZ  500000  0.9956  None  30000000.0  None  None  None  None  None  None
+18  159232.SZ  20250506  SZ  2000000  0.9899  None  900000000.0  None  None  None  None  None  None
+19  159235.SZ  20250506  SZ  1000000  0.9905  None  300000000.0  None  None  None  None  None  None
+```
+
+**2. get_fund_etf_cr_net - 获取ETF净申赎数据**
+
+**2.1. 方法名：get_fund_etf_cr_net**
+
+**2.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(交易日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**2.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 交易代码 |
+| exchange | string | 交易市场 |
+| date | string | 交易日期 |
+| shares | float | 份额 |
+| shares_change | float | 份额变动 |
+| size | float | 规模 |
+| size_change | float | 规模变动 |
+| net_redemption | float | 净申赎 |
+| unit_nav | float | 单位净值 |
+| reference_net | float | 参考净值 |
+| close | float | 收盘价 |
+| vwap | float | 成交均价 |
+| market_cap | float | 市值 |
+| net_inflow | float | 资金净流入 |
+| net_inflow_avg | float | 资金净流入(成交均价) |
+| split_rate | float | 拆分折算比例 |
+| currency_symbol | string | 货币种类 |
+| notes | string | 备注 |
+
+**2.4. 使用示例**
+
+**2.4.1. 获取一段时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_fund_etf_cr_net(
+    start_date='20250501',
+    end_date="20250508"
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  exchange  close  currency_symbol  market_cap  net_inflow  net_inflow_avg  net_redemption  notes  shares  shares_change  size  size_change  split_rate  unit_nav  vwap  name  reference_net
+0  159001.SZ  20250506  SZ  100.0  CNY  1446832700.0  None -100242638.0818  -1002430.0  None  14468327  -1002430.0  None  None  None  None  99.9996  None  None
+1  159003.SZ  20250506  SZ  99.999  CNY  267759822.375  None  -4500054.6749  -45001.0  None  2677625  -45001.0  None  None  None  None  99.999  None  None
+2  159005.SZ  20250506  SZ  99.999  CNY  98505914.931  None  -3190990.9995  -31910.0  None  985069  -31910.0  None  None  None  None  99.9997  None  None
+3  159150.SZ  20250506  SZ  1.129  CNY  200959316.367  1130100.0  1126750.6127  1000000.0  None  177997623  1000000.0  201155113.7523  3661166.0089  None  1.1301  1.1268  易方达深证50ETF  1.1304
+4  159201.SZ  20250506  SZ  0.968  CNY  3266299108.952 -27101200.0  -26964568.9047  -28000000.0  None  3374275939  -28000000.0  3265961681.3581  13045656.0802  None  0.9679  0.963  华夏国证自由现金流ETF  0.9677
+5  159202.SZ  20250506  SZ  1.042  CNY  110870779.8  -7289800.0  -7233912.336  -7000000.0  None  106401900  -7000000.0  110806938.66  -3071249.32  None  1.0414  1.0334  万家恒生互联网科技业ETF(QDII)  1.0496
+6  159206.SZ  20250506  SZ  0.905  CNY  119417795.325  -2715900.0  -2692009.4934  -3000000.0  None  131953365  -3000000.0  119457381.3345  1008812.874  None  0.9053  0.8973  永赢国证商用卫星通信产业ETF  0.9052
+7  159207.SZ  20250506  SZ  1.0  CNY  316483345.0  -1002600.0  -997820.3774  -1000000.0  None  316483345  -1000000.0  317306201.697  1156286.746  None  1.0026  0.9978  广发中证智选高股息策略ETF  1.0024
+8  159209.SZ  20250506  SZ  0.971  CNY  247250636.463  0.0  0.0  0.0  None  254635053  0.0  246919610.8941  1298638.7703  None  0.9697  0.9674  招商中证全指红利质量ETF  0.9702
+9  159211.SZ  20250506  SZ  1.028  CNY  34626426.232  -4116800.0  -4099124.2753  -4000000.0  None  33683294  -4000000.0  34666846.1848  -3615612.1898  None  1.0292  1.0248  富国深证100ETF  1.03
+10  159212.SZ  20250506  SZ  1.031  CNY  135271702.377  -8252800.0  -8230678.7403  -8000000.0  None  131204367  -8000000.0  135350424.9972  -6331779.7354  None  1.0316  1.0288  南方深证100ETF  1.0318
+11  159213.SZ  20250506  SZ  1.056  CNY  181882869.696 -31809000.0  -31379271.8124  -30000000.0  None  172237566  -30000000.0  182623491.2298 -26793508.3632  None  1.0603  1.046  汇添富中证机器人ETF  1.0606
+12  159215.SZ  20250506  SZ  0.982  CNY  1686666312.546 -11796000.0  -11756482.8404  -12000000.0  None  1717582803  -12000000.0  1688383895.349  9996743.3178  None  0.983  0.9797  平安中证A500ETF  0.9834
+13  159216.SZ  20250506  SZ  1.056  CNY  43346952.0  0.0  0.0  0.0  None  41048250  0.0  43412629.2  562361.025  None  1.0576  1.0549  大成深证100ETF  1.0585
+14  159217.SZ  20250506  SZ  1.023  CNY  2790905220.708  9165600.0  9261309.8352  9000000.0  None  2728157596  9000000.0  2778355695.7664  15963493.99  None  1.0184  1.029  工银瑞信国证港股通创新药ETF  1.0249
+15  159222.SZ  20250506  SZ  1.024  CNY  621947291.648 -12298800.0  -12239370.3686  -12000000.0  None  607370402  -12000000.0  622493925.0098  -4618607.0152  None  1.0249  1.0199  易方达国证自由现金流ETF  1.0247
+16  159225.SZ  20250506  SZ  1.024  CNY  118522679.296 -19467400.0  -19368604.8129  -19000000.0  None  115744804  -19000000.0  118592126.1784 -17823513.3912  None  1.0246  1.0194  银华国证自由现金流ETF  1.0246
+17  159231.SZ  20250506  SZ  1.016  CNY  141778664.88 -30104750.0  -29766598.3684  -29500000.0  None  139545930  -29500000.0  142406621.565  -25895506.343  None  1.0205  1.009  华宝国证通用航空产业ETF  1.0207
+18  159232.SZ  20250506  SZ  0.995  CNY  1712343823.17 -39864000.0  -39688093.8668  -40000000.0  None  1720948566  -40000000.0  1715097340.8756 -28065644.6078  None  0.9966  0.9922  南方中证全指自由现金流ETF  0.9965
+19  159235.SZ  20250506  SZ  0.995  CNY  961895897.275 -51844000.0  -51616191.1012  -52000000.0  None  966729545  -52000000.0  963829356.365 -45222257.9575  None  0.997  0.9926  大成中证全指自由现金流ETF  0.9971
+```
+
+**3. get_fund_etf_constituents - 获取ETF基金申赎清单成分券信息**
+
+**3.1. 方法名：get_fund_etf_constituents**
+
+**3.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(交易日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**3.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 交易代码 |
+| name | string | 基金简称 |
+| exchange | string | 证券市场 |
+| date | string | 交易日期 |
+| stock_symbol | string | 成分股代码 |
+| quantity | integer | 股票数量(股) |
+| cash_substitution_flag | integer | 现金替代标志(1:允许，2:必须，3:禁止，4:退补) |
+| cash_premium_rate | float | 现金替代溢价比例(%) |
+| cash_discount_rate | float | 现金替代折价比例 |
+| fixed_substitution_amount | float | 固定替代金额(元) |
+| redemption_cash_amount | float | 赎回替代金额 |
+
+**3.4. 使用示例**
+
+**3.4.1. 获取一段时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_fund_etf_constituents(
+    start_date='20250501',
+    end_date="20250508"
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  cash_discount_rate  cash_premium_rate  cash_substitution_flag  exchange  fixed_substitution_amount  name  quantity  redemption_cash_amount  stock_symbol
+0  159001.SZ  20250506  None  None  2  SZ  100.0  易方达保证金收益货币ETF-A  0.0  None  159900
+1  159001.SZ  20250507  None  None  2  SZ  100.0  易方达保证金收益货币ETF-A  0.0  None  159900
+2  159001.SZ  20250508  None  None  2  SZ  100.0  易方达保证金收益货币ETF-A  0.0  None  159900
+3  159003.SZ  20250506  None  None  2  SZ  100.0  招商保证金快线货币ETF-A  None  None  159900
+4  159003.SZ  20250507  None  None  2  SZ  100.0  招商保证金快线货币ETF-A  None  None  159900
+5  159003.SZ  20250508  None  None  2  SZ  100.0  招商保证金快线货币ETF-A  None  None  159900
+6  159005.SZ  20250506  None  None  2  SZ  100.0  汇添富收益快钱货币ETF-A  0.0  None  159900
+7  159005.SZ  20250507  None  None  2  SZ  100.0  汇添富收益快钱货币ETF-A  0.0  None  159900
+8  159005.SZ  20250508  None  None  2  SZ  100.0  汇添富收益快钱货币ETF-A  0.0  None  159900
+9  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  1700.0  None  000002.SZ
+10  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  800.0  None  000063.SZ
+11  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  4700.0  None  000100.SZ
+12  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  1300.0  None  000333.SZ
+13  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  200.0  None  000538.SZ
+14  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  200.0  None  000568.SZ
+15  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  1100.0  None  000625.SZ
+16  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  1100.0  None  000651.SZ
+17  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  8500.0  None  000725.SZ
+18  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  300.0  None  000768.SZ
+19  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  200.0  None  000786.SZ
+```
+
+**4. get_fund_etf_cr - 获取ETF基金申赎清单数据**
+
+**4.1. 方法名：get_fund_etf_cr**
+
+**4.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(交易日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**4.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 交易代码 |
+| name | string | 基金简称 |
+| date | string | 交易日期 |
+| exchange | string | 交易市场 |
+| index_symbol | string | 指数代码 |
+| index_name | string | 指数简称 |
+| cash_component | float | 现金差额(元) |
+| estimated_cash_component | float | 预估现金差额(元) |
+| cash_substitution_rate | float | 现金替代比例上限(%) |
+| unit | integer | 最小申赎单位(份) |
+| creation_unit | float | 最小申赎单位资产净值(元) |
+| unit_nav | float | 单位净值 |
+| publish_iopv_flag | integer | 是否需要公布IOPV(1:是，0:否) |
+| purchase_allowed_flag | integer | 是否允许申购(1:是，0:否) |
+| redemption_allowed_flag | integer | 是否允许赎回(1:是，0:否) |
+
+**4.4. 使用示例**
+
+**4.4.1. 获取一段时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_fund_etf_cr(
+    start_date='20230101',
+    end_date='20231231',
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  cash_component  cash_substitution_rate  creation_unit  estimated_cash_component  exchange  index_name  index_symbol  name  publish_iopv_flag  purchase_allowed_flag  redemption_allowed_flag  unit  unit_nav
+0  159001.SZ  20230103  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+1  159001.SZ  20230104  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+2  159001.SZ  20230105  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+3  159001.SZ  20230106  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+4  159001.SZ  20230109  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+5  159001.SZ  20230110  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+6  159001.SZ  20230111  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+7  159001.SZ  20230112  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+8  159001.SZ  20230113  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+9  159001.SZ  20230116  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+10  159001.SZ  20230117  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+11  159001.SZ  20230118  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+12  159001.SZ  20230119  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+13  159001.SZ  20230120  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+14  159001.SZ  20230130  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+15  159001.SZ  20230131  0.0  100  100.0  0.0  SZ  None  None  易方达保证金收益货币ETF-A  0  1  1  1  None
+16  159003.SZ  20230103  0.0  100  100.0  0.0  SZ  None  None  招商保证金快线货币ETF-A  0  1  1  1  None
+17  159003.SZ  20230104  0.0  100  100.0  0.0  SZ  None  None  招商保证金快线货币ETF-A  0  1  1  1  None
+18  159003.SZ  20230105  0.0  100  100.0  0.0  SZ  None  None  招商保证金快线货币ETF-A  0  1  1  1  None
+19  159003.SZ  20230106  0.0  100  100.0  0.0  SZ  None  None  招商保证金快线货币ETF-A  0  1  1  1  None
+```
+
+**九. 优先股数据**
+
+**（一）优先股数据：**
+
+**1. get_stock_preferred_dividend - 获取优先股分红**
+
+**1.1. 方法名：get_stock_preferred_dividend**
+
+**1.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(最新公告日)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(最新公告日)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 优先股代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| procedure | Optional[Union[string, List[string]]] | 事件进程(1:董事会通过;2:股东大会通过;3:实施;4:停止实施) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**1.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 优先股代码 |
+| exchange | string | 交易市场 |
+| interest_start_date | string | 计息起始日 |
+| interest_end_date | string | 计息截止日 |
+| publish_date | string | 最新公告日 |
+| plan_ann_date | string | 预案公告日 |
+| meeting_date | string | 股东大会公告日 |
+| dividend_date | string | 分红实施公告日 |
+| procedure | string | 事件进程 |
+| currency_code | string | 货币代码 |
+| coupon_dividend_rate | float | 票面股息率(百分比) |
+| dividend_pre_tax | float | 每股派现(税前,元) |
+| dividend_after_tax | float | 每股派现(税后,元) |
+| total_dividend_amount | float | 派息总额(万元,元) |
+| last_trading_date | string | 最后交易日 |
+| record_date | string | 股权登记日 |
+| ex_date | string | 除息日 |
+| payment_date | string | 派息日 |
+
+**1.4. 使用示例**
+
+**1.4.1. 获取指定时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_preferred_dividend(
+    start_date="20200101",
+    end_date="20260602",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  coupon_dividend_rate  dividend_date  ex_date  exchange  publish_date  total_dividend_amount
+0  140001.SZ  4.6  20201112  20201116  SZ  20201112  22310.0
+1  140001.SZ  4.68  20211110  20211116  SZ  20211110  22698.0
+2  140001.SZ  4.68  20221109  20221116  SZ  20221109  22698.0
+3  140001.SZ  4.68  20231109  20231116  SZ  20231109  22698.0
+4  140001.SZ  4.68  20241112  20241118  SZ  20241112  22698.0
+5  140001.SZ  4.68  20251113  20251117  SZ  20251113  22698.0
+6  140002.SZ  4.37  20200302  20200309  SZ  20200302  87400.0
+7  140002.SZ  4.37  20210302  20210308  SZ  20210302  87400.0
+8  140002.SZ  4.37  20220301  20220307  SZ  20220301  87400.0
+9  140002.SZ  4.37  20230301  20230307  SZ  20230301  87400.0
+10  140002.SZ  4.37  20240301  20240307  SZ  20240301  87400.0
+11  140002.SZ  4.37  20250301  20250307  SZ  20250301  87400.0
+12  140002.SZ  4.37  None  20260309  SZ  20260310  87400.0
+13  140003.SZ  4.36  20200310  20200317  SZ  20200310  9810.0
+14  140003.SZ  3.8372  20200811  20200818  SZ  20200811  17267.6073
+15  140004.SZ  5.17  20200810  20200817  SZ  20200810  5170.0
+16  140004.SZ  3.8372  20200811  20200818  SZ  20200811  17267.6073
+17  140004.SZ  4.84  20210806  20210812  SZ  20210806  10896.5969
+18  140005.SZ  3.8372  20200811  20200818  SZ  20200811  17267.6073
+19  140005.SZ  5.17  20200915  20200921  SZ  20200915  6462.5
+```
+
+**2. get_stock_preferred_trading - 获取优先股成交统计信息**
+
+**2.1. 方法名：get_stock_preferred_trading**
+
+**2.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(交易日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(交易日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 优先股代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**2.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 优先股代码 |
+| exchange | string | 交易市场 |
+| date | string | 交易日期 |
+| price | string | 成交价(元) |
+| volume | string | 成交量(股) |
+| amount | string | 成交金额(元) |
+| buyer_department | string | 买入营业部 |
+| seller_department | string | 卖出营业部 |
+
+**2.4. 使用示例**
+
+**2.4.1. 获取指定时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_preferred_trading(
+    start_date="20200101",
+    end_date="20260602",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  date  amount  buyer_department  exchange  price  seller_department  volume
+0  140001.SZ  20210910  8382000  机构专用  SZ  83.82  海通证券股份有限公司上海黄浦区福州路证券营业部  100000
+1  140001.SZ  20210915  9089000  机构专用  SZ  90.89  海通证券股份有限公司上海黄浦区福州路证券营业部  100000
+2  140001.SZ  20210922  9897000  机构专用  SZ  98.97  海通证券股份有限公司上海黄浦区福州路证券营业部  100000
+3  140001.SZ  20210923  492560000  机构专用  SZ  104.8  海通证券股份有限公司上海黄浦区福州路证券营业部  4700000
+4  140001.SZ  20211026  1002336000  机构专用  SZ  104.41  中国中金财富证券有限公司上海黄浦区湖滨路证券营业部  9600000
+5  140001.SZ  20211026  526050000  机构专用  SZ  105.21  机构专用  5000000
+6  140001.SZ  20211027  286110800  华泰证券股份有限公司北京分公司  SZ  104.42  中信证券股份有限公司北京呼家楼证券营业部  2740000
+7  140001.SZ  20211028  905494800  华泰证券股份有限公司常州分公司  SZ  104.44  中信证券股份有限公司北京呼家楼证券营业部  8670000
+8  140001.SZ  20211202  571197000  机构专用  SZ  100.21  西南证券股份有限公司深圳深南大道证券营业部  5700000
+9  140001.SZ  20230112  204940000  兴业证券股份有限公司上海金陵东路证券营业部  SZ  102.47  机构专用  2000000
+10  140001.SZ  20230209  308850000  兴业证券股份有限公司上海金陵东路证券营业部  SZ  102.95  机构专用  3000000
+11  140001.SZ  20230213  204060000  机构专用  SZ  102.03  机构专用  2000000
+12  140001.SZ  20230214  204200000  机构专用  SZ  102.1  机构专用  2000000
+13  140001.SZ  20230215  153060000  机构专用  SZ  102.04  机构专用  1500000
+14  140001.SZ  20230217  306720000  机构专用  SZ  102.24  机构专用  3000000
+15  140001.SZ  20230307  155100000  机构专用  SZ  103.4  机构专用  1500000
+16  140001.SZ  20240314  146230000  光大证券股份有限公司青岛香港西路证券营业部  SZ  104.45  机构专用  1400000
+17  140001.SZ  20240319  292404000  光大证券股份有限公司青岛香港西路证券营业部  SZ  104.43  机构专用  2800000
+18  140001.SZ  20240321  83576000  光大证券股份有限公司青岛香港西路证券营业部  SZ  104.47  机构专用  800000
+19  140001.SZ  20240725  103950000  华泰证券股份有限公司北京分公司  SZ  103.95  机构专用  1000000
+```
+
+**3. get_stock_issuer_credit_rating - 获取优先股发行主体信用评级**
+
+**3.1. 方法名：get_stock_issuer_credit_rating**
+
+**3.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(公告日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(公告日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| rating_level | Optional[Union[string, List[string]]] | 级别(格式：“AA”) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**3.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 股票名称 |
+| full_name | string | 发行主体 |
+| publish_date | string | 公告日期 |
+| rating_date | string | 评级日期 |
+| rating_level | string | 级别 |
+| outlook | string | 展望 |
+| rating_company | string | 评级公司 |
+| previous_level | string | 上次级别 |
+| previous_outlook | string | 上次展望 |
+
+**3.4. 使用示例**
+
+**3.4.1. 获取指定时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_issuer_credit_rating(
+    start_date="20200101",
+    end_date="20260602",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  full_name  name  outlook  previous_level  previous_outlook  publish_date  rating_company  rating_date  rating_level
+0  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20200218  中诚信国际信用评级有限责任公司  20200210  AAA
+1  000001.SZ  平安银行股份有限公司  平安银行  2  None  None  20200429  惠誉国际信用评级有限公司  20200429  BB+
+2  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20200507  大公国际资信评估有限公司  20200507  AAA
+3  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20200511  中诚信国际信用评级有限责任公司  20200509  AAA
+4  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20200529  大公国际资信评估有限公司  20200528  AAA
+5  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20200930  大公国际资信评估有限公司  20200929  AAA
+6  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20201125  大公国际资信评估有限公司  20201125  AAA
+7  000001.SZ  平安银行股份有限公司  平安银行  3  None  None  20201126  标准普尔评级公司  20201126  BBB+
+8  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20210125  中诚信国际信用评级有限责任公司  20210119  AAA
+9  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20210312  大公国际资信评估有限公司  20210311  AAA
+10  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20210709  中诚信国际信用评级有限责任公司  20210708  AAA
+11  000001.SZ  平安银行股份有限公司  平安银行  2  BB+  2  20210831  惠誉国际信用评级有限公司  20210831  BB+
+12  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20211104  中诚信国际信用评级有限责任公司  20210831  AAA
+13  000001.SZ  平安银行股份有限公司  平安银行  3  BBB+  3  20220118  标准普尔评级公司  20220118  BBB+
+14  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20220531  中诚信国际信用评级有限责任公司  20220531  AAA
+15  000001.SZ  平安银行股份有限公司  平安银行  2  BB+  2  20220701  惠誉国际信用评级有限公司  20220701  BB+
+16  000001.SZ  平安银行股份有限公司  平安银行  2  None  None  20220722  中债资信评估有限责任公司  20220722  AAApi
+17  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20221012  中诚信国际信用评级有限责任公司  20220928  AAA
+18  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20221103  中诚信国际信用评级有限责任公司  20220914  AAA
+19  000001.SZ  平安银行股份有限公司  平安银行  3  BBB+  3  20221128  标准普尔评级公司  20221128  BBB+
+```
+
+**4. get_stock_preferred_rating - 获取优先股评级情况**
+
+**4.1. 方法名：get_stock_preferred_rating**
+
+**4.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(公告日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(公告日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 优先股代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| rating_level | Optional[Union[string, List[string]]] | 评级(格式：“AA”) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**4.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 优先股代码 |
+| exchange | string | 交易市场 |
+| publish_date | string | 公告日 |
+| rating_date | string | 评级日 |
+| rating_level | string | 评级 |
+| rating_agency | string | 评级机构简称 |
+
+**4.4. 使用示例**
+
+**4.4.1. 获取指定时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_preferred_rating(
+    start_date="20200101",
+    end_date="20260602",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  exchange  publish_date  rating_agency  rating_date  rating_level
+0  360038.SH  SH  20200108  联合信用评级  20190412  AA
+1  360042.SH  SH  20201124  中诚信国际  20200708  AA+
+2  360043.SH  SH  20201222  中诚信国际  20200708  AA+
+3  360044.SH  SH  20230427  鹏元资信评估  20230309  AA+
+4  360045.SH  SH  20230427  鹏元资信评估  20230309  AA+
+5  360046.SH  SH  20230427  鹏元资信评估  20230309  AA+
+```
+
+**5. get_stock_preferred_shares - 获取优先股股本**
+
+**5.1. 方法名：get_stock_preferred_shares**
+
+**5.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期(公告日期)，格式 YYYYMMDD | 必填 |
+| end_date | string | 结束日期(公告日期)，格式 YYYYMMDD | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**5.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 股票代码 |
+| name | string | 股票名称 |
+| exchange | string | 交易市场代码 |
+| publish_date | string | 公告日期 |
+| change_date | string | 变动日期 |
+| change_reason | string | 变动原因 |
+| issue_shares | float | 发行股份数量(万股) |
+
+**5.4. 使用示例**
+
+**5.4.1. 获取指定时间内的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_preferred_shares(
+    start_date="20200101",
+    end_date="20260602",
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  change_date  change_reason  exchange  issue_shares  publish_date
+0  000001.SZ  20260310  优先股赎回  SZ  0  20260310
+1  000488.SZ  20210317  优先股赎回  SZ  2250  20210312
+2  000488.SZ  20210819  优先股赎回  SZ  1250  20210819
+3  000488.SZ  20210924  优先股赎回  SZ  0  20210924
+4  002142.SZ  20251107  优先股赎回  SZ  4850  20251106
+5  002714.SZ  20221229  优先股赎回  SZ  0  20221229
+6  200488.SZ  20210317  优先股赎回  SZ  2250  20210312
+7  200488.SZ  20210819  优先股赎回  SZ  1250  20210819
+8  200488.SZ  20210924  优先股赎回  SZ  0  20210924
+9  300197.SZ  20200226  优先股上市  SZ  935  20200224
+10  300355.SZ  20200226  优先股上市  SZ  800  20200224
+11  300355.SZ  20250102  优先股赎回  SZ  0  20250101
+12  600015.SH  20230328  优先股赎回  SH  0  20230323
+13  600036.SH  20260415  优先股赎回  SH  0  20260410
+14  600348.SH  20200916  优先股上市  SH  1000  20200911
+15  600348.SH  20230817  优先股赎回  SH  0  20230812
+16  600390.SH  20201130  优先股上市  SH  5000  20201125
+17  600390.SH  20201229  优先股上市  SH  8000  20201224
+18  600390.SH  20230515  优先股上市  SH  13000  20230510
+19  600390.SH  20230905  优先股上市  SH  16000  20230831
+```
+
+**6. get_stock_preferred_placement - 获取优先股配售结果**
+
+**6.1. 方法名：get_stock_preferred_placement**
+
+**6.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 优先股代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| target_type | Optional[Union[string, List[string]]] | 发行对象类型(见发行对象类型表) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**6.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 优先股代码 |
+| exchange | string | 交易市场 |
+| issuer_target | string | 发行对象 |
+| target_type | string | 发行对象类型 |
+| subscription_volume | float | 认购数量(万股) |
+| subscription_amount | float | 认购金额(万元) |
+| is_related_party | integer | 是否为关联方(0:否,1:是;2:未获知) |
+| has_recent_related_transaction | integer | 最近一年是否存在关联交易(0:否,1:是;2:未获知) |
+
+**6.4. 使用示例**
+
+**6.4.1. 获取所有优先股的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_preferred_placement(
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  exchange  has_recent_related_transaction  is_related_party  issuer_target  subscription_amount  subscription_volume  target_type
+0  140001.SZ  SZ  0  0  浦银安盛基金管理有限公司  50000  500.0  基金管理公司
+1  140001.SZ  SZ  0  0  中粮信托有限责任公司  114100  1141.0  信托公司
+2  140001.SZ  SZ  0  0  博时基金管理有限公司  77900  779.0  基金管理公司
+3  140001.SZ  SZ  0  0  招商财富资产管理有限公司  57000  570.0  资产管理公司
+4  140001.SZ  SZ  0  0  华安未来资产管理(上海)有限公司  50000  500.0  资产管理公司
+5  140001.SZ  SZ  0  0  中国邮政储蓄银行股份有限公司  40000  400.0  城市商业银行
+6  140001.SZ  SZ  0  0  交银国际信托有限公司  96000  960.0  信托公司
+7  140002.SZ  SZ  0  0  中国光大银行股份有限公司  29700  297.0  城市商业银行
+8  140002.SZ  SZ  0  0  交银施罗德基金管理有限公司  17800  178.0  基金管理公司
+9  140002.SZ  SZ  0  0  广东粤财信托有限公司  17800  178.0  信托公司
+10  140002.SZ  SZ  0  0  中邮创业基金管理股份有限公司  179050  1790.5  基金管理公司
+11  140002.SZ  SZ  0  0  交银施罗德资产管理有限公司  179050  1790.5  资产管理公司
+12  140002.SZ  SZ  0  0  中银基金管理有限公司  89300  893.0  基金管理公司
+13  140002.SZ  SZ  1  1  平安资产管理有限责任公司  1160000  11600.0  资产管理公司
+14  140002.SZ  SZ  0  0  招商财富资产管理有限公司  59500  595.0  资产管理公司
+15  140002.SZ  SZ  0  0  中国邮政储蓄银行股份有限公司  59500  595.0  城市商业银行
+16  140002.SZ  SZ  0  0  华润深国投信托有限公司  59500  595.0  信托公司
+17  140002.SZ  SZ  0  0  华宝信托有限责任公司  59500  595.0  信托公司
+18  140002.SZ  SZ  0  0  中银国际证券有限责任公司  89300  893.0  证券公司
+19  140003.SZ  SZ  0  0  国信租赁有限公司  80000  800.0  租赁公司
+```
+
+**7. get_stock_preferred_detail - 获取优先股基本资料**
+
+**7.1. 方法名：get_stock_preferred_detail**
+
+**7.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 优先股代码 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 交易市场 | 非必填 |
+| plan_progress | Optional[Union[string, List[string]]] | 方案进度(见方案进度表) | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+
+**7.3. 响应参数**
+
+| 字段 | 类型 | 描述 |
+|:---|:---|:---|
+| symbol | string | 优先股代码 |
+| exchange | string | 交易市场 |
+| name | string | 优先股名称 |
+| publish_date | string | 最新公告日 |
+| issue_target | string | 发行对象 |
+| face_value | float | 票面金额(元) |
+| currency_code | string | 货币代码 |
+| dividend_yield | float | 票面股息率(百分比) |
+| dividend_yield_description | string | 股息率说明 |
+| dividend_yield_type | string | 股息率类型 |
+| issuance_method | string | 发行方式 |
+| is_installment | integer | 是否分次对应(0:否,1:是;2:未获知) |
+| subscription_method | string | 认购方式 |
+| max_issue_volume | float | 发行数量上限(万股) |
+| min_issue_volume | float | 发行数量下限(万股) |
+| actual_issue_volume | float | 实际发行数量(万股) |
+| offering_price | float | 发行价格 |
+| plan_progress | string | 方案进度 |
+| board_plan_date | string | 董事会预案公告日 |
+| shareholder_meeting_date | string | 股东大会决议公告日 |
+| cbrc_approval_date | string | 银监会批准公告日 |
+| ipo_review_date | string | 发审委通过公告日 |
+| csrc_approval_date | string | 证监会核准公告日 |
+| registration_date | string | 登记日期 |
+| issuance_ann_date | string | 发行公告日 |
+| listing_ann_date | string | 挂牌转让公告日 |
+| listed_date | string | 上市日期 |
+| is_accumulated | integer | 股息是否累计对应(0:否,1:是;2:未获知) |
+| is_convertible | integer | 是否可转换为普通股对应(0:否,1:是;2:未获知) |
+| voting_restrictions | string | 表决限制条款 |
+| voting_right_recovery | string | 表决权恢复条件 |
+| is_forced_conversion | integer | 是否可强制转换为普通股对应(0:否,1:是;2:未获知) |
+| forced_conversion_conditions | string | 强制转换为普通股条件 |
+| annual_payment_count | float | 年付息次数 |
+| first_interest_date | string | 首次起息日 |
+| dividend_adjustment_period | float | 股息调整周期(年) |
+| purchasedate | string | 申购日 |
+| underwriting_method | string | 承销方式 |
+| max_planned_raising | float | 预计募集资金上限 |
+| min_planned_raising | float | 预计募集资金下限 |
+| actual_raising_amount | float | 实际募集资金 |
+| net_raising_amount | float | 募集资金净额 |
+| fund_usage | string | 资金用途 |
+| is_at_par | integer | 是否可强制转换为普通股对应(0:否,1:是;2:未获知) |
+| put_provision | string | 回售条款 |
+| forced_conversion_price | float | 强制转股价格(元/股) |
+| fund_receipt_date | string | 募集资金到账日期 |
+| fund_verification_date | string | 募集资金验资日期 |
+| transfer_arrangement | string | 转让安排 |
+| reference_date | string | 基准日 |
+| reference_date_type | string | 基准日类型 |
+| right_to_residual_profit | integer | 是否可强制转换为普通股对应(0:否,1:是;2:未获知) |
+
+**7.4. 使用示例**
+
+**7.4.1. 获取所有优先股的数据**
+
+```python
+import panda_data
+result = panda_data.get_stock_preferred_detail(
+)
+print(result)
+```
+
+**响应示例**
+
+```text
+symbol  actual_issue_volume  actual_raising_amount  board_plan_date  dividend_yield  exchange  net_raising_amount
+0  140001.SZ  4850.0  485000.0  20141022  4.6  SZ  482575.0
+1  140002.SZ  20000.0  2000000.0  20140716  4.37  SZ  1995250.0
+2  140003.SZ  2250.0  225000.0  20141230  4.36  SZ  223875.0
+3  140004.SZ  1000.0  100000.0  20141230  5.17  SZ  99500.0
+4  140005.SZ  1250.0  125000.0  20141230  5.17  SZ  124375.0
+5  140006.SZ  2475.93  247593.0  20170509  6.8  SZ  245968.98
+6  140007.SZ  10000.0  1000000.0  20160426  5.3  SZ  998465.0
+7  140008.SZ  935.0  93500.0  20181208  7.5  SZ  92105.2
+8  140009.SZ  800.0  80000.0  20181201  7.5  SZ  78885.0
+9  360001.SH  40000.0  4000000.0  20140509  6.0  SH  3994410.0
+10  360002.SH  32000.0  3200000.0  20140514  6.0  SH  3196181.0
+11  360003.SH  15000.0  1500000.0  20140430  6.0  SH  1495983.0
+12  360005.SH  13000.0  1300000.0  20140607  6.0  SH  1295816.7917
+13  360006.SH  3000.0  300000.0  20140517  7.5  SH  296770.0
+14  360007.SH  15000.0  1500000.0  20140527  5.8  SH  1497541.0
+15  360008.SH  15000.0  1500000.0  20140430  5.5  SH  1496063.0
+16  360009.SH  40000.0  4000000.0  20140509  5.5  SH  3995465.6
+17  360010.SH  28000.0  2800000.0  20140514  5.5  SH  2796977.5932
+18  360011.SH  45000.0  4500000.0  20140726  4.5  SH  4494665.8
+19  360012.SH  13000.0  1300000.0  20140607  5.4  SH  1294715.88
 ```

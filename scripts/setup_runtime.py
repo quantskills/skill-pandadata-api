@@ -14,7 +14,6 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_BASE_URL = "http://pandadata.pandaaiquant.com"
 DEFAULT_ENV_FILE = Path.home() / ".pandadata" / "pandadata.env"
 
 
@@ -40,7 +39,7 @@ def prompt_secret(label: str, existing: str = "") -> str:
 def resolve_credentials(args: argparse.Namespace) -> tuple[str, str, str]:
     env_username = os.getenv("DEFAULT_USERNAME", "")
     env_password = os.getenv("DEFAULT_PASSWORD", "")
-    env_base_url = os.getenv("JAVA_SERVICE_BASE_URL", DEFAULT_BASE_URL)
+    env_base_url = os.getenv("JAVA_SERVICE_BASE_URL") or os.getenv("PANDADATA_BASE_URL", "")
 
     username = args.username or env_username
     password = args.password or env_password
@@ -49,7 +48,7 @@ def resolve_credentials(args: argparse.Namespace) -> tuple[str, str, str]:
     if not args.non_interactive:
         username = prompt_text("Pandadata username", username)
         password = prompt_secret("Pandadata password", password)
-        base_url = prompt_text("Pandadata base URL", base_url or DEFAULT_BASE_URL)
+        base_url = prompt_text("Pandadata base URL", base_url)
 
     return username, password, base_url
 
@@ -111,7 +110,7 @@ def main() -> int:
     parser.add_argument("--password", help="Pandadata password. Defaults to DEFAULT_PASSWORD.")
     parser.add_argument(
         "--base-url",
-        help=f"Pandadata base URL. Defaults to JAVA_SERVICE_BASE_URL or {DEFAULT_BASE_URL}.",
+        help="Pandadata base URL. Defaults to JAVA_SERVICE_BASE_URL or PANDADATA_BASE_URL.",
     )
     parser.add_argument(
         "--env-file",
