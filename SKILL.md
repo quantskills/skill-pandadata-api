@@ -37,6 +37,17 @@ quantSkills:
   license: GPL-3.0
 ---
 
+```json qsh-form
+{
+  "version": 1,
+  "task": {
+    "placeholder": "请描述需要查询的数据、市场、标的、日期范围、字段，或贴出待排查的 panda_data 调用与报错",
+    "required": true
+  },
+  "prompt_template": "{{#task}}任务与材料：\n{{task}}\n\n{{/task}}{{#attachments}}用户上传的材料（已放入工作区）：\n{{attachments}}\n\n{{/attachments}}请先从随附 Pandadata 文档中定位准确的 panda_data.get_* 方法及参数/返回字段契约，再按文档编写或排查最小可运行的 Python 调用；不得臆造方法、字段、标的格式或认证步骤，附上代码与验证结果，输出中文报告。"
+}
+```
+
 # Pandadata API
 
 Use this skill to route natural-language data requests to the correct `panda_data` API method, load the exact parameter/field contract from the bundled Pandadata interface document, and write runnable Python calls.
