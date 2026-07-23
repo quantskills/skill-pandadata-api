@@ -7,8 +7,8 @@
 <p align="center">
   <img alt="methods" src="https://img.shields.io/badge/API_methods-218-brightgreen">
   <img alt="domains" src="https://img.shields.io/badge/data_domains-9-blue">
-  <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.9-orange">
-  <img alt="python" src="https://img.shields.io/badge/python-3.x-3776AB?logo=python&logoColor=white">
+  <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.12-orange">
+  <img alt="python" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="agents" src="https://img.shields.io/badge/agents-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%2B4-7c3aed">
   <img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue">
 </p>
@@ -81,9 +81,10 @@ mindmap
 | 🌏 **HK & US stocks** | `get_hk_daily` · `get_us_daily` | Quotes, corporate events, consensus, financial factors |
 | 🏛️ **Macro data** | `get_macro_na` · `get_macro_cal` | China/international macro, industries, special data, economic calendar |
 | 🧾 **Fund data** | `get_fund_detail` · `get_fund_daily` | Fund basics, quotes, ETF creation-redemption lists |
-| 💠 **Preferred stock data** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | Preferred stock basics, dividends, ratings, issuance and placement |
+| 💠 **Preferred stock data** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | Present in gateway docs; not exported by SDK 0.0.12 |
 
 The full mapping of all 218 interfaces lives in [`references/method-index.md`](references/method-index.md).
+Of those, 201 are directly callable with `panda_data==0.0.12`; 17 exist only in the gateway documentation and are marked `not exported`. See [`references/sdk-0.0.12.md`](references/sdk-0.0.12.md) for the compatibility details.
 
 ---
 
@@ -113,9 +114,10 @@ flowchart TD
 ```
 pandadata-api/
 ├── SKILL.md                          # Skill entry: workflow, calling conventions, rules
-├── requirements.txt                  # panda_data==0.0.9, requests
+├── requirements.txt                  # panda_data==0.0.12, requests
 ├── references/
 │   ├── method-index.md               # 📇 218-interface quick index (grouped by domain + doc line numbers)
+│   ├── sdk-0.0.12.md                 # 🧩 SDK version, auth changes, and interface differences
 │   ├── api_catalog.json              # 🧭 Method-to-MCP-gateway /pandaData endpoint mapping
 │   ├── api-docs.md                   # 📚 Full Chinese API documentation
 │   └── agent-integration.md          # 🔌 Install/load/smoke-test per Agent
@@ -124,6 +126,7 @@ pandadata-api/
 │   ├── call_api.py                   # 📞 Credential-aware interface runner
 │   ├── setup_runtime.py              # 🔐 Interactive install + login + credential save
 │   ├── pandadata_runtime.py          # In-process SDK initialization helper
+│   ├── sdk_compat.py                 # SDK version and documented-interface constraints
 │   └── build_method_index.py         # Rebuild method-index from api-docs.md
 └── agents/
     ├── cursor-rule.mdc               # Cursor rule adapter
@@ -211,11 +214,14 @@ Full per-Agent install commands and smoke tests live in [`references/agent-integ
 
 ```bash
 cd "$PANDADATA_SKILL_ROOT"
+python -m pip install -r requirements.txt
+python scripts/setup_runtime.py --no-install --skip-login-check --non-interactive --no-save-env
 python scripts/search_api_docs.py --method get_stock_daily | head -60
 python scripts/search_api_docs.py --list-methods | wc -l
+python scripts/call_api.py --method get_stock_competitor_information --params '{}' --dry-run
 ```
 
-**Expected**: `get_stock_daily` prints its parameter table, and the method count is **218**.
+**Expected**: the imported version is **0.0.12**, `get_stock_daily` prints its parameter table, the documented method count is **218**, and the 0.0.12 method-name dry-run succeeds.
 
 ---
 
@@ -230,6 +236,8 @@ python scripts/search_api_docs.py --list-methods | wc -l
 | 🔢 Parameter types | `symbol=["000001.SZ"]` vs `symbol="000001.SZ"` | List vs scalar varies by interface — **match the target method's example exactly** |
 
 > ⚠️ For broad / unfiltered calls, warn the user that the interface may return a very large table.
+
+Live availability depends on the Pandadata service URL, account permissions, and upstream data coverage. This skill is data-access and research tooling; its examples and outputs do not constitute investment advice.
 
 ---
 
@@ -261,7 +269,8 @@ Then rerun the universal smoke test.
 
 - The SDK raises `ClientNotInitializedError` until `init_token()` succeeds.
 - Credentials can come from environment variables or `~/.pandadata/pandadata.env`: `DEFAULT_USERNAME` / `DEFAULT_PASSWORD` / `JAVA_SERVICE_BASE_URL` (`PANDADATA_BASE_URL` is also accepted). Pass the **plaintext password**; the SDK hashes it internally.
-- `panda_data==0.0.9` runtime dependencies: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`.
+- SDK 0.0.12 `init_token()` writes encrypted credentials and expiry metadata to `user.json`, while keeping the token in memory. `--no-save-env` only disables the skill's separate plaintext shell env file.
+- `panda_data==0.0.12` requires Python `>=3.10`; runtime dependencies: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`, `websockets>=13.0`, `requests`.
 
 > Credential files (`*.env`, `user.json`, `.pandadata/`) are git-ignored and never committed.
 
@@ -270,6 +279,8 @@ Then rerun the universal smoke test.
 ## 📜 License
 
 This project is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE).
+
+Maintainer: [`abgyjaguo`](https://github.com/abgyjaguo)
 
 ## 🐼 PandaAI / QUANTSKILLS Community
 

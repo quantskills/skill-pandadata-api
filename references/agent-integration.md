@@ -18,12 +18,21 @@ Run from inside the skill folder:
 cd "$PANDADATA_SKILL_ROOT"
 PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 [ -x "$PYTHON_BIN" ] || PYTHON_BIN=python3
-"$PYTHON_BIN" scripts/setup_runtime.py
+"$PYTHON_BIN" -m pip install -r requirements.txt
+"$PYTHON_BIN" scripts/setup_runtime.py \
+  --no-install \
+  --skip-login-check \
+  --non-interactive \
+  --no-save-env
 "$PYTHON_BIN" scripts/search_api_docs.py --method get_stock_daily | sed -n '1,60p'
 "$PYTHON_BIN" scripts/search_api_docs.py --list-methods | wc -l
+"$PYTHON_BIN" scripts/call_api.py \
+  --method get_stock_competitor_information \
+  --params '{}' \
+  --dry-run
 ```
 
-Expected result: `get_stock_daily` prints its parameter table and the method count is `218`.
+Expected result: `panda_data 0.0.12` imports successfully, `get_stock_daily` prints its parameter table, the documented method count is `218`, and the 0.0.12 method-name dry-run succeeds.
 
 Runtime API calls require SDK login:
 
@@ -34,7 +43,7 @@ PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 "$PYTHON_BIN" scripts/setup_runtime.py
 ```
 
-The setup script installs `panda_data`, asks for username/password with hidden password input, calls `panda_data.init_token()`, and optionally writes a private env file:
+The setup script installs `panda_data==0.0.12`, asks for username/password with hidden password input, calls `panda_data.init_token()`, and optionally writes a private env file:
 
 ```bash
 source ~/.pandadata/pandadata.env
@@ -63,13 +72,15 @@ panda_data.init_token(
 )
 ```
 
+SDK 0.0.12 persists encrypted credentials and expiry metadata in `user.json` whenever `init_token()` succeeds; its token stays in memory. The skill's `--no-save-env` option controls only the separate plaintext shell env file. See `references/sdk-0.0.12.md` for method availability and other upstream limitations.
+
 Agent prompt smoke test:
 
 ```text
 Use $pandadata-api to find the Pandadata method for A-share daily bars of 000001.SZ from 20250101 to 20250131. Return a minimal Python example, but do not call the API.
 ```
 
-Expected agent behavior: load `SKILL.md`, consult `references/method-index.md` or `scripts/search_api_docs.py`, choose `panda_data.get_stock_daily`, and preserve the documented date/symbol/fields conventions.
+Expected agent behavior: load `SKILL.md`, consult `references/sdk-0.0.12.md` and `references/method-index.md` or `scripts/search_api_docs.py`, choose `panda_data.get_stock_daily`, and preserve the documented date/symbol/fields conventions.
 
 Credential-aware API runner:
 

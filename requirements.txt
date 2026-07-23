@@ -1,2 +1,2 @@
-panda_data==0.0.9
+panda_data==0.0.12
 requests>=2.0.0

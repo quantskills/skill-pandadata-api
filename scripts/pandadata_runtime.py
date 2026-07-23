@@ -10,6 +10,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from sdk_compat import require_sdk_version
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ENV_FILE = Path.home() / ".pandadata" / "pandadata.env"
@@ -17,6 +19,13 @@ DEFAULT_ENV_FILE = Path.home() / ".pandadata" / "pandadata.env"
 
 class PandadataRuntimeError(RuntimeError):
     """Raised when the Pandadata runtime cannot be initialized."""
+
+
+def ensure_sdk_compatibility() -> str:
+    try:
+        return require_sdk_version()
+    except RuntimeError as exc:
+        raise PandadataRuntimeError(str(exc)) from exc
 
 
 def _parse_env_assignment(line: str) -> tuple[str, str] | None:
@@ -163,6 +172,8 @@ def init_pandadata(
             check=True,
         )
         import panda_data  # noqa: PLC0415
+
+    ensure_sdk_compatibility()
 
     load_env_file(env_file)
 

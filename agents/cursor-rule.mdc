@@ -16,7 +16,8 @@ Preferred local project path:
 Workflow:
 
 1. Read `.cursor/skills/pandadata-api/SKILL.md`.
-2. Use `.cursor/skills/pandadata-api/references/method-index.md` or run `python .cursor/skills/pandadata-api/scripts/search_api_docs.py --list-methods`.
-3. Before writing code for a method, extract the exact section with `python .cursor/skills/pandadata-api/scripts/search_api_docs.py --method <method>`.
-4. For real API calls, prefer `python .cursor/skills/pandadata-api/scripts/call_api.py --method <method> --params '<json>'`; it checks credentials and runs setup when needed.
-5. Preserve documented parameter names, date formats, symbol formats, and examples. Do not invent authentication or installation steps.
+2. Use an interpreter with `panda_data==0.0.12` (prefer `PANDADATA_PYTHON` or the project virtual environment); runtime scripts reject other SDK versions.
+3. Read `.cursor/skills/pandadata-api/references/sdk-0.0.12.md`, then use `references/method-index.md` or run the selected interpreter with `.cursor/skills/pandadata-api/scripts/search_api_docs.py --list-methods`.
+4. Before writing code for a method, extract the exact section with the selected interpreter and `scripts/search_api_docs.py --method <method>`.
+5. For real API calls, prefer the selected interpreter with `scripts/call_api.py --method <method> --params '<json>'`; it checks credentials and runs setup when needed.
+6. Preserve documented parameter names, date formats, symbol formats, and examples. Do not generate Python calls for methods marked `not exported` by SDK 0.0.12. Do not invent authentication or installation steps.

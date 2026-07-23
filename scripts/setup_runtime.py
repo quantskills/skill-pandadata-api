@@ -12,6 +12,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from sdk_compat import SDK_VERSION, require_sdk_version
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ENV_FILE = Path.home() / ".pandadata" / "pandadata.env"
@@ -85,10 +87,17 @@ def ask_yes_no(prompt: str, default: bool = True) -> bool:
 def validate_import() -> None:
     import panda_data  # noqa: PLC0415
 
-    print(f"[setup] panda_data import OK: {panda_data.__file__}")
-    for name in ("init_token", "get_stock_daily", "get_trade_cal"):
+    installed_version = require_sdk_version()
+    print(f"[setup] panda_data {installed_version} import OK: {panda_data.__file__}")
+    for name in (
+        "init_token",
+        "get_stock_daily",
+        "get_trade_cal",
+        "get_fund_detail",
+        "get_option_exercise",
+    ):
         if not hasattr(panda_data, name):
-            raise RuntimeError(f"panda_data is missing expected method: {name}")
+            raise RuntimeError(f"panda_data {SDK_VERSION} is missing expected method: {name}")
 
 
 def validate_login(username: str, password: str, base_url: str, probe_api: bool) -> None:
@@ -165,7 +174,12 @@ def main() -> int:
             return 2
         write_env_file(args.env_file, username, password, base_url)
     else:
-        print("[setup] Credentials were not saved.")
+        print("[setup] Shell env credentials were not saved.")
+        if not args.skip_login_check:
+            print(
+                f"[setup] panda_data {SDK_VERSION} still persists encrypted credentials in user.json "
+                "when init_token() succeeds; the token remains in memory."
+            )
 
     print("[setup] Pandadata runtime setup complete.")
     return 0

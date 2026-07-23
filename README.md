@@ -7,8 +7,8 @@
 <p align="center">
   <img alt="methods" src="https://img.shields.io/badge/API_methods-218-brightgreen">
   <img alt="domains" src="https://img.shields.io/badge/data_domains-9-blue">
-  <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.9-orange">
-  <img alt="python" src="https://img.shields.io/badge/python-3.x-3776AB?logo=python&logoColor=white">
+  <img alt="sdk" src="https://img.shields.io/badge/panda__data-0.0.12-orange">
+  <img alt="python" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="agents" src="https://img.shields.io/badge/agents-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%2B4-7c3aed">
   <img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue">
 </p>
@@ -81,9 +81,10 @@ mindmap
 | 🌏 **港美股** | `get_hk_daily` · `get_us_daily` | 行情、公司事件、一致预期、财务因子 |
 | 🏛️ **宏观数据** | `get_macro_na` · `get_macro_cal` | 中国/国际宏观、行业、特色数据、经济日历 |
 | 🧾 **基金数据** | `get_fund_detail` · `get_fund_daily` | 基金基础信息、行情、ETF 申赎清单 |
-| 💠 **优先股数据** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | 优先股基础信息、分红、评级、发行配售 |
+| 💠 **优先股数据** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | 网关文档已收录；SDK 0.0.12 尚未导出 |
 
 完整 218 个接口映射见 [`references/method-index.md`](references/method-index.md)。
+其中 201 个可由 `panda_data==0.0.12` 直接调用，17 个仅存在于网关文档并在索引中标记为 `not exported`；详细兼容说明见 [`references/sdk-0.0.12.md`](references/sdk-0.0.12.md)。
 
 ---
 
@@ -113,9 +114,10 @@ flowchart TD
 ```
 pandadata-api/
 ├── SKILL.md                          # 技能入口：工作流、调用约定、规则
-├── requirements.txt                  # panda_data==0.0.9, requests
+├── requirements.txt                  # panda_data==0.0.12, requests
 ├── references/
 │   ├── method-index.md               # 📇 218 接口速查表（按域分组 + 文档行号）
+│   ├── sdk-0.0.12.md                 # 🧩 SDK 版本、认证变化与接口差异
 │   ├── api_catalog.json              # 🧭 方法到 MCP 网关 /pandaData endpoint 的映射
 │   ├── api-docs.md                   # 📚 完整中文接口文档
 │   └── agent-integration.md          # 🔌 各 Agent 安装/加载/冒烟测试
@@ -124,6 +126,7 @@ pandadata-api/
 │   ├── call_api.py                   # 📞 凭证感知的接口运行器
 │   ├── setup_runtime.py              # 🔐 交互式安装 + 登录 + 保存凭证
 │   ├── pandadata_runtime.py          # 同进程初始化 SDK 的运行时助手
+│   ├── sdk_compat.py                 # SDK 版本与文档接口兼容约束
 │   └── build_method_index.py         # 从 api-docs.md 重建 method-index
 └── agents/
     ├── cursor-rule.mdc               # Cursor 规则适配
@@ -211,11 +214,14 @@ export PANDADATA_SKILL_ROOT="/path/to/pandadata-api"
 
 ```bash
 cd "$PANDADATA_SKILL_ROOT"
+python -m pip install -r requirements.txt
+python scripts/setup_runtime.py --no-install --skip-login-check --non-interactive --no-save-env
 python scripts/search_api_docs.py --method get_stock_daily | head -60
 python scripts/search_api_docs.py --list-methods | wc -l
+python scripts/call_api.py --method get_stock_competitor_information --params '{}' --dry-run
 ```
 
-**预期结果**：`get_stock_daily` 打印其参数表，且方法计数为 **218**。
+**预期结果**：导入版本为 **0.0.12**，`get_stock_daily` 打印参数表，文档方法计数为 **218**，且 0.0.12 新方法名的 dry-run 通过。
 
 ---
 
@@ -230,6 +236,8 @@ python scripts/search_api_docs.py --list-methods | wc -l
 | 🔢 入参类型 | `symbol=["000001.SZ"]` vs `symbol="000001.SZ"` | 列表 / 标量因接口而异，**严格匹配目标方法示例** |
 
 > ⚠️ 对于宽口径 / 无过滤的调用，需提醒用户接口可能返回大表。
+
+实时可用性取决于 Pandadata 服务地址、账户权限和上游数据覆盖。本技能仅用于数据访问与研究工程，示例和输出不构成投资建议。
 
 ---
 
@@ -261,7 +269,8 @@ python scripts/search_api_docs.py --list-methods | wc -l   # 复核方法计数
 
 - SDK 在 `init_token()` 成功前会抛出 `ClientNotInitializedError`。
 - 可通过环境变量或 `~/.pandadata/pandadata.env` 提供凭证：`DEFAULT_USERNAME` / `DEFAULT_PASSWORD` / `JAVA_SERVICE_BASE_URL`（兼容 `PANDADATA_BASE_URL`）。传入**明文密码**，SDK 内部自行哈希。
-- `panda_data==0.0.9` 运行时依赖：`pandas>=2.0.0`、`numpy>=1.22,<2.0`、`python-snappy>=0.7.3`、`python-dotenv>=1.0.0`、`PyYAML>=6.0`、`zstandard>=0.22.0`、`duckdb`、`pyarrow`。
+- SDK 0.0.12 的 `init_token()` 会把加密凭证和过期元数据写入 `user.json`，token 仅保留在内存；`--no-save-env` 只是不写技能自己的明文 shell env 文件。
+- `panda_data==0.0.12` 要求 Python `>=3.10`；运行时依赖：`pandas>=2.0.0`、`numpy>=1.22,<2.0`、`python-snappy>=0.7.3`、`python-dotenv>=1.0.0`、`PyYAML>=6.0`、`zstandard>=0.22.0`、`duckdb`、`pyarrow`、`websockets>=13.0`、`requests`。
 
 > 凭证文件（`*.env`、`user.json`、`.pandadata/`）已在 `.gitignore` 中忽略，不会提交。
 
@@ -270,6 +279,8 @@ python scripts/search_api_docs.py --list-methods | wc -l   # 复核方法计数
 ## 📜 License
 
 This project is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE).
+
+维护者：[`abgyjaguo`](https://github.com/abgyjaguo)
 
 ## 🐼 PandaAI / QUANTSKILLS 社群
 

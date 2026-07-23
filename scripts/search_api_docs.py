@@ -8,6 +8,8 @@ import re
 import sys
 from pathlib import Path
 
+from sdk_compat import DOCUMENTED_ONLY_METHODS, LEGACY_METHOD_ALIASES, SDK_VERSION
+
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -36,20 +38,32 @@ def method_spans(lines: list[str]) -> list[tuple[str, str, int, int]]:
 
 
 def print_method(lines: list[str], method: str) -> int:
-    wanted = method.strip()
+    requested = method.strip()
+    wanted = LEGACY_METHOD_ALIASES.get(requested, requested)
     for item_method, summary, start, end in method_spans(lines):
         if item_method == wanted:
             print(f"# {item_method} - {summary}")
+            if requested != wanted:
+                print(
+                    f"\n> SDK {SDK_VERSION} mapping: `{requested}` is a legacy document name; "
+                    f"use `panda_data.{wanted}`."
+                )
+            if item_method in DOCUMENTED_ONLY_METHODS:
+                print(
+                    f"\n> SDK {SDK_VERSION} limitation: this documented gateway interface is not "
+                    "exported as a top-level panda_data method. Do not generate a Python SDK call."
+                )
             print(f"\nSource lines: {start + 1}-{end}\n")
             print("\n".join(lines[start:end]).rstrip())
             return 0
-    print(f"Method not found: {wanted}")
+    print(f"Method not found: {requested}")
     return 1
 
 
 def print_methods(lines: list[str]) -> int:
     for method, summary, start, _ in method_spans(lines):
-        print(f"{start + 1}: {method} - {summary}")
+        suffix = f" [not exported by SDK {SDK_VERSION}]" if method in DOCUMENTED_ONLY_METHODS else ""
+        print(f"{start + 1}: {method} - {summary}{suffix}")
     return 0
 
 

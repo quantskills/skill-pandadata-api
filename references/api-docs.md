@@ -1311,6 +1311,8 @@ name  date
 |:---|:---|:---|:---|
 | concept | Optional[Union[string, List[string]]] | 概念名称 | 非必填 |
 | concept_stock | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
+| start_date | Optional[string] | 开始日期，格式 YYYYMMDD | 非必填 |
+| end_date | Optional[string] | 结束日期，格式 YYYYMMDD | 非必填 |
 | date | Optional[string] | 日期，返回该日期前被纳入对应概念的股票 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
@@ -1480,7 +1482,7 @@ market_tplus  name  special_type  status  de_listed_date  listed_date  sector_co
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 指数代码 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
-| status | Optional[string] | 指数状态(1：正常交易，0：已退市，-1：暂无信息) | 非必填 |
+| status | Optional[integer] | 指数状态(1：正常交易，0：已退市，-1：暂无信息) | 非必填 |
 
 **2.3. 响应参数**
 
@@ -3170,7 +3172,7 @@ participant  institute  investor_or_analyst_detail  symbol  date
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
-| start_date | string | 开始日期,eg:"20250702" | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" | 必填 |
 | end_date | string | 结束日期,eg:"20250702" | 必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 | market | Optional[string] | 市场,默认"cn"为中国内地市场 | 非必填 |
@@ -3667,6 +3669,7 @@ symbol  date  circulation_a  free_circulation  non_circulation_a  preferred_shar
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| market | Optional[string] | 市场代码，当前仅支持 "cn"，默认为 "cn" | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 | start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 | end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
@@ -3714,6 +3717,7 @@ symbol  announcement_date  effective_date  ex_date  div_type
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| market | Optional[string] | 市场代码，当前仅支持 "cn"，默认为 "cn" | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 | start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 | end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
@@ -3760,6 +3764,7 @@ symbol  ex_date  record_date  payable_date  split_factor_pre  split_factor_post 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| market | Optional[string] | 市场代码，当前仅支持 "cn"，默认为 "cn" | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 | start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 | end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
@@ -3811,6 +3816,7 @@ symbol  announcement_date  div_cash_gross  record_date  ex_date  payment_date  r
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| market | Optional[string] | 市场代码，当前仅支持 "cn"，默认为 "cn" | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 | start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 | end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
@@ -3859,6 +3865,7 @@ symbol  announcement_date  event_stage  total_div_amount  quarter
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| market | Optional[string] | 市场代码，当前仅支持 "cn"，默认为 "cn" | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 | start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 | end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
@@ -3909,6 +3916,7 @@ symbol  announcement_date  issue_type  issue_status  listed_date  issued_shares 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表 | 非必填 |
+| market | Optional[string] | 市场代码，当前仅支持 "cn"，默认为 "cn" | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 | start_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
 | end_date | string | 信息发布日期，格式为 "YYYYMMDD" | 必填 |
@@ -4000,9 +4008,9 @@ symbol  end_date  name  expected_disclosure_date  actual_disclosure_date  first_
 1  000001.SZ  20250331  平安银行  20250419  20250419  None  None  None  20250331  20250331
 ```
 
-**15. get_stock_over_allotment - 获取超额配售权实施情况数据**
+**15. get_stock_status_over_allotment - 获取超额配售权实施情况数据**
 
-**15.1. 方法名：get_stock_over_allotment**
+**15.1. 方法名：get_stock_status_over_allotment**
 
 **15.2. 入参**
 
@@ -4040,7 +4048,7 @@ symbol  end_date  name  expected_disclosure_date  actual_disclosure_date  first_
 
 ```python
 import panda_data
-result = panda_data.get_stock_over_allotment(
+result = panda_data.get_stock_status_over_allotment(
     start_date='20250101',
     end_date='20260430',
 
@@ -4067,7 +4075,7 @@ symbol  info_date  name  end_date  vwap  volume  over_allotment_shares  over_all
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
 | symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
-| lawsuit_type | Optional[Union[integer, List[integer]]] | 诉讼类型 | 非必填 |
+| lawsuit_type | Optional[Union[string, List[string]]] | 诉讼类型 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **16.3. 响应参数**
@@ -4077,7 +4085,7 @@ symbol  info_date  name  end_date  vwap  volume  over_allotment_shares  over_all
 | symbol | string | 证券代码 |
 | name | string | 证券简称 |
 | info_date | string | 公告日期 |
-| lawsuit_type | integer | 诉讼类型(CI:民事诉讼,AD:行政诉讼,CR:刑事诉讼,AR:仲裁) |
+| lawsuit_type | string | 诉讼类型(CI:民事诉讼,AD:行政诉讼,CR:刑事诉讼,AR:仲裁) |
 | filing_date | string | 起诉日期 |
 | case_summary | string | 案件摘要 |
 | case_intro | string | 案件简介 |
@@ -4166,9 +4174,9 @@ publish_date  publish_institution  announcement_category  announcement_level  an
 1  20250102  证监会  15  01  关于同意大连商品交易所原木期货和期权注册的批复  无  大连商品交易所：你所《关于申请原木期货和期权注册的请示》（大商所发〔2023〕410号）收悉。根据《中华人民共和国期货和衍生品法》的有关规定，按照《期货期权品种注册管理暂行规定》（证监发〔2022〕85号），现批复如下：一、同意你所原木期货和期权注册。二、请你所做好各项准备工作，确保原木期货和期权平稳运行和健康发展。三、本批复自作出之日起一年内有效。中国证监会2024年10月24日  http://www.csrc.gov.cn/csrc/c101903/c7530171/content.shtml
 ```
 
-**18. get_stock_competitor - 获取竞争企业信息数据**
+**18. get_stock_competitor_information - 获取竞争企业信息数据**
 
-**18.1. 方法名：get_stock_competitor**
+**18.1. 方法名：get_stock_competitor_information**
 
 **18.2. 入参**
 
@@ -4213,9 +4221,9 @@ symbol  info_date  name  competitor_name  competitor_intro  competitor_stock_cod
 1  001220.SZ  20251121  世盟股份  密尔克卫智能供应链服务集团股份有限公司  密尔克卫化工供应链服务股份有限公司成立于 1997 年 3 月 28 日，公司是一家专业化工供应链服务商，提供以货运代理、仓储和运输为核心的一站式综合物流服务，以及化工品交易服务。  603713  综合性物流服务
 ```
 
-**19. get_stock_intermediary - 获取中介情况信息表数据**
+**19. get_stock_intermediary_information - 获取中介情况信息表数据**
 
-**19.1. 方法名：get_stock_intermediary**
+**19.1. 方法名：get_stock_intermediary_information**
 
 **19.2. 入参**
 
@@ -4246,7 +4254,7 @@ symbol  info_date  name  competitor_name  competitor_intro  competitor_stock_cod
 
 ```python
 import panda_data
-result = panda_data.get_stock_intermediary (
+result = panda_data.get_stock_intermediary_information (
     start_date='20240101',
     end_date='20260430',
     symbol=['000002.SZ']
@@ -4262,9 +4270,9 @@ symbol  issue_start_date  name  equity_event_code  event_type  intermediary_cate
 1  000002.SZ  20251231  万科A  60202501  PRE  03  德勤华永会计师事务所(特殊普通合伙)  杨誉民、许湘照
 ```
 
-**20. get_stock_related_party - 上市公司关联交易**
+**20. get_stock_rela_party_trans - 上市公司关联交易**
 
-**20.1. 方法名：get_stock_related_party**
+**20.1. 方法名：get_stock_rela_party_trans**
 
 **20.2. 入参**
 
@@ -4300,7 +4308,7 @@ symbol  issue_start_date  name  equity_event_code  event_type  intermediary_cate
 
 ```python
 import panda_data
-result = panda_data.get_stock_related_party(
+result = panda_data.get_stock_rela_party_trans(
     symbol="000001.SZ",
     start_date="20250101",
     end_date="20260101",
@@ -6209,9 +6217,9 @@ symbol  info_date  basic_eps  end_date  net_profit_parent  eps_excluding_nonrecu
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, list]] | 股票名称 | 非必填 |
-| start_quarter | Optional[string] | 起始季度，格式为 "YYYYqN"（与end_quarter同用，end_quarter启用时必填） | 非必填 |
-| end_quarter | Optional[string] | 结束季度，格式为 "YYYYqN"（与start_quarter同用，start_quarter启用时必填） | 非必填 |
-| date | Optional[string] | 公告日期,返回该日期及之前的数据（当start_quarter和end_quarter均不启用时此字段必填） | 非必填 |
+| start_quarter | string | 起始季度，格式为 "YYYYqN" | 必填 |
+| end_quarter | string | 结束季度，格式为 "YYYYqN" | 必填 |
+| date | Optional[string] | 公告日期,返回该日期及之前的数据 | 非必填 |
 | is_latest | Optional[bool] | True：返回最新披露数据，False：返回全部。默认为True | 非必填 |
 | fields | Optional[Union[string, list]] | 返回字段 | 非必填 |
 
@@ -9070,7 +9078,7 @@ symbol  date  broker  net_cap_value
 | end_date | string | 结束日期,eg:"20250802" | 必填 |
 | type | Optional[string] | 多空方向，可选long或short，为空时均返回 | 非必填 |
 | max_rank | Optional[integer] | 最大排名 | 非必填 |
-| rank_type | string | 排名依据，仅接受ratio或line，ratio将返回龙虎比及对应排名信息，line则返回牛熊线及对应排名信息 | 必填 |
+| rank_type | Optional[string] | 排名依据，仅接受ratio或line，ratio将返回龙虎比及对应排名信息，line则返回牛熊线及对应排名信息 | 非必填 |
 
 **15.3. 响应参数**
 
@@ -9319,6 +9327,7 @@ symbol  date  rank  position_type  line  underlying_symbol
 | symbol | Optional[Union[string, List[string]]] | 合约代码：“SC2607.INE” | 非必填 |
 | start_date | string | 开始日期：“YYYYMMDD” | 必填 |
 | end_date | string | 结束日期：“YYYYMMDD” | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **16.3. 响应参数**
 
@@ -9361,6 +9370,7 @@ symbol  date  close_price
 | symbol | Optional[Union[string, List[string]]] | 合约代码：“SC2607.INE” | 非必填 |
 | start_date | string | 开始日期：“YYYYMMDD” | 必填 |
 | end_date | string | 结束日期：“YYYYMMDD” | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **17.3. 响应参数**
 
@@ -9536,6 +9546,7 @@ RB1901.SHF  HC1901.SHF  20180808  4094.0  4100.0  0.998537
 | start_date | string | 开始日期，支持 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，支持 YYYYMMDD | 必填 |
 | broker | string | None | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **21.3. 响应参数**
 
@@ -9582,6 +9593,7 @@ A2605.DCE  20260413  东证期货  1.285892e+09
 | symbol | string | list\[str\] | 非必填 |
 | start_date | string | 开始日期，支持 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，支持 YYYYMMDD | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **22.3. 响应参数**
 
@@ -9625,6 +9637,7 @@ AG  20180803 -75477.0
 | start_date | string | 开始日期，支持 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，支持 YYYYMMDD | 必填 |
 | broker | string | None | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **23.3. 响应参数**
 
@@ -9671,6 +9684,8 @@ broker  date  profit
 | end_date | string | 结束日期，支持 YYYYMMDD | 必填 |
 | broker | string | None | 非必填 |
 | underlying_symbol | string 或 List[string] | 品种代码筛选（如 RB） | 非必填 |
+| underlying_symbol_cn | Optional[Union[string, List[string]]] | 中文品种名称筛选 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **24.3. 响应参数**
 
@@ -9719,6 +9734,7 @@ broker  date  underlying_symbol  underlying_symbol_cn  margin_flow
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
 | broker | string | 席位名称 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **25.3. 响应参数**
 
@@ -10472,7 +10488,7 @@ date  margin_deposits_change  underlying_symbol
 |:---|:---|:---|:---|
 | start_date | string | 开始日期，格式 YYYYMMDD | 必填 |
 | end_date | string | 结束日期，格式 YYYYMMDD | 必填 |
-| symbol | Optional[Union[string, List[string]]] | 期货品种名称 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 期货品种名称 | 非必填 |
 
 **33.3. 响应参数**
 
@@ -10514,6 +10530,7 @@ data
 | start_date | string | 开始日期 | 必填 |
 | end_date | string | 结束日期 | 必填 |
 | position_direction | string/list[string]/None | long / short | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **34.3. 响应参数**
 
@@ -10895,7 +10912,7 @@ symbol  underlying_ticker_symbol  exchange  call_put_code  listed_date  exercise
 
 ```python
 import panda_data
-result = panda_data.get_option_underlying_volatility(
+result = panda_data.get_option_exercise(
    start_date='20260310',
     end_date='20260310',
  )
@@ -22492,6 +22509,7 @@ symbol  period_date  data_value
 | event_code | string/list[string]/None | 日历指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string | 开始日期 YYYYMMDD | 必填 |
 | end_date | string | 结束日期 YYYYMMDD | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -22563,6 +22581,7 @@ event_code  pub_date_bj  event_name_cn  indicator_name_cn  indicator_name_en  pu
 | event_code | string/list[string]/None | 日历指标代码，完整指标码表见文件下载 | 非必填 |
 | start_date | string/None | 开始日期 YYYYMMDD | 必填 |
 | end_date | string/None | 结束日期 YYYYMMDD | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -22612,7 +22631,8 @@ event_code  pub_date_bj  indic_name  datadate  country_code  pub_date  pub_time 
 
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
-| event_code | string/list[string]/None | 日历指标代码，完整指标码表见文件下载 | 必填 |
+| event_code | string/list[string]/None | 日历指标代码，完整指标码表见文件下载 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -22957,7 +22977,7 @@ symbol  name  management_short_name  benchmark
 
 **（二）基金行情数据：**
 
-**1. get_fund_daily - 获取基金日行情数据**
+**1. get_fund_daily - 获取场内基金日行情数据**
 
 **1.1. 方法名：get_fund_daily**
 
@@ -23067,7 +23087,7 @@ symbol  date  close
 7  510050.SH  20250610  2.742
 ```
 
-**2. get_fund_daily_post - 获取基金后复权日行情数据**
+**2. get_fund_daily_post - 获取场内基金后复权日行情数据**
 
 **2.1. 方法名：get_fund_daily_post**
 
@@ -23272,7 +23292,7 @@ symbol  date  close
 116  159915.SZ  20250630  2.133
 ```
 
-**3. get_fund_daily_pre - 获取基金前复权日行情数据**
+**3. get_fund_daily_pre - 获取场内基金前复权日行情数据**
 
 **3.1. 方法名：get_fund_daily_pre**
 

@@ -3,7 +3,7 @@ name: pandadata-api
 description: Pandadata/panda_data Python SDK API reference skill for selecting, calling,
   and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档. Use
   when the user asks to query Pandadata data, choose the right panda_data.get_* method,
-  write or validate panda_data Python examples, inspect request/response fields, or
+  write or validate panda_data 0.0.12 Python examples, inspect request/response fields, or
   install/load/use this skill in Claude Code, Codex, Hermes, OpenClaw, Cursor, or
   WorkBuddy agents.
 license: GPL-3.0-only
@@ -14,6 +14,13 @@ metadata:
   repository_url: https://github.com/quantskills/skill-pandadata-api
   project_type: skill
   collection: pandadata-api
+  maintainer: abgyjaguo
+  supported_runtimes:
+  - cursor
+  - claude-code
+  - codex
+  - hermes
+  - openclaw
 quantSkills:
   project_type: skill
   category: data-api
@@ -23,6 +30,8 @@ quantSkills:
   - market-data
   - python-sdk
   - api-reference
+  # The community registry enum does not yet include Hermes; the authoritative
+  # five-runtime compatibility declaration is metadata.supported_runtimes above.
   platforms:
   - claude-code
   - codex
@@ -44,7 +53,7 @@ quantSkills:
     "placeholder": "请描述需要查询的数据、市场、标的、日期范围、字段，或贴出待排查的 panda_data 调用与报错",
     "required": true
   },
-  "prompt_template": "{{#task}}任务与材料：\n{{task}}\n\n{{/task}}{{#attachments}}用户上传的材料（已放入工作区）：\n{{attachments}}\n\n{{/attachments}}请先从随附 Pandadata 文档中定位准确的 panda_data.get_* 方法及参数/返回字段契约，再按文档编写或排查最小可运行的 Python 调用；不得臆造方法、字段、标的格式或认证步骤，附上代码与验证结果，输出中文报告。"
+  "prompt_template": "{{#task}}任务与材料：\n{{task}}\n\n{{/task}}{{#attachments}}用户上传的材料（已放入工作区）：\n{{attachments}}\n\n{{/attachments}}请先读取 references/sdk-0.0.12.md，再从随附 Pandadata 文档中定位准确的 panda_data.get_* 方法及参数/返回字段契约；不得为标记为 not exported 的接口生成 Python SDK 调用，不得臆造方法、字段、标的格式或认证步骤。按文档编写或排查最小可运行调用，附上验证结果，输出中文报告。"
 }
 ```
 
@@ -55,7 +64,7 @@ Use this skill to route natural-language data requests to the correct `panda_dat
 ## Workflow
 
 1. Identify the data domain: trading calendar, A-share, futures, options, factors, Hong Kong/US equities, macro, funds, or preferred stocks.
-2. Open `references/method-index.md` first, or run `./.venv/bin/python scripts/search_api_docs.py --list-methods` when `.venv` exists.
+2. Open `references/sdk-0.0.12.md`, then `references/method-index.md`, or run `./.venv/bin/python scripts/search_api_docs.py --list-methods` when `.venv` exists.
 3. Load the exact method section before coding:
 
 ```bash
@@ -66,12 +75,14 @@ PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 "$PYTHON_BIN" scripts/search_api_docs.py 股票 分红 --context-lines 4
 ```
 
-4. Use the documented method signature and examples from `references/api-docs.md`. Do not invent parameters, field names, symbols, or authentication steps.
+4. Use the documented method signature and examples from `references/api-docs.md`. If the index marks a method `not exported`, do not generate a Python SDK call. Do not invent parameters, field names, symbols, or authentication steps.
 5. For real API calls, prefer `scripts/call_api.py`; it loads saved credentials, runs setup when credentials are missing, initializes `panda_data` in the same process, then calls the API.
 
 ## Calling Pattern
 
-Use `import panda_data`; Pandadata calls return DataFrame-like tabular results in the examples.
+Use `import panda_data`; this skill requires `panda_data==0.0.12` and Python 3.10 or newer. Pandadata calls return DataFrame-like tabular results in the examples.
+
+Run SDK commands with an interpreter that has 0.0.12 installed. Set `PANDADATA_PYTHON` when needed; common virtual-environment paths are `.venv/bin/python` on POSIX and `.venv\Scripts\python.exe` on Windows. The runtime scripts reject any other installed SDK version.
 
 Install the runtime SDK when real API calls are required:
 
@@ -81,7 +92,7 @@ PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 "$PYTHON_BIN" -m pip install -r requirements.txt
 ```
 
-For first-time setup, prefer the interactive setup script. It installs the SDK, prompts for credentials without echoing the password, validates login, and can optionally save a shell env file at `~/.pandadata/pandadata.env`.
+For first-time setup, prefer the interactive setup script. It installs the pinned SDK, verifies version 0.0.12, prompts for credentials without echoing the password, validates login, and can optionally save a shell env file at `~/.pandadata/pandadata.env`.
 
 ```bash
 PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
@@ -102,7 +113,7 @@ panda_data.init_token(
 )
 ```
 
-The SDK can also read `DEFAULT_USERNAME`, `DEFAULT_PASSWORD`, and `JAVA_SERVICE_BASE_URL` from environment variables. Pass the plain password; the SDK hashes it internally. Do not assume a fixed service URL; use the configured environment or the saved env file.
+The SDK can also read `DEFAULT_USERNAME`, `DEFAULT_PASSWORD`, and `JAVA_SERVICE_BASE_URL` from environment variables. Pass the plain password; the SDK hashes it internally. Do not assume a fixed service URL; use the configured environment or the saved env file. SDK 0.0.12 keeps the token in memory and persists encrypted credentials in `user.json` when `init_token()` succeeds; `--no-save-env` only disables the separate plaintext shell env file.
 
 If credentials were saved by `scripts/setup_runtime.py`, load them before running data scripts:
 
@@ -164,14 +175,15 @@ Before running real calls in a new environment:
 
 ```bash
 python - <<'PY'
+from importlib.metadata import version
 import panda_data
-print("panda_data import ok", getattr(panda_data, "__version__", "unknown"))
+print("panda_data import ok", version("panda-data"), panda_data.__file__)
 PY
 ```
 
 If `panda_data` is unavailable or credentials are missing, report that the SDK/runtime is not configured. The supplied interface document does not define installation, token, or login setup.
 
-Known PyPI runtime dependencies from `panda_data==0.0.9`: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, and `pyarrow`.
+PyPI runtime dependencies from `panda_data==0.0.12`: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`, `websockets>=13.0`, and `requests`.
 
 ## Core Conventions
 
@@ -182,17 +194,25 @@ Known PyPI runtime dependencies from `panda_data==0.0.9`: `pandas>=2.0.0`, `nump
 - Some APIs accept list inputs such as `symbol=["000001.SZ"]`; others show scalar strings such as `symbol="000001.SZ"`. Match the target method's own example.
 - For broad/unfiltered calls, warn the user when the API may return a large table.
 
+## Limitations
+
+- Live availability depends on the configured Pandadata service, account permissions, and upstream data coverage.
+- Treat bundled interface documentation as a contract reference, but apply the SDK 0.0.12 availability exceptions in `references/sdk-0.0.12.md`.
+- This skill is data-access and research tooling. Its examples and outputs do not constitute investment advice.
+
 ## Reference Files
 
 - `references/method-index.md`: compact method map grouped by domain, with line numbers into `api-docs.md`.
+- `references/sdk-0.0.12.md`: supported SDK contract, authentication changes, method reconciliation, and known upstream limitations.
 - `references/api_catalog.json`: method-to-gateway endpoint mapping for API routing checks, preserving the MCP gateway's `/pandaData/...` dispatch paths.
-- `references/api-docs.md`: full Pandadata interface document copied from `接口文档2.md`.
+- `references/api-docs.md`: full Chinese Pandadata interface reference reconciled with SDK 0.0.12.
 - `references/agent-integration.md`: installation, loading, and smoke-test patterns for Claude Code, Codex, Hermes, OpenClaw, Cursor, and WorkBuddy.
 
 ## Agent Usage Rules
 
 - Prefer the bundled reference over memory. Search before answering API-specific questions.
 - Quote method names and parameters exactly as documented.
+- Run `scripts/call_api.py --method <method> --params '{}' --dry-run` when validating that SDK 0.0.12 exports a method.
 - Keep examples minimal and executable; use `head()`, `shape`, or explicit row counts when validating.
 - Separate data retrieval from analysis: first obtain/verify the DataFrame, then transform or analyze it.
 - If a method returns empty data, check date range, symbol format, and required filters before assuming service failure.
