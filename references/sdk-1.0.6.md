@@ -102,6 +102,10 @@ Maintainer: `abgyjaguo`. This skill is data-access/research tooling; outputs are
 
 ## Migration from 1.0.4
 
-1.0.6 adds 62 exported data names (including compatibility aliases), with no removed exports. Twelve existing futures/broker signatures now default their formerly required arguments to empty strings; runtime nonempty validation still applies. The default service URL is now HTTPS. The machine-readable baseline is `references/sdk-contract.json`; `validation.live_service` explicitly remains `not_tested` until service checks are run in an authorized environment.
+1.0.6 adds 62 exported data names (including compatibility aliases), with no removed exports. Twelve existing futures/broker signatures now default their formerly required arguments to empty strings; runtime nonempty validation still applies. The default service URL is now HTTPS. The machine-readable baseline is `references/sdk-contract.json`; `validation.live_service` records bounded account smoke checks separately from full project validation.
 
 Consumer repositories can run `python scripts/check_sdk_contract.py --root <project> --contract references/sdk-contract.json`. The shared `pandadata-compat.yml` reusable workflow provides the same offline check. Dynamic dispatch and response semantics require project tests; static checks do not establish account or server availability.
+
+## Maintaining the machine baseline
+
+After explicitly selecting and installing a release, run `python scripts/build_sdk_contract.py --version <version>`, update the version-specific documentation, regenerate the method index, and run the tests. The generator verifies the published wheel digest and the installed Python sources, and never serializes authentication defaults from private configuration. Keep consumer workflows tied to a reviewed contract commit and propose upgrades through project PRs.

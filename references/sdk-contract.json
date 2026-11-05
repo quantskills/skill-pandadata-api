@@ -9,7 +9,24 @@
   "maintainer": "abgyjaguo",
   "validation": {
     "offline_contract": "tested",
-    "live_service": "not_tested"
+    "live_service": "bounded_smoke_passed",
+    "live_methods": {
+      "get_stock_daily": {
+        "rows": 1,
+        "window": "one trading date",
+        "symbols": 1
+      },
+      "get_factor": {
+        "rows": 20,
+        "window_calendar_days": 30,
+        "symbols": 1
+      },
+      "get_future_daily_post": {
+        "rows": 20,
+        "window_calendar_days": 30,
+        "symbols": 1
+      }
+    }
   },
   "methods": {
     "get_adj_factor": {
@@ -4535,7 +4552,7 @@
       "upstream_warning": false
     },
     "init_token": {
-      "signature": "(username: 'Optional[str]' = '', password: 'Optional[str]' = '', base_url: 'Optional[str]' = 'https://pandadata.pandaaiquant.com', country: 'Optional[str]' = 'CN') -> 'str'",
+      "signature": "(username=..., password=..., base_url=..., country='CN')",
       "parameters": [
         "username",
         "password",

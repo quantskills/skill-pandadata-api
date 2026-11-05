@@ -204,7 +204,7 @@ PyPI runtime dependencies from `panda_data==1.0.6`: `pandas>=2.0.0`, `numpy>=1.2
 
 ## Reference Files
 
-- `references/sdk-contract.json`: signed-by-hash wheel baseline for automated consumer checks; live service validation is tracked separately.
+- `references/sdk-contract.json`: wheel baseline tied to the published SHA-256 for automated consumer checks; bounded live service checks are tracked separately.
 - `scripts/check_sdk_contract.py`: offline contract checker for consumer source and version declarations.
 
 
