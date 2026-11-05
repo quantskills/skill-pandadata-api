@@ -1,7 +1,7 @@
 **接口文档**
 
-> SDK 基准：`panda_data==1.0.4`（[PyPI 发布包](https://pypi.org/project/panda-data/1.0.4/)）。原有 218 个网关接口均已导出；本次另补录 43 个 SDK 数据入口，共 261 个，包含别名及兼容入口。
-> 参数表和签名以 1.0.4 wheel 为准；旧网关响应示例保留用于字段参考，未重新请求生产数据。新增入口仅记录 SDK 可证实的返回说明，不推测完整字段。先在同一进程调用 `init_token()`；认证、实时订阅及服务端限制见 [SDK 兼容说明](sdk-1.0.4.md)。
+> SDK 基准：`panda_data==1.0.6`（[PyPI 发布包](https://pypi.org/project/panda-data/1.0.6/)）。原有 218 个网关接口均已导出；另补录共 105 个 SDK 数据入口，共 323 个，包含别名及兼容入口。
+> 参数表和签名以 1.0.4 wheel 为准；旧网关响应示例保留用于字段参考，未重新请求生产数据。新增入口仅记录 SDK 可证实的返回说明，不推测完整字段。先在同一进程调用 `init_token()`；认证、实时订阅及服务端限制见 [SDK 兼容说明](sdk-1.0.6.md)。
 
 **一. 交易工具**
 
@@ -25698,3 +25698,2364 @@ symbol 使用裸代码（如 AAPL）；frequency 支持 1m、5m、10m、60m。
 ```
 
 不传 symbol 时日期范围不超过 1 个月；传 symbol 时不超过 5 年，并受 SDK 数据量校验限制。
+
+**十一. SDK 1.0.6 补充接口**
+
+以下签名与说明来自已校验摘要的 1.0.6 wheel；不推测完整响应 schema。
+
+**1. get_bond_cash_flow - 获取债券现金流（bond_cash_flow）**
+
+**1.1. 方法名：get_bond_cash_flow**
+
+```text
+get_bond_cash_flow(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**1.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按现金流日期），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按现金流日期），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、cash_flow_type；默认 None | 非必填 |
+
+**1.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取债券现金流（bond_cash_flow）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按现金流日期），YYYYMMDD，必填
+    end_date: 结束日期（按现金流日期），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、cash_flow_type
+```
+
+**2. get_bond_conv_basic - 获取可转债发行基本资料（bond_conv_basic）**
+
+**2.1. 方法名：get_bond_conv_basic**
+
+```text
+get_bond_conv_basic(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**2.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按发行公告日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按发行公告日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date；默认 None | 非必填 |
+
+**2.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取可转债发行基本资料（bond_conv_basic）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按发行公告日），YYYYMMDD，必填
+    end_date: 结束日期（按发行公告日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date
+```
+
+**3. get_bond_conv_call_exec - 获取可转债赎回执行（bond_conv_call_exec）**
+
+**3.1. 方法名：get_bond_conv_call_exec**
+
+```text
+get_bond_conv_call_exec(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**3.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按赎回公告日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按赎回公告日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、call_type；默认 None | 非必填 |
+
+**3.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取可转债赎回执行（bond_conv_call_exec）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按赎回公告日），YYYYMMDD，必填
+    end_date: 结束日期（按赎回公告日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、call_type
+```
+
+**4. get_bond_conv_call_progress - 获取可转债赎回进展（bond_conv_call_progress）**
+
+**4.1. 方法名：get_bond_conv_call_progress**
+
+```text
+get_bond_conv_call_progress(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**4.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按交易日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按交易日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date；默认 None | 非必填 |
+
+**4.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取可转债赎回进展（bond_conv_call_progress）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按交易日），YYYYMMDD，必填
+    end_date: 结束日期（按交易日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date
+```
+
+**5. get_bond_conv_price_change - 获取可转债转股价变动（bond_conv_price_change）**
+
+**5.1. 方法名：get_bond_conv_price_change**
+
+```text
+get_bond_conv_price_change(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**5.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按转股价生效日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按转股价生效日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、change_reason_type；默认 None | 非必填 |
+
+**5.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取可转债转股价变动（bond_conv_price_change）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按转股价生效日），YYYYMMDD，必填
+    end_date: 结束日期（按转股价生效日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、change_reason_type
+```
+
+**6. get_bond_conv_term - 获取可转债转股条款（bond_conv_term）**
+
+**6.1. 方法名：get_bond_conv_term**
+
+```text
+get_bond_conv_term(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**6.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按转股起始日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按转股起始日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date；默认 None | 非必填 |
+
+**6.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取可转债转股条款（bond_conv_term）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按转股起始日），YYYYMMDD，必填
+    end_date: 结束日期（按转股起始日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date
+```
+
+**7. get_bond_coupon - 获取债券票面利率（bond_coupon）**
+
+**7.1. 方法名：get_bond_coupon**
+
+```text
+get_bond_coupon(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**7.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按本段计息起始日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按本段计息起始日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date；默认 None | 非必填 |
+
+**7.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取债券票面利率（bond_coupon）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按本段计息起始日），YYYYMMDD，必填
+    end_date: 结束日期（按本段计息起始日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date
+```
+
+**8. get_bond_daily - 获取债券日行情（bond_daily）**
+
+**8.1. 方法名：get_bond_daily**
+
+```text
+get_bond_daily(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**8.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按交易日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按交易日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date；默认 None | 非必填 |
+
+**8.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取债券日行情（bond_daily）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按交易日），YYYYMMDD，必填
+    end_date: 结束日期（按交易日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date
+```
+
+**9. get_bond_option - 获取债券选择权（bond_option）**
+
+**9.1. 方法名：get_bond_option**
+
+```text
+get_bond_option(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**9.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 转债代码，如 "123254.SZ"，非必填；默认 None | 非必填 |
+| start_date | str | 起始日期（按行权日），YYYYMMDD，必填；默认 None | 必填 |
+| end_date | str | 结束日期（按行权日），YYYYMMDD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、exercise_type；默认 None | 非必填 |
+
+**9.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取债券选择权（bond_option）。
+
+Args:
+    symbol: 转债代码，如 "123254.SZ"，非必填
+    start_date: 起始日期（按行权日），YYYYMMDD，必填
+    end_date: 结束日期（按行权日），YYYYMMDD，必填
+    fields: 返回字段子集。传空返回全部公开字段；传子集时必返 symbol、date、exercise_type
+```
+
+**10. get_factor_style_covariance - 获取计算版因子协方差矩阵 (factor_style_covariance)**
+
+**10.1. 方法名：get_factor_style_covariance**
+
+```text
+get_factor_style_covariance(factor_1: 'str' = '', factor_2: 'str' = '', start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**10.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| factor_1 | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| factor_2 | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| start_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| end_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| fields | Optional[Union[str, List[str]]] | 按下方 SDK 说明及实际服务端契约传入；默认 None | 非必填 |
+
+**10.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取计算版因子协方差矩阵 (factor_style_covariance)。
+
+factor_1/factor_2 必填单值 (55 个因子代码, 不支持列表);
+start_date/end_date 必填 (YYYYMMDD);
+返回固定 4 列: factor_1, factor_2, covariance (年化百分点平方), date。
+```
+
+**11. get_factor_style_residual - 获取 CNEX 股票残差风险与收益 (factor_style_residual)**
+
+**11.1. 方法名：get_factor_style_residual**
+
+```text
+get_factor_style_residual(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**11.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 按下方 SDK 说明及实际服务端契约传入；默认 None | 非必填 |
+| start_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| end_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| fields | Optional[Union[str, List[str]]] | 按下方 SDK 说明及实际服务端契约传入；默认 None | 非必填 |
+
+**11.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取 CNEX 股票残差风险与收益 (factor_style_residual)。
+
+``start_date``/``end_date`` 必填 (YYYYMMDD)；
+返回列: date, symbol, spec_risk (残差风险, %), specific_return (残差收益)。
+```
+
+**12. get_factor_style_return - 获取 CNEX 因子日度收益 (factor_style_return)**
+
+**12.1. 方法名：get_factor_style_return**
+
+```text
+get_factor_style_return(factor: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**12.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| factor | Optional[Union[str, List[str]]] | 按下方 SDK 说明及实际服务端契约传入；默认 None | 非必填 |
+| start_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| end_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| fields | Optional[Union[str, List[str]]] | 按下方 SDK 说明及实际服务端契约传入；默认 None | 非必填 |
+
+**12.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取 CNEX 因子日度收益 (factor_style_return)。
+
+``factor`` 支持 55 个因子代码 (31 行业 + 23 风格 + MARKET), 省略返回全部；
+返回列: date, factor, dly_return (小数形式)。
+```
+
+**13. get_fund_asset_allocation - 获取基金资产配置**
+
+**13.1. 方法名：get_fund_asset_allocation**
+
+```text
+get_fund_asset_allocation(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**13.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**13.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金资产配置
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金资产配置，包含 symbol, date, total_asset, net_asset,
+                  equity_market_value, bond_market_value, cash_market_value,
+                  other_market_value, equity_ratio, bond_ratio, cash_ratio,
+                  other_ratio, info_date, currency
+```
+
+**14. get_fund_asset_allocation_detail - 获取基金资产配置细分**
+
+**14.1. 方法名：get_fund_asset_allocation_detail**
+
+```text
+get_fund_asset_allocation_detail(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, report_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**14.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| report_type | Optional[str] | 报告类型（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**14.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金资产配置细分
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    report_type: 报告类型（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金资产配置细分，包含 symbol, fund_name, info_date,
+                  actual_date, date, report_type, item_code, market_value,
+                  ratio_total, ratio_net, remark
+```
+
+**15. get_fund_bond_distribution - 获取基金券种分布**
+
+**15.1. 方法名：get_fund_bond_distribution**
+
+```text
+get_fund_bond_distribution(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, bond_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**15.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| bond_type | Optional[str] | 债券类别（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**15.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金券种分布
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    bond_type: 债券类别（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金券种分布，包含 symbol, info_date, date, bond_type,
+                  market_value, ratio
+```
+
+**16. get_fund_bond_style - 获取偏债基金风格特征**
+
+**16.1. 方法名：get_fund_bond_style**
+
+```text
+get_fund_bond_style(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, is_new: 'Optional[int]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**16.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| is_new | Optional[int] | 是否最新（1：最新，0：历史）（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**16.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取偏债基金风格特征
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    is_new: 是否最新（1：最新，0：历史）（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 偏债基金风格特征，包含 date, symbol, bond_position,
+                  bond_position_history, leverage_preference,
+                  leverage_preference_history, bond_type, bond_type_history,
+                  duration_preference, duration_preference_history,
+                  credit_feature, credit_feature_history, is_new
+```
+
+**17. get_fund_category_changes - 获取基金持仓分类变动**
+
+**17.1. 方法名：get_fund_category_changes**
+
+```text
+get_fund_category_changes(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, is_new: 'Optional[int]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**17.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| start_date | Optional[str] | 查询起始日期，格式 YYYYMMDD（可选）；默认 None | 非必填 |
+| end_date | Optional[str] | 查询结束日期，格式 YYYYMMDD（可选）；默认 None | 非必填 |
+| is_new | Optional[int] | 是否最新（1：最新，0：历史）（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**17.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金持仓分类变动
+
+参数:
+    symbol: 基金代码，如 "000001.OF"（可选）
+    start_date: 查询起始日期，格式 YYYYMMDD（可选）
+    end_date: 查询结束日期，格式 YYYYMMDD（可选）
+    is_new: 是否最新（1：最新，0：历史）（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金持仓分类变动，包含 symbol, start_date, end_date,
+                  asset_type, type_id, type_name, market, foreign_market, is_new
+```
+
+**18. get_fund_holding_detail - 获取基金持仓明细**
+
+**18.1. 方法名：get_fund_holding_detail**
+
+```text
+get_fund_holding_detail(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, holding_type: 'Optional[str]' = None, report_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**18.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| holding_type | Optional[str] | 持有证券类型（B-债券, E-股票, F-基金）（可选）；默认 None | 非必填 |
+| report_type | Optional[str] | 报告类型（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**18.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金持仓明细
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    holding_type: 持有证券类型（B-债券, E-股票, F-基金）（可选）
+    report_type: 报告类型（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金持仓明细，包含 symbol, date, holding_type, holding_symbol,
+                  holding_exchange, holding_name, hold_volume, market_value,
+                  ratio, info_date, currency, report_type
+```
+
+**19. get_fund_index_category - 获取基金指数分类**
+
+**19.1. 方法名：get_fund_index_category**
+
+```text
+get_fund_index_category(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, is_new: 'Optional[int]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**19.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "159007.SZ"（可选）；默认 None | 非必填 |
+| is_new | Optional[int] | 是否最新（1：最新，0：历史）（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**19.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金指数分类
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "159007.SZ"（可选）
+    is_new: 是否最新（1：最新，0：历史）（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金指数分类，包含 symbol, date, index_symbol,
+                  category_level_1, category_level_2, category_level_3, is_new
+```
+
+**20. get_fund_industry_allocation - 获取基金行业配置**
+
+**20.1. 方法名：get_fund_industry_allocation**
+
+```text
+get_fund_industry_allocation(start_date: 'str' = '', end_date: 'str' = '', exchange: 'Optional[str]' = None, symbol: 'Optional[Union[str, List[str]]]' = None, invest_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**20.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| exchange | Optional[str] | 基金交易市场（必填）；默认 None | 非必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| invest_type | Optional[str] | 投资类型（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**20.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金行业配置
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    exchange: 基金交易市场（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    invest_type: 投资类型（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金行业配置，包含 symbol, exchange, info_date, date,
+                  invest_type, industry_code, industry_standard,
+                  industry_name, market_value, ratio
+```
+
+**21. get_fund_investment_style - 获取基金投资风格**
+
+**21.1. 方法名：get_fund_investment_style**
+
+```text
+get_fund_investment_style(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, scale_style: 'Optional[Union[str, List[str]]]' = None, style_label: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**21.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| scale_style | Optional[Union[str, List[str]]] | 规模风格（可选）；默认 None | 非必填 |
+| style_label | Optional[Union[str, List[str]]] | 价值成长风格（价值/均衡/成长）（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**21.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金投资风格
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    scale_style: 规模风格（可选）
+    style_label: 价值成长风格（价值/均衡/成长）（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金投资风格，包含 symbol, exchange, date, style_score,
+                  scale_score, scale_style, style_label
+```
+
+**22. get_fund_nav - 获取基金历史净值（含收益率）**
+
+**22.1. 方法名：get_fund_nav**
+
+```text
+get_fund_nav(start_date: 'str' = '', end_date: 'str' = '', exchange: 'Optional[str]' = None, symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**22.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| exchange | Optional[str] | 交易市场，取值："OF","SZ","SH"；默认 None | 非必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**22.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金历史净值（含收益率）
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    exchange: 交易市场，取值："OF","SZ","SH"
+    symbol: 基金代码，如 "000001.OF"（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金历史净值及收益率数据，包含 symbol, exchange, date,
+                  unit_nav, publish_date, accumulated_nav, currency,
+                  adjusted_nav, change, change_rate, return_rate,
+                  return_rate_week, return_rate_1week, ..., is_year
+```
+
+**23. get_fund_nav_deviation - 获取基金资产净值偏离情况**
+
+**23.1. 方法名：get_fund_nav_deviation**
+
+```text
+get_fund_nav_deviation(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, report_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**23.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| report_type | Optional[str] | 公告类型（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**23.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金资产净值偏离情况
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    report_type: 公告类型（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金资产净值偏离情况，包含 symbol, info_date, date,
+                  report_type, deviation_count_band, max_deviation,
+                  min_deviation, avg_abs_deviation
+```
+
+**24. get_fund_performance_metrics - 获取基金业绩指标**
+
+**24.1. 方法名：get_fund_performance_metrics**
+
+```text
+get_fund_performance_metrics(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**24.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**24.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金业绩指标
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金业绩指标，包含 symbol, date, fund_class,
+                  max_drawdown_xxx, sharpe_xxx, beta_xxx, alpha_xxx,
+                  standard_deviation_xxx, volatility_xxx
+```
+
+**25. get_fund_stock_portfolio_change - 获取基金股票投资组合变动**
+
+**25.1. 方法名：get_fund_stock_portfolio_change**
+
+```text
+get_fund_stock_portfolio_change(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, change_type: 'Optional[int]' = None, stock_exchange: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**25.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| change_type | Optional[int] | 变动类型（1-买入, 2-卖出）（可选）；默认 None | 非必填 |
+| stock_exchange | Optional[Union[str, List[str]]] | 买卖证券交易市场（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**25.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金股票投资组合变动
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    change_type: 变动类型（1-买入, 2-卖出）（可选）
+    stock_exchange: 买卖证券交易市场（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金股票投资组合变动，包含 symbol, info_date, date,
+                  change_type, stock_exchange, stock_symbol, market_value, ratio
+```
+
+**26. get_fund_stock_style - 获取偏股基金风格特征**
+
+**26.1. 方法名：get_fund_stock_style**
+
+```text
+get_fund_stock_style(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, is_new: 'Optional[int]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**26.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| is_new | Optional[int] | 是否最新（1：最新，0：历史）（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**26.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取偏股基金风格特征
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    is_new: 是否最新（1：最新，0：历史）（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 偏股基金风格特征，包含 date, symbol, industry_feature,
+                  stock_position, industry_feature_history, style_preference,
+                  stock_position_history, is_new
+```
+
+**27. get_fund_stock_trade - 获取基金股票交易信息**
+
+**27.1. 方法名：get_fund_stock_trade**
+
+```text
+get_fund_stock_trade(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, report_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**27.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | str | 查询起始日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| end_date | str | 查询结束日期，格式 YYYYMMDD（必填）；默认 '' | 必填 |
+| symbol | Optional[Union[str, List[str]]] | 基金代码，如 "000001.OF"（可选）；默认 None | 非必填 |
+| report_type | Optional[str] | 报告类型（年报/半年报）（可选）；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表（可选）；默认 None | 非必填 |
+
+**27.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取基金股票交易信息
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "000001.OF"（可选）
+    report_type: 报告类型（年报/半年报）（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: 基金股票交易信息，包含 symbol, exchange, info_date, date,
+                  report_type, buy_cost, sell_income, balance
+```
+
+**28. get_future_second - 获取期货次主力合约数据**
+
+**28.1. 方法名：get_future_second**
+
+```text
+get_future_second(underlying_symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**28.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| underlying_symbol | Optional[Union[str, List[str]]] | 期货品种，非必填；默认 None | 非必填 |
+| start_date | str | 开始日期,eg:"20250702"，必填；默认 None | 必填 |
+| end_date | str | 结束日期,eg:"20250802"，必填；默认 None | 必填 |
+
+**28.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取期货次主力合约数据
+
+Args:
+    underlying_symbol (string): 期货品种，非必填
+    start_date (string): 开始日期,eg:"20250702"，必填
+    end_date (string): 结束日期,eg:"20250802"，必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_future_second(
+    ...     underlying_symbol=["A","AG"],
+    ...     start_date="20250701",
+    ...     end_date="20250710",
+    ... )
+```
+
+**29. get_hk_etf_daily - 获取港股ETF日线数据**
+
+**29.1. 方法名：get_hk_etf_daily**
+
+```text
+get_hk_etf_daily(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**29.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| start_date | str | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填；默认 None | 必填 |
+| end_date | str | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**29.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取港股ETF日线数据
+
+当前数据侧仅产出 1D 日线（暂无 1W/1M 周月线），接口固定返回日线。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_etf_daily(
+    ...     symbol=["02800.HK"],
+    ...     start_date="20250101",
+    ...     end_date="20250131",
+    ...     fields=[],
+    ... )
+```
+
+**30. get_hk_etf_detail - 获取港股ETF基本信息-按日快照（只读 stock_symbol_hk_etf_daily，month=YYYYMM 分区）**
+
+**30.1. 方法名：get_hk_etf_detail**
+
+```text
+get_hk_etf_detail(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**30.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，如 "02800.HK"，可传单个或列表，为空返回全部，非必填；默认 '' | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| date | Optional[str] | 快照交易日，格式 "YYYYMMDD" 或 "YYYY-MM-DD"，返回该交易日全部 symbol 快照，为空返回最新快照，非必填；默认 None | 非必填 |
+
+**30.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取港股ETF基本信息-按日快照（只读 stock_symbol_hk_etf_daily，month=YYYYMM 分区）。
+
+Args:
+    date (Optional[str]): 快照交易日，格式 "YYYYMMDD" 或 "YYYY-MM-DD"，返回该交易日全部 symbol 快照，为空返回最新快照，非必填
+    symbol (Optional[Union[str, List[str]]]): ETF代码，如 "02800.HK"，可传单个或列表，为空返回全部，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_etf_detail(
+    ...     date="20260902",
+    ...     fields=["symbol", "name", "status", "trading_code"],
+    ... )
+```
+
+**31. get_hk_etf_detail_all - 获取港股ETF基本信息**
+
+**31.1. 方法名：get_hk_etf_detail_all**
+
+```text
+get_hk_etf_detail_all(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, status: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**31.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，如 "02800.HK"，非必填；默认 '' | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| status | Optional[int] | 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填；默认 None | 非必填 |
+
+**31.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取港股ETF基本信息
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，如 "02800.HK"，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    status (Optional[int]): 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_etf_detail_all(
+    ...     symbol=["02800.HK", "02801.HK"],
+    ...     fields=[""],
+    ...     status=None,
+    ... )
+```
+
+**32. get_hk_etf_dividend_event - 获取港股ETF分红相关的事件**
+
+**32.1. 方法名：get_hk_etf_dividend_event**
+
+```text
+get_hk_etf_dividend_event(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**32.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| start_date | str | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填；默认 None | 必填 |
+| end_date | str | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**32.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取港股ETF分红相关的事件
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_etf_dividend_event(
+    ...     symbol=["02800.HK"],
+    ...     start_date="20250101",
+    ...     end_date="20260501",
+    ...     fields=[],
+    ... )
+```
+
+**33. get_hk_etf_investor_concentration - 获取港股ETF投资者集中度**
+
+**33.1. 方法名：get_hk_etf_investor_concentration**
+
+```text
+get_hk_etf_investor_concentration(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**33.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**33.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取港股ETF投资者集中度
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_etf_investor_concentration(
+    ...     symbol=["02800.HK"],
+    ...     fields=[],
+    ... )
+```
+
+**34. get_hk_etf_investor_ranking - 获取港股ETF投资者排行**
+
+**34.1. 方法名：get_hk_etf_investor_ranking**
+
+```text
+get_hk_etf_investor_ranking(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, max_rank: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**34.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| max_rank | Optional[int] | 最大返回排名（小于等于20的正整数），默认为空返回前20名，非必填；默认 None | 非必填 |
+
+**34.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取港股ETF投资者排行
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    max_rank (Optional[int]): 最大返回排名（小于等于20的正整数），默认为空返回前20名，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_etf_investor_ranking(
+    ...     symbol=["02800.HK"],
+    ...     fields=[],
+    ...     max_rank=10,
+    ... )
+```
+
+**35. get_hk_etf_top20_concentration - 获取港股ETF前20投资者集中度**
+
+**35.1. 方法名：get_hk_etf_top20_concentration**
+
+```text
+get_hk_etf_top20_concentration(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**35.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**35.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取港股ETF前20投资者集中度
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_etf_top20_concentration(
+    ...     symbol=["02800.HK"],
+    ...     fields=[],
+    ... )
+```
+
+**36. get_option_commodity_rank - 获取商品期权持仓排名**
+
+**36.1. 方法名：get_option_commodity_rank**
+
+```text
+get_option_commodity_rank(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, exchange: 'Optional[str]' = None, contract_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**36.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 期权标的交易代码，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| end_date | str | 查询结束日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| exchange | Optional[str] | 交易市场编码，非必填；默认 None | 非必填 |
+| contract_type | Optional[str] | 期权合约类型，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表，非必填；默认 None | 非必填 |
+
+**36.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取商品期权持仓排名
+
+Args:
+    symbol (str or list of str, optional): 期权标的交易代码，非必填
+    start_date (str): 查询起始日期，格式为 "YYYYMMDD"
+    end_date (str): 查询结束日期，格式为 "YYYYMMDD"
+    exchange (str, optional): 交易市场编码，非必填
+    contract_type (str, optional): 期权合约类型，非必填
+    fields (str or list of str, optional): 需要返回的字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame: 包含字段 symbol, date, exchange, name, contract_type, party_name, rank_type,
+                  rank, position_value, change
+```
+
+**37. get_option_margin - 获取期权保证金**
+
+**37.1. 方法名：get_option_margin**
+
+```text
+get_option_margin(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, exchange: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**37.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 期权交易代码，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| end_date | str | 查询结束日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| exchange | Optional[str] | 交易市场，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表，非必填；默认 None | 非必填 |
+
+**37.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取期权保证金
+
+Args:
+    symbol (str or list of str, optional): 期权交易代码，非必填
+    start_date (str): 查询起始日期，格式为 "YYYYMMDD"
+    end_date (str): 查询结束日期，格式为 "YYYYMMDD"
+    exchange (str, optional): 交易市场，非必填
+    fields (str or list of str, optional): 需要返回的字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame: 包含字段 symbol, date, exchange, name, margin
+```
+
+**38. get_option_trade_rank - 获取期权期货公司交易排名**
+
+**38.1. 方法名：get_option_trade_rank**
+
+```text
+get_option_trade_rank(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, exchange: 'Optional[str]' = None, stats_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**38.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 期权标的交易代码，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| end_date | str | 查询结束日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| exchange | Optional[str] | 交易市场编码，非必填；默认 None | 非必填 |
+| stats_type | Optional[str] | 统计项目类型，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表，非必填；默认 None | 非必填 |
+
+**38.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取期权期货公司交易排名
+
+Args:
+    symbol (str or list of str, optional): 期权标的交易代码，非必填
+    start_date (str): 查询起始日期，格式为 "YYYYMMDD"
+    end_date (str): 查询结束日期，格式为 "YYYYMMDD"
+    exchange (str, optional): 交易市场编码，非必填
+    stats_type (str, optional): 统计项目类型，非必填
+    fields (str or list of str, optional): 需要返回的字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame: 包含字段 symbol, date, exchange, name, rank, volume, party_name, stats_type
+```
+
+**39. get_option_trade_stats - 获取期权交易信息**
+
+**39.1. 方法名：get_option_trade_stats**
+
+```text
+get_option_trade_stats(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, exchange: 'Optional[str]' = None, stats_interval: 'Optional[int]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**39.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 期权标的交易代码，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| end_date | str | 查询结束日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| exchange | Optional[str] | 交易市场编码，非必填；默认 None | 非必填 |
+| stats_interval | Optional[int] | 数据统计区间（1：年，2：月，3：周，4：日），非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表，非必填；默认 None | 非必填 |
+
+**39.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取期权交易信息
+
+Args:
+    symbol (str or list of str, optional): 期权标的交易代码，非必填
+    start_date (str): 查询起始日期，格式为 "YYYYMMDD"
+    end_date (str): 查询结束日期，格式为 "YYYYMMDD"
+    exchange (str, optional): 交易市场编码，非必填
+    stats_interval (int, optional): 数据统计区间（1：年，2：月，3：周，4：日），非必填
+    fields (str or list of str, optional): 需要返回的字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame: 包含字段 symbol, date, exchange, name, stats_interval, turnover_volume,
+                  call_volume, put_volume, put_call_ratio, open_interest, call_open_interest,
+                  put_open_interest
+```
+
+**40. get_option_underlying_exercise - 获取期权标的行权信息**
+
+**40.1. 方法名：get_option_underlying_exercise**
+
+```text
+get_option_underlying_exercise(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, contract_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**40.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 期权标的交易代码，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| end_date | str | 查询结束日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| contract_type | Optional[str] | 期权合约类型（CO：认购期权，PO：认沽期权），非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表，非必填；默认 None | 非必填 |
+
+**40.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取期权标的行权信息
+
+Args:
+    symbol (str or list of str, optional): 期权标的交易代码，非必填
+    start_date (str): 查询起始日期，格式为 "YYYYMMDD"
+    end_date (str): 查询结束日期，格式为 "YYYYMMDD"
+    contract_type (str, optional): 期权合约类型（CO：认购期权，PO：认沽期权），非必填
+    fields (str or list of str, optional): 需要返回的字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame: 包含字段 symbol, exercise_date, contract_type, exercise_volume
+```
+
+**41. get_option_variety_rank - 获取期权品种成交排名**
+
+**41.1. 方法名：get_option_variety_rank**
+
+```text
+get_option_variety_rank(underlying_name: 'Optional[str]' = None, start_date: 'str' = None, end_date: 'str' = None, exchange: 'Optional[str]' = None, underlying_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**41.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| underlying_name | Optional[str] | 品种名称（如"苹果"），非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| end_date | str | 查询结束日期，格式为 "YYYYMMDD"；默认 None | 必填 |
+| exchange | Optional[str] | 交易市场代码，非必填；默认 None | 非必填 |
+| underlying_type | Optional[str] | 品种类型，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 需要返回的字段列表，非必填；默认 None | 非必填 |
+
+**41.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取期权品种成交排名
+
+Args:
+    underlying_name (str, optional): 品种名称（如"苹果"），非必填
+    start_date (str): 查询起始日期，格式为 "YYYYMMDD"
+    end_date (str): 查询结束日期，格式为 "YYYYMMDD"
+    exchange (str, optional): 交易市场代码，非必填
+    underlying_type (str, optional): 品种类型，非必填
+    fields (str or list of str, optional): 需要返回的字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame: 包含字段 underlying_name, date, exchange, underlying_type, party_name, rank_type,
+                  rank, position_value, change
+```
+
+**42. get_rf_rate - 获取币种与无风险利率 (rf_rate)**
+
+**42.1. 方法名：get_rf_rate**
+
+```text
+get_rf_rate(currency: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**42.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| currency | Optional[Union[str, List[str]]] | 按下方 SDK 说明及实际服务端契约传入；默认 None | 非必填 |
+| start_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| end_date | str | 按下方 SDK 说明及实际服务端契约传入；默认 '' | 必填 |
+| fields | Optional[Union[str, List[str]]] | 按下方 SDK 说明及实际服务端契约传入；默认 None | 非必填 |
+
+**42.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取币种与无风险利率 (rf_rate)。
+
+返回列: date, currency, rf_rate (%)。
+```
+
+**43. get_stock_ipo_first_day - 获取 IPO 上市首日表现数据（stock_ipo_first_day）**
+
+**43.1. 方法名：get_stock_ipo_first_day**
+
+```text
+get_stock_ipo_first_day(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**43.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 股票代码，单个或列表，如 "688981.SH"，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期（按上市日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| end_date | str | 查询结束日期（按上市日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集，非必填；传空返回全部列，传子集时必返字段 symbol、date 仍会返回；默认 None | 非必填 |
+
+**43.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取 IPO 上市首日表现数据（stock_ipo_first_day）
+
+Args:
+    symbol: 股票代码，单个或列表，如 "688981.SH"，非必填
+    start_date: 查询起始日期（按上市日期），格式 "YYYYMMDD"，必填
+    end_date: 查询结束日期（按上市日期），格式 "YYYYMMDD"，必填
+    fields: 返回字段子集，非必填；传空返回全部列，传子集时必返字段 symbol、date 仍会返回
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_stock_ipo_first_day(
+    ... start_date="20250101",
+    ... end_date="20251231",
+    ... )
+    ... print(result)
+```
+
+**44. get_stock_ipo_issuance - 获取股票首次上市信息数据（stock_ipo_issuance，含北交所）**
+
+**44.1. 方法名：get_stock_ipo_issuance**
+
+```text
+get_stock_ipo_issuance(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**44.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 股票代码，单个或列表，如 "688981.SH"，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期（按上市日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| end_date | str | 查询结束日期（按上市日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集，非必填；传空返回全部列，传子集时必返字段 symbol、date 仍会返回；默认 None | 非必填 |
+
+**44.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取股票首次上市信息数据（stock_ipo_issuance，含北交所）
+
+Args:
+    symbol: 股票代码，单个或列表，如 "688981.SH"，非必填
+    start_date: 查询起始日期（按上市日期），格式 "YYYYMMDD"，必填
+    end_date: 查询结束日期（按上市日期），格式 "YYYYMMDD"，必填
+    fields: 返回字段子集，非必填；传空返回全部列，传子集时必返字段 symbol、date 仍会返回
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_stock_ipo_issuance(
+    ... start_date="20250101",
+    ... end_date="20251231",
+    ... )
+    ... print(result)
+```
+
+**45. get_stock_ipo_listing - 获取新股上市数据（stock_ipo_listing）**
+
+**45.1. 方法名：get_stock_ipo_listing**
+
+```text
+get_stock_ipo_listing(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**45.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 股票代码，单个或列表，如 "688981.SH"，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期（按上市日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| end_date | str | 查询结束日期（按上市日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集，非必填；传空返回全部列，传子集时必返字段 symbol、date 仍会返回；默认 None | 非必填 |
+
+**45.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取新股上市数据（stock_ipo_listing）
+
+Args:
+    symbol: 股票代码，单个或列表，如 "688981.SH"，非必填
+    start_date: 查询起始日期（按上市日期），格式 "YYYYMMDD"，必填
+    end_date: 查询结束日期（按上市日期），格式 "YYYYMMDD"，必填
+    fields: 返回字段子集，非必填；传空返回全部列，传子集时必返字段 symbol、date 仍会返回
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_stock_ipo_listing(
+    ... start_date="20250101",
+    ... end_date="20251231",
+    ... )
+    ... print(result)
+```
+
+**46. get_stock_ipo_offline_bid - 获取新股网下询价明细数据（stock_ipo_offline_bid，仅沪深，不含北交所）**
+
+**46.1. 方法名：get_stock_ipo_offline_bid**
+
+```text
+get_stock_ipo_offline_bid(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, investor_name: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**46.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 股票代码，单个或列表，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期（按询价结果公布日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| end_date | str | 查询结束日期（按询价结果公布日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| investor_name | Optional[Union[str, List[str]]] | 询价机构（配售对象管理人）名称过滤，单个或列表，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集，非必填；传空返回全部列，传子集时必返字段；默认 None | 非必填 |
+
+**46.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取新股网下询价明细数据（stock_ipo_offline_bid，仅沪深，不含北交所）
+
+Args:
+    symbol: 股票代码，单个或列表，非必填
+    start_date: 查询起始日期（按询价结果公布日期），格式 "YYYYMMDD"，必填
+    end_date: 查询结束日期（按询价结果公布日期），格式 "YYYYMMDD"，必填
+    investor_name: 询价机构（配售对象管理人）名称过滤，单个或列表，非必填
+    fields: 返回字段子集，非必填；传空返回全部列，传子集时必返字段
+        symbol、date、investor_name、org_name 仍会返回（单只新股上万行，缺这两列无法定位到行）
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_stock_ipo_offline_bid(
+    ... symbol="688981.SH",
+    ... start_date="20200701",
+    ... end_date="20200731",
+    ... )
+    ... print(result)
+```
+
+**47. get_stock_ipo_offline_placing - 获取新股网下发行配售结果数据（stock_ipo_offline_placing，仅沪深，不含北交所）**
+
+**47.1. 方法名：get_stock_ipo_offline_placing**
+
+```text
+get_stock_ipo_offline_placing(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, org_name: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**47.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 股票代码，单个或列表，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期（按网上发行日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| end_date | str | 查询结束日期（按网上发行日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| org_name | Optional[Union[str, List[str]]] | 配售对象名称过滤，单个或列表，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集，非必填；传空返回全部列，传子集时必返字段；默认 None | 非必填 |
+
+**47.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取新股网下发行配售结果数据（stock_ipo_offline_placing，仅沪深，不含北交所）
+
+Args:
+    symbol: 股票代码，单个或列表，非必填
+    start_date: 查询起始日期（按网上发行日期），格式 "YYYYMMDD"，必填
+    end_date: 查询结束日期（按网上发行日期），格式 "YYYYMMDD"，必填
+    org_name: 配售对象名称过滤，单个或列表，非必填
+    fields: 返回字段子集，非必填；传空返回全部列，传子集时必返字段
+        symbol、date、org_name 仍会返回（单只新股上万行，配售对象名是唯一可读定位列）
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_stock_ipo_offline_placing(
+    ... symbol="688981.SH",
+    ... start_date="20190701",
+    ... end_date="20190731",
+    ... )
+    ... print(result)
+```
+
+**48. get_stock_ipo_offline_stat - 获取网下配售统计数据（stock_ipo_offline_stat，仅沪深，不含北交所）**
+
+**48.1. 方法名：get_stock_ipo_offline_stat**
+
+```text
+get_stock_ipo_offline_stat(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, investor_type: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**48.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 股票代码，单个或列表，非必填；默认 None | 非必填 |
+| start_date | str | 查询起始日期（按配售结果公布日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| end_date | str | 查询结束日期（按配售结果公布日期），格式 "YYYYMMDD"，必填；默认 None | 必填 |
+| investor_type | Optional[Union[str, List[str]]] | 投资者类别过滤（原始码，如 "1"/"2"/"3"），单个或列表，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段子集，非必填；传空返回全部列，传子集时必返字段；默认 None | 非必填 |
+
+**48.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取网下配售统计数据（stock_ipo_offline_stat，仅沪深，不含北交所）
+
+Args:
+    symbol: 股票代码，单个或列表，非必填
+    start_date: 查询起始日期（按配售结果公布日期），格式 "YYYYMMDD"，必填
+    end_date: 查询结束日期（按配售结果公布日期），格式 "YYYYMMDD"，必填
+    investor_type: 投资者类别过滤（原始码，如 "1"/"2"/"3"），单个或列表，非必填
+    fields: 返回字段子集，非必填；传空返回全部列，传子集时必返字段
+        symbol、date、investor_type 仍会返回
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_stock_ipo_offline_stat(
+    ... symbol="688981.SH",
+    ... start_date="20200601",
+    ... end_date="20200731",
+    ... )
+    ... print(result)
+```
+
+**49. get_us_etf_daily - 获取美股ETF日线数据**
+
+**49.1. 方法名：get_us_etf_daily**
+
+```text
+get_us_etf_daily(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**49.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| start_date | str | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填；默认 None | 必填 |
+| end_date | str | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**49.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股ETF日线数据
+
+当前数据侧仅产出 1D 日线（暂无 1W/1M 周月线），接口固定返回日线。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_etf_daily(
+    ...     symbol=["SPY"],
+    ...     start_date="20250101",
+    ...     end_date="20250131",
+    ...     fields=[],
+    ... )
+```
+
+**50. get_us_etf_detail - 获取美股ETF基本信息-按日快照（只读 stock_symbol_us_etf_daily，month=YYYYMM 分区）**
+
+**50.1. 方法名：get_us_etf_detail**
+
+```text
+get_us_etf_detail(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**50.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，如 "SPY"、"QQQ"，可传单个或列表，为空返回全部，非必填；默认 '' | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| date | Optional[str] | 快照交易日，格式 "YYYYMMDD" 或 "YYYY-MM-DD"，返回该交易日全部 symbol 快照，为空返回最新快照，非必填；默认 None | 非必填 |
+
+**50.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股ETF基本信息-按日快照（只读 stock_symbol_us_etf_daily，month=YYYYMM 分区）。
+
+Args:
+    date (Optional[str]): 快照交易日，格式 "YYYYMMDD" 或 "YYYY-MM-DD"，返回该交易日全部 symbol 快照，为空返回最新快照，非必填
+    symbol (Optional[Union[str, List[str]]]): ETF代码，如 "SPY"、"QQQ"，可传单个或列表，为空返回全部，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_etf_detail(
+    ...     date="20260902",
+    ...     fields=["symbol", "name", "status", "isin_code"],
+    ... )
+```
+
+**51. get_us_etf_detail_all - 获取美股ETF基本信息**
+
+**51.1. 方法名：get_us_etf_detail_all**
+
+```text
+get_us_etf_detail_all(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, status: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**51.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，如 "SPY"、"QQQ"，非必填；默认 '' | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| status | Optional[int] | 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填；默认 None | 非必填 |
+
+**51.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股ETF基本信息
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，如 "SPY"、"QQQ"，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    status (Optional[int]): 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_etf_detail(
+    ...     symbol=["SPY", "QQQ"],
+    ...     fields=[""],
+    ...     status=None,
+    ... )
+```
+
+**52. get_us_etf_dividend_activity - 获取美股ETF分红相关的事件**
+
+**52.1. 方法名：get_us_etf_dividend_activity**
+
+```text
+get_us_etf_dividend_activity(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**52.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| start_date | str | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填；默认 None | 必填 |
+| end_date | str | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**52.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股ETF分红相关的事件
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_etf_dividend_activity(
+    ...     symbol=["SPY"],
+    ...     fields=[],
+    ...     start_date="20250101",
+    ...     end_date="20260501",
+    ... )
+```
+
+**53. get_us_etf_investor_centralization - 获取美股ETF投资者集中度**
+
+**53.1. 方法名：get_us_etf_investor_centralization**
+
+```text
+get_us_etf_investor_centralization(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**53.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**53.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股ETF投资者集中度
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_etf_investor_centralization(
+    ...     symbol=["SPY"],
+    ...     fields=[],
+    ... )
+```
+
+**54. get_us_etf_investor_leaderboard - 获取美股ETF投资者排行**
+
+**54.1. 方法名：get_us_etf_investor_leaderboard**
+
+```text
+get_us_etf_investor_leaderboard(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, max_rank: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**54.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| max_rank | Optional[int] | 最大返回排名（小于等于20的正整数），默认为空返回前20名，非必填；默认 None | 非必填 |
+
+**54.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股ETF投资者排行
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    max_rank (Optional[int]): 最大返回排名（小于等于20的正整数），默认为空返回前20名，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_etf_investor_leaderboard(
+    ...     symbol=["SPY"],
+    ...     fields=[],
+    ...     max_rank=10,
+    ... )
+```
+
+**55. get_us_etf_top20_centralization - 获取美股ETF前20投资者集中度**
+
+**55.1. 方法名：get_us_etf_top20_centralization**
+
+```text
+get_us_etf_top20_centralization(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**55.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | ETF代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**55.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股ETF前20投资者集中度
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): ETF代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_etf_top20_centralization(
+    ...     symbol=["SPY"],
+    ...     fields=[],
+    ... )
+```
+
+**56. get_us_short_interest - 获取美股空头（Short Interest）数据**
+
+**56.1. 方法名：get_us_short_interest**
+
+```text
+get_us_short_interest(symbol: 'Optional[Union[str, List[str]]]' = None, start_month: 'str' = '', end_month: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**56.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | 股票代码，裸代码如 AAPL，非必填；默认 None | 非必填 |
+| start_month | str | 开始月份，格式 YYYYMM，如 "202608"，必填；默认 '' | 必填 |
+| end_month | str | 结束月份，格式 YYYYMM，如 "202608"，与开始月份间隔不超过5年，必填；默认 '' | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段，非必填；传空返回全部字段；默认 None | 非必填 |
+
+**56.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股空头（Short Interest）数据。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): 股票代码，裸代码如 AAPL，非必填
+    start_month (str): 开始月份，格式 YYYYMM，如 "202608"，必填
+    end_month (str): 结束月份，格式 YYYYMM，如 "202608"，与开始月份间隔不超过5年，必填
+    fields (Optional[Union[str, List[str]]]): 返回字段，非必填；传空返回全部字段
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_short_interest(
+    ...     symbol=["AAPL"],
+    ...     start_month="202606",
+    ...     end_month="202608",
+    ... )
+```
+
+**57. get_us_warrant_daily - 获取美股轮证warrant日线数据**
+
+**57.1. 方法名：get_us_warrant_daily**
+
+```text
+get_us_warrant_daily(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**57.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | warrant代码，非必填；默认 None | 非必填 |
+| start_date | str | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填；默认 None | 必填 |
+| end_date | str | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填；默认 None | 必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**57.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股轮证warrant日线数据
+
+当前数据侧仅产出 1D 日线（暂无 1W/1M 周月线），接口固定返回日线。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): warrant代码，非必填
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_warrant_daily(
+    ...     symbol=[""],
+    ...     start_date="20250101",
+    ...     end_date="20250131",
+    ...     fields=[],
+    ... )
+```
+
+**58. get_us_warrant_detail - 获取美股轮证warrant基本信息-按日快照（只读 stock_symbol_us_warrant_daily，month=YYYYMM 分区）**
+
+**58.1. 方法名：get_us_warrant_detail**
+
+```text
+get_us_warrant_detail(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**58.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | warrant代码，可传单个或列表，为空返回全部，非必填；默认 '' | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| date | Optional[str] | 快照交易日，格式 "YYYYMMDD" 或 "YYYY-MM-DD"，返回该交易日全部 symbol 快照，为空返回最新快照，非必填；默认 None | 非必填 |
+
+**58.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股轮证warrant基本信息-按日快照（只读 stock_symbol_us_warrant_daily，month=YYYYMM 分区）。
+
+Args:
+    date (Optional[str]): 快照交易日，格式 "YYYYMMDD" 或 "YYYY-MM-DD"，返回该交易日全部 symbol 快照，为空返回最新快照，非必填
+    symbol (Optional[Union[str, List[str]]]): warrant代码，可传单个或列表，为空返回全部，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_warrant_detail(
+    ...     date="20260901",
+    ...     fields=["symbol", "name", "status", "underlying_symbol"],
+    ... )
+```
+
+**59. get_us_warrant_detail_all - 获取美股轮证warrant基本信息**
+
+**59.1. 方法名：get_us_warrant_detail_all**
+
+```text
+get_us_warrant_detail_all(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, status: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**59.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | warrant代码，非必填；默认 '' | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| status | Optional[int] | 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填；默认 None | 非必填 |
+
+**59.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股轮证warrant基本信息
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): warrant代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    status (Optional[int]): 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_warrant_detail_all(
+    ...     symbol=[""],
+    ...     fields=[""],
+    ...     status=None,
+    ... )
+```
+
+**60. get_us_warrant_investor_centralization - 获取美股轮证warrant投资者集中度**
+
+**60.1. 方法名：get_us_warrant_investor_centralization**
+
+```text
+get_us_warrant_investor_centralization(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**60.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | warrant代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**60.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股轮证warrant投资者集中度
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): warrant代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_warrant_investor_centralization(
+    ...     symbol=[""],
+    ...     fields=[],
+    ... )
+```
+
+**61. get_us_warrant_investor_leaderboard - 获取美股轮证warrant投资者排行**
+
+**61.1. 方法名：get_us_warrant_investor_leaderboard**
+
+```text
+get_us_warrant_investor_leaderboard(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, max_rank: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**61.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | warrant代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+| max_rank | Optional[int] | 最大返回排名（小于等于20的正整数），默认为空返回前20名，非必填；默认 None | 非必填 |
+
+**61.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股轮证warrant投资者排行
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): warrant代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    max_rank (Optional[int]): 最大返回排名（小于等于20的正整数），默认为空返回前20名，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_warrant_investor_leaderboard(
+    ...     symbol=[""],
+    ...     fields=[],
+    ...     max_rank=10,
+    ... )
+```
+
+**62. get_us_warrant_top20_centralization - 获取美股轮证warrant前20投资者集中度**
+
+**62.1. 方法名：get_us_warrant_top20_centralization**
+
+```text
+get_us_warrant_top20_centralization(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**62.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[str, List[str]]] | warrant代码，非必填；默认 None | 非必填 |
+| fields | Optional[Union[str, List[str]]] | 返回字段列表，非必填；默认 None | 非必填 |
+
+**62.3. 响应参数与限制**
+
+返回类型：`pd.DataFrame`。字段语义与完整响应以服务端文档为准；以下保留 SDK 发布说明。
+
+```text
+获取美股轮证warrant前20投资者集中度
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): warrant代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_warrant_top20_centralization(
+    ...     symbol=[""],
+    ...     fields=[],
+    ... )
+```

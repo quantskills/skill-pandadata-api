@@ -2,9 +2,9 @@
 
 Generated from `api-docs.md`. Use line numbers with `sed -n '<line>,+120p' references/api-docs.md`, or run `python scripts/search_api_docs.py --method <method>`.
 
-Total methods: 261
+Total methods: 323
 
-SDK 1.0.4 directly exports 261 of these documented methods.
+SDK 1.0.6 directly exports 323 of these documented methods.
 All indexed methods are exported; server availability still depends on the service and account.
 
 
@@ -272,3 +272,65 @@ All indexed methods are exported; server availability still depends on the servi
 | SDK 1.0.4 补充接口 | - | `get_us_index_daily` | 获取美股指数日线数据 | 25592 |
 | SDK 1.0.4 补充接口 | - | `get_us_index_detail` | 获取美股指数基本信息 | 25634 |
 | SDK 1.0.4 补充接口 | - | `get_us_min` | 获取美股分钟线数据 | 25671 |
+| SDK 1.0.6 补充接口 | - | `get_bond_cash_flow` | 获取债券现金流（bond_cash_flow） | 25706 |
+| SDK 1.0.6 补充接口 | - | `get_bond_conv_basic` | 获取可转债发行基本资料（bond_conv_basic） | 25737 |
+| SDK 1.0.6 补充接口 | - | `get_bond_conv_call_exec` | 获取可转债赎回执行（bond_conv_call_exec） | 25768 |
+| SDK 1.0.6 补充接口 | - | `get_bond_conv_call_progress` | 获取可转债赎回进展（bond_conv_call_progress） | 25799 |
+| SDK 1.0.6 补充接口 | - | `get_bond_conv_price_change` | 获取可转债转股价变动（bond_conv_price_change） | 25830 |
+| SDK 1.0.6 补充接口 | - | `get_bond_conv_term` | 获取可转债转股条款（bond_conv_term） | 25861 |
+| SDK 1.0.6 补充接口 | - | `get_bond_coupon` | 获取债券票面利率（bond_coupon） | 25892 |
+| SDK 1.0.6 补充接口 | - | `get_bond_daily` | 获取债券日行情（bond_daily） | 25923 |
+| SDK 1.0.6 补充接口 | - | `get_bond_option` | 获取债券选择权（bond_option） | 25954 |
+| SDK 1.0.6 补充接口 | - | `get_factor_style_covariance` | 获取计算版因子协方差矩阵 (factor_style_covariance) | 25985 |
+| SDK 1.0.6 补充接口 | - | `get_factor_style_residual` | 获取 CNEX 股票残差风险与收益 (factor_style_residual) | 26015 |
+| SDK 1.0.6 补充接口 | - | `get_factor_style_return` | 获取 CNEX 因子日度收益 (factor_style_return) | 26043 |
+| SDK 1.0.6 补充接口 | - | `get_fund_asset_allocation` | 获取基金资产配置 | 26071 |
+| SDK 1.0.6 补充接口 | - | `get_fund_asset_allocation_detail` | 获取基金资产配置细分 | 26107 |
+| SDK 1.0.6 补充接口 | - | `get_fund_bond_distribution` | 获取基金券种分布 | 26144 |
+| SDK 1.0.6 补充接口 | - | `get_fund_bond_style` | 获取偏债基金风格特征 | 26180 |
+| SDK 1.0.6 补充接口 | - | `get_fund_category_changes` | 获取基金持仓分类变动 | 26219 |
+| SDK 1.0.6 补充接口 | - | `get_fund_holding_detail` | 获取基金持仓明细 | 26255 |
+| SDK 1.0.6 补充接口 | - | `get_fund_index_category` | 获取基金指数分类 | 26294 |
+| SDK 1.0.6 补充接口 | - | `get_fund_industry_allocation` | 获取基金行业配置 | 26330 |
+| SDK 1.0.6 补充接口 | - | `get_fund_investment_style` | 获取基金投资风格 | 26369 |
+| SDK 1.0.6 补充接口 | - | `get_fund_nav` | 获取基金历史净值（含收益率） | 26407 |
+| SDK 1.0.6 补充接口 | - | `get_fund_nav_deviation` | 获取基金资产净值偏离情况 | 26445 |
+| SDK 1.0.6 补充接口 | - | `get_fund_performance_metrics` | 获取基金业绩指标 | 26482 |
+| SDK 1.0.6 补充接口 | - | `get_fund_stock_portfolio_change` | 获取基金股票投资组合变动 | 26517 |
+| SDK 1.0.6 补充接口 | - | `get_fund_stock_style` | 获取偏股基金风格特征 | 26555 |
+| SDK 1.0.6 补充接口 | - | `get_fund_stock_trade` | 获取基金股票交易信息 | 26592 |
+| SDK 1.0.6 补充接口 | - | `get_future_second` | 获取期货次主力合约数据 | 26628 |
+| SDK 1.0.6 补充接口 | - | `get_hk_etf_daily` | 获取港股ETF日线数据 | 26669 |
+| SDK 1.0.6 补充接口 | - | `get_hk_etf_detail` | 获取港股ETF基本信息-按日快照（只读 stock_symbol_hk_etf_daily，month=YYYYMM 分区） | 26715 |
+| SDK 1.0.6 补充接口 | - | `get_hk_etf_detail_all` | 获取港股ETF基本信息 | 26755 |
+| SDK 1.0.6 补充接口 | - | `get_hk_etf_dividend_event` | 获取港股ETF分红相关的事件 | 26796 |
+| SDK 1.0.6 补充接口 | - | `get_hk_etf_investor_concentration` | 获取港股ETF投资者集中度 | 26840 |
+| SDK 1.0.6 补充接口 | - | `get_hk_etf_investor_ranking` | 获取港股ETF投资者排行 | 26878 |
+| SDK 1.0.6 补充接口 | - | `get_hk_etf_top20_concentration` | 获取港股ETF前20投资者集中度 | 26919 |
+| SDK 1.0.6 补充接口 | - | `get_option_commodity_rank` | 获取商品期权持仓排名 | 26957 |
+| SDK 1.0.6 补充接口 | - | `get_option_margin` | 获取期权保证金 | 26997 |
+| SDK 1.0.6 补充接口 | - | `get_option_trade_rank` | 获取期权期货公司交易排名 | 27034 |
+| SDK 1.0.6 补充接口 | - | `get_option_trade_stats` | 获取期权交易信息 | 27073 |
+| SDK 1.0.6 补充接口 | - | `get_option_underlying_exercise` | 获取期权标的行权信息 | 27114 |
+| SDK 1.0.6 补充接口 | - | `get_option_variety_rank` | 获取期权品种成交排名 | 27151 |
+| SDK 1.0.6 补充接口 | - | `get_rf_rate` | 获取币种与无风险利率 (rf_rate) | 27191 |
+| SDK 1.0.6 补充接口 | - | `get_stock_ipo_first_day` | 获取 IPO 上市首日表现数据（stock_ipo_first_day） | 27218 |
+| SDK 1.0.6 补充接口 | - | `get_stock_ipo_issuance` | 获取股票首次上市信息数据（stock_ipo_issuance，含北交所） | 27261 |
+| SDK 1.0.6 补充接口 | - | `get_stock_ipo_listing` | 获取新股上市数据（stock_ipo_listing） | 27304 |
+| SDK 1.0.6 补充接口 | - | `get_stock_ipo_offline_bid` | 获取新股网下询价明细数据（stock_ipo_offline_bid，仅沪深，不含北交所） | 27347 |
+| SDK 1.0.6 补充接口 | - | `get_stock_ipo_offline_placing` | 获取新股网下发行配售结果数据（stock_ipo_offline_placing，仅沪深，不含北交所） | 27394 |
+| SDK 1.0.6 补充接口 | - | `get_stock_ipo_offline_stat` | 获取网下配售统计数据（stock_ipo_offline_stat，仅沪深，不含北交所） | 27441 |
+| SDK 1.0.6 补充接口 | - | `get_us_etf_daily` | 获取美股ETF日线数据 | 27488 |
+| SDK 1.0.6 补充接口 | - | `get_us_etf_detail` | 获取美股ETF基本信息-按日快照（只读 stock_symbol_us_etf_daily，month=YYYYMM 分区） | 27534 |
+| SDK 1.0.6 补充接口 | - | `get_us_etf_detail_all` | 获取美股ETF基本信息 | 27574 |
+| SDK 1.0.6 补充接口 | - | `get_us_etf_dividend_activity` | 获取美股ETF分红相关的事件 | 27615 |
+| SDK 1.0.6 补充接口 | - | `get_us_etf_investor_centralization` | 获取美股ETF投资者集中度 | 27659 |
+| SDK 1.0.6 补充接口 | - | `get_us_etf_investor_leaderboard` | 获取美股ETF投资者排行 | 27697 |
+| SDK 1.0.6 补充接口 | - | `get_us_etf_top20_centralization` | 获取美股ETF前20投资者集中度 | 27738 |
+| SDK 1.0.6 补充接口 | - | `get_us_short_interest` | 获取美股空头（Short Interest）数据 | 27776 |
+| SDK 1.0.6 补充接口 | - | `get_us_warrant_daily` | 获取美股轮证warrant日线数据 | 27819 |
+| SDK 1.0.6 补充接口 | - | `get_us_warrant_detail` | 获取美股轮证warrant基本信息-按日快照（只读 stock_symbol_us_warrant_daily，month=YYYYMM 分区） | 27865 |
+| SDK 1.0.6 补充接口 | - | `get_us_warrant_detail_all` | 获取美股轮证warrant基本信息 | 27905 |
+| SDK 1.0.6 补充接口 | - | `get_us_warrant_investor_centralization` | 获取美股轮证warrant投资者集中度 | 27946 |
+| SDK 1.0.6 补充接口 | - | `get_us_warrant_investor_leaderboard` | 获取美股轮证warrant投资者排行 | 27984 |
+| SDK 1.0.6 补充接口 | - | `get_us_warrant_top20_centralization` | 获取美股轮证warrant前20投资者集中度 | 28025 |

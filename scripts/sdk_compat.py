@@ -7,7 +7,7 @@ from importlib.metadata import PackageNotFoundError, version
 
 
 SDK_DISTRIBUTION = "panda-data"
-SDK_VERSION = "1.0.4"
+SDK_VERSION = "1.0.6"
 
 # Legacy headings found in the supplied gateway document.
 LEGACY_METHOD_ALIASES = {
@@ -19,7 +19,7 @@ LEGACY_METHOD_ALIASES = {
     "get_stock_related_party": "get_stock_rela_party_trans",
 }
 
-# SDK 1.0.4 also exports four former document aliases; the two option aliases
+# SDK 1.0.6 also exports four former document aliases; the two option aliases
 # above remain documentation-only spellings.
 SDK_EXPORTED_ALIASES = frozenset(
     {

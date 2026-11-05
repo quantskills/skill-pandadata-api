@@ -3,7 +3,7 @@ name: pandadata-api
 description: Pandadata/panda_data Python SDK API reference skill for selecting, calling,
   and troubleshooting Pandadata data interfaces from the bundled Chinese 接口文档. Use
   when the user asks to query Pandadata data, choose the right panda_data.get_* method,
-  write or validate panda_data 1.0.4 Python examples, inspect request/response fields, or
+  write or validate panda_data 1.0.6 Python examples, inspect request/response fields, or
   install/load/use this skill in Claude Code, Codex, Hermes, OpenClaw, Cursor, or
   WorkBuddy agents.
 license: GPL-3.0-only
@@ -53,7 +53,7 @@ quantSkills:
     "placeholder": "请描述需要查询的数据、市场、标的、日期范围、字段，或贴出待排查的 panda_data 调用与报错",
     "required": true
   },
-  "prompt_template": "{{#task}}任务与材料：\n{{task}}\n\n{{/task}}{{#attachments}}用户上传的材料（已放入工作区）：\n{{attachments}}\n\n{{/attachments}}请先读取 references/sdk-1.0.4.md，再从随附 Pandadata 文档中定位准确的 panda_data.get_* 方法及参数/返回字段契约；不得为标记为 not exported 的接口生成 Python SDK 调用，不得臆造方法、字段、标的格式或认证步骤。按文档编写或排查最小可运行调用，附上验证结果，输出中文报告。"
+  "prompt_template": "{{#task}}任务与材料：\n{{task}}\n\n{{/task}}{{#attachments}}用户上传的材料（已放入工作区）：\n{{attachments}}\n\n{{/attachments}}请先读取 references/sdk-1.0.6.md，再从随附 Pandadata 文档中定位准确的 panda_data.get_* 方法及参数/返回字段契约；不得为标记为 not exported 的接口生成 Python SDK 调用，不得臆造方法、字段、标的格式或认证步骤。按文档编写或排查最小可运行调用，附上验证结果，输出中文报告。"
 }
 ```
 
@@ -64,7 +64,7 @@ Use this skill to route natural-language data requests to the correct `panda_dat
 ## Workflow
 
 1. Identify the data domain: trading calendar, A-share, futures, options, factors, Hong Kong/US equities, macro, funds, or preferred stocks.
-2. Open `references/sdk-1.0.4.md`, then `references/method-index.md`, or run `./.venv/bin/python scripts/search_api_docs.py --list-methods` when `.venv` exists.
+2. Open `references/sdk-1.0.6.md`, then `references/method-index.md`, or run `./.venv/bin/python scripts/search_api_docs.py --list-methods` when `.venv` exists.
 3. Load the exact method section before coding:
 
 ```bash
@@ -80,9 +80,9 @@ PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 
 ## Calling Pattern
 
-Use `import panda_data`; this skill requires `panda_data==1.0.4` and Python 3.10 or newer. Pandadata calls return DataFrame-like tabular results in the examples.
+Use `import panda_data`; this skill requires `panda_data==1.0.6` and Python 3.10 or newer. Pandadata calls return DataFrame-like tabular results in the examples.
 
-Run SDK commands with an interpreter that has 1.0.4 installed. Set `PANDADATA_PYTHON` when needed; common virtual-environment paths are `.venv/bin/python` on POSIX and `.venv\Scripts\python.exe` on Windows. The runtime scripts reject any other installed SDK version. The searchable reference covers all 261 data entrypoints exported by 1.0.4, including aliases and compatibility names; the original gateway catalog retains 218 dispatch paths.
+Run SDK commands with an interpreter that has 1.0.6 installed. Set `PANDADATA_PYTHON` when needed; common virtual-environment paths are `.venv/bin/python` on POSIX and `.venv\Scripts\python.exe` on Windows. The runtime scripts reject any other installed SDK version. The searchable reference covers all 323 data entrypoints exported by 1.0.6, including aliases and compatibility names; the original gateway catalog retains 218 dispatch paths.
 
 Install the runtime SDK when real API calls are required:
 
@@ -92,7 +92,7 @@ PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
 "$PYTHON_BIN" -m pip install -r requirements.txt
 ```
 
-For first-time setup, prefer the interactive setup script. It installs the pinned SDK, verifies version 1.0.4, prompts for credentials without echoing the password, validates login, and can optionally save a shell env file at `~/.pandadata/pandadata.env`.
+For first-time setup, prefer the interactive setup script. It installs the pinned SDK, verifies version 1.0.6, prompts for credentials without echoing the password, validates login, and can optionally save a shell env file at `~/.pandadata/pandadata.env`.
 
 ```bash
 PYTHON_BIN="${PANDADATA_PYTHON:-./.venv/bin/python}"
@@ -113,7 +113,7 @@ panda_data.init_token(
 )
 ```
 
-The SDK can also read `DEFAULT_USERNAME`, `DEFAULT_PASSWORD`, and `JAVA_SERVICE_BASE_URL` from environment variables. Pass the plain password; the SDK hashes it internally. Do not assume a fixed service URL; use the configured environment or the saved env file. SDK 1.0.4 keeps the token in memory and persists encrypted credentials in `user.json` when `init_token()` succeeds; `--no-save-env` only disables the separate plaintext shell env file.
+The SDK can also read `DEFAULT_USERNAME`, `DEFAULT_PASSWORD`, and `JAVA_SERVICE_BASE_URL` from environment variables. Pass the plain password; the SDK hashes it internally. Do not assume a fixed service URL; use the configured environment or the saved env file. SDK 1.0.6 keeps the token in memory and persists encrypted credentials in `user.json` when `init_token()` succeeds; `--no-save-env` only disables the separate plaintext shell env file.
 
 If credentials were saved by `scripts/setup_runtime.py`, load them before running data scripts:
 
@@ -183,7 +183,7 @@ PY
 
 If `panda_data` is unavailable or credentials are missing, report that the SDK/runtime is not configured. The supplied interface document does not define installation, token, or login setup.
 
-PyPI runtime dependencies from `panda_data==1.0.4`: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`, `websockets>=13.0`, and `requests`.
+PyPI runtime dependencies from `panda_data==1.0.6`: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`, `websockets>=13.0`, and `requests`.
 
 ## Core Conventions
 
@@ -198,23 +198,27 @@ PyPI runtime dependencies from `panda_data==1.0.4`: `pandas>=2.0.0`, `numpy>=1.2
 
 - Live availability depends on the configured Pandadata service, account permissions, and upstream data coverage. Preserve warnings for deprecated/not-yet-online interfaces even when they are exported.
 - Use keyword arguments and the exact target signature. Some dates are required by validation despite empty defaults; `get_future_daily_post` uses `underlying_symbol`, and `get_oversea_stock_list` returns lists.
-- WebSocket clients are documented separately in `references/sdk-1.0.4.md`; the CLI runner handles synchronous `get_*` data calls.
-- Treat bundled interface documentation as a contract reference, but apply the SDK 1.0.4 availability exceptions in `references/sdk-1.0.4.md`.
+- WebSocket clients are documented separately in `references/sdk-1.0.6.md`; the CLI runner handles synchronous `get_*` data calls.
+- Treat bundled interface documentation as a contract reference, but apply the SDK 1.0.6 availability exceptions in `references/sdk-1.0.6.md`.
 - This skill is data-access and research tooling. Its examples and outputs do not constitute investment advice.
 
 ## Reference Files
 
+- `references/sdk-contract.json`: signed-by-hash wheel baseline for automated consumer checks; live service validation is tracked separately.
+- `scripts/check_sdk_contract.py`: offline contract checker for consumer source and version declarations.
+
+
 - `references/method-index.md`: compact method map grouped by domain, with line numbers into `api-docs.md`.
-- `references/sdk-1.0.4.md`: supported SDK contract, authentication changes, method reconciliation, and known upstream limitations.
+- `references/sdk-1.0.6.md`: supported SDK contract, authentication changes, method reconciliation, and known upstream limitations.
 - `references/api_catalog.json`: method-to-gateway endpoint mapping for API routing checks, preserving the MCP gateway's `/pandaData/...` dispatch paths.
-- `references/api-docs.md`: Chinese gateway reference plus 43 SDK supplemental data entrypoints, reconciled with SDK 1.0.4. Newly exported methods can still carry upstream server-availability warnings.
+- `references/api-docs.md`: Chinese gateway reference plus 105 SDK supplemental data entrypoints, reconciled with SDK 1.0.6. Newly exported methods can still carry upstream server-availability warnings.
 - `references/agent-integration.md`: installation, loading, and smoke-test patterns for Claude Code, Codex, Hermes, OpenClaw, Cursor, and WorkBuddy.
 
 ## Agent Usage Rules
 
 - Prefer the bundled reference over memory. Search before answering API-specific questions.
 - Quote method names and parameters exactly as documented.
-- Run `scripts/call_api.py --method <method> --params '{}' --dry-run` when validating that SDK 1.0.4 exports a method.
+- Run `scripts/call_api.py --method <method> --params '{}' --dry-run` when validating that SDK 1.0.6 exports a method.
 - Keep examples minimal and executable; use `head()`, `shape`, or explicit row counts when validating.
 - Separate data retrieval from analysis: first obtain/verify the DataFrame, then transform or analyze it.
 - If a method returns empty data, check date range, symbol format, and required filters before assuming service failure.

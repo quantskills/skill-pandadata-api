@@ -30,7 +30,7 @@ class SDKContractTests(unittest.TestCase):
         )
 
     def test_supported_release(self):
-        self.assertEqual(require_sdk_version(), "1.0.4")
+        self.assertEqual(require_sdk_version(), "1.0.6")
 
     def test_all_data_exports_have_searchable_sections(self):
         documented = {item["method"] for item in parse_methods(ROOT / "references/api-docs.md")}
