@@ -5,9 +5,9 @@
 > Routes natural-language data requests to the right `panda_data` API and generates Python calls that run as-is.
 
 <p align="center">
-  <img alt="methods" src="https://img.shields.io/badge/API_methods-261-brightgreen">
+  <img alt="methods" src="https://img.shields.io/badge/API_methods-323-brightgreen">
   <img alt="domains" src="https://img.shields.io/badge/data_domains-9-blue">
-  <img alt="sdk" src="https://img.shields.io/badge/panda__data-1.0.4-orange">
+  <img alt="sdk" src="https://img.shields.io/badge/panda__data-1.0.6-orange">
   <img alt="python" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="agents" src="https://img.shields.io/badge/agents-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%2B4-7c3aed">
   <img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue">
@@ -17,7 +17,7 @@
 
 ## 📖 What is this
 
-`pandadata-api` is an **Agent Skill** — it packages the Chinese API documentation of the Pandadata / `panda_data` Python SDK (261 data entrypoints, including aliases and compatibility names) into a local knowledge base that AI Agents can query, cite, and validate against.
+`pandadata-api` is an **Agent Skill** — it packages the Chinese API documentation of the Pandadata / `panda_data` Python SDK (323 data entrypoints, including aliases and compatibility names) into a local knowledge base that AI Agents can query, cite, and validate against.
 
 When you ask an Agent (Claude Code, Codex, Cursor, …) something like *"fetch A-share daily bars for 000001.SZ"*, this skill will:
 
@@ -34,7 +34,7 @@ When you ask an Agent (Claude Code, Codex, Cursor, …) something like *"fetch A
 
 ```mermaid
 mindmap
-  root((panda_data<br/>261 methods))
+  root((panda_data<br/>323 methods))
     Trading utilities
       Trading calendar
       Trade-date math
@@ -81,10 +81,10 @@ mindmap
 | 🌏 **HK & US stocks** | `get_hk_daily` · `get_us_daily` | Quotes, corporate events, consensus, financial factors |
 | 🏛️ **Macro data** | `get_macro_na` · `get_macro_cal` | China/international macro, industries, special data, economic calendar |
 | 🧾 **Fund data** | `get_fund_detail` · `get_fund_daily` | Fund basics, quotes, ETF creation-redemption lists |
-| 💠 **Preferred stock data** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | Exported by SDK 1.0.4; upstream warns to confirm server support |
+| 💠 **Preferred stock data** | `get_stock_preferred_detail` · `get_stock_preferred_dividend` | Exported by SDK 1.0.6; upstream warns to confirm server support |
 
-The full mapping of all 261 interfaces lives in [`references/method-index.md`](references/method-index.md).
-All 218 original gateway methods are exported by `panda_data==1.0.4`; 43 additional data entrypoints (including aliases and compatibility names) bring the searchable total to 261. Exports do not establish server availability. See [`references/sdk-1.0.4.md`](references/sdk-1.0.4.md) for the compatibility details.
+The full mapping of all 323 interfaces lives in [`references/method-index.md`](references/method-index.md).
+All 218 original gateway methods are exported by `panda_data==1.0.6`; 105 additional data entrypoints (including aliases and compatibility names) bring the searchable total to 323. Exports do not establish server availability. See [`references/sdk-1.0.6.md`](references/sdk-1.0.6.md) for the compatibility details.
 
 ---
 
@@ -114,10 +114,10 @@ flowchart TD
 ```
 pandadata-api/
 ├── SKILL.md                          # Skill entry: workflow, calling conventions, rules
-├── requirements.txt                  # panda_data==1.0.4, requests
+├── requirements.txt                  # panda_data==1.0.6, requests
 ├── references/
-│   ├── method-index.md               # 📇 261-interface quick index (grouped by domain + doc line numbers)
-│   ├── sdk-1.0.4.md                  # 🧩 SDK version, auth changes, and interface differences
+│   ├── method-index.md               # 📇 323-interface quick index (grouped by domain + doc line numbers)
+│   ├── sdk-1.0.6.md                  # 🧩 SDK version, auth changes, and interface differences
 │   ├── api_catalog.json              # 🧭 Method-to-MCP-gateway /pandaData endpoint mapping
 │   ├── api-docs.md                   # 📚 Full Chinese API documentation
 │   └── agent-integration.md          # 🔌 Install/load/smoke-test per Agent
@@ -141,7 +141,7 @@ pandadata-api/
 ### 1️⃣ Search the docs (no credentials needed)
 
 ```bash
-# List all methods (should be 261)
+# List all methods (should be 323)
 python scripts/search_api_docs.py --list-methods
 
 # Show a method's full parameters / fields / examples
@@ -221,7 +221,7 @@ python scripts/search_api_docs.py --list-methods | wc -l
 python scripts/call_api.py --method get_stock_competitor_information --params '{}' --dry-run
 ```
 
-**Expected**: the imported version is **1.0.4**, `get_stock_daily` prints its parameter table, the documented method count is **261**, and the 1.0.4 method-name dry-run succeeds.
+**Expected**: the imported version is **1.0.6**, `get_stock_daily` prints its parameter table, the documented method count is **323**, and the 1.0.6 method-name dry-run succeeds.
 
 ---
 
@@ -269,8 +269,8 @@ Then rerun the universal smoke test.
 
 - The SDK raises `ClientNotInitializedError` until `init_token()` succeeds.
 - Credentials can come from environment variables or `~/.pandadata/pandadata.env`: `DEFAULT_USERNAME` / `DEFAULT_PASSWORD` / `JAVA_SERVICE_BASE_URL` (`PANDADATA_BASE_URL` is also accepted). Pass the **plaintext password**; the SDK hashes it internally.
-- SDK 1.0.4 `init_token()` writes encrypted credentials and expiry metadata to `user.json`, while keeping the token in memory. `--no-save-env` only disables the skill's separate plaintext shell env file.
-- `panda_data==1.0.4` requires Python `>=3.10`; runtime dependencies: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`, `websockets>=13.0`, `requests`.
+- SDK 1.0.6 `init_token()` writes encrypted credentials and expiry metadata to `user.json`, while keeping the token in memory. `--no-save-env` only disables the skill's separate plaintext shell env file.
+- `panda_data==1.0.6` requires Python `>=3.10`; runtime dependencies: `pandas>=2.0.0`, `numpy>=1.22,<2.0`, `python-snappy>=0.7.3`, `python-dotenv>=1.0.0`, `PyYAML>=6.0`, `zstandard>=0.22.0`, `duckdb`, `pyarrow`, `websockets>=13.0`, `requests`.
 
 > Credential files (`*.env`, `user.json`, `.pandadata/`) are git-ignored and never committed.
 
