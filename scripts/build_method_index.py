@@ -70,7 +70,8 @@ def render_markdown(methods: list[dict[str, str | int]], doc_name: str) -> str:
         f"Total methods: {len(methods)}",
         "",
         f"SDK {SDK_VERSION} directly exports {len(methods) - len(documented_only)} of these documented methods.",
-        "The following documented gateway methods are not exported by the SDK:",
+        ("The following documented gateway methods are not exported by the SDK:"
+         if documented_only else "All indexed methods are exported; server availability still depends on the service and account."),
         "",
         ", ".join(f"`{method}`" for method in documented_only),
         "",

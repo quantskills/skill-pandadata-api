@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from sdk_compat import DOCUMENTED_ONLY_METHODS, LEGACY_METHOD_ALIASES, SDK_VERSION
+from sdk_compat import DOCUMENTED_ONLY_METHODS, LEGACY_METHOD_ALIASES, SDK_EXPORTED_ALIASES, SDK_VERSION
 from pandadata_runtime import (
     DEFAULT_ENV_FILE,
     PandadataRuntimeError,
@@ -117,7 +117,7 @@ def main() -> int:
         return 2
 
     canonical_method = LEGACY_METHOD_ALIASES.get(args.method)
-    if canonical_method:
+    if canonical_method and args.method not in SDK_EXPORTED_ALIASES:
         print(
             f"{args.method} is a legacy document name; SDK {SDK_VERSION} exports "
             f"panda_data.{canonical_method}.",

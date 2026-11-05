@@ -1,5 +1,8 @@
 **接口文档**
 
+> SDK 基准：`panda_data==1.0.4`（[PyPI 发布包](https://pypi.org/project/panda-data/1.0.4/)）。原有 218 个网关接口均已导出；本次另补录 43 个 SDK 数据入口，共 261 个，包含别名及兼容入口。
+> 参数表和签名以 1.0.4 wheel 为准；旧网关响应示例保留用于字段参考，未重新请求生产数据。新增入口仅记录 SDK 可证实的返回说明，不推测完整字段。先在同一进程调用 `init_token()`；认证、实时订阅及服务端限制见 [SDK 兼容说明](sdk-1.0.4.md)。
+
 **一. 交易工具**
 
 **（一）交易日历：**
@@ -66,7 +69,6 @@ exchange  is_trade  nature_date  pretrade_date  next_trade_date
 ```
 
 **（二）某一日期前第 n 个交易日：**
-
 **1. get_prev_trade_date - 获取指定日期的前第n个交易日**
 
 **1.1. 方法名：get_prev_trade_date**
@@ -107,7 +109,6 @@ date
 ```
 
 **（三）最新交易日：**
-
 **1. get_last_trade_date - 获取最新交易日**
 
 **1.1. 方法名：get_last_trade_date**
@@ -144,7 +145,6 @@ date
 ```
 
 **（四）合约特殊处理数据：**
-
 **1. get_stock_status_change - 获取合约特殊处理数据**
 
 **1.1. 方法名：get_stock_status_change**
@@ -192,7 +192,6 @@ symbol  date  change_date  description  name  type
 ```
 
 **（五）指定日期的在售股票列表：**
-
 **1. get_trade_list - 获取指定日期的在售股票列表**
 
 **1.1. 方法名：get_trade_list**
@@ -432,7 +431,6 @@ symbol  date
 **二. A股数据**
 
 **（一）沪深股票行情数据：**
-
 **1. get_stock_daily - 获取A股日线数据**
 
 **1.1. 方法名：get_stock_daily**
@@ -506,7 +504,6 @@ symbol  date  close  high  limit_down  limit_up  low  name  open  pre_close  tra
 16  000001.SZ  20250124  11.34  11.39  10.19  12.45  11.22  平安银行  11.32  11.32  0  94494421.0  1.069899e+09
 17  000001.SZ  20250127  11.47  11.55  10.21  12.47  11.38  平安银行  11.38  11.34  0  115193471.0  1.324271e+09
 ```
-
 **2. get_stock_rt_daily - 获取A股当日日线**
 
 **2.1. 方法名：get_stock_rt_daily**
@@ -750,7 +747,6 @@ symbol  date  open  high  low  close  volume  amount  num_trades
 198  600903.SH  20260603  9.54  9.63  9.21  9.25  38802134.0  3.618079e+08  61495.0
 199  002599.SZ  20260603  6.35  6.35  6.16  6.20  10521100.0  6.576026e+07  8023.0
 ```
-
 **3. get_stock_daily_pre - 获取A股前复权日线数据**
 
 **3.1. 方法名：get_stock_daily_pre**
@@ -823,7 +819,6 @@ symbol  date  open  high  low  close  volume  pre_close  limit_up  limit_down  n
 16  000001.SZ  20250103  10.864284  10.959252  10.788310  10.807304  115468044.0  11.43  11.937417  9.772158  平安银行  0
 17  000001.SZ  20250102  11.139690  11.177677  10.816801  10.854788  181959699.0  11.70  12.222320  10.000080  平安银行  0
 ```
-
 **4. get_stock_daily_post - 获取A股后复权日线数据**
 
 **4.1. 方法名：get_stock_daily_post**
@@ -896,7 +891,6 @@ symbol  date  open  high  low  close  volume  pre_close  limit_up  limit_down  n
 16  000001.SZ  20250103  1933.45152  1950.35232  1919.93088  1923.31104  1.392122e+06  11.43  2124.43056  1739.09232  平安银行  0
 17  000001.SZ  20250102  1982.46384  1989.22416  1925.00112  1931.76144  2.193768e+06  11.70  2175.13296  1779.65424  平安银行  0
 ```
-
 **5. get_stock_min - 获取A股分钟线**
 
 **5.1. 方法名：get_stock_min**
@@ -1150,7 +1144,6 @@ symbol  date  datetime  minute  num_trades  amount  volume
 198  000001.SZ  20250107  2025-01-07 10:15:00  101500  253.0  5228802.0  455300.0
 199  000001.SZ  20250107  2025-01-07 10:16:00  101600  226.0  3127968.0  272500.0
 ```
-
 **6. get_stock_rt_min - 获取A股当日分钟线**
 
 **6.1. 方法名：get_stock_rt_min**
@@ -1260,7 +1253,6 @@ symbol  date  amount  num_trades  volume
 ```
 
 **（二）概念基础数据：**
-
 **1. get_concept_list - 获取概念列表**
 
 **1.1. 方法名：get_concept_list**
@@ -1300,7 +1292,6 @@ print(result)
 name  date
 0  英伟达概念  20250117
 ```
-
 **2. get_concept_constituents - 获取概念成分股**
 
 **2.1. 方法名：get_concept_constituents**
@@ -1413,7 +1404,6 @@ concept_stock  date  concept
 ```
 
 **（三）市场参考数据：**
-
 **1. get_stock_detail - 获取股票基本信息**
 
 **1.1. 方法名：get_stock_detail**
@@ -1425,6 +1415,7 @@ concept_stock  date  concept
 | symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | status | Optional[integer] | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -1471,7 +1462,6 @@ market_tplus  name  special_type  status  de_listed_date  listed_date  sector_co
 1  1  万科A  Normal  1  0000-00-00  1991-01-29  房地产  WKA  RealEstate  100.0  09:31-11:30,13:01-15:00  MainBoard  1.0  000002  中国广东省深圳市福田区梅林路63号万科大厦  广东省  None  000002.SZ
 2  1  PT金田A  PT  0  2002-06-14  1991-07-03  未知  PTJTA  Unknown  100.0  09:31-11:30,13:01-15:00  MainBoard  10.0  000003  深圳市罗湖区嘉宾路深华商业大厦19楼1909  广东省  None  000003.SZ
 ```
-
 **2. get_index_detail - 获取指数基本信息**
 
 **2.1. 方法名：get_index_detail**
@@ -1483,6 +1473,7 @@ market_tplus  name  special_type  status  de_listed_date  listed_date  sector_co
 | symbol | Optional[Union[string, List[string]]] | 指数代码 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 | status | Optional[integer] | 指数状态(1：正常交易，0：已退市，-1：暂无信息) | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -1719,7 +1710,6 @@ symbol  abbrev_symbol  de_listed_date  listed_date  market_tplus  min_order_amou
 ```
 
 **（四）行业基础数据：**
-
 **1. get_industry_constituents - 获取行业成分股数据**
 
 **1.1. 方法名：get_industry_constituents**
@@ -1732,6 +1722,8 @@ symbol  abbrev_symbol  de_listed_date  listed_date  market_tplus  min_order_amou
 | stock_symbol | Optional[Union[string, List[string]]] | 股票代码，如"000001.SZ" | 非必填 |
 | level | Optional[string] | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
+| reference | Optional[string] | 行业分类依据，默认 sws_2021；可选值按 SDK 校验规则 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -1769,7 +1761,6 @@ print(result)
 stock_symbol  l1_code  in_date  l1_name  l2_code  l2_name  l3_code  l3_name  out_date  stock_name
 0  000001.SZ  801780  19910403  银行  801783  股份制银行Ⅱ  857831  股份制银行Ⅲ  None  平安银行
 ```
-
 **2. get_industry_detail - 获取行业基本信息数据**
 
 **2.1. 方法名：get_industry_detail**
@@ -1780,6 +1771,8 @@ stock_symbol  l1_code  in_date  l1_name  l2_code  l2_name  l3_code  l3_name  out
 |:---|:---|:---|:---|
 | fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 | level | Optional[Union[string, List[string]]] | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
+| reference | Optional[string] | 行业分类依据，默认 sws_2021；可选值按 SDK 校验规则 | 非必填 |
 
 **2.3. 响应参数**
 
@@ -1843,7 +1836,6 @@ industry_code  industry_name
 29  801970  环保
 30  801980  美容护理
 ```
-
 **3. get_stock_industry - 获取指定股票所属的行业信息**
 
 **3.1. 方法名：get_stock_industry**
@@ -1854,6 +1846,8 @@ industry_code  industry_name
 |:---|:---|:---|:---|
 | stock_symbol | string | 股票代码，如"000001.SZ" | 必填 |
 | level | Optional[string] | 行业级别，可选值："L1"(一级)、"L2"(二级)、"L3"(三级) | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
+| reference | Optional[string] | 行业分类依据，默认 sws_2021；可选值按 SDK 校验规则 | 非必填 |
 
 **3.3. 响应参数**
 
@@ -1890,7 +1884,6 @@ stock_symbol  industry_code  industry_name
 ```
 
 **（五）指数行情（上交所&深交所）：**
-
 **1. get_index_daily - 获取指数日线**
 
 **1.1. 方法名：get_index_daily**
@@ -1956,7 +1949,6 @@ symbol  date  amount  close  high  low  open  pre_close  volume
 16  000001.SH  20250124  480685057973.200012  3252.6264  3260.0112  3221.7121  3222.8774  3230.1637  39865303300.0
 17  000001.SH  20250127  450231535760.299988  3250.6007  3274.3924  3250.6007  3256.6136  3252.6264  38746764200.0
 ```
-
 **2. get_index_min - 获取指数分钟线**
 
 **2.1. 方法名：get_index_min**
@@ -2212,7 +2204,6 @@ symbol  date  datetime  minute  amount  volume
 ```
 
 **（六）指数基础数据：**
-
 **1. get_index_weights - 获取指数权重信息数据**
 
 **1.1. 方法名：get_index_weights**
@@ -2457,7 +2448,6 @@ index_symbol  date  stock_symbol
 198  000006.SH  20250115  601668.SH
 199  000006.SH  20250115  603506.SH
 ```
-
 **2. get_index_indicator - 获取指数估值指标数据**
 
 **2.1. 方法名：get_index_indicator**
@@ -2705,7 +2695,6 @@ symbol  date  pb_lf  pb_lyr  pb_ttm  pe_lyr  pe_ttm
 ```
 
 **（七）市场交易与资金数据：**
-
 **1. get_lhb_list - 获取股票龙虎榜数据**
 
 **1.1. 方法名：get_lhb_list**
@@ -2716,8 +2705,8 @@ symbol  date  pb_lf  pb_lyr  pb_ttm  pe_lyr  pe_ttm
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码，如 "000001.SZ" | 非必填 |
 | type | Optional[Union[string, List[string]]] | 龙虎榜类型 | 非必填 |
-| start_date | Optional[string] | 开始日期，格式 "YYYYMMDD" | 非必填 |
-| end_date | Optional[string] | 结束日期，格式 "YYYYMMDD" | 非必填 |
+| start_date | Optional[string] | 开始日期，格式 "YYYYMMDD" | 必填 |
+| end_date | Optional[string] | 结束日期，格式 "YYYYMMDD" | 必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 
 **1.3. 响应参数**
@@ -2933,7 +2922,6 @@ symbol  date  type  amount  amplitude  change_rate  deviation  end_date  reason 
 173  605398.SH  20250123  G0007  426498096.0  None  None  0.095  20250123  日涨幅偏离值达7%  20250123  None  18684754.0
 174  605398.SH  20250127  G0007  37639036.0  None  None  0.1007  20250127  日涨幅偏离值达7%  20250127  None  1348103.0
 ```
-
 **2. get_lhb_detail - 获取股票龙虎榜明细数据**
 
 **2.1. 方法名：get_lhb_detail**
@@ -3000,7 +2988,6 @@ symbol  date  side  rank  agency  b_value  reason  s_value  type
 13  001314.SZ  20250107  sell  1  中信证券股份有限公司西安朱雀大街证券营业部  9264.0  日换手率达20%  65335573.0  T0020
 14  001314.SZ  20250107  sell  5  国泰君安证券股份有限公司昆明人民中路证券营业部  283895.0  日换手率达20%  9456590.0  T0020
 ```
-
 **3. get_margin - 获取融资融券信息**
 
 **3.1. 方法名：get_margin**
@@ -3070,7 +3057,6 @@ symbol  date  short_balance  margin_balance  short_repayment_quantity  short_sel
 16  000001.SZ  20250124  3722922.0  4691464146.0  52600.0  27400.0  4695187068.0  120046368.0  stock  139809406.0  328300.0
 17  000001.SZ  20250127  3644019.0  4548698864.0  20200.0  9600.0  4552342883.0  108514057.0  stock  251279339.0  317700.0
 ```
-
 **4. get_hsgt_hold - 获取沪深股通持股信息**
 
 **4.1. 方法名：get_hsgt_hold**
@@ -3117,7 +3103,6 @@ adjusted_holding_ratio  symbol  date  holding_ratio  shares_num
 ```
 
 **（八）公司行为：**
-
 **1. get_investor_activity - 获取A股合约投资者关系活动**
 
 **1.1. 方法名：get_investor_activity**
@@ -3162,7 +3147,6 @@ print(result)
 participant  institute  investor_or_analyst_detail  symbol  date
 0  None  None  境内投资者  000001.SZ  20250117
 ```
-
 **2. get_restricted_list - 获取股票限售解禁明细数据**
 
 **2.1. 方法名：get_restricted_list**
@@ -3216,7 +3200,6 @@ symbol  date  relieve_date  shareholder  relieve_reason  relieve_shares  actual_
 4  001256.SZ  20251211  20251212  於金华  发行前股份限售流通  4000000.0  4000000.0  自然人
 5  001256.SZ  20251230  20251231  平阳炜仕股权投资合伙企业(有限合伙)  发行前股份限售流通  1293353.0  1293353.0  企业
 ```
-
 **3. get_repurchase - 获取回购数据**
 
 **3.1. 方法名：get_repurchase**
@@ -3226,8 +3209,8 @@ symbol  date  relieve_date  shareholder  relieve_reason  relieve_shares  actual_
 | 字段 | 类型 | 描述 | 是否必填 |
 |:---|:---|:---|:---|
 | symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
-| start_date | Optional[string] | 日期，格式 "YYYYMMDD" | 非必填 |
-| end_date | Optional[string] | 日期，格式 "YYYYMMDD" | 非必填 |
+| start_date | Optional[string] | 日期，格式 "YYYYMMDD" | 必填 |
+| end_date | Optional[string] | 日期，格式 "YYYYMMDD" | 必填 |
 | fields | Optional[Union[string, List[string]]] | 需要返回的字段列表 | 非必填 |
 
 **3.3. 响应参数**
@@ -3282,7 +3265,6 @@ symbol  date  maturity_desc  buy_back_percent  buy_back_value  currency  purpose
 2  002011.SZ  20250730  None  0.0008  5630000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的23名激励对象已离职,公司应回购注销该23名激励对象已获授但尚未解除限售的40.80万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》《第一期股权激励授予协议书》的相关约定,本激励计划首次授予限制性股票的2名激励对象因退休不再具备激励对象资格,公司应回购注销该2名激励对象因个人年度考核系数未达到100%及退休后无法解除限售的2.93万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,除前述激励对象外,本激励计划首次授予限制性股票的178名激励对象的个人年度考核系数未达到100%或存在降职,公司应回购注销该178名激励对象无法解除限售的37.67万股限制性股票。根据《第一期限制性股票与股票期权激励计划(草案)》关于解除限售条件的约定,本激励计划首次授予限制性股票的1名激励对象因担任监事不能持有限制性股票,不再具备激励对象资格,公司应回购注销该1名激励对象无法解除限售的2万股限制性股票。  流通A股  6.61  None  None  834043.0  协议回购  834043.0  决案  None  None  2025-07-29 19:41:19  激励对象  None  5630000.0  834043.0  5630000.0
 3  002011.SZ  20251127  None  0.0002  1350000.0  1420.0  根据《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划(草案)》(以下简称“《第一期限制性股票与股票期权激励计划(草案)》”、“本激励计划”)及《浙江盾安人工环境股份有限公司长期激励计划第一期暨2023年限制性股票与股票期权激励计划股权激励授予协议书》(以下简称“《第一期股权激励授予协议书》”)的相关约定,本激励计划首次授予限制性股票的8名激励对象已离职或工作调整,公司应回购注销该8名激励对象已获授但尚未解除限售的19.98万股限制性股票。  流通A股  6.61  None  None  199800.0  协议回购  199800.0  预案  None  None  2025-11-26 19:51:37  8名激励对象  None  1350000.0  199800.0  1350000.0
 ```
-
 **4. get_holder_count - 获取股东数量**
 
 **4.1. 方法名：get_holder_count**
@@ -3332,7 +3314,6 @@ symbol  date  end_date  a_holders  avg_a_holders  avg_circulation_holders  avg_h
 1  000001.SZ  20250315  20250228  479969.0  40431.61  40430.0  40431.61  479969.0
 2  000001.SZ  20250419  20250331  504267.0  38483.42  38482.0  38483.42  504267.0
 ```
-
 **5. get_top_holders - 获取A股股东信息**
 
 **5.1. 方法名：get_top_holders**
@@ -3402,7 +3383,6 @@ symbol  date  rank  stock_type  end_date  freeze  hold_percent_float  hold_perce
 8  000001.SZ  20250419  4.0  flow  20250331  None  2.269857  2.269816  证券品种  保险投资组合  中国平安人寿保险股份有限公司-传统-普通保险产品  None  None
 9  000001.SZ  20250419  5.0  flow  20250331  None  2.211904  2.211865  企业  金融机构—证券公司  中国证券金融股份有限公司  None  None
 ```
-
 **6. get_block_trade - 获取A股大宗交易信息**
 
 **6.1. 方法名：get_block_trade**
@@ -3451,7 +3431,6 @@ symbol  date  price  buyer  seller  volume  amount
 0  000001.SZ  20250217  11.78  机构专用  中信证券股份有限公司上海分公司  171000.0  2014400.0
 1  000001.SZ  20250711  11.86  中信证券股份有限公司江苏分公司  中信证券股份有限公司江苏分公司  1024600.0  12151800.0
 ```
-
 **7. get_share_float - 获取股票股本数据**
 
 **7.1. 方法名：get_share_float**
@@ -3659,7 +3638,6 @@ symbol  date  circulation_a  free_circulation  non_circulation_a  preferred_shar
 159  000001.SZ  20250828  19405600653.0  8160481215.0  317545.0  0.0  19405918198.0  19405918198.0
 160  000001.SZ  20250829  19405600653.0  8160481215.0  317545.0  0.0  19405918198.0  19405918198.0
 ```
-
 **8. get_stock_dividend - 获取股票分红信息**
 
 **8.1. 方法名：get_stock_dividend**
@@ -3707,7 +3685,6 @@ symbol  announcement_date  effective_date  ex_date  div_type
 2  688799.SH  20241017  20231231  20241025  cash only
 3  688799.SH  20250523  20241231  20250529  cash and transferred share
 ```
-
 **9. get_stock_split - 获取股票拆分数据**
 
 **9.1. 方法名：get_stock_split**
@@ -3754,7 +3731,6 @@ print(result)
 symbol  ex_date  record_date  payable_date  split_factor_pre  split_factor_post  cum_adj_factor
 0  688798.SH  20230616  20230615  20230616  10.0  14.0  1.4
 ```
-
 **10. get_stock_cash_dividend - 获取股票现金分红数据**
 
 **10.1. 方法名：get_stock_cash_dividend**
@@ -3806,7 +3782,6 @@ symbol  announcement_date  div_cash_gross  record_date  ex_date  payment_date  r
 2  688819.SH  20230515  6.0000  20230518  20230519  20230519  10.0  20230325  2022q4
 3  688819.SH  20240613  6.5003  20240618  20240619  20240619  10.0  20240329  2023q4
 ```
-
 **11. get_stock_dividend_amount - 获取股票分红总额数据**
 
 **11.1. 方法名：get_stock_dividend_amount**
@@ -3855,7 +3830,6 @@ symbol  announcement_date  event_stage  total_div_amount  quarter
 3  000001.SZ  19930507  方案实施  4.040899e+07  1992q4
 4  000001.SZ  19940329  预案  1.347089e+08  1993q4
 ```
-
 **12. get_stock_private_placement - 获取股票定向增发数据**
 
 **12.1. 方法名：get_stock_private_placement**
@@ -3906,7 +3880,6 @@ symbol  announcement_date  issue_type  issue_status  listed_date  issued_shares 
 2  000001.SZ  20130909  非公开发行  实施完成  20140109  1.323385e+09  11.17  20131231
 3  000001.SZ  20140716  非公开发行  实施完成  20150521  5.988024e+08  16.70  20150425
 ```
-
 **13. get_stock_allotment - 获取股票配股信息**
 
 **13.1. 方法名：get_stock_allotment**
@@ -3957,8 +3930,9 @@ symbol  announcement_date  planned_ratio  actual_ratio  actual_shares  allotment
 2  000001.SZ  19940329  0.1  0.10000  26941789.0  5.0  19940708  19940711
 3  000001.SZ  19990717  0.3  0.25387  393975057.0  8.0  20001103  20001106
 ```
-
 **14. get_stock_disclosure_date - 获取上市A股定期报告预披露数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **14.1. 方法名：get_stock_disclosure_date**
 
@@ -4007,8 +3981,9 @@ symbol  end_date  name  expected_disclosure_date  actual_disclosure_date  first_
 0  000001.SZ  20241231  平安银行  20250315  20250315  None  None  None  20241231  20241231
 1  000001.SZ  20250331  平安银行  20250419  20250419  None  None  None  20250331  20250331
 ```
-
 **15. get_stock_status_over_allotment - 获取超额配售权实施情况数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **15.1. 方法名：get_stock_status_over_allotment**
 
@@ -4063,8 +4038,9 @@ symbol  info_date  name  end_date  vwap  volume  over_allotment_shares  over_all
 0  001391.SZ  20250207  国货航  None  None  None  198176500.0  15.0  1  455806000.0  4096000.0  3494514200  3437295600  None  None  None
 1  600930.SH  20250816  华电新能  None  None  None  745341500.0  15.0  1  2370186000  17657600  18171428600  17944401500  None  None  None
 ```
-
 **16. get_stock_litigation_arbitration - 获取上市公司诉讼仲裁数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **16.1. 方法名：get_stock_litigation_arbitration**
 
@@ -4124,8 +4100,9 @@ symbol  appellant_type  case_intro  case_progress  case_summary  currency_code  
 0  000776.SZ  None  案号：\n(2023)粤03民初5772号\n诉讼当事人：\n原告：陈卫福等合计12名自然人...  20241217：近日，公司收到了广东省深圳市中级人民法院于2024年12月13日出具的《民...  证券虚假陈述责任纠纷  CNY  王迎燕,徐晶,美尚生态景观股份有限公司,广发证券股份有限公司,东兴证券股份有限公司,天衡会计...  None  广东省深圳市中级人民法院  None  20250101  950202.89  None  None  CI  广发证券  陈卫福等合计12名自然人投资者  None  None  None
 1  300266.SZ  None  合同纠纷  20250101：公司于近日收到了最高人民法院送达的《民事裁定书》<(2023)最高法民申3...  合同纠纷  CNY  吴劼,双兴棋,杭州立阳投资管理合伙企业(有限合伙),王森,盛国祥,吕勤,黄斌  None  最高人民法院  None  20250101  188891000.0  None  None  CI  兴源环境  兴源环境科技股份有限公司,杭州中艺生态环境工程有限公司  None  None  None
 ```
-
 **17. get_stock_csrc_approval - 获取证监会批文数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **17.1. 方法名：get_stock_csrc_approval**
 
@@ -4173,8 +4150,9 @@ publish_date  publish_institution  announcement_category  announcement_level  an
 0  20250102  证监会  15  01  关于同意上海期货交易所铅、镍、锡和氧化铝期权注册的批复  无  上海期货交易所：你所《关于申请铅、镍、锡和氧化铝期权注册的请示》（上期发〔2024〕279号）收悉。根据《中华人民共和国期货和衍生品法》的有关规定，按照《期货期权品种注册管理暂行规定》（证监发〔2022〕85号），现批复如下：一、同意你所铅、镍、锡和氧化铝期权注册。二、请你所做好各项准备工作，确保铅、镍、锡和氧化铝期权平稳运行和健康发展。三、本批复自作出之日起一年内有效。中国证监会2024年8月22日  http://www.csrc.gov.cn/csrc/c101903/c7530169/content.shtml
 1  20250102  证监会  15  01  关于同意大连商品交易所原木期货和期权注册的批复  无  大连商品交易所：你所《关于申请原木期货和期权注册的请示》（大商所发〔2023〕410号）收悉。根据《中华人民共和国期货和衍生品法》的有关规定，按照《期货期权品种注册管理暂行规定》（证监发〔2022〕85号），现批复如下：一、同意你所原木期货和期权注册。二、请你所做好各项准备工作，确保原木期货和期权平稳运行和健康发展。三、本批复自作出之日起一年内有效。中国证监会2024年10月24日  http://www.csrc.gov.cn/csrc/c101903/c7530171/content.shtml
 ```
-
 **18. get_stock_competitor_information - 获取竞争企业信息数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **18.1. 方法名：get_stock_competitor_information**
 
@@ -4220,8 +4198,9 @@ symbol  info_date  name  competitor_name  competitor_intro  competitor_stock_cod
 0  001220.SZ  20251121  世盟股份  上海畅联国际物流股份有限公司  上海畅联国际物流股份有限公司成立于 2001 年 5 月 22 日，公司专注于为国际跨国企业提供精益供应链管理服务，主要在企业供应链中的采购、生产、销售等环节提供供应链综合管理方案的设计与实施，并提供与之配套的口岸通关、仓储管理、货物配送等一体化综合物流服务。  603648  综合性物流服务
 1  001220.SZ  20251121  世盟股份  密尔克卫智能供应链服务集团股份有限公司  密尔克卫化工供应链服务股份有限公司成立于 1997 年 3 月 28 日，公司是一家专业化工供应链服务商，提供以货运代理、仓储和运输为核心的一站式综合物流服务，以及化工品交易服务。  603713  综合性物流服务
 ```
-
 **19. get_stock_intermediary_information - 获取中介情况信息表数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **19.1. 方法名：get_stock_intermediary_information**
 
@@ -4269,8 +4248,9 @@ symbol  issue_start_date  name  equity_event_code  event_type  intermediary_cate
 0  000002.SZ  20241231  万科A  60202401  PRE  03  毕马威华振会计师事务所(特殊普通合伙)  周永明、李瑶
 1  000002.SZ  20251231  万科A  60202501  PRE  03  德勤华永会计师事务所(特殊普通合伙)  杨誉民、许湘照
 ```
-
 **20. get_stock_rela_party_trans - 上市公司关联交易**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **20.1. 方法名：get_stock_rela_party_trans**
 
@@ -4335,8 +4315,9 @@ symbol  info_date  name  introduction  relation  party_name  is_control  amount 
 11  000001.SZ  20250927  平安银行  平安银行股份有限公司（以下简称平安银行或本行）第十二届董事会第四十三次会议审议通过了《关于与平安国际融资租赁有限公司关联交易的议案》，同意与平安国际融资租赁有限公司（以下简称平安租赁）进行协定存款业务合作，本金金额合计不超过人民币18.71亿元，存款利息合计不超过人民币841.95万元。  同一母公司  平安国际融资租赁有限公司  否  None  CNY  前述关联交易的定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  金融服务  现金  None  None
 12  000001.SZ  20250927  平安银行  平安银行股份有限公司（以下简称平安银行或本行）第十二届董事会第四十三次会议审议通过《关于与远东宏信有限公司关联交易的议案》，同意给予远东宏信有限公司（以下简称远东宏信）新增综合授信额度人民币20亿元或等值外币，额度期限12个月。  公司其它关联方,同一关键人员  远东宏信有限公司  否  None  CNY  前述关联交易定价按照商业原则进行,定价以不优于对非关联方同类交易的条件进行。  金融服务  现金  None  None
 ```
-
 **21. get_cumu_guarantee - 获取累计担保信息**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **21.1. 方法名：get_cumu_guarantee**
 
@@ -4412,8 +4393,9 @@ symbol  info_date  end_date  name  currency  amount  ex_amount  sub_amount  occu
 18  000022.SZ  20250403  20241231  深赤湾A  CNY  2992037.43  364244.65  2627792.78  8316.0  0.0  8316.0  1448370.16  34240.58  1414129.58  23.55  1310704.38  34240.58  None
 19  000022.SZ  20250830  20250630  深赤湾A  CNY  2602785.64  52387.32  2550398.32  None  0.0  0.0  1439243.13  34133.5  1405109.63  23.01  1305228.15  34133.5  0.0
 ```
-
 **22. get_stock_material_contract - 获取上市公司重大合同数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **22.1. 方法名：get_stock_material_contract**
 
@@ -4489,8 +4471,9 @@ info_date  symbol  bid_amount  consortium_members  contract_party_a  contract_pa
 17  20250506  300001.SZ  None  None  国家电网有限公司  青岛特锐德电气股份有限公司  None  None  None  None  None  0  45505420  0  None  None  特锐德  None  本公司  国家电网有限公司2025年第二十三批采购(输变电项目第二次变电设备(含电缆)招标采购)组合电...  1
 18  20250506  300001.SZ  None  None  国家电网有限公司  川开电气有限公司  None  None  None  None  None  0  45505420  0  None  None  特锐德  None  全资公司  国家电网有限公司2025年第二十三批采购(输变电项目第二次变电设备(含电缆)招标采购)开关柜包62  1
 ```
-
 **23. get_investor_brief_detail - 获取投资者简报详情**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **23.1. 方法名：get_investor_brief_detail**
 
@@ -4733,8 +4716,9 @@ symbol  date  begin_time  title  name
 198  000895.SZ  20250416  2025-04-16 16:00:00  双汇发展2024年度业绩网上说明会  双汇发展
 199  000898.SZ  20250829  2025-08-29 15:00:00  鞍钢股份2025年中期业绩说明会  鞍钢股份
 ```
-
 **24. get_investor_brief_qa - 获取投资者简报问答**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **24.1. 方法名：get_investor_brief_qa**
 
@@ -4979,7 +4963,6 @@ ask_time  date  ask_user  ask_content
 198  2025-03-06 16:22:21  20250306  提问人653001  有没有打算剥离瓷砖行业，专心打造养老业务
 199  2025-03-06 16:26:11  20250306  verwey  公司年报显示亏损，会不会有ST风险
 ```
-
 **25. get_stock_equity_illegal - 获取股权违规信息**
 
 **25.1. 方法名：get_stock_equity_illegal**
@@ -5234,7 +5217,6 @@ symbol  info_date  name  illegal_type  illegal_subject  punish_subject  punish_r
 ```
 
 **（九）股东行为：**
-
 **1. get_stock_pledge - 获取A股公司股权质押**
 
 **1.1. 方法名：get_stock_pledge**
@@ -5493,7 +5475,6 @@ symbol  publish_date  hold_shares  hold_ratio
 198  000526.SZ  20250102  1244.9032  10.1
 199  000526.SZ  20250124  1244.9032  10.12
 ```
-
 **2. get_stock_pledge_stat - 获取股票质押信息统计**
 
 **2.1. 方法名：get_stock_pledge_stat**
@@ -5739,7 +5720,6 @@ pledge_begin_date  pledge_end_date  data_source  unrestricted_avg_pledge_ratio  
 198  20250428  20250430  中国证券登记结算有限责任公司  34.89  0.0  None  None  None  None
 199  20250428  20250430  深交所  37.64  0.0  None  None  None  None
 ```
-
 **3. get_stock_shareholder_change - 获取股东增减持计划**
 
 **3.1. 方法名：get_stock_shareholder_change**
@@ -6001,7 +5981,6 @@ symbol  info_date  name  first_info_date  progress  begin_date  end_date  shareh
 198  000912.SZ  20250823  泸天化  20250426  已完成  20250522  20250821  兴业银行股份有限公司重庆分行,兴业资产管理有限公司  股东  减持  80035200.0  15680000.0  1.0  股东经营之需要  None  None  None  None  None  None  None  None  None
 199  000912.SZ  20251211  泸天化  20250820  已完成  20250910  20251209  中国农业银行股份有限公司宁夏回族自治区分行  股东  减持  61771398.0  15680000.0  1.0  股东经营之需要  None  None  None  None  None  None  None  None  None
 ```
-
 **4. get_stock_equity_placard - 获取被举牌公司明细**
 
 **4.1. 方法名：get_stock_equity_placard**
@@ -6065,7 +6044,6 @@ symbol  info_date  name  shareholder_name  increase_num  total_share_ratio  aver
 ```
 
 **（十）业绩预告：**
-
 **1. get_fina_forecast - 获取业绩预告数据**
 
 **1.1. 方法名：get_fina_forecast**
@@ -6123,7 +6101,6 @@ symbol  info_date  end_date  forecast_description  forecast_earning_ceiling  for
 ```
 
 **（十一）财务三表、财务快报：**
-
 **1. get_fina_performance - 获取财务快报数据**
 
 **1.1. 方法名：get_fina_performance**
@@ -6207,7 +6184,6 @@ print(result)
 symbol  info_date  basic_eps  end_date  net_profit_parent  eps_excluding_nonrecurring  net_profit_excluding_nonrecurring_yoy
 0  688235.SH  20251107  0.81  20250930  1138596000.0  0.6292  124.295951
 ```
-
 **2. get_fina_reports - 获取财务季度报告**
 
 **2.1. 方法名：get_fina_reports**
@@ -6294,7 +6270,6 @@ symbol  quarter  date  bs_acct_payable  is_adj_credit_impair  cfs_cash_inflow_op
 37  688795.SH  2025q3  20251114  75908618.18  -857201.07  867761611.39  277751007.68
 38  688795.SH  2025q3  20251114  75908618.18  -857201.07  867761611.39  277751007.68
 ```
-
 **3. get_audit_opinion - 获取财务报告审计意见**
 
 **3.1. 方法名：get_audit_opinion**
@@ -6349,7 +6324,6 @@ symbol  quarter  date  agency  audit_type  opinion
 ```
 
 **（十二）股东结构：**
-
 **1. get_stock_equity_nature - 获取个股企业性质**
 
 **1.1. 方法名：get_stock_equity_nature**
@@ -6593,7 +6567,6 @@ symbol  info_date  name  illegal_type  illegal_subject  punish_subject  punish_r
 **三. 期货数据**
 
 **（一）期货行情数据：**
-
 **1. get_future_daily - 获取期货日线**
 
 **1.1. 方法名：get_future_daily**
@@ -6668,7 +6641,6 @@ symbol  date  close  day_session_open  dominant_id  exchange  high  limit_down  
 16  A_DOMINANT.DCE  20250124  4032.0  4021.0  A2505  DCE  4039.0  3794.0  4278.0  4007.0  4019.0  193961.0  4036.0  4024.0  a2505  A  82709.0  3328289300.0
 17  A_DOMINANT.DCE  20250127  4026.0  4028.0  A2505  DCE  4037.0  3703.0  4345.0  4011.0  4026.0  179821.0  4024.0  4024.0  a2505  A  77051.0  3101000970.0
 ```
-
 **2. get_future_daily_post - 获取期货后复权数据**
 
 **2.1. 方法名：get_future_daily_post**
@@ -6687,11 +6659,11 @@ symbol  date  close  day_session_open  dominant_id  exchange  high  limit_down  
 
 | 字段 | 类型 | 描述 |
 |:---|:---|:---|
-| symbol | string | 合约代码（如 A_DOMINANT.DCE） |
+| symbol | string | 实际主力合约代码（如 CF509.CZC） |
 | date | string | 交易日期 YYYYMMDD |
 | underlying_symbol | string | 品种编码 |
 | exchange | string | 交易所（3 位代码） |
-| dominant_id | string | 主力合约代码（如 CF509.CZC） |
+| dominant_id | string | 品种级主力连续标识（如 A_dominant.DCE） |
 | open | float | 开盘价 |
 | high | float | 最高价 |
 | low | float | 最低价 |
@@ -6759,7 +6731,6 @@ symbol  date  dominant_id  close  method
 6  A_DOMINANT.DCE  20260602  A2607.DCE  5623.0  close_os
 7  A_DOMINANT.DCE  20260601  A2607.DCE  5620.0  close_os
 ```
-
 **3. get_future_min - 获取期货分钟线**
 
 **3.1. 方法名：get_future_min**
@@ -7021,7 +6992,6 @@ symbol  date  datetime  minute  trading_date  amount  volume
 ```
 
 **（二）期货基本信息：**
-
 **1. get_future_detail - 获取期货基本信息**
 
 **1.1. 方法名：get_future_detail**
@@ -7034,6 +7004,7 @@ symbol  date  datetime  minute  trading_date  amount  volume
 | fields | Optional[Union[string, List[string]]] | 返回字段列表 | 非必填 |
 | exchange | Optional[Union[string, List[string]]] | 期货交易所后缀 | 非必填 |
 | is_trading | Optional[integer] | 是否可交易 | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -7082,7 +7053,6 @@ symbol  underlying_symbol  market_tplus  name  margin_rate  maturity_date  type 
 ```
 
 **（三）期货主力合约信息：**
-
 **1. get_future_dominant - 获取期货主力合约数据**
 
 **1.1. 方法名：get_future_dominant**
@@ -7141,7 +7111,6 @@ underlying_symbol  date  symbol  trading_code
 ```
 
 **（四）期货 DeepView 数据：**
-
 **1. get_broker_netmarg - 获取席位净持仓保证金数据**
 
 **1.1. 方法名：get_broker_netmarg**
@@ -7385,7 +7354,6 @@ underlying_symbol  date  broker  net_margin
 198  A  20250108  渤海期货  19861760
 199  A  20250108  长安期货  -11354160
 ```
-
 **2. get_future_netposi_rank - 获取期货商品净持仓多空榜单数据**
 
 **2.1. 方法名：get_future_netposi_rank**
@@ -7615,7 +7583,6 @@ underlying_symbol  date  position_type  rank  broker_name  exchange  net_positio
 178  A  20250127  long  9  新湖期货  DCE  2300  2
 179  A  20250127  long  10  创元期货  DCE  2230  -270
 ```
-
 **3. get_broker_netmarg_change - 获取席位净持仓保证金变化数据**
 
 **3.1. 方法名：get_broker_netmarg_change**
@@ -7859,7 +7826,6 @@ underlying_symbol  date  broker  margin_change
 198  A  20250108  渤海期货  0.0
 199  A  20250108  长安期货  -3154280.0
 ```
-
 **4. get_broker_grade - 获取席位评级数据**
 
 **4.1. 方法名：get_broker_grade**
@@ -7921,7 +7887,6 @@ broker  grade
 25  中金财富  A
 26  招商期货  A
 ```
-
 **5. get_broker_totlmarg - 获取席位总持仓保证金数据**
 
 **5.1. 方法名：get_broker_totlmarg**
@@ -8165,7 +8130,6 @@ underlying_symbol  date  broker  total_margin
 198  A  20250108  渤海期货  19861760
 199  A  20250108  长安期货  102280240
 ```
-
 **6. get_future_basis - 获取期货基差数据**
 
 **6.1. 方法名：get_future_basis**
@@ -8227,7 +8191,6 @@ underlying_symbol  date  basis  basis_ratio  spot_price
 16  A  20250124  -92.0  -2.335025  3940.0
 17  A  20250127  -86.0  -2.182741  3940.0
 ```
-
 **7. get_future_warehouse_receipt - 获取期货仓单数据**
 
 **7.1. 方法名：get_future_warehouse_receipt**
@@ -8289,7 +8252,6 @@ underlying_symbol  date  wr_change  wr_lot_change  wr_lot_quantity  wr_quantity
 16  A  20250124  0  0.0  40578.0  40578
 17  A  20250127  0  0.0  40578.0  40578
 ```
-
 **8. get_future_net_flow - 获取期货净资金流列表**
 
 **8.1. 方法名：get_future_net_flow**
@@ -8337,7 +8299,6 @@ print(result)
 underlying_symbol  date  broker_name  money_flow  position_type
 0  AG  20250102  海通期货  1.115451e+09  long
 ```
-
 **9. get_future_contract_indicators - 获取期货龙虎比、牛熊线**
 
 **9.1. 方法名：get_future_contract_indicators**
@@ -8407,7 +8368,6 @@ symbol  date  line  ratio
 26  AG2505.SHF  20250124  0.0  0.000
 27  AG2505.SHF  20250127  0.0  0.000
 ```
-
 **10. get_broker_variety_profit - 获取期货席位的商品盈亏数据**
 
 **10.1. 方法名：get_broker_variety_profit**
@@ -8463,7 +8423,6 @@ underlying_symbol  date  broker  profit
 10  M  20250109  创元期货  8410780
 11  LH  20250109  创元期货  776160
 ```
-
 **11. get_future_variety_posi - 获取期货商品持仓数据**
 
 **11.1. 方法名：get_future_variety_posi**
@@ -8522,7 +8481,6 @@ underlying_symbol  date  broker_name  change_oi  open_interest  position_type  r
 6  A  20250110  中信期货  -1162  23500  long  1
 7  A  20250113  中信期货  260  23760  long  1
 ```
-
 **12. get_future_symbol_posi - 获取期货合约持仓数据**
 
 **12.1. 方法名：get_future_symbol_posi**
@@ -8580,7 +8538,6 @@ symbol  date  broker_name  change_oi  open_interest  position_type  rank_num
 5  A2503.DCE  20250109  新湖期货  -775  5642  long  1
 6  A2503.DCE  20250110  新湖期货  -721  4921  long  1
 ```
-
 **13. get_future_ls_ratio - 获取期货合约多空比数据**
 
 **13.1. 方法名：get_future_ls_ratio**
@@ -8820,7 +8777,6 @@ symbol  date  ls_ratio
 198  AD2605.SHF  20260116  50.0
 199  AD2605.SHF  20260119  50.0
 ```
-
 **14. get_future_netcap_change - 获取期货合约净持仓市值变化数据**
 
 **14.1. 方法名：get_future_netcap_change**
@@ -9063,7 +9019,6 @@ symbol  date  broker  net_cap_value
 198  A2603.DCE  20260113  永安期货  301980.0
 199  A2603.DCE  20260113  中州期货  474540.0
 ```
-
 **15. get_future_contract_rank - 获取期货合约龙虎比、牛熊线排行**
 
 **15.1. 方法名：get_future_contract_rank**
@@ -9315,7 +9270,6 @@ symbol  date  rank  position_type  line  underlying_symbol
 198  V2603.DCE  20260116  9  short  -22  V
 199  SR2605.CZC  20260116  10  short  -22  SR
 ```
-
 **16. get_future_term_structure - 获取期货期限结构数据**
 
 **16.1. 方法名：get_future_term_structure**
@@ -9358,7 +9312,6 @@ symbol  date  close_price
 0  SC2607.INE  20260401  631.6
 1  Y2703.DCE  20260401  8492.0
 ```
-
 **17. get_future_inventory - 获取期货库存数据**
 
 **17.1. 方法名：get_future_inventory**
@@ -9401,7 +9354,6 @@ underlying_symbol  date  inventory_qty
 0  RB  20260403  840.75
 1  HC  20260403  439.22
 ```
-
 **18. get_future_calendar_arbitrage - 获取期货跨期套利数据**
 
 **18.1. 方法名：get_future_calendar_arbitrage**
@@ -9445,7 +9397,6 @@ print(result)
 contract_symbol_1  contract_symbol_2  date  settlement_1  settlement_2  cross_term_arbitrage
 RB1901.SHF  RB1905.SHF  20180808  4109.0  3930.0  179.0
 ```
-
 **19. get_future_free_spread - 获取期货自由价差数据**
 
 **19.1. 方法名：get_future_free_spread**
@@ -9489,7 +9440,6 @@ print(result)
 contract_symbol_1  contract_symbol_2  date  close_1  close_2  free_spread
 RB1901.SHF  HC1901.SHF  20180808  4094.0  4100.0  -6.0
 ```
-
 **20. get_future_free_ratio - 获取期货自由价比数据**
 
 **20.1. 方法名：get_future_free_ratio**
@@ -9533,7 +9483,6 @@ print(result)
 contract_symbol_1  contract_symbol_2  date  close_1  close_2  free_ratio
 RB1901.SHF  HC1901.SHF  20180808  4094.0  4100.0  0.998537
 ```
-
 **21. get_broker_oi_value - 获取期货席位合约的总持仓市值**
 
 **21.1. 方法名：get_broker_oi_value**
@@ -9581,7 +9530,6 @@ A2605.DCE  20260413  东吴期货  1.561865e+08
 A2605.DCE  20260413  东方财富  7.101146e+07
 A2605.DCE  20260413  东证期货  1.285892e+09
 ```
-
 **22. get_future_nonbroker_net - 获取期货非期货公司净持仓**
 
 **22.1. 方法名：get_future_nonbroker_net**
@@ -9625,7 +9573,6 @@ AG  20180801 -74335.0
 AG  20180802 -75281.0
 AG  20180803 -75477.0
 ```
-
 **23. get_broker_profit - 获取期货席位盈亏数据**
 
 **23.1. 方法名：get_broker_profit**
@@ -9671,7 +9618,6 @@ broker  date  profit
 齐盛期货  20260305 -18707640.0
 齐盛期货  20260306  23037900.0
 ```
-
 **24. get_broker_flow_daily - 获取期货席位每日大资金流动数据**
 
 **24.1. 方法名：get_broker_flow_daily**
@@ -9722,7 +9668,6 @@ broker  date  underlying_symbol  underlying_symbol_cn  margin_flow
 一德期货  20260303  ZN  沪锌  5515875.0
 一德期货  20260304  RB  螺纹钢  -22713960.0
 ```
-
 **25. get_broker_ls_ratio - 获取期货席位多空比数据**
 
 **25.1. 方法名：get_broker_ls_ratio**
@@ -9769,7 +9714,6 @@ broker  date  ls_ratio
 一德期货  20260305  40.379355
 齐盛期货  20260412  50.000000
 ```
-
 **26. get_broker_loss_rank - 获取期货席位亏损排行数据**
 
 **26.1. 方法名：get_broker_loss_rank**
@@ -9811,7 +9755,6 @@ rank  date  broker  profit
 0  1  20260310  中信期货 -1462298703
 1  1  20260317  国泰君安  -581299320
 ```
-
 **27. get_broker_profit_rank - 获取期货席位盈利排行数据**
 
 **27.1. 方法名：get_broker_profit_rank**
@@ -9853,7 +9796,6 @@ rank  date  broker  profit
 0  1  20260310  浙商期货  781159755
 1  1  20260320  金瑞期货  389575505
 ```
-
 **28. get_broker_build_process - 获取期货席位建仓过程数据**
 
 **28.1. 方法名：get_broker_build_process**
@@ -10101,7 +10043,6 @@ date  broker  symbol  long  short  profit  net_hold  total_profit  cost
 198  20260310  浙商期货  TA2606.CZC  2284  2159  11070  125  476190  5484.1
 199  20260310  浙商期货  TA2607.CZC  5516  6749  -327410  -1233  -3565440  5625.66
 ```
-
 **29. get_future_trader_quote - 获取期货现货贸易商报价数据**
 
 **29.1. 方法名：get_future_trader_quote**
@@ -10346,7 +10287,6 @@ date  underlying_symbol  name  price  band  model  unit  trader_name
 198  20240812  EG  乙二醇  3800.0  国产  聚酯级 含量≥99.9%  元/吨  潍坊硕鑫化工有限公司VIP
 199  20240812  EG  乙二醇  4000.0  国产  聚酯级 含量≥99.9%  元/吨  潍坊鸣博化工有限公司VIP
 ```
-
 **30. get_future_virtual_ratio - 获取期货虚实盘比数据**
 
 **30.1. 方法名：get_future_virtual_ratio**
@@ -10390,7 +10330,6 @@ date  symbol  ratio  real_volume  virtual_volume
 0  20240812  A2409.DCE  3.453528  9737.0  33627.0
 1  20240812  A2411.DCE  1.024751  9737.0  9978.0
 ```
-
 **31. get_future_spot_profit - 获取期货利润数据**
 
 **31.1. 方法名：get_future_spot_profit**
@@ -10435,7 +10374,6 @@ date  underlying_symbol  name  profit  unit  updateRate
 0  20240810  CF  棉花加工利润 -2167.00  元/吨  日
 1  20240810  LH  生猪外购利润  697.67  元/头  日
 ```
-
 **32. get_future_variety_mcap - 获取期货品种持仓市值数据**
 
 **32.1. 方法名：get_future_variety_mcap**
@@ -10477,7 +10415,6 @@ date  margin_deposits_change  underlying_symbol
 0  20240812  -137866600  A
 1  20240812  -341963910  AG
 ```
-
 **33. get_future_dominant_corr - 获取期货主力合约涨跌幅相关性**
 
 **33.1. 方法名：get_future_dominant_corr**
@@ -10516,7 +10453,6 @@ print(result)
 data
 0  {'RB:RB': 1.0, 'RB:JM': 0.67, 'RB:A': 0.1, 'JM:RB': 0.67, 'JM:JM': 1.0, 'JM:A': 0.07, 'A:RB': 0.1, 'A:JM': 0.07, 'A:A': 1.0}
 ```
-
 **34. get_future_contract_pool - 获取期货多头空头合约池**
 
 **34.1. 方法名：get_future_contract_pool**
@@ -10570,7 +10506,6 @@ symbol  date  position_direction  underlying_symbol
 **四. 期权数据**
 
 **（一）期权基本信息：**
-
 **1. get_option_detail - 获取期权基本信息**
 
 **1.1. 方法名：get_option_detail**
@@ -10826,7 +10761,6 @@ symbol  contract_symbol  ticker_symbol  underlying_simpol_name  underlying_symbo
 198  10000199.SH  50ETF购12月3500  510050C1512M03500  华夏上证50ETF  510050  SH  股指期权  CNY  CO  3.5  10000  DE  20150428  20151223  2015  12  20151223  20151223  20151224
 199  10000200.SH  50ETF沽12月3500  510050P1512M03500  华夏上证50ETF  510050  SH  股指期权  CNY  PO  3.5  10000  DE  20150428  20151223  2015  12  20151223  20151223  20151224
 ```
-
 **2. get_option_underlying_detail - 获取期权品种信息**
 
 **2.1. 方法名：get_option_underlying_detail**
@@ -10882,8 +10816,9 @@ symbol  underlying_ticker_symbol  exchange  call_put_code  listed_date  exercise
 0  A  大商所黄大豆1号期货  DCE  CP  20220808  A  10  1、3、5、7、9、11月  每周一至周五上午9:00～11:30，下午13:30～15:00，以及交易所规定的其他时间  买方可以在到期日之前任一交易日的交易时间，以及到期日15:30之前提出行权申请。  标的期货合约交割月份前一个月的第5个交易日  标的期货合约交割月份前一个月的第5个交易日  买方可以在到期日之前任一交易日的交易时间，以及到期日15:30之前提出行权申请。  P  0.5  元/手  0.5  元/吨  手
 1  SC  上能所原油期货  INE  CP  20210621  A  1000  最近两个连续月份合约，其后月份在标的期货合约结算后持仓量达到一定数值之后的第二个交易日挂盘  上午9:00-11:30下午13:30-15:00及上海国际能源交易中心规定的其他时间  买方可在到期日前任一交易日的交易时间提交行权申请；买方可在到期日15:30之前提交行权申请、放弃申请  标的期货合约交割月前第一月的倒数第13个交易日  标的期货合约交割月前第一月的倒数第13个交易日  买方可在到期日前任一交易日的交易时间提交行权申请；买方可在到期日15:30之前提交行权申请、放弃申请  P  10.0  元/手  0.05  元/桶  手
 ```
-
 **3. get_option_exercise - 获取期权行权交收信息**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **3.1. 方法名：get_option_exercise**
 
@@ -10926,8 +10861,9 @@ date  symbol  call_put_code  exercise_volume
 0  20250528  510050.SH  PO  9003
 1  20250528  510050.SH  CO  9915
 ```
-
 **4. get_option_static - 获取期权每日盘前静态数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **4.1. 方法名：get_option_static**
 
@@ -11005,8 +10941,9 @@ date  symbol  call_put_code  contract_size  contract_version  delisted_date  exc
 ```
 
 **（二）期权日线行情：**
-
 **1. get_option_daily - 获取期权日线数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **1.1. 方法名：get_option_daily**
 
@@ -11256,8 +11193,9 @@ date  symbol  ticker_symbol  exchange  pre_settlement  pre_close  open  high  lo
 198  20260204  10009647.SH  50ETF沽3月2874A  SH  0.0153  0.0153  0.0157  0.0157  0.0081  0.0081  0.0081  732  85762.02  6381
 199  20260205  10009647.SH  50ETF沽3月2874A  SH  0.0081  0.0081  0.0083  0.0136  0.0082  0.0088  0.0087  463  52741.57  6449
 ```
-
 **2. get_option_spot_market - 获取期权现货日行情**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **2.1. 方法名：get_option_spot_market**
 
@@ -11333,7 +11271,6 @@ date  symbol  amount  change  change_rate  close  exchange  high  low  name  ope
 ```
 
 **（三）期权波动率数据：**
-
 **1. get_option_implied_volatility - 获取期权隐含波动率**
 
 **1.1. 方法名：get_option_implied_volatility**
@@ -11375,7 +11312,6 @@ date  implied_volatility  symbol
 0  20260310  37.53  AP605C10000.CZC
 1  20260310  37.17  AP605C10200.CZC
 ```
-
 **2. get_option_underlying_volatility - 获取期权标的历史波动率**
 
 **2.1. 方法名：get_option_underlying_volatility**
@@ -11503,8 +11439,9 @@ date  symbol  ticker_symbol  exchange  is_adj  close  period  historical_volatil
 79  20260310  588080.SH  易方达上证科创板50成份ETF  SH  0  1.449  250  0.296242
 80  20260310  588080.SH  易方达上证科创板50成份ETF  SH  0  1.449  500  0.353985
 ```
-
 **3. get_option_risk_indicators - 获取期权风险指标**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **3.1. 方法名：get_option_risk_indicators**
 
@@ -11556,7 +11493,6 @@ date  symbol  delta  exchange  gamma  name  rho  theta  vega
 **五. 量化因子数据**
 
 **（一）回测因子：**
-
 **1. get_factor - 获取回测因子**
 
 **1.1. 方法名：get_factor**
@@ -11640,7 +11576,6 @@ date  symbol  open  close
 ```
 
 **（二）复权因子：**
-
 **1. get_adj_factor - 获取复权因子**
 
 **1.1. 方法名：get_adj_factor**
@@ -11690,7 +11625,6 @@ symbol  ex_date  announcement_date  ex_cum_factor  ex_end_date  ex_factor
 **六. 港美股**
 
 **（一）行情数据：**
-
 **1. get_hk_daily - 获取港股日线数据**
 
 **1.1. 方法名：get_hk_daily**
@@ -11703,6 +11637,7 @@ symbol  ex_date  announcement_date  ex_cum_factor  ex_end_date  ex_factor
 | end_date | string | 结束日期,eg:"20250702"，与开始日期间不超过5年 | 必填 |
 | symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
+| frequency | string | 港股 K 线频率：1D（日）、1W（周）、1M（月）；默认 1D | 非必填 |
 
 **1.3. 响应参数**
 
@@ -11956,7 +11891,6 @@ symbol  date  alt_close  amount  ask  bid  close  cls_aucvol  high  lmt_refpr2  
 198  0013.HK  20250114  23.55  68017494.0 23.55  23.5  23.55  33000  23.7  23.55  0  22.4  0  22.9  HUTCHMED (CHINA) LIMITED  3020  22.9  22.9  500  22.95  0  0  24.7  0  2903851.0 23.4234  2893000.0
 199  0013.HK  20250115  21.25  313170004.0 21.25  21.2  21.25  55500  23.5  21.25  0  20.2  0 21.05  HUTCHMED (CHINA) LIMITED  9792  23.5  0  0  23.55  0  0  22.3  0 14363879.0  21.806 14275500.0
 ```
-
 **2. get_us_daily - 获取美股日线数据**
 
 **2.1. 方法名：get_us_daily**
@@ -12213,7 +12147,6 @@ symbol  date  num_moves  vwap  volume  high  pre_close  low  blkvolum  trade_sta
 ```
 
 **（二）港股股票基础信息：**
-
 **1. get_hk_detail - 获取港股的基本信息**
 
 **1.1. 方法名：get_hk_detail**
@@ -12225,6 +12158,7 @@ symbol  date  num_moves  vwap  volume  high  pre_close  low  blkvolum  trade_sta
 | symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | status | Optional[integer] | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -12278,7 +12212,6 @@ symbol  abbrev_symbol  board_type  business_sector  cn_name  delisted_date  econ
 ```
 
 **（三）美股股票基础信息：**
-
 **1. get_us_detail - 获取美股的基本信息**
 
 **1.1. 方法名：get_us_detail**
@@ -12290,6 +12223,7 @@ symbol  abbrev_symbol  board_type  business_sector  cn_name  delisted_date  econ
 | symbol | Optional[Union[string, List[string]]] | 股票代码 | 非必填 |
 | fields | Optional[Union[string, List[string]]] | 返回字段 | 非必填 |
 | status | Optional[integer] | 是否在市，1 -在市，0 -退市，-1 -未知 | 非必填 |
+| date | Optional[string] | 查询日期，YYYYMMDD 或 YYYY-MM-DD；省略时使用最新快照 | 非必填 |
 
 **1.3. 响应参数**
 
@@ -12340,7 +12274,6 @@ symbol  abbrev_symbol  business_sector  economic_sector  exchange_name  incorp_d
 ```
 
 **（四）港股公司事件：**
-
 **1. get_stock_dividend_event - 获取股票分红相关的事件**
 
 **1.1. 方法名：get_stock_dividend_event**
@@ -12391,7 +12324,6 @@ symbol  publish_date  excute_date  event_type  number  currency  event
 3  9999.HK  20251204  20251216  ExDividends  0.114  USD  9999.HK Interim Cash Dividend of gross USD 0.1...
 4  9999.HK  20260313  20260325  ExDividends  0.232  USD  9999.HK Final Cash Dividend of gross USD 0.232...
 ```
-
 **2. get_stock_market_event - 获取市场活动相关的事件**
 
 **2.1. 方法名：get_stock_market_event**
@@ -12638,7 +12570,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 198  2701.HK  20260323  20260323  Nsing Technologies Inc Prices US$131M Follow-On  0  20260322  SecondaryPricings  None
 199  2706.HK  20260213  20260213  Beijing Haizhi Tech Grp Co Ltd Prices US$97M IPO  0  20260212  IpoPricings  None
 ```
-
 **3. get_stock_meeting_event - 获取公司会议相关的事件**
 
 **3.1. 方法名：get_stock_meeting_event**
@@ -12885,7 +12816,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 198  0123.HK  20250206  20250206  January 2025 Yuexiu Property Co Ltd Contracted...  0  20250206  OtherCorporate  None
 199  0123.HK  20250307  20250307  February 2025 Yuexiu Property Co Ltd Contracte...  0  20250307  OtherCorporate  None
 ```
-
 **4. get_stock_financial_event - 获取财务披露相关的事件**
 
 **4.1. 方法名：get_stock_financial_event**
@@ -13132,7 +13062,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 198  0039.HK  20260317  20260317  Full Year 2025 China Beidahuang Industry Group...  0  20260317  EarningsReleases  2025q4
 199  0040.HK  20250529  20250529  Full Year 2025 Gold Peak Technology Group Ltd ...  0  20250529  EarningsReleases  2025q4
 ```
-
 **5. get_stock_ir_event - 获取投资者关系活动相关的事件**
 
 **5.1. 方法名：get_stock_ir_event**
@@ -13381,7 +13310,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 ```
 
 **（五）美股公司事件：**
-
 **1. get_stock_dividend_activity - 获取股票分红相关的事件**
 
 **1.1. 方法名：get_stock_dividend_activity**
@@ -13432,7 +13360,6 @@ symbol  publish_date  excute_date  event_type  number  currency  event
 3  AAPL  20251110  20251113  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.26 paid on Nov 13, 2025 going ex on Nov 10, 2025
 4  AAPL  20260209  20260212  ExDividends  0.26  USD  AAPL.NB Interim Cash Dividend of gross USD 0.26 paid on Feb 12, 2026 going ex on Feb 09, 2026
 ```
-
 **2. get_stock_market_activity - 获取市场活动相关的事件**
 
 **2.1. 方法名：get_stock_market_activity**
@@ -13679,7 +13606,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 198  BXP  20260306  20260306  BXP Inc Announces US$1,000M Follow-On  0  20260309  SecondaryFilings  None
 199  BYAH  20260127  20260127  Pk Ha Biological Tech Co Ltd Prices US$2M Foll...  0  20260129  SecondaryPricings  None
 ```
-
 **3. get_stock_meeting_activity - 获取公司会议相关的事件**
 
 **3.1. 方法名：get_stock_meeting_activity**
@@ -13926,7 +13852,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 198  AEC  20260227  20260227  Anfield Energy Inc Extraordinary Shareholders ...  0  20260207  ExtraordinaryShareholdersMeeting  None
 199  AEE  20250508  20250508  Ameren Corp Annual Shareholders Meeting  0  20250508  ShareholderAndAnnualMeetings  None
 ```
-
 **4. get_stock_financial_activity - 获取财务披露相关的事件**
 
 **4.1. 方法名：get_stock_financial_activity**
@@ -14173,7 +14098,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 198  ABR_pd  20110506  20110506  Q1 2011 Arbor Realty Trust Inc Earnings Confer...  0  20260207  EarningsCallsAndPresentations  None
 199  ABR_pd  20050214  20050214  Q4 2004 Arbor Realty Trust Earnings Conference...  0  20260207  EarningsCallsAndPresentations  None
 ```
-
 **5. get_stock_ir_activity - 获取投资者关系活动相关的事件**
 
 **5.1. 方法名：get_stock_ir_activity**
@@ -14422,7 +14346,6 @@ symbol  start_date  end_date  event  is_estimated  info_date  event_type  fiscal
 ```
 
 **（六）港股股东与投资者：**
-
 **1. get_stock_investor_concentration - 获取公司投资者集中度**
 
 **1.1. 方法名：get_stock_investor_concentration**
@@ -14663,7 +14586,6 @@ symbol  currency  total_investors  investor_outstanding_ratio  total_sharehold  
 198  0241.HK  CNY  293  78.7239  12733815406.0  7885907331.48
 199  0242.HK  HKD  25  62.1541  1875597026.0  158694971.62
 ```
-
 **2. get_stock_top20_concentration - 获取公司前20投资者集中度**
 
 **2.1. 方法名：get_stock_top20_concentration**
@@ -14904,7 +14826,6 @@ symbol  currency  top_investors_num  investor_outstanding_ratio  sharehold  hold
 198  0241.HK  CNY  20  75.1375  12153713212.0  7526927020.6
 199  0242.HK  HKD  20  62.1541  1875597026.0  158694971.62
 ```
-
 **3. get_stock_investor_ranking - 获取公司投资者排行**
 
 **3.1. 方法名：get_stock_investor_ranking**
@@ -15151,7 +15072,6 @@ symbol  investor_name  investor_type  investor_outstanding_ratio  sharehold  sha
 198  0026.HK  Dimensional Fund Advisors, L.P.  Investment Advisor/Hedge Fund  0.0402  18200.0  0.0  20260331  LOW  8  HKD
 199  0026.HK  Dimensional Fund Advisors, Ltd.  Investment Advisor  0.0186  8400.0  0.0  20260331  LOW  9  HKD
 ```
-
 **4. get_stock_insider_trade - 获取公司内部人交易活动**
 
 **4.1. 方法名：get_stock_insider_trade**
@@ -15219,7 +15139,6 @@ symbol  investor_name  info_date  investor_type  insider_role  is_main_role  ins
 4  0004.HK  Fang (Kang Vincent)  20250502  Individual Investor  None  None  None  None  20250502  Sale of shares  Other  -100000.0  -100000.0  -0.0033  2.46  19.09  Hong Kong Insider  DIR  128000.0  128000.0  None  None  HKD
 5  0004.HK  Fang (Kang Vincent)  20250506  Individual Investor  None  None  None  None  20250506  Sale of shares  Other  -128000.0  -128000.0  -0.0042  2.48  19.29  Hong Kong Insider  DIR  0.0  0.0  None  None  HKD
 ```
-
 **5. get_stock_shareholder_holding - 获取公司股东持股报告**
 
 **5.1. 方法名：get_stock_shareholder_holding**
@@ -15287,7 +15206,6 @@ symbol  currency  investor_name  investor_category  investor_type  investment_ac
 ```
 
 **（七）美股股东与投资者：**
-
 **1. get_stock_investor_centralization - 获取公司投资者集中度**
 
 **1.1. 方法名：get_stock_investor_centralization**
@@ -15528,7 +15446,6 @@ symbol  currency  total_investors  investor_outstanding_ratio  total_sharehold  
 198  AI  USD  818  87.3519  123860178.0  1124381316.17
 199  AIB  USD  15  70.207  26430195.0  27487402.8
 ```
-
 **2. get_stock_top20_centralization - 获取公司前20投资者集中度**
 
 **2.1. 方法名：get_stock_top20_centralization**
@@ -15769,7 +15686,6 @@ symbol  currency  top_investors_num  investor_outstanding_ratio  sharehold  hold
 198  AI  USD  20  63.7224  90352701.0  798497623.92
 199  AIB  USD  15  70.207  26430195.0  27487402.8
 ```
-
 **3. get_stock_investor_leaderboard - 获取公司投资者排行**
 
 **3.1. 方法名：get_stock_investor_leaderboard**
@@ -16016,7 +15932,6 @@ symbol  currency  investor_name  investor_type  investor_outstanding_ratio  shar
 198  ABCB  USD  North Reef Capital Management LP  Hedge Fund  5.0871  3423243.0  686215.0  20260331  HIGH  4
 199  ABCB  USD  State Street Investment Management (US)  Investment Advisor/Hedge Fund  4.9334  3319796.0  120431.0  20260331  LOW  5
 ```
-
 **4. get_stock_insider_transaction - 获取公司内部人交易活动**
 
 **4.1. 方法名：get_stock_insider_transaction**
@@ -16148,7 +16063,6 @@ symbol  investor_name  info_date  investor_type  insider_role  is_main_role  ins
 68  AAPL  Kondo (Christopher)  20251107  Individual Investor  Officer  None  None  None  20251107  Open market or private sale of non-derivative ...  Disposition  -3752.0  -3752.0  0.0  271.23  271.23  Form 4  DIR  15098.0  15098.0  None  None  USD
 69  AAPL  Adams (Katherine L)  20251112  Individual Investor  Officer  None  None  20260301  20251112  Bona fide gift  Disposition  -3750.0  -3750.0  0.0  0.0  0.0  Form 4  DIR  175408.0  175408.0  None  None  USD
 ```
-
 **5. get_stock_shareholder_report - 获取公司股东持股报告**
 
 **5.1. 方法名：get_stock_shareholder_report**
@@ -16226,7 +16140,6 @@ symbol  currency  investor_name  investor_category  investor_type  investment_ac
 ```
 
 **（八）港股核心数据：**
-
 **1. get_stock_industry_median - 获取公司最新行业中位统计数据**
 
 **1.1. 方法名：get_stock_industry_median**
@@ -16668,7 +16581,6 @@ symbol  date  imed_net_trade_cycle_days_ttm  imed_pretax_roa_ratio_ttm
 198  0009.HK  20260525  None  1.563647
 199  0009.HK  20260526  None  1.543004
 ```
-
 **2. get_stock_pv_indicator - 获取公司最新价量指标数据**
 
 **2.1. 方法名：get_stock_pv_indicator**
@@ -16933,7 +16845,6 @@ symbol  pv_beta_5y  pv_rel_return_26w
 ```
 
 **（九）美股核心数据：**
-
 **1. get_stock_sector_median - 获取公司最新行业中位统计数据**
 
 **1.1. 方法名：get_stock_sector_median**
@@ -17375,7 +17286,6 @@ symbol  date  imed_net_trade_cycle_days_ttm  imed_pretax_roa_ratio_ttm
 198  AAON  20260527  None  2.302561
 199  AAON  20260528  None  None
 ```
-
 **2. get_stock_pv_metric - 获取公司最新价量指标数据**
 
 **2.1. 方法名：get_stock_pv_metric**
@@ -17640,7 +17550,6 @@ symbol  pv_beta_5y  pv_rel_return_26w
 ```
 
 **（十）港股一致预期数据：**
-
 **1. get_stock_ncycl_consensus - 获取非周期性指标一致预期**
 
 **1.1. 方法名：get_stock_ncycl_consensus**
@@ -17885,7 +17794,6 @@ symbol  indicator  mean  std_6month  high_week
 198  0856.HK  TP  11.84667  2.45854  14.0
 199  0857.HK  TP  12.34539  1.53955  14.5
 ```
-
 **2. get_stock_recommendation_consensus - 获取买卖建议一致预期**
 
 **2.1. 方法名：get_stock_recommendation_consensus**
@@ -18135,7 +18043,6 @@ symbol  strong_buy_num  buy_num_week
 ```
 
 **（十一）美股一致预期数据：**
-
 **1. get_stock_ncycl_estimate - 获取非周期性指标一致预期**
 
 **1.1. 方法名：get_stock_ncycl_estimate**
@@ -18380,7 +18287,6 @@ symbol  indicator  mean  std_6month  high_week
 198  AGO  TP  92.33333  7.11805  103.0
 199  AGPU  TP  None  None  None
 ```
-
 **2. get_stock_recommendation_estimate - 获取买卖建议一致预期**
 
 **2.1. 方法名：get_stock_recommendation_estimate**
@@ -18630,7 +18536,6 @@ symbol  indicator  mean  std_6month  high_week
 ```
 
 **（十二）港股财务数据：**
-
 **1. get_stock_operating_indicator - 获取公司标准化营运指标**
 
 **1.1. 方法名：get_stock_operating_indicator**
@@ -18883,7 +18788,6 @@ symbol  financial_year  is_final  financial_period_end_date  report_type  data_t
 198  0071.HK  2024  1  20241231  Recent To Recent  Original  Consolidated Only  HKG ARS  Net Asset Value (NAV) - Total (REIT/Real Estate)  False  False  Units  HKD  20883.304
 199  0071.HK  2024  1  20241231  Original To Original  Original  Consolidated Only  HKG ARS  Net Asset Value (NAV) - Total (REIT/Real Estate)  False  False  Units  HKD  20883.304
 ```
-
 **2. get_stock_mktfin_indicator - 获取公司最新市场财务统计指标**
 
 **2.1. 方法名：get_stock_mktfin_indicator**
@@ -19266,7 +19170,6 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 198  0012.HK  20260511  21.971615  None
 199  0012.HK  20260512  21.895413  None
 ```
-
 **3. get_fina_statement - 获取财务季度报告**
 
 **3.1. 方法名：get_fina_statement**
@@ -19317,7 +19220,6 @@ symbol  fy_period  date  bs_asset_accruals
 ```
 
 **（十三）美股财务数据：**
-
 **1. get_stock_operating_metric - 获取公司标准化营运指标**
 
 **1.1. 方法名：get_stock_operating_metric**
@@ -19570,7 +19472,6 @@ symbol  financial_year  is_final  financial_period_end_date  report_type  data_t
 198  ACR  2023  1  20231231  Original To Original  Original  Consolidated Only  10-K  Net Asset Value (NAV) - Total (REIT/Real Estate)  False  False  Units  USD  435.796
 199  ACR  2023  1  20231231  Recent To Recent  Original  Consolidated Only  10-K  Net Asset Value (NAV) - Total (REIT/Real Estate)  False  False  Units  USD  435.796
 ```
-
 **2. get_stock_mktfin_metric - 获取公司最新市场财务统计指标**
 
 **2.1. 方法名：get_stock_mktfin_metric**
@@ -19953,7 +19854,6 @@ symbol  date  curr_price_to_dps_issue_ttm  curr_ev_to_rev
 198  AAPG  20260527  None  23.041575
 199  AAPL  20251227  None  None
 ```
-
 **3. get_fina_ex - 获取财务季度报告**
 
 **3.1. 方法名：get_fina_ex**
@@ -20006,7 +19906,6 @@ symbol  fy_period  date  bs_asset_accruals
 **七. 宏观数据**
 
 **（一）宏观指标基础信息：**
-
 **1. get_macro_detail - 宏观指标列表**
 
 **1.1. 方法名：get_macro_detail**
@@ -20263,7 +20162,6 @@ symbol  name  en_name  is_list  frequency  unit  stat_type  accuracy  region  co
 ```
 
 **（二）中国宏观指标：**
-
 **1. get_macro_na - 中国宏观-国民经济核算**
 
 **1.1. 方法名：get_macro_na**
@@ -20307,7 +20205,6 @@ symbol  period_date  data_value
 2  NA0005501  20220131  17.3
 3  NA0005502  20220131  3097.0
 ```
-
 **2. get_macro_in - 中国宏观-工业**
 
 **2.1. 方法名：get_macro_in**
@@ -20351,7 +20248,6 @@ symbol  period_date  data_value
 2  IN0000003  20220228  0.38
 3  IN0000004  20220228  7.50
 ```
-
 **3. get_macro_ci - 中国宏观-景气指数**
 
 **3.1. 方法名：get_macro_ci**
@@ -20394,7 +20290,6 @@ symbol  period_date  data_value
 1  CI0003528  20220104  -1.608125
 2  CI0003528  20220105  -1.722521
 ```
-
 **4. get_macro_pi - 中国宏观-价格指数**
 
 **4.1. 方法名：get_macro_pi**
@@ -20437,7 +20332,6 @@ symbol  period_date  data_value
 1  PI0006581  20220101  -0.90000
 2  PI0006582  20220101  -1.10000
 ```
-
 **5. get_macro_fa - 中国宏观-固定资产投资**
 
 **5.1. 方法名：get_macro_fa**
@@ -20480,7 +20374,6 @@ symbol  period_date  data_value
 1  FA0005375  20220101  98.0000
 2  FA0005376  20220101  30.0000
 ```
-
 **6. get_macro_fi - 中国宏观-财政**
 
 **6.1. 方法名：get_macro_fi**
@@ -20523,7 +20416,6 @@ symbol  period_date  data_value
 1  FI0001804  20220131  139.79440
 2  FI0001805  20220131  75.45302
 ```
-
 **7. get_macro_mb - 中国宏观-货币与银行**
 
 **7.1. 方法名：get_macro_mb**
@@ -20567,7 +20459,6 @@ symbol  period_date  data_value
 2  MB0003831  20220103  800.0000
 3  MB0004126  20220103  0.0000
 ```
-
 **8. get_macro_ir - 中国宏观-利率汇率**
 
 **8.1. 方法名：get_macro_ir**
@@ -20611,7 +20502,6 @@ symbol  period_date  data_value
 2  IR0000036  20260101  4.4433
 3  IR0000037  20260101  0.8966
 ```
-
 **9. get_macro_fe - 中国宏观-对外经济**
 
 **9.1. 方法名：get_macro_fe**
@@ -20654,7 +20544,6 @@ symbol  period_date  data_value
 1  FE0000002  20260131  3353.122002
 2  FE0000003  20260131  356.814422
 ```
-
 **10. get_macro_dt - 中国宏观-国内贸易**
 
 **10.1. 方法名：get_macro_dt**
@@ -20698,7 +20587,6 @@ symbol  period_date  data_value
 2  DT0000018  20260228  86078.90
 3  DT0000019  20260228  74449.20
 ```
-
 **11. get_macro_ew - 中国宏观-就业与工资**
 
 **11.1. 方法名：get_macro_ew**
@@ -20742,7 +20630,6 @@ symbol  period_date  data_value
 2  EW0009281  20260101  121.0
 3  EW0009282  20260101  218.0
 ```
-
 **12. get_macro_li - 中国宏观-人民生活**
 
 **12.1. 方法名：get_macro_li**
@@ -20786,7 +20673,6 @@ symbol  period_date  data_value
 2  LI0000425  20260131  24783.00
 3  LI0000426  20260131  31853.00
 ```
-
 **13. get_macro_pr - 中国宏观-人口与资源**
 
 **13.1. 方法名：get_macro_pr**
@@ -20829,7 +20715,6 @@ symbol  period_date  data_value
 1  PR0001094  20260101  -10.00
 2  PR0001095  20260101  3.00
 ```
-
 **14. get_macro_se - 中国宏观-科教体卫**
 
 **14.1. 方法名：get_macro_se**
@@ -20874,7 +20759,6 @@ symbol  period_date  data_value
 3  SE0000276  20260131  100.0
 4  SE0000277  20260131  54187.0
 ```
-
 **15. get_macro_sm - 中国宏观-证券市场**
 
 **15.1. 方法名：get_macro_sm**
@@ -20918,7 +20802,6 @@ symbol  period_date  data_value
 2  SM0000007  20260401  13164.474092
 3  SM0000008  20260401  123.677318
 ```
-
 **16. get_macro_pm - 中国宏观-区域宏观**
 
 **16.1. 方法名：get_macro_pm**
@@ -20965,7 +20848,6 @@ symbol  period_date  data_value
 ```
 
 **（三）国际宏观指标：**
-
 **1. get_macro_gb - 宏观行业-国际宏观**
 
 **1.1. 方法名：get_macro_gb**
@@ -21011,7 +20893,6 @@ symbol  period_date  data_value
 ```
 
 **（四）宏观行业数据：**
-
 **1. get_macro_ag - 宏观行业-农林牧渔**
 
 **1.1. 方法名：get_macro_ag**
@@ -21055,7 +20936,6 @@ symbol  period_date  data_value
 2  AG0049148  20260101  1.222
 3  AG0049149  20260101  1.101
 ```
-
 **2. get_macro_en - 宏观行业-能源**
 
 **2.1. 方法名：get_macro_en**
@@ -21099,7 +20979,6 @@ symbol  period_date  data_value
 2  EN0054964  20260101  1264.000
 3  EN0054965  20260101  1188.000
 ```
-
 **3. get_macro_ch - 宏观行业-化工**
 
 **3.1. 方法名：get_macro_ch**
@@ -21143,7 +21022,6 @@ symbol  period_date  data_value
 2  CH0104780  20260101  5800.00
 3  CH0104782  20260101  7733.33
 ```
-
 **4. get_macro_st - 宏观行业-钢铁**
 
 **4.1. 方法名：get_macro_st**
@@ -21188,7 +21066,6 @@ symbol  period_date  data_value
 3  ST0002349  20150101  3273.0
 4  ST0002350  20150101  4379.0
 ```
-
 **5. get_macro_nf - 宏观行业-有色金属**
 
 **5.1. 方法名：get_macro_nf**
@@ -21231,7 +21108,6 @@ symbol  period_date  data_value
 1  NF0001338  20260101  4332.10
 2  NF0001874  20260101  38.00
 ```
-
 **6. get_macro_bm - 宏观行业-建材**
 
 **6.1. 方法名：get_macro_bm**
@@ -21274,7 +21150,6 @@ symbol  period_date  data_value
 1  BM0021966  20260104  314.00
 2  BM0032339  20260104  115.38
 ```
-
 **7. get_macro_au - 宏观行业-汽车**
 
 **7.1. 方法名：get_macro_au**
@@ -21317,7 +21192,6 @@ symbol  period_date  data_value
 1  AU0036627  20260102  6.71537
 2  AU0036628  20260102  7.31107
 ```
-
 **8. get_macro_me - 宏观行业-机械设备**
 
 **8.1. 方法名：get_macro_me**
@@ -21361,7 +21235,6 @@ symbol  period_date  data_value
 2  ME0039131  20260109  128.35
 3  ME0039132  20260109  105.11
 ```
-
 **9. get_macro_ee - 宏观行业-电子电器**
 
 **9.1. 方法名：get_macro_ee**
@@ -21405,7 +21278,6 @@ symbol  period_date  data_value
 2  EE0001410  20260102  9.388000e+02
 3  EE0001411  20260102  3.903000e+01
 ```
-
 **10. get_macro_tm - 宏观行业-TMT**
 
 **10.1. 方法名：get_macro_tm**
@@ -21448,7 +21320,6 @@ symbol  period_date  data_value
 1  TM0025561  20260101  8.100000e+01
 2  TM0025571  20260101  1.600000e+02
 ```
-
 **11. get_macro_fb - 宏观行业-食品饮料**
 
 **11.1. 方法名：get_macro_fb**
@@ -21492,7 +21363,6 @@ symbol  period_date  data_value
 2  FB0001745  20260101  1550.0
 3  FB0001746  20260101  1540.0
 ```
-
 **12. get_macro_te - 宏观行业-纺织服装**
 
 **12.1. 方法名：get_macro_te**
@@ -21535,7 +21405,6 @@ symbol  period_date  data_value
 1  TE0001895  20260102  87.18
 2  TE0001896  20260102  110.98
 ```
-
 **13. get_macro_pp - 宏观行业-造纸印刷**
 
 **13.1. 方法名：get_macro_pp**
@@ -21578,7 +21447,6 @@ symbol  period_date  data_value
 1  PP0004538  20260104  1630.00
 2  PP0004539  20260104  1630.00
 ```
-
 **14. get_macro_ph - 宏观行业-医药生物**
 
 **14.1. 方法名：get_macro_ph**
@@ -21622,7 +21490,6 @@ symbol  period_date  data_value
 2  PH0003668  20260101  9.0
 3  PH0003670  20260101  7.5
 ```
-
 **15. get_macro_ut - 宏观行业-公用事业**
 
 **15.1. 方法名：get_macro_ut**
@@ -21666,7 +21533,6 @@ symbol  period_date  data_value
 2  UT0001594  20260101  52.0
 3  UT0001595  20260101  29.0
 ```
-
 **16. get_macro_tr - 宏观行业-交通运输**
 
 **16.1. 方法名：get_macro_tr**
@@ -21710,7 +21576,6 @@ symbol  period_date  data_value
 2  TR0031702  20260101  0.00
 3  TR0031703  20260101  4.30
 ```
-
 **17. get_macro_rc - 宏观行业-房地产及建筑业**
 
 **17.1. 方法名：get_macro_rc**
@@ -21754,7 +21619,6 @@ symbol  period_date  data_value
 2  RC0070279  20260101  0.0000
 3  RC0070280  20260101  0.0000
 ```
-
 **18. get_macro_th - 宏观行业-旅游酒店**
 
 **18.1. 方法名：get_macro_th**
@@ -21797,7 +21661,6 @@ symbol  period_date  data_value
 1  TH0004096  20260111  87.44
 2  TH0004096  20260118  103.71
 ```
-
 **19. get_macro_ce - 宏观行业-文教体娱及工艺品**
 
 **19.1. 方法名：get_macro_ce**
@@ -21840,7 +21703,6 @@ symbol  period_date  data_value
 1  CE0005775  20260101  475167.00
 2  CE0005776  20260101  853.00
 ```
-
 **20. get_macro_wr - 宏观行业-批发零售业**
 
 **20.1. 方法名：get_macro_wr**
@@ -21883,7 +21745,6 @@ symbol  period_date  data_value
 1  WR0009593  20260107  102.700000
 2  WR0009594  20260107  96.130000
 ```
-
 **21. get_macro_fs - 宏观行业-金融保险业**
 
 **21.1. 方法名：get_macro_fs**
@@ -21927,7 +21788,6 @@ symbol  period_date  data_value
 2  FS0007629  20260101  4.000000
 3  FS0007633  20260101  0.000000
 ```
-
 **22. get_macro_is - 宏观行业-行业综合**
 
 **22.1. 方法名：get_macro_is**
@@ -21973,7 +21833,6 @@ symbol  period_date  data_value
 ```
 
 **（五）宏观特色数据：**
-
 **1. get_macro_ec - 宏观特色数据-线上电商数据**
 
 **1.1. 方法名：get_macro_ec**
@@ -22016,7 +21875,6 @@ symbol  period_date  data_value
 1  EC0252099  20260104  950.0
 2  EC0252100  20260104  475.0
 ```
-
 **2. get_macro_md - 宏观特色数据-医药数据**
 
 **2.1. 方法名：get_macro_md**
@@ -22059,7 +21917,6 @@ symbol  period_date  data_value
 1  MD0006165  20260104  36.0
 2  MD0006166  20260104  32.0
 ```
-
 **3. get_macro_eh - 宏观特色数据-能化数据**
 
 **3.1. 方法名：get_macro_eh**
@@ -22103,7 +21960,6 @@ symbol  period_date  data_value
 2  EH0000094  20260101  3900.0
 3  EH0000095  20260101  3645.0
 ```
-
 **4. get_macro_ad - 宏观特色数据-汽车数据**
 
 **4.1. 方法名：get_macro_ad**
@@ -22146,7 +22002,6 @@ symbol  period_date  data_value
 1  AD0024138  20260131  1.800000e+02
 2  AD0024146  20260131  4.110000e+02
 ```
-
 **5. get_macro_ha - 宏观特色数据-家电数据**
 
 **5.1. 方法名：get_macro_ha**
@@ -22189,7 +22044,6 @@ symbol  period_date  data_value
 1  HA0000009  20220131  -8.7019
 2  HA0000010  20220131  -8.2639
 ```
-
 **6. get_macro_of - 宏观特色数据-线下商超数据**
 
 **6.1. 方法名：get_macro_of**
@@ -22232,7 +22086,6 @@ symbol  period_date  data_value
 1  OF0000002  20220131  265.422570
 2  OF0000013  20220131  8847.351547
 ```
-
 **7. get_macro_rb - 宏观特色数据-招聘数据**
 
 **7.1. 方法名：get_macro_rb**
@@ -22276,7 +22129,6 @@ symbol  period_date  data_value
 2  RB0000003  20220102  155573.5439
 3  RB0000004  20220102  61.8373
 ```
-
 **8. get_macro_re - 宏观特色数据-房地产数据**
 
 **8.1. 方法名：get_macro_re**
@@ -22320,7 +22172,6 @@ symbol  period_date  data_value
 2  RE0000493  20150101  21985.0
 3  RE0000496  20150101  26060.0
 ```
-
 **9. get_macro_ed - 宏观特色数据-电子数据**
 
 **9.1. 方法名：get_macro_ed**
@@ -22363,7 +22214,6 @@ symbol  period_date  data_value
 1  ED0000002  20220101  102.21254
 2  ED0000003  20220101  103.94813
 ```
-
 **10. get_macro_ep - 宏观特色数据-电新数据**
 
 **10.1. 方法名：get_macro_ep**
@@ -22407,7 +22257,6 @@ symbol  period_date  data_value
 2  EP0000004  20220103  0.135
 3  EP0000005  20220103  5.644
 ```
-
 **11. get_macro_ar - 宏观特色数据-农业数据**
 
 **11.1. 方法名：get_macro_ar**
@@ -22451,7 +22300,6 @@ symbol  period_date  data_value
 2  AR0000526  20220101  8.00
 3  AR0000527  20220101  8.00
 ```
-
 **12. get_macro_cm - 宏观特色数据-大宗数据**
 
 **12.1. 方法名：get_macro_cm**
@@ -22497,7 +22345,6 @@ symbol  period_date  data_value
 ```
 
 **（六）宏观经济日历：**
-
 **1. get_macro_cal - 宏观经济日历**
 
 **1.1. 方法名：get_macro_cal**
@@ -22569,7 +22416,6 @@ event_code  pub_date_bj  event_name_cn  indicator_name_cn  indicator_name_en  pu
 ```
 
 **（七）宏观经济日历信息：**
-
 **1. get_macro_cal_info - 宏观经济日历信息**
 
 **1.1. 方法名：get_macro_cal_info**
@@ -22622,7 +22468,6 @@ event_code  pub_date_bj  indic_name  datadate  country_code  pub_date  pub_time 
 ```
 
 **（八）宏观经济日历配置：**
-
 **1. get_macro_cal_config - 宏观经济日历配置**
 
 **1.1. 方法名：get_macro_cal_config**
@@ -22667,8 +22512,9 @@ event_code  indic_name  region_code  eco_name_cn
 **八. 基金数据**
 
 **（一）基金基础数据：**
-
 **1. get_fund_detail - 获取基金基本信息**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **1.1. 方法名：get_fund_detail**
 
@@ -22976,8 +22822,9 @@ symbol  name  management_short_name  benchmark
 ```
 
 **（二）基金行情数据：**
-
 **1. get_fund_daily - 获取场内基金日行情数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **1.1. 方法名：get_fund_daily**
 
@@ -23086,8 +22933,9 @@ symbol  date  close
 6  510050.SH  20250611  2.762
 7  510050.SH  20250610  2.742
 ```
-
 **2. get_fund_daily_post - 获取场内基金后复权日行情数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **2.1. 方法名：get_fund_daily_post**
 
@@ -23291,8 +23139,9 @@ symbol  date  close
 115  159915.SZ  20250627  2.101
 116  159915.SZ  20250630  2.133
 ```
-
 **3. get_fund_daily_pre - 获取场内基金前复权日行情数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **3.1. 方法名：get_fund_daily_pre**
 
@@ -23498,8 +23347,9 @@ symbol  date  close
 ```
 
 **（三）ETF数据：**
-
 **1. get_fund_etf_cr_limits - 获取ETF申赎限制数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **1.1. 方法名：get_fund_etf_cr_limits**
 
@@ -23569,8 +23419,9 @@ symbol  date  exchange  min_cr_unit  nav  purchase_limit  redemption_limit  acco
 18  159232.SZ  20250506  SZ  2000000  0.9899  None  900000000.0  None  None  None  None  None  None
 19  159235.SZ  20250506  SZ  1000000  0.9905  None  300000000.0  None  None  None  None  None  None
 ```
-
 **2. get_fund_etf_cr_net - 获取ETF净申赎数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **2.1. 方法名：get_fund_etf_cr_net**
 
@@ -23645,8 +23496,9 @@ symbol  date  exchange  close  currency_symbol  market_cap  net_inflow  net_infl
 18  159232.SZ  20250506  SZ  0.995  CNY  1712343823.17 -39864000.0  -39688093.8668  -40000000.0  None  1720948566  -40000000.0  1715097340.8756 -28065644.6078  None  0.9966  0.9922  南方中证全指自由现金流ETF  0.9965
 19  159235.SZ  20250506  SZ  0.995  CNY  961895897.275 -51844000.0  -51616191.1012  -52000000.0  None  966729545  -52000000.0  963829356.365 -45222257.9575  None  0.997  0.9926  大成中证全指自由现金流ETF  0.9971
 ```
-
 **3. get_fund_etf_constituents - 获取ETF基金申赎清单成分券信息**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **3.1. 方法名：get_fund_etf_constituents**
 
@@ -23714,8 +23566,9 @@ symbol  date  cash_discount_rate  cash_premium_rate  cash_substitution_flag  exc
 18  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  300.0  None  000768.SZ
 19  159150.SZ  20250506  None  20.0  1  SZ  0.0  易方达深证50ETF  200.0  None  000786.SZ
 ```
-
 **4. get_fund_etf_cr - 获取ETF基金申赎清单数据**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **4.1. 方法名：get_fund_etf_cr**
 
@@ -23791,8 +23644,9 @@ symbol  date  cash_component  cash_substitution_rate  creation_unit  estimated_c
 **九. 优先股数据**
 
 **（一）优先股数据：**
-
 **1. get_stock_preferred_dividend - 获取优先股分红**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **1.1. 方法名：get_stock_preferred_dividend**
 
@@ -23868,8 +23722,9 @@ symbol  coupon_dividend_rate  dividend_date  ex_date  exchange  publish_date  to
 18  140005.SZ  3.8372  20200811  20200818  SZ  20200811  17267.6073
 19  140005.SZ  5.17  20200915  20200921  SZ  20200915  6462.5
 ```
-
 **2. get_stock_preferred_trading - 获取优先股成交统计信息**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **2.1. 方法名：get_stock_preferred_trading**
 
@@ -23934,8 +23789,9 @@ symbol  date  amount  buyer_department  exchange  price  seller_department  volu
 18  140001.SZ  20240321  83576000  光大证券股份有限公司青岛香港西路证券营业部  SZ  104.47  机构专用  800000
 19  140001.SZ  20240725  103950000  华泰证券股份有限公司北京分公司  SZ  103.95  机构专用  1000000
 ```
-
 **3. get_stock_issuer_credit_rating - 获取优先股发行主体信用评级**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **3.1. 方法名：get_stock_issuer_credit_rating**
 
@@ -24002,8 +23858,9 @@ symbol  full_name  name  outlook  previous_level  previous_outlook  publish_date
 18  000001.SZ  平安银行股份有限公司  平安银行  2  AAA  2  20221103  中诚信国际信用评级有限责任公司  20220914  AAA
 19  000001.SZ  平安银行股份有限公司  平安银行  3  BBB+  3  20221128  标准普尔评级公司  20221128  BBB+
 ```
-
 **4. get_stock_preferred_rating - 获取优先股评级情况**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **4.1. 方法名：get_stock_preferred_rating**
 
@@ -24053,8 +23910,9 @@ symbol  exchange  publish_date  rating_agency  rating_date  rating_level
 4  360045.SH  SH  20230427  鹏元资信评估  20230309  AA+
 5  360046.SH  SH  20230427  鹏元资信评估  20230309  AA+
 ```
-
 **5. get_stock_preferred_shares - 获取优先股股本**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **5.1. 方法名：get_stock_preferred_shares**
 
@@ -24118,8 +23976,9 @@ symbol  change_date  change_reason  exchange  issue_shares  publish_date
 18  600390.SH  20230515  优先股上市  SH  13000  20230510
 19  600390.SH  20230905  优先股上市  SH  16000  20230831
 ```
-
 **6. get_stock_preferred_placement - 获取优先股配售结果**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **6.1. 方法名：get_stock_preferred_placement**
 
@@ -24181,8 +24040,9 @@ symbol  exchange  has_recent_related_transaction  is_related_party  issuer_targe
 18  140002.SZ  SZ  0  0  中银国际证券有限责任公司  89300  893.0  证券公司
 19  140003.SZ  SZ  0  0  国信租赁有限公司  80000  800.0  租赁公司
 ```
-
 **7. get_stock_preferred_detail - 获取优先股基本资料**
+
+> SDK 1.0.4 已导出；上游标记此接口“已废弃或未上线”，调用前须确认服务端支持。
 
 **7.1. 方法名：get_stock_preferred_detail**
 
@@ -24288,3 +24148,1553 @@ symbol  actual_issue_volume  actual_raising_amount  board_plan_date  dividend_yi
 18  360011.SH  45000.0  4500000.0  20140726  4.5  SH  4494665.8
 19  360012.SH  13000.0  1300000.0  20140607  5.4  SH  1294715.88
 ```
+
+**十. SDK 1.0.4 补充接口**
+
+本节覆盖旧网关文档未单独列出的导出名称，包括此前版本已有的入口与 1.0.4 新增入口，不将所有条目视为本版本新增能力。`**kwargs` 不代表允许任意参数；多数接口会拒绝额外参数。
+
+**1. get_adj_factor_hk - 获取港股自研复权因子数据**
+
+**1.1. 方法名：get_adj_factor_hk**
+
+```text
+get_adj_factor_hk(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**1.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | Optional[string] | 开始日期，YYYYMMDD | 非必填 |
+| end_date | Optional[string] | 结束日期，YYYYMMDD | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+
+**1.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股自研复权因子数据。
+start_date、end_date 必填。
+```
+
+**2. get_factor_exposure_style - 获取 CNE 风格因子暴露宽表**
+
+**2.1. 方法名：get_factor_exposure_style**
+
+```text
+get_factor_exposure_style(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, industry: 'Optional[Union[str, List[str]]]' = None, is_state_owned: 'Optional[bool]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**2.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | Optional[string] | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | Optional[string] | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+| industry | Optional[Union[string, List[string]]] | 行业名或行业列表；使用 SDK 支持的英文行业名，如 bank | 非必填 |
+| is_state_owned | Optional[bool] | True 筛选央国企，False 筛选民营企业 | 非必填 |
+
+**2.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取 CNE 风格因子暴露宽表。
+
+``start_date`` 和 ``end_date`` 为必填日期参数，格式为 ``YYYYMMDD``；
+``industry`` 支持单个行业名或行业名列表，列表按任一行业命中筛选；
+``is_state_owned`` 为 True/False 时分别筛选央国企/民营企业。
+```
+
+日期提示：SDK 实现要求开始、结束日期非空；上游说明中的“可选/非必填”不应覆盖运行时校验。
+
+**3. get_factor_hk - 获取港股因子数据（服务端 /hkMarket/getFactorHk）**
+
+**3.1. 方法名：get_factor_hk**
+
+```text
+get_factor_hk(symbol: 'Optional[Union[str, List[str]]]' = '', start_date: 'str' = '', end_date: 'str' = '', factors: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**3.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 港股股票代码，如 "00700.HK" 或 ["00700.HK", "09988.HK"]，默认为空返回所有。 | 非必填 |
+| start_date | string | 开始日期，格式为 "YYYYMMDD"。；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式为 "YYYYMMDD"。；运行时要求非空 | 必填 |
+| factors | Optional[Union[string, List[string]]] | 因子列表，如 "open"、"ma5"、"macd_diff"、"cal_ret_1d"。 | 必填 |
+
+**3.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股因子数据（服务端 /hkMarket/getFactorHk）。
+
+与 A 股 get_factor 类似：factors 先按 txt 白名单匹配，再查对应 Parquet。
+- 基础行情 → stock_market_hk_post
+- 均线类 → factor_moving_average_indicator_hk
+- 超买超卖 → factor_obos_indicator_hk
+- cal_ → factor_cal_date_hk
+- market_cap / outstanding_shares 固定取自 factor_moving_average_indicator_hk
+
+参数：
+    symbol: 港股股票代码，如 "00700.HK" 或 ["00700.HK", "09988.HK"]，默认为空返回所有。
+    start_date: 开始日期，格式为 "YYYYMMDD"。
+    end_date: 结束日期，格式为 "YYYYMMDD"。
+    factors: 因子列表，如 "open"、"ma5"、"macd_diff"、"cal_ret_1d"。
+```
+
+**4. get_fund_etf_dividend - 获取ETF基金分红**
+
+**4.1. 方法名：get_fund_etf_dividend**
+
+```text
+get_fund_etf_dividend(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**4.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 查询起始日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| end_date | string | 查询结束日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "510050.SH"（可选） | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表（可选） | 非必填 |
+
+**4.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取ETF基金分红
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "510050.SH"（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: ETF基金分红记录，包含 symbol, name, payable_date,
+                  record_date, date, dividend, dividend_index
+```
+
+**5. get_fund_etf_listing - 获取ETF上市信息**
+
+**5.1. 方法名：get_fund_etf_listing**
+
+```text
+get_fund_etf_listing(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**5.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 查询起始日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| end_date | string | 查询结束日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "510050.SH"（可选） | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表（可选） | 非必填 |
+
+**5.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取ETF上市信息。
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "510050.SH"（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: ETF上市记录，包含 symbol, name, date, listed_shares
+```
+
+**6. get_fund_etf_split - 获取ETF拆分和折算**
+
+**6.1. 方法名：get_fund_etf_split**
+
+```text
+get_fund_etf_split(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, split_type: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**6.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 查询起始日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| end_date | string | 查询结束日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "510050.SH"（可选） | 非必填 |
+| split_type | Optional[string] | 类型（拆分/折算）（可选） | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表（可选） | 非必填 |
+
+**6.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取ETF拆分和折算
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "510050.SH"（可选）
+    split_type: 类型（拆分/折算）（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: ETF拆分折算记录，包含 symbol, name, payable_date,
+                  split_type, split_factor, pre_unit_nav, unit_nav, date,
+                  ex_date
+```
+
+**7. get_fund_etf_suspend - 获取ETF停复牌数据**
+
+**7.1. 方法名：get_fund_etf_suspend**
+
+```text
+get_fund_etf_suspend(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**7.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 查询起始日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| end_date | string | 查询结束日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "510050.SH"（可选） | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表（可选） | 非必填 |
+
+**7.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取ETF停复牌数据。
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "510050.SH"（可选）
+    fields: 需要返回的字段列表（可选）
+返回:
+    pd.DataFrame: ETF停复牌记录，包含 symbol, name, date,
+                  suspend_time, suspend_reason
+```
+
+**8. get_fund_min - 获取ETF分钟线**
+
+**8.1. 方法名：get_fund_min**
+
+```text
+get_fund_min(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, time_zone: 'Optional[Tuple[str, str]]' = None, frequency: 'Optional[str]' = '1m', **kwargs) -> 'pd.DataFrame'
+```
+
+**8.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 查询起始日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| end_date | string | 查询结束日期，格式 YYYYMMDD（必填）；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 基金代码，如 "510050.SH"（可选） | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段列表（可选） | 非必填 |
+| time_zone | Optional[Tuple[string, string]] | 日内时间段元组，如 ("09:30", "10:30")；CLI 的 JSON 不保留 tuple 类型，请用 Python 调用 | 非必填 |
+| frequency | Optional[string] | ETF 分钟频率：1m、5m、15m、60m；默认 1m | 非必填 |
+
+**8.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取ETF分钟线
+
+参数:
+    start_date: 查询起始日期，格式 YYYYMMDD（必填）
+    end_date: 查询结束日期，格式 YYYYMMDD（必填）
+    symbol: 基金代码，如 "510050.SH"（可选）
+    fields: 需要返回的字段列表（可选）
+    time_zone: 时间段过滤，格式为 ("HH:MM", "HH:MM")（可选）
+    frequency: 频率，支持 "1m"、"5m"、"15m"、"60m"，默认为 "1m"
+返回:
+    pd.DataFrame: ETF分钟线，包含 symbol, date, minute, datetime,
+                  open, high, low, close, volume, amount, vwap,
+```
+
+日期范围不超过 1 年。
+
+**9. get_future_detail_all - 兼容名称，等同 get_future_detail**
+
+**9.1. 方法名：get_future_detail_all**
+
+```text
+get_future_detail_all(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, is_trading: 'Optional[int]' = None, exchange: 'Optional[Union[str, List[str]]]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**9.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 期货代码，非必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+| is_trading | Optional[int] | 是否可交易，非必填 | 非必填 |
+| exchange | Optional[Union[string, List[string]]] | 期货交易所后缀，非必填 | 非必填 |
+| date | Optional[string] | 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新期货列表，非必填 | 非必填 |
+
+**9.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+本名称与 `get_future_detail` 绑定同一函数；优先使用后者对应的完整网关字段说明。
+
+```text
+获取期货基本信息
+
+Args:
+    symbol (string): 期货代码，非必填
+    fields (string): 返回字段列表，非必填
+    exchange (string): 期货交易所后缀，非必填
+    is_trading (integer): 是否可交易，非必填
+    date (string): 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新期货列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_future_detail(
+    ...     symbol=["A0303.DCE", "ZN_DOMINANT.SHF"],
+    ...     fields=[],
+    ...     is_trading=None,
+    ... )
+```
+
+**10. get_future_market_post - 获取期货后复权数据**
+
+**10.1. 方法名：get_future_market_post**
+
+```text
+get_future_market_post(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**10.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 期货代码，非必填 | 非必填 |
+| start_date | string | 开始日期,eg:"20250702" （查询上市日期），非必填；运行时要求非空 | 必填 |
+| end_date | string | 结束日期,eg:"20250702" （查询上市日期），非必填；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+
+**10.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取期货后复权数据
+
+Args:
+    symbol (string): 期货代码，非必填
+    start_date (string): 开始日期,eg:"20250702" （查询上市日期），非必填
+    end_date (string): 结束日期,eg:"20250702" （查询上市日期），非必填
+    fields (string): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_future_daily_post(
+    ...     symbol=["A2511.DCE", "P2607.DCE","A_DOMINANT.DCE"],
+    ...     start_date="20251101",
+    ...     end_date="20251105",
+    ...     fields=[],
+    ... )
+```
+
+**11. get_hk_daily_post - 获取港股自研后复权日线数据。start_date、end_date 必填**
+
+**11.1. 方法名：get_hk_daily_post**
+
+```text
+get_hk_daily_post(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**11.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | Optional[string] | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | Optional[string] | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+
+**11.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股自研后复权日线数据。start_date、end_date 必填。
+```
+
+**12. get_hk_daily_pre - 获取港股自研前复权日线数据。start_date、end_date 必填**
+
+**12.1. 方法名：get_hk_daily_pre**
+
+```text
+get_hk_daily_pre(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**12.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | Optional[string] | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | Optional[string] | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+
+**12.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股自研前复权日线数据。start_date、end_date 必填。
+```
+
+**13. get_hk_detail_all - 获取港股全量基本信息（只读根 part-0.parquet，无 date）**
+
+**13.1. 方法名：get_hk_detail_all**
+
+```text
+get_hk_detail_all(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, status: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**13.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，如 "0001.HK"，非必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+| status | Optional[int] | 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填 | 非必填 |
+
+**13.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股全量基本信息（只读根 part-0.parquet，无 date）。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): 股票代码，如 "0001.HK"，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    status (Optional[int]): 是否在市，1 - 在市，0 - 退市，-1 - 未知，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+```
+
+**14. get_hk_index_constituents - 获取港股指数成分数据**
+
+**14.1. 方法名：get_hk_index_constituents**
+
+```text
+get_hk_index_constituents(start_date: 'str' = '', end_date: 'str' = '', index_symbol: 'Optional[Union[str, List[str]]]' = None, stock_symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**14.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填；运行时要求非空 | 必填 |
+| index_symbol | Optional[Union[string, List[string]]] | 指数代码（保留后缀，如 HSI.HK），非必填 | 非必填 |
+| stock_symbol | Optional[Union[string, List[string]]] | 成分股代码（如 00700.HK），非必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+
+**14.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股指数成分数据。
+
+Args:
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填
+    index_symbol (Optional[Union[str, List[str]]]): 指数代码（保留后缀，如 HSI.HK），非必填
+    stock_symbol (Optional[Union[str, List[str]]]): 成分股代码（如 00700.HK），非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_index_constituents(
+    ...     start_date="20260101",
+    ...     end_date="20260301",
+    ...     index_symbol="HSI.HK",
+    ... )
+```
+
+**15. get_hk_index_daily - 获取港股指数日线数据**
+
+**15.1. 方法名：get_hk_index_daily**
+
+```text
+get_hk_index_daily(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**15.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 指数代码（保留后缀，如 HSI.HK），非必填，不做格式校验 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填；取值须在公开字段白名单内，不含 amount/vwap | 非必填 |
+
+**15.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股指数日线数据。
+
+Args:
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填
+    symbol (Optional[Union[str, List[str]]]): 指数代码（保留后缀，如 HSI.HK），非必填，不做格式校验
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填；取值须在公开字段白名单内，不含 amount/vwap
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_index_daily(
+    ...     start_date="20260110",
+    ...     end_date="20260610",
+    ... )
+```
+
+**16. get_hk_index_detail - 获取港股指数基本信息**
+
+**16.1. 方法名：get_hk_index_detail**
+
+```text
+get_hk_index_detail(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**16.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 指数代码（保留后缀，如 HSI.HK），非必填，不做格式校验 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；传空返回全部公开字段 | 非必填 |
+| date | Optional[string] | 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新在市指数列表，传入历史日期时仅保留当时已上市且在市的指数 | 非必填 |
+
+**16.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取港股指数基本信息。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): 指数代码（保留后缀，如 HSI.HK），非必填，不做格式校验
+    fields (Optional[Union[str, List[str]]]): 返回字段子集；传空返回全部公开字段
+    date (Optional[str]): 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新在市指数列表，传入历史日期时仅保留当时已上市且在市的指数
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_hk_index_detail(symbol="HSI.HK")
+```
+
+**17. get_index_component - 获取港股指数成分股数据**
+
+**17.1. 方法名：get_index_component**
+
+```text
+get_index_component(stock_symbol: 'Optional[Union[str, List[str]]]' = None, index_symbol: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**17.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| stock_symbol | Optional[Union[string, List[string]]] | 股票代码列表，可选 | 非必填 |
+| index_symbol | Optional[Union[string, List[string]]] | 指数代码列表，可选，不进行格式验证 | 非必填 |
+
+**17.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+
+获取港股指数成分股数据
+
+Args:
+    stock_symbol: 股票代码列表，可选
+        - 港股格式：如 "00001.HK"（4位或5位以8开头的数字）
+    index_symbol: 指数代码列表，可选，不进行格式验证
+    **kwargs: 其他参数（会被验证）
+
+Returns:
+    pd.DataFrame: 港股指数成分股数据
+
+Raises:
+    ServiceError: 当参数验证失败时抛出异常
+```
+
+**18. get_index_constituent - 获取美股指数成分股数据**
+
+**18.1. 方法名：get_index_constituent**
+
+```text
+get_index_constituent(stock_symbol: 'Optional[Union[str, List[str]]]' = None, index_symbol: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**18.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| stock_symbol | Optional[Union[string, List[string]]] | 股票代码列表，可选，如 "AAPL" | 非必填 |
+| index_symbol | Optional[Union[string, List[string]]] | 指数代码列表，可选，不进行格式验证 | 非必填 |
+
+**18.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+
+获取美股指数成分股数据
+
+Args:
+    stock_symbol: 股票代码列表，可选，如 "AAPL"
+    index_symbol: 指数代码列表，可选，不进行格式验证
+    **kwargs: 其他参数（会被验证）
+
+Returns:
+    pd.DataFrame: 美股指数成分股数据
+
+Raises:
+    ServiceError: 当参数验证失败时抛出异常
+```
+
+**19. get_index_detail_all - 兼容名称，等同 get_index_detail**
+
+**19.1. 方法名：get_index_detail_all**
+
+```text
+get_index_detail_all(symbol: 'Optional[Union[str, List[str]]]' = None, status: 'Optional[int]' = None, fields: 'Optional[Union[str, List[str]]]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**19.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 指数代码，非必填 | 非必填 |
+| status | Optional[int] | 指数状态(1：正常交易，0：已退市，-1：暂无信息)，非必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+| date | Optional[string] | 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新指数列表，非必填 | 非必填 |
+
+**19.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+本名称与 `get_index_detail` 绑定同一函数；优先使用后者对应的完整网关字段说明。
+
+```text
+获取指数基本信息
+
+Args:
+    symbol (str): 指数代码，非必填
+    fields (str): 返回字段列表，非必填
+    status (str): 指数状态(1：正常交易，0：已退市，-1：暂无信息)，非必填
+    date (str): 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新指数列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_index_detail(
+    ... symbol="",
+    ... status=None,
+    ... fields=[]
+    ... )
+    ... print(result)
+```
+
+**20. get_index_weights_day - 查询 `index_weights_ex`，参数和返回合同与 `get_index_weights` 一致**
+
+**20.1. 方法名：get_index_weights_day**
+
+```text
+get_index_weights_day(index_symbol: 'Optional[Union[str, List[str]]]' = None, stock_symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[List[str]]' = None) -> 'pd.DataFrame'
+```
+
+**20.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| index_symbol | Optional[Union[string, List[string]]] | 指数代码或代码列表 | 非必填 |
+| stock_symbol | Optional[Union[string, List[string]]] | 股票代码或代码列表 | 非必填 |
+| start_date | Optional[string] | 开始日期，YYYYMMDD | 非必填 |
+| end_date | Optional[string] | 结束日期，YYYYMMDD | 非必填 |
+| fields | Optional[List[string]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+
+**20.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+查询 ``index_weights_ex``，参数和返回合同与 ``get_index_weights`` 一致。
+```
+
+**21. get_macro_or - 宏观特色数据-其他**
+
+**21.1. 方法名：get_macro_or**
+
+```text
+get_macro_or(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kw) -> 'pd.DataFrame'
+```
+
+**21.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 指标代码，完整指标码表见文件下载，非必填 | 非必填 |
+| start_date | Optional[string] | 开始日期 YYYYMMDD，必填 | 非必填 |
+| end_date | Optional[string] | 结束日期 YYYYMMDD，必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+
+**21.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+宏观特色数据-其他
+
+Args:
+    symbol (str or list[str]): 指标代码，完整指标码表见文件下载，非必填
+    start_date (str): 开始日期 YYYYMMDD，必填
+    end_date (str): 结束日期 YYYYMMDD，必填
+    fields (str or list[str]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_macro_or(
+    ...     start_date="20220101",
+    ...     end_date="20260430",
+    ... )
+```
+
+**22. get_market_data - get_market_data**
+
+**22.1. 方法名：get_market_data**
+
+```text
+get_market_data(symbol: 'Optional[Union[str, List[str]]]' = '', start_date: 'str' = '', end_date: 'str' = '', type: 'Optional[str]' = 'stock', fields: 'Optional[Union[str, List[str]]]' = None, indicator: 'Optional[str]' = '', st: 'Optional[bool]' = True, **kwargs) -> 'pd.DataFrame'
+```
+
+**22.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| type | Optional[string] | 行情数据类型，默认 stock | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+| indicator | Optional[string] | 股票池；省略时按接口默认范围 | 非必填 |
+| st | Optional[bool] | 是否包含 ST 股票，默认 True | 非必填 |
+
+**22.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+```
+
+**23. get_market_min_data - get_market_min_data**
+
+**23.1. 方法名：get_market_min_data**
+
+```text
+get_market_min_data(symbol: 'Optional[Union[str, List[str]]]' = '', start_date: 'str' = '', end_date: 'str' = '', symbol_type: 'Optional[str]' = 'stock', fields: 'Optional[Union[str, List[str]]]' = None, time_zone: 'Optional[Tuple[str, str]]' = None, frequency: 'Optional[str]' = '1m', **kwargs) -> 'pd.DataFrame'
+```
+
+**23.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| symbol_type | Optional[string] | 标的类型，默认 stock | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+| time_zone | Optional[Tuple[string, string]] | 日内时间段元组，如 ("09:30", "10:30")；CLI 的 JSON 不保留 tuple 类型，请用 Python 调用 | 非必填 |
+| frequency | Optional[string] | 行情频率；可选值以本接口 SDK 说明为准 | 非必填 |
+
+**23.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+```
+
+**24. get_oversea_stock_list - 获取日线中有行情的港美股代码列表**
+
+**24.1. 方法名：get_oversea_stock_list**
+
+```text
+get_oversea_stock_list(market: 'Optional[str]' = None, **kwargs) -> 'Any'
+```
+
+**24.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| market | Optional[string] | 市场，HK 或 US。不填则同时返回港美股。 | 非必填 |
+
+**24.3. 响应参数与限制**
+
+返回代码列表。指定 `market="US"` 或 `"HK"` 返回一维列表；不指定时返回 `[[美股代码...], [港股代码...]]`。
+
+```text
+获取日线中有行情的港美股代码列表。
+
+Args:
+    market (str, optional): 市场，HK 或 US。不填则同时返回港美股。
+    **kwargs: 多余参数，传入额外参数将被拒绝。
+
+Returns:
+    不填 market：``[[美股...], [港股...]]``。
+    market=US / HK：对应市场的一维代码列表。
+
+请求示例:
+    >>> import panda_data
+    >>> panda_data.get_oversea_stock_list()
+    >>> panda_data.get_oversea_stock_list(market="US")
+    >>> panda_data.get_oversea_stock_list(market="HK")
+```
+
+**25. get_st_list - 获取股票逐日 ST 状态**
+
+**25.1. 方法名：get_st_list**
+
+```text
+get_st_list(symbol: 'Optional[Union[str, List[str]]]' = None, *, start_date: 'str' = '', end_date: 'str' = '', is_st: 'Optional[bool]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**25.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| is_st | Optional[bool] | ST 状态筛选，True/False；省略时不过滤 | 非必填 |
+
+**25.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取股票逐日 ST 状态。
+```
+
+**26. get_stock_competitor - 兼容名称，等同 get_stock_competitor_information**
+
+**26.1. 方法名：get_stock_competitor**
+
+```text
+get_stock_competitor(start_date: 'str' = None, end_date: 'str' = None, symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**26.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 "YYYYMMDD"，如 "20250702"；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式 "YYYYMMDD"，如 "20250702"；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码列表，不传则查询所有 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 指定返回的字段列表 | 非必填 |
+
+**26.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+本名称与 `get_stock_competitor_information` 绑定同一函数；优先使用后者对应的完整网关字段说明。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+
+获取竞争企业信息数据
+
+参数:
+    start_date: 开始日期，格式 "YYYYMMDD"，如 "20250702"
+    end_date: 结束日期，格式 "YYYYMMDD"，如 "20250702"
+    symbol: 股票代码列表，不传则查询所有
+    fields: 指定返回的字段列表
+返回:
+    pd.DataFrame: 竞争企业信息数据，包含以下字段：
+        - symbol: 证券代码
+        - info_date: 公告日期
+        - name: 证券简称
+        - competitor_name: 竞争公司名称
+        - competitor_intro: 竞争公司机构介绍
+        - competitor_stock_code: 竞争公司股票代码
+        - competition_fields: 竞争领域（有多个时，以","分割）
+```
+
+**27. get_stock_detail_all - 兼容名称，等同 get_stock_detail**
+
+**27.1. 方法名：get_stock_detail_all**
+
+```text
+get_stock_detail_all(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, status: 'Optional[int]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**27.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，非必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段，非必填 | 非必填 |
+| status | Optional[int] | 是否在市，1 -在市，0 -退市，-1 -未知，非必填 | 非必填 |
+| date | Optional[string] | 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新股票列表，非必填 | 非必填 |
+
+**27.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+本名称与 `get_stock_detail` 绑定同一函数；优先使用后者对应的完整网关字段说明。
+
+```text
+获取股票基本信息
+
+Args:
+    symbol (str or list of str, optional): 股票代码，非必填
+    fields (str or list of str, optional): 返回字段，非必填
+    status (int, optional): 是否在市，1 -在市，0 -退市，-1 -未知，非必填
+    date (str, optional): 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新股票列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    ... result = panda_data.get_stock_detail(
+    ... symbol=["000001.SZ","000002.SZ","000003.SZ"],
+    ... fields=[""],
+    ... status=None
+    ... )
+    ... print(result)
+```
+
+**28. get_stock_flow - 获取股票资金流入流出**
+
+**28.1. 方法名：get_stock_flow**
+
+```text
+get_stock_flow(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**28.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，可以是单个字符串或字符串列表（可选）。 | 非必填 |
+| start_date | string | 开始日期，支持 ``YYYYMMDD`` 或 ``YYYY-MM-DD``（可选）。；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，支持 ``YYYYMMDD`` 或 ``YYYY-MM-DD``（可选）。；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 需要返回的字段，可以是字段名或字段名列表；未指定时返回全部字段。 | 非必填 |
+
+**28.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取股票资金流入流出。
+
+Args:
+    symbol: 股票代码，可以是单个字符串或字符串列表（可选）。
+    start_date: 开始日期，支持 ``YYYYMMDD`` 或 ``YYYY-MM-DD``（可选）。
+    end_date: 结束日期，支持 ``YYYYMMDD`` 或 ``YYYY-MM-DD``（可选）。
+    fields: 需要返回的字段，可以是字段名或字段名列表；未指定时返回全部字段。
+    **kwargs: 多余参数，传入额外参数将被拒绝。
+
+Returns:
+    包含查询结果的 ``pandas.DataFrame``。如果数据包含 ``symbol`` 和 ``date``，
+    这两列会始终排在最前面。
+
+    后端以 Parquet 数据流返回时，传输层会分块接收并转换为 DataFrame。
+
+Raises:
+    ServiceError: 当参数类型、股票代码或日期格式无效时。
+```
+
+日期提示：SDK 实现要求开始、结束日期非空；上游说明中的“可选/非必填”不应覆盖运行时校验。
+
+**29. get_stock_intermediary - 兼容名称，等同 get_stock_intermediary_information**
+
+**29.1. 方法名：get_stock_intermediary**
+
+```text
+get_stock_intermediary(start_date: 'str' = None, end_date: 'str' = None, symbol: 'Optional[Union[str, List[str]]]' = None, event_type: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**29.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 "YYYYMMDD"，如 "20250702"；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式 "YYYYMMDD"，如 "20250702"；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码列表，不传则查询所有 | 非必填 |
+| event_type | Optional[Union[string, List[string]]] | 事件类型列表，不传则查询所有（PIPE:定向增发；FO:公开增发；IPO:首发；RI:配股；PREF:优先股；PRE:定期报告） | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 指定返回的字段列表 | 非必填 |
+
+**29.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+本名称与 `get_stock_intermediary_information` 绑定同一函数；优先使用后者对应的完整网关字段说明。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+
+获取中介情况信息表数据
+
+参数:
+    start_date: 开始日期，格式 "YYYYMMDD"，如 "20250702"
+    end_date: 结束日期，格式 "YYYYMMDD"，如 "20250702"
+    symbol: 股票代码列表，不传则查询所有
+    event_type: 事件类型列表，不传则查询所有（PIPE:定向增发；FO:公开增发；IPO:首发；RI:配股；PREF:优先股；PRE:定期报告）
+    fields: 指定返回的字段列表
+返回:
+    pd.DataFrame: 中介情况信息表数据，包含以下字段：
+        - symbol: 股票代码
+        - name: 证券简称
+        - equity_event_code: 权益融资事件代码
+        - event_type: 事件类型（PIPE:定向增发；FO:公开增发；IPO:首发；RI:配股；PREF:优先股；PRE:定期报告）
+        - issue_start_date: 发行起始日
+        - intermediary_category: 中介机构类别
+        - intermediary_name: 中介机构名称
+        - intermediary_handler: 中介机构经办人姓名
+```
+
+**30. get_stock_min_post - 获取 A 股后复权分钟线；参数校验与 get_stock_min 一致**
+
+**30.1. 方法名：get_stock_min_post**
+
+```text
+get_stock_min_post(symbol: 'Optional[Union[str, List[str]]]' = '', start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, time_zone: 'Optional[Tuple[str, str]]' = None, frequency: 'Optional[str]' = '1m', **kwargs) -> 'pd.DataFrame'
+```
+
+**30.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+| time_zone | Optional[Tuple[string, string]] | 日内时间段元组，如 ("09:30", "10:30")；CLI 的 JSON 不保留 tuple 类型，请用 Python 调用 | 非必填 |
+| frequency | Optional[string] | 行情频率；可选值以本接口 SDK 说明为准 | 非必填 |
+
+**30.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取 A 股后复权分钟线；参数校验与 get_stock_min 一致。
+```
+
+**31. get_stock_min_pre - 获取 A 股前复权分钟线；参数校验与 get_stock_min 一致**
+
+**31.1. 方法名：get_stock_min_pre**
+
+```text
+get_stock_min_pre(symbol: 'Optional[Union[str, List[str]]]' = '', *, start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, time_zone: 'Optional[Tuple[str, str]]' = None, frequency: 'Optional[str]' = '1m', **kwargs) -> 'pd.DataFrame'
+```
+
+**31.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+| time_zone | Optional[Tuple[string, string]] | 日内时间段元组，如 ("09:30", "10:30")；CLI 的 JSON 不保留 tuple 类型，请用 Python 调用 | 非必填 |
+| frequency | Optional[string] | 行情频率；可选值以本接口 SDK 说明为准 | 非必填 |
+
+**31.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取 A 股前复权分钟线；参数校验与 get_stock_min 一致。
+```
+
+**32. get_stock_monthly - 获取A股月线行情数据**
+
+**32.1. 方法名：get_stock_monthly**
+
+```text
+get_stock_monthly(symbol: 'Optional[Union[str, List[str]]]' = '', start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, indicator: 'Optional[str]' = '', st: 'Optional[bool]' = True, **kwargs) -> 'pd.DataFrame'
+```
+
+**32.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，非必填 | 非必填 |
+| start_date | string | 开始日期，格式为 YYYYMMDD，与结束日期间不超过5年，非必填；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式为 YYYYMMDD，与开始日期间不超过5年，非必填；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段，非必填 | 非必填 |
+| indicator | Optional[string] | 股票池，默认为空表示查询所有，非必填 | 非必填 |
+| st | Optional[bool] | 是否包含ST股，默认True表示包含，非必填 | 非必填 |
+
+**32.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取A股月线行情数据
+
+Args:
+    symbol (str or list of str, optional): 股票代码，非必填
+    start_date (str): 开始日期，格式为 YYYYMMDD，与结束日期间不超过5年，非必填
+    end_date (str): 结束日期，格式为 YYYYMMDD，与开始日期间不超过5年，非必填
+    fields (str or list of str, optional): 返回字段，非必填
+    indicator (str, optional): 股票池，默认为空表示查询所有，非必填
+    st (bool, optional): 是否包含ST股，默认True表示包含，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_stock_monthly(
+    ...     symbol=["000001.SZ"],
+    ...     start_date="20250101",
+    ...     end_date="20250131",
+    ... )
+```
+
+日期提示：SDK 实现要求开始、结束日期非空；上游说明中的“可选/非必填”不应覆盖运行时校验。
+
+**33. get_stock_over_allotment - 兼容名称，等同 get_stock_status_over_allotment**
+
+**33.1. 方法名：get_stock_over_allotment**
+
+```text
+get_stock_over_allotment(start_date: 'str' = None, end_date: 'str' = None, symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**33.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式 "YYYYMMDD"，如 "20250702"；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式 "YYYYMMDD"，如 "20250702"；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 股票代码列表，不传则查询所有 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 指定返回的字段列表 | 非必填 |
+
+**33.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+本名称与 `get_stock_status_over_allotment` 绑定同一函数；优先使用后者对应的完整网关字段说明。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+
+获取超额配售权实施情况（仅A股数据）
+
+参数:
+    start_date: 开始日期，格式 "YYYYMMDD"，如 "20250702"
+    end_date: 结束日期，格式 "YYYYMMDD"，如 "20250702"
+    symbol: 股票代码列表，不传则查询所有
+    fields: 指定返回的字段列表
+返回:
+    pd.DataFrame: 超额配售权实施情况数据，包含以下字段：
+        - symbol: 股票代码
+        - name: 证券简称
+        - info_date: 公告日期
+        - end_date: 最后行使日期
+        - vwap: 行权中竞价交易购买股票均价
+        - volume: 行权中竞价交易购买股票数量
+        - over_allotment_shares: 超额发行股份数
+        - over_allotment_rate: 超额配售率
+        - full_subscription_flag: 是否全额(0：否，1：是，2：未获知，3:不排除)
+        - additional_raised_funds: 增加的募集资金
+        - additional_raised_fee: 增加的募集资金费用
+        - total_proceeds_exercise: 行权后募集资金总额人民币
+        - net_proceeds_exercise: 行权后募集资金净额人民币
+        - foreign_total_proceeds_exercise: 行权后募集资金总额外币
+        - foreign_net_proceeds_exercise: 行权后募集资金净额外币
+        - currency_symbol: 外币币种(HKD：港元，USD：美元)
+```
+
+**34. get_stock_related_party - 兼容名称，等同 get_stock_rela_party_trans**
+
+**34.1. 方法名：get_stock_related_party**
+
+```text
+get_stock_related_party(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = None, end_date: 'str' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**34.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+
+**34.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+本名称与 `get_stock_rela_party_trans` 绑定同一函数；优先使用后者对应的完整网关字段说明。
+
+```text
+[WARNING: 此接口已废弃或未上线，调用前请确认服务端支持]
+```
+
+**35. get_stock_weekly - 获取A股周线行情数据**
+
+**35.1. 方法名：get_stock_weekly**
+
+```text
+get_stock_weekly(symbol: 'Optional[Union[str, List[str]]]' = '', start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, indicator: 'Optional[str]' = '', st: 'Optional[bool]' = True, **kwargs) -> 'pd.DataFrame'
+```
+
+**35.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，非必填 | 非必填 |
+| start_date | string | 开始日期，格式为 YYYYMMDD，与结束日期间不超过5年，非必填；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式为 YYYYMMDD，与开始日期间不超过5年，非必填；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段，非必填 | 非必填 |
+| indicator | Optional[string] | 股票池，默认为空表示查询所有，非必填 | 非必填 |
+| st | Optional[bool] | 是否包含ST股，默认True表示包含，非必填 | 非必填 |
+
+**35.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取A股周线行情数据
+
+Args:
+    symbol (str or list of str, optional): 股票代码，非必填
+    start_date (str): 开始日期，格式为 YYYYMMDD，与结束日期间不超过5年，非必填
+    end_date (str): 结束日期，格式为 YYYYMMDD，与开始日期间不超过5年，非必填
+    fields (str or list of str, optional): 返回字段，非必填
+    indicator (str, optional): 股票池，默认为空表示查询所有，非必填
+    st (bool, optional): 是否包含ST股，默认True表示包含，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_stock_weekly(
+    ...     symbol=["000001.SZ"],
+    ...     start_date="20250101",
+    ...     end_date="20250131",
+    ... )
+```
+
+日期提示：SDK 实现要求开始、结束日期非空；上游说明中的“可选/非必填”不应覆盖运行时校验。
+
+**36. get_suspended_list - 获取股票逐日停牌状态**
+
+**36.1. 方法名：get_suspended_list**
+
+```text
+get_suspended_list(symbol: 'Optional[Union[str, List[str]]]' = None, *, start_date: 'str' = '', end_date: 'str' = '', is_suspended: 'Optional[bool]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**36.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| is_suspended | Optional[bool] | 停牌状态筛选，True/False；省略时不过滤 | 非必填 |
+
+**36.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取股票逐日停牌状态。
+```
+
+**37. get_us_daily_post - 获取美股自研后复权日线数据。start_date、end_date 必填**
+
+**37.1. 方法名：get_us_daily_post**
+
+```text
+get_us_daily_post(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**37.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | Optional[string] | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | Optional[string] | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+
+**37.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取美股自研后复权日线数据。start_date、end_date 必填。
+```
+
+**38. get_us_daily_pre - 获取美股自研前复权日线数据。start_date、end_date 必填**
+
+**38.1. 方法名：get_us_daily_pre**
+
+```text
+get_us_daily_pre(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'Optional[str]' = None, end_date: 'Optional[str]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**38.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | Optional[string] | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | Optional[string] | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+
+**38.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取美股自研前复权日线数据。start_date、end_date 必填。
+```
+
+**39. get_us_detail_all - 获取美股全量基本信息（只读根 part-0.parquet，无 date）**
+
+**39.1. 方法名：get_us_detail_all**
+
+```text
+get_us_detail_all(symbol: 'Optional[Union[str, List[str]]]' = '', fields: 'Optional[Union[str, List[str]]]' = None, status: 'Optional[int]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**39.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 股票代码，非必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+| status | Optional[int] | 是否在市，1-在市，0-退市，-1-未知，非必填 | 非必填 |
+
+**39.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取美股全量基本信息（只读根 part-0.parquet，无 date）。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): 股票代码，非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    status (Optional[int]): 是否在市，1-在市，0-退市，-1-未知，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+```
+
+**40. get_us_index_constituents - 获取美股指数成分数据**
+
+**40.1. 方法名：get_us_index_constituents**
+
+```text
+get_us_index_constituents(start_date: 'str' = '', end_date: 'str' = '', index_symbol: 'Optional[Union[str, List[str]]]' = None, stock_symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**40.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填；运行时要求非空 | 必填 |
+| index_symbol | Optional[Union[string, List[string]]] | 指数代码（去后缀，如 DJI），非必填 | 非必填 |
+| stock_symbol | Optional[Union[string, List[string]]] | 成分股代码（去后缀，如 AAPL），非必填 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填 | 非必填 |
+
+**40.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取美股指数成分数据。
+
+Args:
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填
+    index_symbol (Optional[Union[str, List[str]]]): 指数代码（去后缀，如 DJI），非必填
+    stock_symbol (Optional[Union[str, List[str]]]): 成分股代码（去后缀，如 AAPL），非必填
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_index_constituents(
+    ...     start_date="20260101",
+    ...     end_date="20260301",
+    ...     index_symbol="DJI",
+    ... )
+```
+
+**41. get_us_index_daily - 获取美股指数日线数据**
+
+**41.1. 方法名：get_us_index_daily**
+
+```text
+get_us_index_daily(start_date: 'str' = '', end_date: 'str' = '', symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**41.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| start_date | string | 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填；运行时要求非空 | 必填 |
+| symbol | Optional[Union[string, List[string]]] | 指数代码（去后缀，如 DJI），非必填，不做格式校验 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段列表，非必填；取值须在公开字段白名单内，不含 amount/vwap | 非必填 |
+
+**41.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取美股指数日线数据。
+
+Args:
+    start_date (str): 开始日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与结束日期间不超过5年，必填
+    end_date (str): 结束日期，格式为 YYYYMMDD 或 YYYY-MM-DD，与开始日期间不超过5年，必填
+    symbol (Optional[Union[str, List[str]]]): 指数代码（去后缀，如 DJI），非必填，不做格式校验
+    fields (Optional[Union[str, List[str]]]): 返回字段列表，非必填；取值须在公开字段白名单内，不含 amount/vwap
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_index_daily(
+    ...     start_date="20260110",
+    ...     end_date="20260610",
+    ... )
+```
+
+**42. get_us_index_detail - 获取美股指数基本信息**
+
+**42.1. 方法名：get_us_index_detail**
+
+```text
+get_us_index_detail(symbol: 'Optional[Union[str, List[str]]]' = None, fields: 'Optional[Union[str, List[str]]]' = None, date: 'Optional[str]' = None, **kwargs) -> 'pd.DataFrame'
+```
+
+**42.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 指数代码（去后缀，如 DJI），非必填，不做格式校验 | 非必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；传空返回全部公开字段 | 非必填 |
+| date | Optional[string] | 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新在市指数列表，传入历史日期时仅保留当时已上市且在市的指数 | 非必填 |
+
+**42.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取美股指数基本信息。
+
+Args:
+    symbol (Optional[Union[str, List[str]]]): 指数代码（去后缀，如 DJI），非必填，不做格式校验
+    fields (Optional[Union[str, List[str]]]): 返回字段子集；传空返回全部公开字段
+    date (Optional[str]): 查询日期，支持YYYYMMDD或YYYY-MM-DD；为空时返回最新在市指数列表，传入历史日期时仅保留当时已上市且在市的指数
+    **kwargs: 多余参数，传入额外参数将被拒绝
+
+Returns:
+    pd.DataFrame
+
+请求示例:
+    >>> import panda_data
+    >>> result = panda_data.get_us_index_detail(symbol="DJI")
+```
+
+**43. get_us_min - 获取美股分钟线数据**
+
+**43.1. 方法名：get_us_min**
+
+```text
+get_us_min(symbol: 'Optional[Union[str, List[str]]]' = None, start_date: 'str' = '', end_date: 'str' = '', fields: 'Optional[Union[str, List[str]]]' = None, time_zone: 'Optional[Tuple[str, str]]' = None, frequency: 'Optional[str]' = '1m', **kwargs) -> 'pd.DataFrame'
+```
+
+**43.2. 入参**
+
+| 字段 | 类型 | 描述 | 是否必填 |
+|:---|:---|:---|:---|
+| symbol | Optional[Union[string, List[string]]] | 标的代码或代码列表；格式以本接口 SDK 说明为准 | 非必填 |
+| start_date | string | 开始日期，YYYYMMDD；运行时要求非空 | 必填 |
+| end_date | string | 结束日期，YYYYMMDD；运行时要求非空 | 必填 |
+| fields | Optional[Union[string, List[string]]] | 返回字段子集；省略时按接口默认返回 | 非必填 |
+| time_zone | Optional[Tuple[string, string]] | 日内时间段元组，如 ("09:30", "10:30")；CLI 的 JSON 不保留 tuple 类型，请用 Python 调用 | 非必填 |
+| frequency | Optional[string] | 美股分钟频率：1m、5m、10m、60m；默认 1m | 非必填 |
+
+**43.3. 响应参数与限制**
+
+返回 `pandas.DataFrame`；字段和可用范围以 SDK 说明、实际服务端响应为准。以下是发布包自带说明，未据此推定完整响应 schema。
+
+```text
+获取美股分钟线数据。
+
+symbol 使用裸代码（如 AAPL）；frequency 支持 1m、5m、10m、60m。
+```
+
+不传 symbol 时日期范围不超过 1 个月；传 symbol 时不超过 5 年，并受 SDK 数据量校验限制。
